@@ -1,30 +1,28 @@
 
-main.neverHaveIEver > h1{
-    text-align: center;
-}
-
-.neverHaveIEver p{
+.neverHaveIEver{
+    color: var(--textColor);
     font-family: outfit;
-    color: white;
 }
-h1{
-
+.neverHaveIEver > h1{
+    text-align: center;
     font-family: museoModerno;
-    font-size: 30px;
-    color: white;
+    font-size:  var(--fontSizeHeader);
+    margin-top: 2vh;
+    margin-bottom: 2vh;
 }
+
 .cards{
     height: 55vh;
     width: 100%;
     border-radius: 5px;
 
-    background-color: grey;
+    background-color: var(--blackGrey);
+    box-shadow: var(--boxShadow);
 }
 
 .swipeNextCard{
     display: flex;
     flex-direction: column;
-    
 }
 
 .buttonQuit{
@@ -32,8 +30,6 @@ h1{
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
-    font-family: outfit;
-    color: white;
 }
 
 .fa-chevron-left7{
