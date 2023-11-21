@@ -1,5 +1,6 @@
 "use strict";
 
+/*
 chooseTruthORDare()
 
 async function chooseTruthORDare() {
@@ -11,4 +12,4 @@ async function chooseTruthORDare() {
         <div>OR</div>
         <button>Truth</button>
         `;
-}
+}*/

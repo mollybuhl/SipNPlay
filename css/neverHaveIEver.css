@@ -1,0 +1,42 @@
+
+main.neverHaveIEver > h1{
+    text-align: center;
+}
+
+.neverHaveIEver p{
+    font-family: outfit;
+    color: white;
+}
+h1{
+
+    font-family: museoModerno;
+    font-size: 30px;
+    color: white;
+}
+.cards{
+    height: 55vh;
+    width: 100%;
+    border-radius: 5px;
+
+    background-color: grey;
+}
+
+.swipeNextCard{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.buttonQuit{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    font-family: outfit;
+    color: white;
+}
+
+.fa-chevron-left7{
+    margin: 0;
+}
+

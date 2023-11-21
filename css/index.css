@@ -7,23 +7,43 @@
     font-family: outfit;
     src: url(../outfit/Outfit-VariableFont_wght.ttf);
 }
+
+*{
+    box-sizing: border-box;
+    
+}
+
 body{
     background-color: #1B1B1B;
-    margin: 3vh;
+    height: 100vh;
+    margin: 0;
+    padding: 4vh;
 }
 
 header{
-    height: 10vh;
+    height: 10%;
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
+
+main{
+    height: 80%;
+}
+
+/*SipNPlay header logo*/
 #headerLogo{
     height: 100%;
+    font-family: museoModerno;
     
 }
 
-.fa-solid, .fa-bars, .fa-2xl{
-    margin-top: 2vh;
+/*Hamburger menu*/
+ .fa-bars, .fa-xl{
+    margin-top: 1vh;
     margin-left: 4vh;
+}
+
+footer{
+    height: 10%;
 }
