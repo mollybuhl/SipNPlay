@@ -31,14 +31,20 @@
     src: url(../outfit/Outfit-VariableFont_wght.ttf);
 }
 
-body {
-    background-color: #1B1B1B;
-    margin: 3vh;
-    color: var(--textColor);
+*{
+    box-sizing: border-box;
+    
 }
 
-header {
-    height: 10vh;
+body{
+    background-color: #1B1B1B;
+    height: 100vh;
+    margin: 0;
+    padding: 4vh;
+}
+
+header{
+    height: 10%;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -60,4 +66,23 @@ header {
 .fa-2xl {
     margin-top: 2vh;
     margin-left: 4vh;
+main{
+    height: 80%;
+}
+
+/*SipNPlay header logo*/
+#headerLogo{
+    height: 100%;
+    font-family: museoModerno;
+    
+}
+
+/*Hamburger menu*/
+ .fa-bars, .fa-xl{
+    margin-top: 1vh;
+    margin-left: 4vh;
+}
+
+footer{
+    height: 10%;
 }

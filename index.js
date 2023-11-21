@@ -1,9 +1,4 @@
 "use strict";
 
-const main = document.querySelector("main");
+renderNeverHaveIEver();
 
-function renderNeverHaveIEver() {
-    main.innerHTML = `
-    
-    `;
-}

@@ -1,4 +1,5 @@
 "use strict";
+
 chooseTruthORDare()
 
 async function chooseTruthORDare() {
