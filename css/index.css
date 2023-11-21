@@ -50,6 +50,15 @@ header{
     justify-content: space-between;
 }
 
+main{
+    height: 80%;
+}
+
+footer{
+    height: 10%;
+}
+
+/*SipNPlay header logo*/
 #headerLogo {
     font-family: museoModerno;
     font-weight: var(--fontMedium);
@@ -61,28 +70,9 @@ header{
     -webkit-text-fill-color: transparent;
 }
 
-.fa-solid,
-.fa-bars,
-.fa-2xl {
-    margin-top: 2vh;
-    margin-left: 4vh;
-main{
-    height: 80%;
-}
-
-/*SipNPlay header logo*/
-#headerLogo{
-    height: 100%;
-    font-family: museoModerno;
-    
-}
-
 /*Hamburger menu*/
  .fa-bars, .fa-xl{
     margin-top: 1vh;
     margin-left: 4vh;
 }
 
-footer{
-    height: 10%;
-}
