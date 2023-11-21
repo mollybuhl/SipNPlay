@@ -30,8 +30,8 @@ async function renderNeverHaveIEver(category){
     `
 
     //Fetch card information
-    let question = await fetchNeverHaveIEverQuestion(category);
-    console.log(question);
+   // let question = await fetchNeverHaveIEverQuestion(category);
+   // console.log(question);
 
 };
 
@@ -50,15 +50,17 @@ async function fetchNeverHaveIEverQuestion(category){
         })
     }
 
-    let request = new Request("../php/neverHaveIEver.php", requestParameters);
+    let request = new Request("php/neverHaveIEver.php", requestParameters);
 
     try{
         let response = await fetch(request);
         let resource = await response.json();
         
         if(response.ok){
+            console.log("Here");
             return resource;
         }else{
+            console.log("Not ok");
             console.log("resource error");
         }
     }catch(error){
