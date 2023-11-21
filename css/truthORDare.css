@@ -89,7 +89,6 @@ section div {
 }
 
 #questionHolder h2 {
-    margin-bottom: -15vh;
     font-family: museoModerno;
     font-size: var(--fontSizeTwo);
     font-weight: var(--fontMedium);
@@ -109,4 +108,28 @@ section div {
     font-size: var(--fontSizeFive);
     font-weight: var(--fontRegular);
     color: var(--darkGrey);
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer .buttonQuit {
+    font-family: outfit;
+    font-weight: var(--fontRegular);
+    font-size: var(--fontSizeFive);
+}
+
+footer #nextButton {
+    font-family: outfit;
+    font-weight: var(--fontRegular);
+    font-size: var(--fontSizeFive);
+
+    background-color: var(--white);
+    height: 55%;
+    width: auto;
+    padding: 0 4vh;
+    border-radius: 20px;
 }
