@@ -1,5 +1,5 @@
 "use strict";
-/*
+
 chooseTruthORDare()
 
 async function chooseTruthORDare() {
@@ -15,4 +15,4 @@ async function chooseTruthORDare() {
             </section>
         </div>
     `;
-}*/
+}
