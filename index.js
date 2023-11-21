@@ -1,10 +1,9 @@
 "use strict";
 
-function renderNeverHaveIEver(){
+const main = document.querySelector("main");
 
-    let main =document.querySelector("main");
-
-    main.innerHTML=`
+function renderNeverHaveIEver() {
+    main.innerHTML = `
     
     `;
 }
