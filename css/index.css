@@ -8,6 +8,14 @@
     --white: #E6E6E6;
     --textColor: #C1C1C1;
     --buttonColor: #C1C1C1;
+
+    --fontSizeHeader: 30px;
+    --fontSizeTwo: 28px;
+    --fontSizeThree: 24px;
+    --fontSizeFour: 20px;
+    --fontBold: 800;
+    --fontMedium: 600;
+    --fontRegular: 400;
 }
 
 @font-face {
@@ -19,23 +27,34 @@
     font-family: outfit;
     src: url(../outfit/Outfit-VariableFont_wght.ttf);
 }
-body{
+
+body {
     background-color: #1B1B1B;
     margin: 3vh;
+    color: var(--textColor);
 }
 
-header{
+header {
     height: 10vh;
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
-#headerLogo{
+
+#headerLogo {
+    font-family: museoModerno;
+    font-weight: var(--fontMedium);
+    font-size: var(--fontSizeThree);
+
     height: 100%;
-    
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.fa-solid, .fa-bars, .fa-2xl{
+.fa-solid,
+.fa-bars,
+.fa-2xl {
     margin-top: 2vh;
     margin-left: 4vh;
 }

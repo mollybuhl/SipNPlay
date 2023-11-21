@@ -9,16 +9,18 @@
 
 h1 {
     font-family: museoModerno;
+    font-size: var(--fontSizeHeader);
     margin-bottom: 0;
 }
 
 h2 {
     font-family: outfit;
-    font-weight: 400;
+    font-weight: var(--fontRegular);
+    font-size: var(--fontSizeThree);
 }
 
 h2 span {
-    font-weight: 800;
+    font-weight: var(--fontBold);
 }
 
 #truthORDareWrapper>section {
@@ -26,9 +28,9 @@ h2 span {
 }
 
 button {
-    font-size: 30px;
+    font-size: var(--fontSizeTwo);
     font-family: museoModerno;
-    font-weight: 600;
+    font-weight: var(--fontMedium);
 
     height: 15vh;
     width: 100%;
