@@ -1,0 +1,20 @@
+body{
+    background-color: #1B1B1B;
+    margin: 3vh;
+}
+
+header{
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+#headerLogo{
+    height: 100%;
+    
+}
+
+.fa-solid, .fa-bars, .fa-2xl{
+    margin-top: 2vh;
+    margin-left: 4vh;
+}
