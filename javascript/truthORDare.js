@@ -1,8 +1,7 @@
 "use strict";
+TruthORDareHandle()
 
-chooseTruthORDare()
-
-async function chooseTruthORDare() {
+function TruthORDareHandle() {
     main.innerHTML = `
         <div id="truthORDareWrapper">
             <h1>Truth OR Dare?</h1>
@@ -15,4 +14,19 @@ async function chooseTruthORDare() {
             </section>
         </div>
     `;
+
+    document.querySelectorAll("button").forEach(button => {
+        button.addEventListener("click", (e) => {
+            renderTruthORDareQuestion(e.target.attributes.id.value)
+            console.log(e.target.attributes.id.value);
+        })
+    });
+}
+
+async function renderTruthORDareQuestion(type) {
+    if (type === "truth") {
+
+    } else {
+
+    }
 }
