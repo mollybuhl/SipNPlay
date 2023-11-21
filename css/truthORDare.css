@@ -1,0 +1,46 @@
+#truthORDareWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 0;
+    width: 90vw;
+}
+
+h1 {
+    font-family: museoModerno;
+    margin-bottom: 0;
+}
+
+h2 {
+    font-family: outfit;
+    font-weight: 400;
+}
+
+h2 span {
+    font-weight: 800;
+}
+
+#truthORDareWrapper>section {
+    width: 100%;
+}
+
+button {
+    font-size: 30px;
+    font-family: museoModerno;
+    font-weight: 600;
+
+    height: 15vh;
+    width: 100%;
+    background-color: #2A2A2A;
+    border: none;
+    border-radius: 5px;
+}
+
+#truth {
+    color: var(--green);
+}
+
+#dare {
+    color: var(--pink);
+}
