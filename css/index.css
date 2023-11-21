@@ -1,0 +1,9 @@
+@font-face {
+    font-family: museoModerno;
+    src: url(../museomoderno/MuseoModerno-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: outfit;
+    src: url(../outfit/Outfit-VariableFont_wght.ttf);
+}
