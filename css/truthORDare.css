@@ -4,7 +4,7 @@
     align-items: center;
 
     margin: 0;
-    width: 90vw;
+    width: 100%;
 }
 
 h1 {
@@ -37,6 +37,7 @@ button {
     background-color: #2A2A2A;
     border: none;
     border-radius: 5px;
+    box-shadow: var(--boxShadow);
 }
 
 #truth {
@@ -45,4 +46,31 @@ button {
 
 #dare {
     color: var(--pink);
+}
+
+section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+section div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: var(--fontSizeThree);
+    font-family: museoModerno;
+    font-weight: var(--fontMedium);
+
+    color: var(--black);
+    background: var(--pinkGradient);
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+
+    position: absolute;
+    top: 40%;
+    left: 42%;
 }

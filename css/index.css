@@ -3,6 +3,7 @@
     --green: #B1C871;
     --orange: #E9A072;
     --gradient: linear-gradient(90deg, rgba(177, 200, 113, 1) 0%, rgba(233, 160, 114, 1) 50%, rgba(231, 83, 140, 1) 100%);
+    --pinkGradient: linear-gradient(180deg, rgba(233, 160, 114, 1) 0%, rgba(231, 83, 140, 1) 100%);
     --black: #1B1B1B;
     --blackGrey: #2A2A2A;
     --white: #E6E6E6;
@@ -16,6 +17,8 @@
     --fontBold: 800;
     --fontMedium: 600;
     --fontRegular: 400;
+
+    --boxShadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 @font-face {
