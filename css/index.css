@@ -6,6 +6,7 @@
     --pinkGradient: linear-gradient(180deg, rgba(233, 160, 114, 1) 0%, rgba(231, 83, 140, 1) 100%);
     --black: #1B1B1B;
     --blackGrey: #2A2A2A;
+    --darkGrey: #5D5D5D;
     --white: #E6E6E6;
     --textColor: #C1C1C1;
     --buttonColor: #C1C1C1;
@@ -14,6 +15,8 @@
     --fontSizeTwo: 28px;
     --fontSizeThree: 24px;
     --fontSizeFour: 20px;
+    --fontSizeFive: 18px;
+
     --fontBold: 800;
     --fontMedium: 600;
     --fontRegular: 400;
@@ -31,30 +34,31 @@
     src: url(../outfit/Outfit-VariableFont_wght.ttf);
 }
 
-*{
+* {
     box-sizing: border-box;
-    
+
 }
 
-body{
+body {
     background-color: #1B1B1B;
+    color: var(--textColor);
     height: 100vh;
     margin: 0;
     padding: 4vh;
 }
 
-header{
+header {
     height: 10%;
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-main{
+main {
     height: 80%;
 }
 
-footer{
+footer {
     height: 10%;
 }
 
@@ -71,8 +75,8 @@ footer{
 }
 
 /*Hamburger menu*/
- .fa-bars, .fa-xl{
+.fa-bars,
+.fa-xl {
     margin-top: 1vh;
     margin-left: 4vh;
 }
-

@@ -1,42 +1,36 @@
 [
     {
-        "basic": [
-            {
-                "truth": [
-                    "When was the last time you cried?",
-                    "When was the last time you lied?",
-                    "What's your biggest fear?",
-                    "Who was your first celebrity crush?"
-                ],
-                "dare": [
-                    "Show the most embarrassing photo on your phone",
-                    "Eat a raw piece of garlic"
-                ]
-            }
-        ],
-        "spicy": [
-            {
-                "truth": [
-                    "Do you have any fetishes?",
-                    "Have you ever cheated on someone?"
-                ],
-                "dare": [
-                    "Give a foot massage to the person on your right"
-                ]
-            }
-        ],
-        "girls": [
-            {
-                "truth": [
-                    "What's the worst date you've been on?",
-                    "Have you ever lied to get out of a bad date?",
-                    "Why did your last relationship break down?"
-                ],
-                "dare": [
-                    "Say two honest things about everyone in this room",
-                    "Show the last five people you texted and what the messages said"
-                ]
-            }
-        ]
+        "basic": {
+            "truth": [
+                "When was the last time you cried?",
+                "When was the last time you lied?",
+                "What's your biggest fear?",
+                "Who was your first celebrity crush?"
+            ],
+            "dare": [
+                "Show the most embarrassing photo on your phone",
+                "Eat a raw piece of garlic"
+            ]
+        },
+        "spicy": {
+            "truth": [
+                "Do you have any fetishes?",
+                "Have you ever cheated on someone?"
+            ],
+            "dare": [
+                "Give a foot massage to the person on your right"
+            ]
+        },
+        "girls": {
+            "truth": [
+                "What's the worst date you've been on?",
+                "Have you ever lied to get out of a bad date?",
+                "Why did your last relationship break down?"
+            ],
+            "dare": [
+                "Say two honest things about everyone in this room",
+                "Show the last five people you texted and what the messages said"
+            ]
+        }
     }
 ]
