@@ -1,6 +1,73 @@
 [
     {
-        "category": "basic",
-        "question": "Never have I ever had a speeding ticket"
+        "The Basic Version": [
+            {
+                "id": 1,
+                "category": "The Basic Version",
+                "question": "got a speeding ticket"
+            },
+            {
+                "id": 2,
+                "category": "The Basic Version",
+                "question": "shoplifted"
+            },
+            {
+                "id": 3,
+                "category": "The Basic Version",
+                "question": "had a holiday romance"
+            }
+        ],
+        "Not Safe For Work": [
+            {
+            "id": 1,
+            "category": "Not Safe For Work",
+            "question": "given a fake name"
+            },
+            {
+                "id": 2,
+                "category": "Not Safe For Work",
+                "question": "lied to get out of going to work"
+            },
+            {
+                "id": 3,
+                "category": "Not Safe For Work",
+                "question": "been sick on public transport"
+            }
+        ],
+        "Spicy Edition": [
+            {
+            "id": 1,
+            "category": "Spicy Edition",
+            "question": "gone skinny dipping with someone"
+            },
+            {
+                "id": 2,
+                "category": "Spicy Edition",
+                "question": "hid a hickey with clothing"
+            },
+            {
+                "id": 3,
+                "category": "Spicy Edition",
+                "question": "played strip poker"
+            }
+        ],
+        "Girl Dinner":
+        [
+            {
+            "id": 1,
+            "category": "Girl Dinner",
+            "question": "lied on a dating app"
+            },
+            {
+            "id": 2,
+            "category": "Girl Dinner",
+            "question": "texted an ex out of nowhere"
+            },
+            {
+            "id": 3,
+            "category": "Girl Dinner",
+            "question": "dumped someone over text"
+            }  
+        ]  
     }
 ]

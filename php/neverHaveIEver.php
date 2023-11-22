@@ -1,48 +1,44 @@
 <?php
     ini_set("display_errors", 1); 
+    require_once("functions.php");
 
-    function sendJSON($message, $statusCode = 200){
-        header("Content-Type: application/json");
-        http_response_code($statusCode);
-        $json = json_encode($message);
-        echo $json;
-        exit();
-    }
-
+    // Get all questions from json file
+    $questions = getFileContents("neverHaveIEver.json");
     $requestMethod = $_SERVER["REQUEST_METHOD"];
+
+    // Check if request method is allowed
     $allowed = ["POST"];
-    //checkMethod($requestMethod, $allowed);
+    checkMethod($requestMethod, $allowed);
 
-    $filename = __DIR__."/neverHaveIEverQuestions.json";
+    // Get request data
+    $requestData = getFileContents("php://input");
 
-    /*if(!file_exists($filename)){
-        
-    }*/
-    $json = file_get_contents($filename);
-    $questions = json_decode($json, true);
-
-
-
-    $requestJSON = file_get_contents("php://input");
-    $requestData = json_decode($requestJSON, true);
-
-    
-
+    // Get all questions of the category from request
     $category = $requestData["category"];
     $questionsOfCategory = [];
 
-    foreach($questions as $question){
-        if($question["category"] == $category){
-            $questionsOfCategory[] = $question;
-        }
+    switch($category){
+        case "The Basic Version":
+            $questionsOfCategory = $questions[0]["The Basic Version"];
+            break;
+        case "Not Safe For Work":
+            $questionsOfCategory = $questions[1]["Not Safe For Work"];
+            break;
+        case "Spicy Edition":
+            $questionsOfCategory = $questions[2]["Spicy Edition"];
+            break;
+        case "Girl Dinner":
+            $questionsOfCategory = $questions[3]["Girl Dinner"];
+            break;
     }
 
-    $randIndex = rand(0, count($questionsOfCategory) - 1);
-
+    // Select a random question and send back to user
+    $numberOfQuestions = count($questionsOfCategory);
+    $randIndex = rand(0, $numberOfQuestions - 1);
     $randQuestion = $questionsOfCategory[$randIndex];
 
-    sendJSON($randQuestion);
+    $data = [$numberOfQuestions, $randQuestion];
 
-    
+    sendJSON($data);
 
 ?>

@@ -1,6 +1,7 @@
 "use strict";
 
-renderNeverHaveIEver("basic");
+renderNeverHaveIEver("The Basic Version");
+//TruthORDareHandle()
 
 document.querySelector(".fa-bars").addEventListener("click", renderMenu);
 
