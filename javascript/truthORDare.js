@@ -1,5 +1,27 @@
 "use strict";
 
+// Global variables to track index
+let truthIndex = 0;
+let dareIndex = 0;
+
+// Setter and getter function for truth index
+function setTruthIndex(index) {
+    truthIndex = index;
+}
+
+function getTruthIndex() {
+    return truthIndex;
+}
+
+// Setter and getter function for dare index
+function setDareIndex(index) {
+    dareIndex = index;
+}
+
+function getDareIndex() {
+    return dareIndex;
+}
+
 // Function handles when the client chooses truth or dare
 function truthORDareHandle() {
     let main = document.querySelector("main");
@@ -58,28 +80,52 @@ async function renderTruthORDareQuestion(type) {
     // If response is OK, render new innerHTML that displays the question
     if (response.status === 200) {
         let data = await response.json();
-        let section = document.querySelector("#truthORDareWrapper>section");
-        // Change first letter in string to uppercase
-        section.innerHTML = `
-            <section id="questionHolder">
-            <article>
-                <h2>${type.charAt(0).toUpperCase() + type.slice(1)}</h2>
-                <h3>${data.question}</h3>
-            </article>
-                <p>${data.category}</p>
-            </section>
-        `;
+        console.log(data.questions);
 
-        // h2 can be either green or pink depending on type
+        function displayQuestion(data, type, index) {
+            console.log(index);
+            let section = document.querySelector("#truthORDareWrapper>section");
+            // Change first letter in string to uppercase
+            section.innerHTML = `
+                <section id="questionHolder">
+                <article>
+                    <h2>${type.charAt(0).toUpperCase() + type.slice(1)}</h2>
+                    <h3>${data.questions[index]}</h3>
+                </article>
+                    <p>${data.category}</p>
+                </section>
+            `;
+
+            // h2 can be either green or pink depending on type
+            if (type === "truth") {
+                document.querySelector("#questionHolder > article h2").style.color = "var(--green)";
+
+            } else {
+                document.querySelector("#questionHolder > article h2").style.color = "var(--pink)";
+            }
+        }
+
+        let tIndex = getTruthIndex();
+        let dIndex = getDareIndex();
+
+        // Display question based on index
         if (type === "truth") {
-            document.querySelector("#questionHolder > article h2").style.color = "var(--green)";
+            displayQuestion(data, type, tIndex)
         } else {
-            document.querySelector("#questionHolder > article h2").style.color = "var(--pink)";
+            displayQuestion(data, type, dIndex)
         }
 
         // The Next-button should now be displayed to repeat truth or dare
         document.getElementById("nextButton").style.opacity = "100%";
-        document.getElementById("nextButton").addEventListener("click", truthORDareHandle);
+        document.getElementById("nextButton").addEventListener("click", () => {
+            if (type === "truth") {
+                // Increment index to get new truth question
+                setTruthIndex(tIndex + 1);
+            } else {
+                setDareIndex(dIndex + 1);
+            }
+            truthORDareHandle()
+        });
 
     } else {
         let error = await response.json();

@@ -14,36 +14,36 @@
         $category = $data["category"];
 
         // Declare variable to store question
-        $question;
+        $questionArray;
 
         if($questionType == "truth") {
             switch($category) {
                 case "The Basic Version":
-                    $question = $questions[0]["basic"]["truth"][array_rand($questions[0]["basic"]["truth"], 1)];
+                    $questionArray = $questions[0]["basic"]["truth"];
                     break;
                 case "spicy":
-                    $question = $questions[0]["spicy"]["truth"][array_rand($questions[0]["spicy"]["truth"], 1)];
+                    $questionArray = $questions[0]["spicy"]["truth"];
                     break;
                 case "girls":
-                    $question = $questions[0]["girls"]["truth"][array_rand($questions[0]["girls"]["truth"], 1)];
+                    $questionArray = $questions[0]["girls"]["truth"];
                     break;
             }
         } else {
             switch($category) {
                 case "The Basic Version":
-                    $question = $questions[0]["basic"]["dare"][array_rand($questions[0]["basic"]["dare"], 1)];
+                    $questionArray = $questions[0]["basic"]["dare"];
                     break;
                 case "Spicy Edition":
-                    $question = $questions[0]["spicy"]["dare"][array_rand($questions[0]["spicy"]["dare"], 1)];
+                    $questionArray = $questions[0]["spicy"]["dare"];
                     break;
                 case "Girl Dinner":
-                    $question = $questions[0]["girls"]["dare"][array_rand($questions[0]["girls"]["dare"], 1)];
+                    $questionArray = $questions[0]["girls"]["dare"];
                     break;
             }
         }
 
         $response = [
-            "question" => $question,
+            "questions" => $questionArray,
             "type" => $questionType,
             "category" => $category
         ];
