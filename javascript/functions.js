@@ -34,7 +34,7 @@ function renderMenu(){
 }
 
 // Function to run a set timer
-function runTimer(time, progressbar){
+function runTimer(time, progressbar,callback){
 
     let timeLeft = time;
 
@@ -49,6 +49,9 @@ function runTimer(time, progressbar){
             progressbar.style.width = `${progress}%`;
         }else{
             clearInterval(countdownTimer);
+            if(callback){
+                callback();
+            }
         }
 
 

@@ -15,7 +15,7 @@
     height: 100%;
 }
 
-/*Timer*/
+/*Progressbar timer*/
 .timer{
     background-color: var(--white);
     height: 2vh;
@@ -72,7 +72,16 @@
     align-items: center;
 
     font-size: var(--fontSizeFour);
+    cursor: pointer;
 }
+
+.mostLikelyTo > .wrapper > .options > div:hover{
+    background-color: #212121;
+}
+.mostLikelyTo > .wrapper > .options > div.selected{
+    border: 1px solid var(--green);
+}
+
 
 .green{
     color: var(--green);
