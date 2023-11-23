@@ -1,41 +1,115 @@
 
-main.neverHaveIEver > h1{
-    text-align: center;
-}
-
-.neverHaveIEver p{
+.neverHaveIEver{
+    color: var(--textColor);
     font-family: outfit;
-    color: white;
 }
-h1{
 
+.neverHaveIEver > h1{
+    text-align: center;
     font-family: museoModerno;
-    font-size: 30px;
-    color: white;
+    font-size:  var(--fontSizeHeader);
+    margin-top: 2vh;
+    margin-bottom: 4vh;
 }
+
+/*Question cards*/
 .cards{
-    height: 55vh;
+    height: 50vh;
     width: 100%;
-    border-radius: 5px;
-
-    background-color: grey;
+    position: relative;
 }
 
+.cards > div{
+    background-color: var(--blackGrey);
+    box-shadow: var(--boxShadow);
+
+    font-family: outfit;
+    font-size: var(--fontSizeThree);
+    border-radius: 5px;
+    padding: 3vh;
+    height: 50vh;
+    width: 100%;
+}
+
+.cards p{
+    margin: 0;
+}
+
+/*Current card on display*/
+.currentCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    height: 100%;
+    position: absolute;
+    z-index: 4;
+}
+
+.currentCard > .question{
+    padding-top: 1vh;
+}
+
+.cardInformation{
+    color: var(--textOnWhite);
+    font-size: var(--fontSizeFive);
+
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardInformation > .cardNumber{
+    align-self: flex-end;
+}
+
+/*Cards in stack*/
+.cards > .backCard{
+    position: absolute;
+    top: 0;
+    box-shadow: 0px -5px 15px 0px rgba(0, 0, 0, 0.20);
+}
+
+.cards > :nth-child(2){
+    top: -5px;
+    z-index: 3;
+}
+.cards > :nth-child(3){
+    top: -9px;
+    z-index: 2;
+}
+.cards > :nth-child(4){
+    top: -13px;
+    z-index: 1;
+}
+
+/*Swipe fpr next card*/
 .swipeNextCard{
     display: flex;
     flex-direction: column;
-    
+    padding: 5vh;
 }
 
+.swipeNextCard > div{
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.swipeNextCard > div > p{
+    margin: 0;
+}
+
+/*Quit button*/
 .buttonQuit{
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
-    font-family: outfit;
-    color: white;
 }
 
+/*Back arrow*/
 .fa-chevron-left7{
     margin: 0;
 }

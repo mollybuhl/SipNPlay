@@ -19,4 +19,12 @@
         $json = file_get_contents($filename);
         return json_decode($json, true); 
     }
+
+    // Function to check if used request method is allowed
+    function checkMethod($usedMethod, $allowedMethods){
+        if(!in_array($usedMethod, $allowedMethods)){
+            $message = ["message" => "Allowed methods: $allowedMethods"];
+            sendJSON($message, 405);
+        }
+    }
 ?>

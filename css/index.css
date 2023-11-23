@@ -9,11 +9,13 @@
     --darkGrey: #5D5D5D;
     --white: #E6E6E6;
     --textColor: #C1C1C1;
+    --textOnWhite: #5D5D5D;
     --buttonColor: #C1C1C1;
+
 
     --fontSizeHeader: 30px;
     --fontSizeTwo: 28px;
-    --fontSizeThree: 24px;
+    --fontSizeThree: 22px;
     --fontSizeFour: 20px;
     --fontSizeFive: 18px;
 
@@ -47,14 +49,48 @@ body {
     padding: 4vh;
 }
 
-header {
+/*header*/
+header{
     height: 10%;
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-main {
+.menuPopup{
+    height: 100%;
+    width: 70%;
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    color: var(--textColor);
+    font-family: outfit;
+    font-size: var(--fontSizeFour);
+    background-color: var(--blackGrey);
+    box-shadow: var(--boxShadow);
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 4vh;
+}
+
+.menuPopup > .fa-xmark{
+    align-self: flex-end;
+}
+
+.menuOption{
+    display: flex;
+    gap: 1vh;
+}
+
+.fa-martini-glass-empty, .fa-user-group, .fa-earth-americas, .fa-circle-info{
+    margin: 0;
+    align-self: center;
+}
+
+main{
     height: 80%;
 }
 
