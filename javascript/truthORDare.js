@@ -1,8 +1,7 @@
 "use strict";
-TruthORDareHandle()
 
 // Function handles when the client chooses truth or dare
-function TruthORDareHandle() {
+function truthORDareHandle() {
     let main = document.querySelector("main");
     main.innerHTML = `
         <div id="truthORDareWrapper">
@@ -80,7 +79,7 @@ async function renderTruthORDareQuestion(type) {
 
         // The Next-button should now be displayed to repeat truth or dare
         document.getElementById("nextButton").style.opacity = "100%";
-        document.getElementById("nextButton").addEventListener("click", TruthORDareHandle);
+        document.getElementById("nextButton").addEventListener("click", truthORDareHandle);
 
     } else {
         let error = await response.json();

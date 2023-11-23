@@ -2,7 +2,7 @@
     ini_set("display_errors", 1);
     require_once("functions.php");
 
-    $questions = getFileContents("truthORDare.json");
+    $questions = getFileContents("truthORDareQuestions.json");
     $requestMethod = $_SERVER["REQUEST_METHOD"];
     // Get data from the request body
     $requestData = getFileContents("php://input");
@@ -33,21 +33,21 @@
                 case "The Basic Version":
                     $question = $questions[0]["basic"]["dare"][array_rand($questions[0]["basic"]["dare"], 1)];
                     break;
-                case "spicy":
+                case "Spicy Edition":
                     $question = $questions[0]["spicy"]["dare"][array_rand($questions[0]["spicy"]["dare"], 1)];
                     break;
-                case "girls":
+                case "Girl Dinner":
                     $question = $questions[0]["girls"]["dare"][array_rand($questions[0]["girls"]["dare"], 1)];
                     break;
             }
         }
 
-        $message = [
+        $response = [
             "question" => $question,
             "type" => $questionType,
             "category" => $category
         ];
 
-        sendJSON($message);
+        sendJSON($response);
     }
 ?>

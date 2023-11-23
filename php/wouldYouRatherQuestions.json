@@ -1,0 +1,42 @@
+[
+    {
+        "basic": [
+            {
+                "this": "Have teeth for hair",
+                "that": "Have hair for teeth"
+            },
+            {
+                "this": "Have your name tattooed on your forehead",
+                "that": "Have no front teeth"
+            },
+            {
+                "this": "Live with a pink eye",
+                "that": "Live with bedbugs for the rest of your life"
+            }
+        ],
+        "spicy": [
+            {
+                "this": "Pee a ping-pong ball ",
+                "that": "Poop a bowling ball"
+            },
+            {
+                "this": "Be caught cheating",
+                "that": "Catch someone cheating"
+            }
+        ],
+        "girls": [
+            {
+                "this": "Wear the same bra for a month",
+                "that": "Wear the same panties for a week"
+            },
+            {
+                "this": "Pop a big pimple",
+                "that": "Pull out an ingrown hair"
+            },
+            {
+                "this": "Find the love of your life",
+                "that": "Find a million pounds"
+            }
+        ]
+    }
+]
