@@ -1,0 +1,94 @@
+.mostLikelyTo{
+    color: var(--textColor);
+    font-family: outfit;
+}
+
+.mostLikelyTo > .wrapper > h1{
+    text-align: center;
+    font-family: museoModerno;
+    font-size:  var(--fontSizeTwo);
+    margin-top: 2vh;
+    margin-bottom: 4vh;
+}
+
+.mostLikelyTo > .wrapper{
+    height: 100%;
+}
+
+/*Progressbar timer*/
+.timer{
+    background-color: var(--white);
+    height: 2vh;
+    width: 100%;
+    margin-top: 2vh;
+    border-radius: 5px;
+
+    position: relative;
+}
+
+.timer > .progressbar{
+    background-color: var(--pink);
+    position: absolute;
+    top: 0;
+
+    height: 2vh;
+    width: 100%;
+    border-radius: 5px;
+
+    transition-property: width;
+    transition-duration: 2s;
+}
+
+/*Question box*/
+.mostLikelyTo > .wrapper > .questionBox{
+    height: 30%;
+    background-color: var(--blackGrey);
+    border-radius: 5px;
+    box-shadow: var(--boxShadow);
+    padding: 2vh;
+}
+
+.mostLikelyTo > .wrapper > .questionBox > p{
+    font-size: var(--fontSizeThree);
+    margin: 0;
+}
+
+/*Option boxes*/
+.mostLikelyTo > .wrapper > .options{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 6vh;
+    gap: 1vh;
+    padding-top: 2vh;
+}
+
+.mostLikelyTo > .wrapper > .options > div{
+    background-color: var(--blackGrey);
+    border-radius: 5px;
+    box-shadow: var(--boxShadow);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: var(--fontSizeFour);
+    cursor: pointer;
+}
+
+.mostLikelyTo > .wrapper > .options > div:hover{
+    background-color: #212121;
+}
+.mostLikelyTo > .wrapper > .options > div.selected{
+    border: 1px solid var(--green);
+}
+
+
+.green{
+    color: var(--green);
+}
+.orange{
+    color: var(--orange);
+}
+.pink{
+    color: var(--pink);
+}
