@@ -106,6 +106,43 @@ async function renderMostLikelyTo(gameId, category){
     runTimer(30, progressbar,function(){
         renderMostLikelyToResult()
     });
+
+    // Function to fetch and display results
+    async function renderMostLikelyToResult(){
+        console.log("RESULTS ARE IN!");
+
+        // Send request to fetch results
+        let requestData = {
+            gameId: gameId,
+            action: "fetchResults",
+        }
+
+        let votes = await fetchMostLikelyTo(requestData);
+        console.log(votes);
+        let voteCounter = {};
+        // Count votes
+        votes.forEach((name) => {
+            if (voteCounter.hasOwnProperty(name)) {
+                // If yes, increment the count
+                voteCounter[name]++;
+            }else {
+                // If not, initialize the count to 1
+                voteCounter[name] = 1;
+            }
+        })
+
+        console.log(voteCounter);
+    
+        // Set mostLikelyTo class to main and footer
+        let main = document.querySelector("main");
+    
+        main.innerHTML=`
+        <h2>Take a sip</h2
+        <h1></h1>
+        <h2>You are most likely to ${question}</h2>
+        `;
+    }
+
 }
 
 // Function to fetch a most likely to question
@@ -148,6 +185,3 @@ async function createGame(players){
     renderMostLikelyTo(gameId, "The Basic Version");
 }
 
-function renderMostLikelyToResult(){
-    console.log("RESULTS ARE IN!");
-}

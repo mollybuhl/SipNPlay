@@ -119,6 +119,31 @@
         saveToFile("mostLikelyToGame.json", $games);
         $message = $gameId;
         sendJSON($message);
+
+    }else if($action == "fetchResults"){
+
+        $games = getFileContents("mostLikelyToGame.json");
+        $gameId = $requestData["gameId"];
+
+        // Find active game based on gameId from request
+        $activeGame = false;
+        $gameIndex;
+ 
+        foreach($games as $index => $game){
+            if($game["id"] == $gameId){
+                $activeGame = $game;
+                $gameIndex = $index;
+            }
+        }
+
+        // If active game found handle votes, otherwise inform user
+        if($activeGame){
+            sendJSON($activeGame["votes"]);
+
+        }else{
+            $message = ["message" => "no active game was found"];
+            sendJson($message, 404);
+        }
     }
 
     
