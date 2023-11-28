@@ -3,7 +3,6 @@
     - Players 
     - Instructions
     - Language
-    - Connect click
 */
 
 // Function to display menu
@@ -57,7 +56,7 @@ function renderMenu(){
     //menuPopup.querySelector(".instructions").addEventListener("click", renderGameDisplay);
 
     // Display language settings
-    menuPopup.querySelector(".language").addEventListener("click", renderGameDisplay);
+    //menuPopup.querySelector(".language").addEventListener("click", renderGameDisplay);
     
     // Close menu
     menuPopup.querySelector(".exit").addEventListener("click", closeMenu);
