@@ -39,6 +39,28 @@
     transition-duration: 2s;
 }
 
+.mostLikelyToResult{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mostLikelyToResult h2{
+    font-size: var(--fontSizeTwo);
+    text-align: center;
+}
+
+.resultName{
+    font-size: 50px;
+    font-family: museoModerno;
+    font-weight: var(--fontBold);
+
+    background: var(--greenGradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 /*Question box*/
 .mostLikelyTo > .wrapper > .questionBox{
     height: 30%;
