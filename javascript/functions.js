@@ -1,3 +1,4 @@
+// Function to display menu
 function renderMenu(){
     let menuPopup = document.createElement("div");
     menuPopup.classList.add("menuPopup");

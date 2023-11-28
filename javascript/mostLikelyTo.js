@@ -1,10 +1,11 @@
 "use strict";
 /* TO DO:
     - Import names
-
     - Game should only be created for one person
     - Others join by entering code
 */
+
+// Function to render moste likely to question and handle votes
 async function renderMostLikelyTo(gameId, category, questionIndex = 0){
 
     // Set mostLikelyTo class to main and footer
@@ -47,6 +48,8 @@ async function renderMostLikelyTo(gameId, category, questionIndex = 0){
     let counter = 0; 
 
     players.forEach(player => {
+
+        // Create option box for each player and give a color class
         let optionBox = document.createElement("div");
         let colorClass = colorClasses[counter];
         optionBox.classList.add(colorClass);
@@ -65,6 +68,7 @@ async function renderMostLikelyTo(gameId, category, questionIndex = 0){
 
         // Function to update user answer
         function updateAnswer(){
+
             let previousVote = null;
             let newVote = null;
 
@@ -84,7 +88,6 @@ async function renderMostLikelyTo(gameId, category, questionIndex = 0){
                 optionBox.classList.add("selected");
             }
 
-
             // Send request to update votes
             let requestData = {
                 gameId: gameId,
@@ -93,10 +96,9 @@ async function renderMostLikelyTo(gameId, category, questionIndex = 0){
                 previousVote: previousVote
             }
 
-            fetchMostLikelyTo(requestData);
-            
-        }
+            fetchMostLikelyTo(requestData);  
 
+        }
     });
 
     // Set countdown timer for 30sec
@@ -112,8 +114,10 @@ async function renderMostLikelyTo(gameId, category, questionIndex = 0){
         <p>QUIT</p>
     </div>
     `
+    // When clicking quit go back to categories
+    footer.querySelector(".buttonQuit").addEventListener("click", renderMostLikelyToCategories);
 
-    // Function to fetch and display results
+    // Function to fetch and display results after countdown is finished
     async function renderMostLikelyToResult(){
 
         // Send request to fetch results
@@ -124,6 +128,7 @@ async function renderMostLikelyTo(gameId, category, questionIndex = 0){
 
         let votes = await fetchMostLikelyTo(requestData);
         let voteCounter = {};
+
         // Count votes
         votes.forEach((name) => {
             if (voteCounter.hasOwnProperty(name)) {
@@ -135,6 +140,7 @@ async function renderMostLikelyTo(gameId, category, questionIndex = 0){
             }
         })
 
+        // Find person with the most votes
         let mostVotedName = "";
         let maxVotes = 0;
 
@@ -171,7 +177,6 @@ async function renderMostLikelyTo(gameId, category, questionIndex = 0){
 
         // Set mostLikelyTo class and structure to footer
         let footer = document.querySelector("footer");
-        //footer.classList.add("")
 
         // Structure of footer
         footer.innerHTML=`
@@ -182,25 +187,31 @@ async function renderMostLikelyTo(gameId, category, questionIndex = 0){
         <button class="nextButton">NEXT</button>
         `;
 
+        // When clicking quit button go back to categories
+        footer.querySelector(".buttonQuit").addEventListener("click", renderCategories);
+
         // When clicking on next button, clear votes and call to render next question
         footer.querySelector(".nextButton").addEventListener("click", async () => {
+            
             // Send request to fetch results
             let requestData = {
                 gameId: gameId,
                 action: "clearVotes",
             }
+
             // Clear votes
             let clear = await fetchMostLikelyTo(requestData);
 
             // Render next question
             renderMostLikelyTo(gameId, category, questionIndex+1);
+
         });
     }
-
 }
 
 // Function to fetch a most likely to question
 async function fetchMostLikelyTo(requestData){
+
     // Set request parameters
     let requestParameters = {
         method: "POST",
@@ -226,16 +237,18 @@ async function fetchMostLikelyTo(requestData){
     }
 }
 
-// Function to create a game between players
-async function createGame(players){
+// Function to create a new most likely to game based on players and category
+async function createMostLikelyToGame(players, category){
 
+    // Set request parameters
     let requestData = {
         action: "createGame",
         players: players
     }
 
+    // Send request
     let gameId= await fetchMostLikelyTo(requestData);
     
-    renderMostLikelyTo(gameId, "The Basic Version");
+    renderMostLikelyTo(gameId, category);
 }
 
