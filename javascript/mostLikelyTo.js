@@ -123,7 +123,6 @@ async function renderMostLikelyTo(gameId, category, questionIndex = 0){
         }
 
         let votes = await fetchMostLikelyTo(requestData);
-        console.log(votes);
         let voteCounter = {};
         // Count votes
         votes.forEach((name) => {
