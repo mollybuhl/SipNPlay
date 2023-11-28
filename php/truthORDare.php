@@ -2,16 +2,22 @@
     ini_set("display_errors", 1);
     require_once("functions.php");
 
-    $questions = getFileContents("truthORDareQuestions.json");
+    // Check if request method is allowed
     $requestMethod = $_SERVER["REQUEST_METHOD"];
+    $allowed = ["POST"];
+    checkMethod($requestMethod, $allowed);
+
+    $questions = getFileContents("truthORDareQuestions.json");
+
     // Get data from the request body
     $requestData = getFileContents("php://input");
+    // Base action on request action key
+    $action = $requestData["action"];
 
-    if($requestMethod == "POST") {
+    if($action == "fetchQuestion") {
         //Fetches information from POST request and save values
-        $data = getFileContents("php://input"); 
-        $questionType = $data["type"];
-        $category = $data["category"];
+        $questionType = $requestData["type"];
+        $category = $requestDdata["category"];
 
         // Declare variable to store question
         $questionArray;

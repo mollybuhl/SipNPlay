@@ -1,0 +1,31 @@
+[
+    {
+        "gameId": 1664,
+        "this": {
+            "votes": []
+        },
+        "that": {
+            "votes": [
+                "one"
+            ]
+        }
+    },
+    {
+        "gameId": 9832,
+        "this": {
+            "votes": []
+        },
+        "that": {
+            "votes": []
+        }
+    },
+    {
+        "gameId": 1504,
+        "this": {
+            "votes": []
+        },
+        "that": {
+            "votes": []
+        }
+    }
+]

@@ -66,6 +66,7 @@ async function renderTruthORDareQuestion(type) {
     let data = {
         type: type,
         category: "The Basic Version",
+        action: "fetchQuestion"
     };
 
     // POST-request to truthORDare.php

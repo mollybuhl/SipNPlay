@@ -1,7 +1,5 @@
 "use strict";
 
-renderWouldYouRather()
-
 // Global variable to track index
 let wouldYRIIndex = 0;
 
@@ -15,7 +13,7 @@ function getWouldYRIndex() {
 }
 
 // Function fetches a random question from PHP depending on category
-async function renderWouldYouRather() {
+async function renderWouldYouRather(gameId) {
     let main = document.querySelector("main");
     main.innerHTML = `
         <div id="wouldYouRatherWrapper">
@@ -25,9 +23,9 @@ async function renderWouldYouRather() {
             </div>
             
             <section>
-                <button id="btnThis">kajsdldkjdlsa</button>
+                <button id="btnThis" data-set="this"></button>
                 <div>OR</div>
-                <button id="btnThat">Dkj ndjposd ajpoasd kpo</button>
+                <button id="btnThat" data-set="that"></button>
             </section>
         </div>
     `;
@@ -47,6 +45,7 @@ async function renderWouldYouRather() {
 
     let data = {
         category: "The Basic Version",
+        action: "fetchQuestion"
     };
 
     // POST-request to wouldYouRather.php
@@ -69,10 +68,54 @@ async function renderWouldYouRather() {
 
             thisQuestion.innerHTML = `${data.questions[index].this}`;
             thatQuestion.innerHTML = `${data.questions[index].that}`;
+
+            document.querySelectorAll("section>button").forEach((button) => {
+                button.addEventListener("click", (e) => {
+                    let questionType = e.target.dataset["set"];
+                    console.log(e.target.dataset["set"]);
+                    updateSelectedQuestion(questionType)
+                })
+            });
         }
 
+        const questionIndex = getWouldYRIndex();
+        displayWouldYouRatherQuestion(data, questionIndex)
 
-        displayWouldYouRatherQuestion(data, getWouldYRIndex())
+        async function updateSelectedQuestion(type) {
+            let data = {
+                gameId: gameId,
+                questionType: type,
+                vote: "one",
+                action: "updateVotes"
+            };
+
+            // POST-request to wouldYouRather.php
+            const request = new Request("php/wouldYouRather.php", {
+                method: "POST",
+                headers: { "Content-type": "application/json; charset=UTF-8" },
+                body: JSON.stringify(data)
+            });
+
+            const response = await fetch(request);
+
+            // If response OK, display css for which option is selected
+            if (response.status === 200) {
+                let data = await response.json();
+                console.log(data);
+
+                if (type == "this") {
+                    console.log("hej");
+                    document.getElementById("btnThis").style.border = `3px solid var(--green)`;
+                    document.getElementById("btnThat").style.border = `0px`;
+                } else {
+                    document.getElementById("btnThat").style.border = `3px solid var(--green)`;
+                    document.getElementById("btnThis").style.border = `0px`;
+
+                }
+            }
+
+        }
+
         function readWouldYouRatherResults() {
 
         }
@@ -82,12 +125,48 @@ async function renderWouldYouRather() {
 
         }
     }
+    else {
+        let error = await response.json();
+        feedback(error.message);
+    }
 
-
-    // Set countdown timer for 30sec
+    // Set countdown timer for 15 seconds
     let progressbar = document.querySelector(".progressbar");
     runTimer(15, progressbar, function () {
         // renderWouldYouRatherResult()
         console.log("HEJ");
     });
 }
+
+// Function to create a game between players
+async function createWouldYRGame() {
+
+    let data = {
+        action: "createGame"
+    }
+
+    const request = new Request("php/wouldYouRather.php", {
+        method: "POST",
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+        body: JSON.stringify(data)
+    });
+
+    // Fetch request and handle response
+    try {
+        let response = await fetch(request);
+
+        if (response.ok) {
+            let resource = await response.json();
+            console.log(resource);
+            let gameId = resource;
+            renderWouldYouRather(gameId);
+        } else {
+            let error = await response.json();
+            feedback(error.message);
+        }
+    } catch (error) {
+        console.log("Something went wrong", error);
+    }
+}
+
+createWouldYRGame()

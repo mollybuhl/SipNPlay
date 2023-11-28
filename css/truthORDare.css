@@ -83,6 +83,10 @@ section div {
     box-shadow: var(--boxShadow);
 }
 
+#questionHolder article {
+    text-align: left;
+}
+
 #questionHolder h2 {
     font-family: museoModerno;
     font-size: var(--fontSizeTwo);
