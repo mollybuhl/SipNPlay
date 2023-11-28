@@ -13,7 +13,10 @@
     // Base action on request action key
     $action = $requestData["action"];
 
+    // Continue bsed on action
     if($action == "fetchQuestion"){
+        // FETCH QUESTION
+
         // Get all questions from json file
         $questions = getFileContents("mostLikelyTo.json");
 
@@ -40,6 +43,8 @@
         sendJSON($questionsOfCategory);
 
     }else if($action == "updateSelected"){
+        // UPDATE SELECTED
+
         // Get saved games and find
         $games = getFileContents("mostLikelyToGame.json");
         $gameId = $requestData["gameId"];
@@ -82,6 +87,8 @@
         }
 
     }else if($action == "createGame"){
+        // CREATE NEW GAME
+
         $games = getFileContents("mostLikelyToGame.json");
         $players = $requestData["players"];
        
@@ -121,6 +128,7 @@
         sendJSON($message);
 
     }else if($action == "fetchResults"){
+        // GET RESULTS
 
         $games = getFileContents("mostLikelyToGame.json");
         $gameId = $requestData["gameId"];
@@ -144,6 +152,40 @@
             $message = ["message" => "no active game was found"];
             sendJson($message, 404);
         }
+    }else if($action == "clearVotes"){
+        // CLEAR ALL VOTES
+
+        $games = getFileContents("mostLikelyToGame.json");
+        $gameId = $requestData["gameId"];
+
+        // Find active game based on gameId from request
+        $activeGame = false;
+        $gameIndex;
+ 
+        foreach($games as $index => $game){
+            if($game["id"] == $gameId){
+                $activeGame = $game;
+                $gameIndex = $index;
+            }
+        }
+
+        // If active game found handle votes, otherwise inform user
+        if($activeGame){
+            
+            // Remove votes
+            $votes = $activeGame["votes"];
+            foreach($votes as $index => $vote){
+                array_splice($games[$gameIndex]["votes"], $index,1);
+            }
+
+            saveToFile("mostLikelyToGame.json", $games);
+            sendJSON($games[$gameIndex]["votes"]);
+
+        }else{
+            $message = ["message" => "no active game was found"];
+            sendJson($message, 404);
+        }
+
     }
 
     

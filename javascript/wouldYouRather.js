@@ -1,6 +1,6 @@
 "use strict";
 
-renderWouldYouRather()
+//renderWouldYouRather()
 
 // Function fetches a random question from PHP depending on category
 async function renderWouldYouRather() {

@@ -1,3 +1,148 @@
 [
-    
+    {
+        "id": 1448,
+        "palyers": [
+            "Molly",
+            "Amanda",
+            "Alex",
+            "Buster",
+            "Lasse"
+        ],
+        "votes": [
+            " Molly"
+        ]
+    },
+    {
+        "id": 8262,
+        "palyers": [
+            "Molly",
+            "Amanda",
+            "Alex",
+            "Buster",
+            "Lasse"
+        ],
+        "votes": [
+            " Molly"
+        ]
+    },
+    {
+        "id": 5885,
+        "palyers": [
+            "Molly",
+            "Amanda",
+            "Alex",
+            "Buster",
+            "Lasse"
+        ],
+        "votes": [
+            " Alex"
+        ]
+    },
+    {
+        "id": 3116,
+        "palyers": [
+            "Molly",
+            "Amanda",
+            "Alex",
+            "Buster",
+            "Lasse"
+        ],
+        "votes": [
+            " Alex"
+        ]
+    },
+    {
+        "id": 1938,
+        "palyers": [
+            "Molly",
+            "Amanda",
+            "Alex",
+            "Buster",
+            "Lasse"
+        ],
+        "votes": [
+            " Molly"
+        ]
+    },
+    {
+        "id": 6871,
+        "palyers": [
+            "Molly",
+            "Amanda",
+            "Alex",
+            "Buster",
+            "Lasse"
+        ],
+        "votes": [
+            " Amanda"
+        ]
+    },
+    {
+        "id": 7520,
+        "palyers": [
+            "Molly",
+            "Amanda",
+            "Alex",
+            "Buster",
+            "Lasse"
+        ],
+        "votes": [
+            " Amanda"
+        ]
+    },
+    {
+        "id": 4846,
+        "palyers": [
+            "Molly",
+            "Amanda",
+            "Alex",
+            "Buster",
+            "Lasse"
+        ],
+        "votes": [
+            " Molly",
+            " Alex"
+        ]
+    },
+    {
+        "id": 3465,
+        "palyers": [
+            "Molly",
+            "Amanda",
+            "Alex",
+            "Buster",
+            "Lasse"
+        ],
+        "votes": [
+            " Amanda",
+            " Molly"
+        ]
+    },
+    {
+        "id": 4063,
+        "palyers": [
+            "Molly",
+            "Amanda",
+            "Alex",
+            "Buster",
+            "Lasse"
+        ],
+        "votes": [
+            " Molly",
+            " Alex"
+        ]
+    },
+    {
+        "id": 6825,
+        "palyers": [
+            "Molly",
+            "Amanda",
+            "Alex",
+            "Buster",
+            "Lasse"
+        ],
+        "votes": [
+            " Lasse"
+        ]
+    }
 ]
