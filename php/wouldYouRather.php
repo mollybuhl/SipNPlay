@@ -34,4 +34,9 @@
 
         sendJSON($response);
     }
+
+    if($requestMethod == "PATCH") {
+        //Fetches information from POST request and save values
+        $data = getFileContents("php://input"); 
+    }
 ?>

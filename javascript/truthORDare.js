@@ -49,7 +49,7 @@ function truthORDareHandle() {
     `;
 
     // Next-button should not be displayed when choosing truth or dare options
-    document.getElementById("nextButton").style.opacity = "0";
+    document.querySelector(".nextButton").style.opacity = "0";
 
     // Assigns an event listener to truth or dare buttons and calls renderTruthORDareQuestion function to generate a question
     document.querySelectorAll("section>button").forEach(button => {
@@ -116,20 +116,26 @@ async function renderTruthORDareQuestion(type) {
         }
 
         // The Next-button should now be displayed to repeat truth or dare
-        document.getElementById("nextButton").style.opacity = "100%";
-        document.getElementById("nextButton").addEventListener("click", () => {
+        document.querySelector(".nextButton").style.opacity = "100%";
+        document.querySelector(".nextButton").addEventListener("click", () => {
             if (type === "truth") {
                 // Increment index to get new truth question or set index to 0 to restart
-                if (tIndex <= data.questions.length) {
+                if (tIndex < data.questions.length - 1) {
                     displayTruthORDareQuestion(data, type, tIndex)
-                } else {
                     setTruthIndex(tIndex + 1)
-                }
-            } else {
-                if (dIndex <= data.questions.length) {
-                    displayTruthORDareQuestion(data, type, dIndex)
+
                 } else {
+                    setTruthIndex(0)
+                }
+            }
+
+            if (type === "dare") {
+                if (dIndex < data.questions.length - 1) {
+                    displayTruthORDareQuestion(data, type, dIndex)
                     setDareIndex(dIndex + 1)
+
+                } else {
+                    setDareIndex(0)
                 }
             }
             truthORDareHandle()

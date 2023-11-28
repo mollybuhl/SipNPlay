@@ -2,6 +2,18 @@
 
 renderWouldYouRather()
 
+// Global variable to track index
+let wouldYRIIndex = 0;
+
+// Setter and getter function for would you rather question index
+function setWouldYRIndex(index) {
+    wouldYRIIndex = index;
+}
+
+function getWouldYRIndex() {
+    return wouldYRIIndex;
+}
+
 // Function fetches a random question from PHP depending on category
 async function renderWouldYouRather() {
     let main = document.querySelector("main");
@@ -31,7 +43,7 @@ async function renderWouldYouRather() {
      `;
 
     // Next-button should not be displayed when choosing truth or dare options
-    document.getElementById("nextButton").style.opacity = "0";
+    document.querySelector(".nextButton").style.opacity = "0";
 
     let data = {
         category: "The Basic Version",
@@ -52,10 +64,15 @@ async function renderWouldYouRather() {
         console.log(data.questions);
 
         function displayWouldYouRatherQuestion(data, index) {
+            const thisQuestion = document.getElementById("btnThis");
+            const thatQuestion = document.getElementById("btnThat");
 
+            thisQuestion.innerHTML = `${data.questions[index].this}`;
+            thatQuestion.innerHTML = `${data.questions[index].that}`;
         }
 
 
+        displayWouldYouRatherQuestion(data, getWouldYRIndex())
         function readWouldYouRatherResults() {
 
         }
