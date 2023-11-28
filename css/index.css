@@ -4,6 +4,7 @@
     --orange: #E9A072;
     --gradient: linear-gradient(90deg, rgba(177, 200, 113, 1) 0%, rgba(233, 160, 114, 1) 50%, rgba(231, 83, 140, 1) 100%);
     --pinkGradient: linear-gradient(180deg, rgba(233, 160, 114, 1) 0%, rgba(231, 83, 140, 1) 100%);
+    --greenGradient: linear-gradient(177deg, #B1C871 32.27%, #E9A072 64.13%);
     --black: #1B1B1B;
     --blackGrey: #2A2A2A;
     --darkGrey: #5D5D5D;
