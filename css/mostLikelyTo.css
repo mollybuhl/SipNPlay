@@ -1,22 +1,22 @@
-.mostLikelyTo{
+.mostLikelyTo {
     color: var(--textColor);
     font-family: outfit;
 }
 
-.mostLikelyTo > .wrapper > h1{
+.mostLikelyTo>.wrapper>h1 {
     text-align: center;
     font-family: museoModerno;
-    font-size:  var(--fontSizeTwo);
+    font-size: var(--fontSizeTwo);
     margin-top: 2vh;
     margin-bottom: 4vh;
 }
 
-.mostLikelyTo > .wrapper{
+.mostLikelyTo>.wrapper {
     height: 100%;
 }
 
 /*Progressbar timer*/
-.timer{
+.timer {
     background-color: var(--white);
     height: 2vh;
     width: 100%;
@@ -26,7 +26,7 @@
     position: relative;
 }
 
-.timer > .progressbar{
+.timer>.progressbar {
     background-color: var(--pink);
     position: absolute;
     top: 0;
@@ -40,7 +40,7 @@
 }
 
 /*Question box*/
-.mostLikelyTo > .wrapper > .questionBox{
+.mostLikelyTo>.wrapper>.questionBox {
     height: 30%;
     background-color: var(--blackGrey);
     border-radius: 5px;
@@ -48,13 +48,13 @@
     padding: 2vh;
 }
 
-.mostLikelyTo > .wrapper > .questionBox > p{
+.mostLikelyTo>.wrapper>.questionBox>p {
     font-size: var(--fontSizeThree);
     margin: 0;
 }
 
 /*Option boxes*/
-.mostLikelyTo > .wrapper > .options{
+.mostLikelyTo>.wrapper>.options {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: 6vh;
@@ -62,7 +62,7 @@
     padding-top: 2vh;
 }
 
-.mostLikelyTo > .wrapper > .options > div{
+.mostLikelyTo>.wrapper>.options>div {
     background-color: var(--blackGrey);
     border-radius: 5px;
     box-shadow: var(--boxShadow);
@@ -75,20 +75,23 @@
     cursor: pointer;
 }
 
-.mostLikelyTo > .wrapper > .options > div:hover{
+.mostLikelyTo>.wrapper>.options>div:hover {
     background-color: #212121;
 }
-.mostLikelyTo > .wrapper > .options > div.selected{
+
+.mostLikelyTo>.wrapper>.options>div.selected {
     border: 1px solid var(--green);
 }
 
 
-.green{
+.green {
     color: var(--green);
 }
-.orange{
+
+.orange {
     color: var(--orange);
 }
-.pink{
+
+.pink {
     color: var(--pink);
 }

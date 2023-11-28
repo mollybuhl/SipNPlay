@@ -13,22 +13,22 @@
         $category = $data["category"];
 
         // Declare variable to store question
-        $question;
+        $questionArray;
 
         switch($category) {
             case "The Basic Version":
-                $question = $questions[0]["basic"][array_rand($questions[0]["basic"], 1)];
+                $questionArray = $questions[0]["basic"];
                 break;
             case "Spicy Edition":
-                $question = $questions[0]["spicy"][array_rand($questions[0]["spicy"], 1)];
+                $questionArray = $questions[0]["spicy"];
                 break;
             case "Girl Dinner":
-                $question = $questions[0]["girls"][array_rand($questions[0]["girls"], 1)];
+                $questionArray = $questions[0]["girls"];
                 break;
         }
 
         $response = [
-            "question" => $question,           
+            "questions" => $questionArray,           
             "category" => $category
         ];
 

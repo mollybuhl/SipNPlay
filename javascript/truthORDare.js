@@ -45,7 +45,7 @@ function truthORDareHandle() {
             <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
             <p>QUIT</p>
         </div>
-        <button id="nextButton">NEXT</button>
+        <button class="nextButton">NEXT</button>
     `;
 
     // Next-button should not be displayed when choosing truth or dare options
@@ -82,9 +82,9 @@ async function renderTruthORDareQuestion(type) {
         let data = await response.json();
         console.log(data.questions);
 
-        function displayQuestion(data, type, index) {
+        function displayTruthORDareQuestion(data, type, index) {
             console.log(index);
-            let section = document.querySelector("#truthORDareWrapper>section");
+            const section = document.querySelector("#truthORDareWrapper>section");
             // Change first letter in string to uppercase
             section.innerHTML = `
                 <section id="questionHolder">
@@ -110,19 +110,27 @@ async function renderTruthORDareQuestion(type) {
 
         // Display question based on index
         if (type === "truth") {
-            displayQuestion(data, type, tIndex)
+            displayTruthORDareQuestion(data, type, tIndex)
         } else {
-            displayQuestion(data, type, dIndex)
+            displayTruthORDareQuestion(data, type, dIndex)
         }
 
         // The Next-button should now be displayed to repeat truth or dare
         document.getElementById("nextButton").style.opacity = "100%";
         document.getElementById("nextButton").addEventListener("click", () => {
             if (type === "truth") {
-                // Increment index to get new truth question
-                setTruthIndex(tIndex + 1);
+                // Increment index to get new truth question or set index to 0 to restart
+                if (tIndex <= data.questions.length) {
+                    displayTruthORDareQuestion(data, type, tIndex)
+                } else {
+                    setTruthIndex(tIndex + 1)
+                }
             } else {
-                setDareIndex(dIndex + 1);
+                if (dIndex <= data.questions.length) {
+                    displayTruthORDareQuestion(data, type, dIndex)
+                } else {
+                    setDareIndex(dIndex + 1)
+                }
             }
             truthORDareHandle()
         });
