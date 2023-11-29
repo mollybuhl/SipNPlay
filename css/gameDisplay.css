@@ -1,0 +1,11 @@
+.gameDisplay {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.gameDisplay > div{
+    height: 10vh;
+    width: 70vw;
+    background-color: grey;
+    cursor: pointer;
+}

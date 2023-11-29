@@ -101,16 +101,5 @@
     margin: 0;
 }
 
-/*Quit button*/
-.buttonQuit{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-}
 
-/*Back arrow*/
-.fa-chevron-left7{
-    margin: 0;
-}
 

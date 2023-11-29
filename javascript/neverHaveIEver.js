@@ -1,7 +1,6 @@
 /*
     TO DO:
     - Implement swipe animation
-    - Quit to category page
 */
 
 // Function to render Never have I Ever game
@@ -54,11 +53,16 @@ async function renderNeverHaveIEver(category){
     </div>
     `
 
+    //Quit game when clicking on quit button
+    footer.querySelector("buttonQuit").addEventListener("click", () => {
+        renderCategories("Never Have I Ever");
+    })
     
     //Swipe for next question
     //swipeNext();
     document.querySelector(".swipeNextCard").addEventListener("click", renderNewCard);
 
+    // Function to render a new question
     async function renderNewCard(){
        
         // Fetch new card information
@@ -71,12 +75,7 @@ async function renderNeverHaveIEver(category){
         // Display new card
         document.querySelector(".cards > .currentCard > .question").textContent = question;
         document.querySelector(".cards > .currentCard > .cardInformation > .cardNumber").textContent = `${questionNumber}/${numberOfQuestions}`;
-    
     }
-
-    //Quit game when clicking on quit button
-    
-
 };
 
 // Function to fetch a Never Have I Ever Question
@@ -110,7 +109,7 @@ async function fetchNeverHaveIEverQuestion(category){
    
 }
 
-// Swipe for next card
+// Function to swipe for next card
 function swipeNext(){
     let touchArea = document.querySelector(".swipeNextCard");
 
@@ -190,6 +189,6 @@ function swipeNext(){
                     renderNewCard(category);
                 }
             }
-        })
-    
+        }
+    )
 }
