@@ -216,9 +216,6 @@ async function renderWouldYouRather(gameId) {
             }
 
             if (thisPercent < thatPercent) {
-                console.log(thisPercent);
-                console.log(thatPercent);
-
                 document.querySelector("#btnThis > span").style.opacity = "100%";
                 document.querySelector("#btnThat > span").style.opacity = "100%";
                 document.getElementById("btnThis").style.border = "3px solid var(--green)";
@@ -226,14 +223,17 @@ async function renderWouldYouRather(gameId) {
                 document.getElementById("thisResult").innerHTML = thisPercent + "%";
                 document.getElementById("thatResult").innerHTML = thatPercent + "%";
 
-            } else {
-                console.log(thisPercent);
-                console.log(thatPercent);
-
+            } else if (thisPercent > thatPercent) {
                 document.querySelector("#btnThat > span").style.opacity = "100%";
                 document.querySelector("#btnThis > span").style.opacity = "100%";
                 document.querySelector("#btnThis > span svg").style.opacity = "0";
                 document.getElementById("btnThat").style.border = "3px solid var(--green)";
+                document.getElementById("thisResult").innerHTML = thisPercent + "%";
+                document.getElementById("thatResult").innerHTML = thatPercent + "%";
+
+            } else if (thisPercent === thatPercent) {
+                document.querySelector("#btnThat > span").style.opacity = "100%";
+                document.querySelector("#btnThis > span").style.opacity = "100%";
                 document.getElementById("thisResult").innerHTML = thisPercent + "%";
                 document.getElementById("thatResult").innerHTML = thatPercent + "%";
             }
