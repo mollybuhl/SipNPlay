@@ -219,10 +219,6 @@ async function renderWouldYouRather(gameId) {
         }
     }
 
-    function displayWouldYouRatherResults(data) {
-
-    }
-
     // Set countdown timer for 15 seconds
     let progressbar = document.querySelector(".progressbar");
     runTimer(15, progressbar, function () {
