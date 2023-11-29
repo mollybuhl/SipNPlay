@@ -1,7 +1,7 @@
 "use strict";
 
 // Function to render game display
-function renderGameDisplay(){
+function renderGameDisplay() {
 
     let main = document.querySelector("main");
     main.removeAttribute("class");
@@ -17,7 +17,7 @@ function renderGameDisplay(){
     `;
 
     // Display game category or render play when clicking on game
-    main.querySelector(".neverHaveIEver").addEventListener("click",() => {
+    main.querySelector(".neverHaveIEver").addEventListener("click", () => {
         renderCategories("Never Have I Ever");
     });
 
@@ -42,7 +42,7 @@ function renderGameDisplay(){
 
 
 // Function to display categories after selecting a game
-function renderCategories(game){
+function renderCategories(game) {
 
     // Structure of main
     let main = document.querySelector("main");
@@ -58,27 +58,27 @@ function renderCategories(game){
     `;
 
     // Selecting a category and render game on click
-    
+
     // The basic version
-    main.querySelector(".theBasicVersion").addEventListener("click", () =>{
+    main.querySelector(".theBasicVersion").addEventListener("click", () => {
         let category = "The Basic Version";
-        startGame(game, category);  
+        startGame(game, category);
     });
 
     // Not safe for work
-    main.querySelector(".notSafeForWork").addEventListener("click", () =>{
+    main.querySelector(".notSafeForWork").addEventListener("click", () => {
         let category = "Not Safe For Work";
         startGame(game, category);
     });
 
     // Spicy edition
-    main.querySelector(".spicyEdition").addEventListener("click", () =>{
+    main.querySelector(".spicyEdition").addEventListener("click", () => {
         let category = "Spicy Edition";
         startGame(game, category);
     });
 
     // Girl Dinner
-    main.querySelector(".girlDinner").addEventListener("click", () =>{
+    main.querySelector(".girlDinner").addEventListener("click", () => {
         let category = "Girl Dinner";
         startGame(game, category);
     });
@@ -86,7 +86,7 @@ function renderCategories(game){
     // When clicking exit go back to game display
     let footer = document.querySelector("footer");
 
-    footer.innerHTML=`
+    footer.innerHTML = `
     <div class="buttonQuit">
         <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
         <p>BACK</p>
@@ -97,20 +97,20 @@ function renderCategories(game){
 }
 
 // Function to start game based on game-name and category selected
-function startGame(game, category){
-    
+function startGame(game, category) {
+
     // Players should be fetched
     let players = ["Molly", "Amanda", "Alex", "Buster", "Lasse"];
 
-    switch(game){
-        case'Never Have I Ever':
+    switch (game) {
+        case 'Never Have I Ever':
             renderNeverHaveIEver(category)
             break;
         case 'Most Likely To':
             createMostLikelyToGame(players, category);
             break;
         case 'Truth or Dare':
-            truthORDareHandle();
+            truthORDareHandle(category);
             break;
         case 'Would You Rather':
             createWoldYRGame();

@@ -23,7 +23,8 @@ function getDareIndex() {
 }
 
 // Function handles when the client chooses truth or dare
-function truthORDareHandle() {
+function truthORDareHandle(category) {
+    console.log(category);
     let main = document.querySelector("main");
     main.removeAttribute("class");
     main.innerHTML = `
@@ -56,17 +57,17 @@ function truthORDareHandle() {
     document.querySelectorAll("section>button").forEach(button => {
         button.addEventListener("click", (e) => {
             // e.target.attributes.id.value will be either truth or dare
-            renderTruthORDareQuestion(e.target.attributes.id.value)
+            renderTruthORDareQuestion(e.target.attributes.id.value, category)
             console.log(e.target.attributes.id.value);
         })
     });
 }
 
 // Function fetches a random question from PHP depending on type and category
-async function renderTruthORDareQuestion(type) {
+async function renderTruthORDareQuestion(type, category) {
     let data = {
         type: type,
-        category: "The Basic Version",
+        category: category,
         action: "fetchQuestion"
     };
 
@@ -123,9 +124,7 @@ async function renderTruthORDareQuestion(type) {
             if (type === "truth") {
                 // Increment index to get new truth question or set index to 0 to restart
                 if (tIndex < data.questions.length - 1) {
-                    displayTruthORDareQuestion(data, type, tIndex)
                     setTruthIndex(tIndex + 1)
-
                 } else {
                     setTruthIndex(0)
                 }
@@ -133,14 +132,12 @@ async function renderTruthORDareQuestion(type) {
 
             if (type === "dare") {
                 if (dIndex < data.questions.length - 1) {
-                    displayTruthORDareQuestion(data, type, dIndex)
                     setDareIndex(dIndex + 1)
-
                 } else {
                     setDareIndex(0)
                 }
             }
-            truthORDareHandle()
+            truthORDareHandle(category)
         });
 
     } else {

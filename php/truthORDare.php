@@ -17,7 +17,7 @@
     if($action == "fetchQuestion") {
         //Fetches information from POST request and save values
         $questionType = $requestData["type"];
-        $category = $requestDdata["category"];
+        $category = $requestData["category"];
 
         // Declare variable to store question
         $questionArray;
@@ -27,10 +27,10 @@
                 case "The Basic Version":
                     $questionArray = $questions[0]["basic"]["truth"];
                     break;
-                case "spicy":
+                case "Spicy Edition":
                     $questionArray = $questions[0]["spicy"]["truth"];
                     break;
-                case "girls":
+                case "Girl Dinner":
                     $questionArray = $questions[0]["girls"]["truth"];
                     break;
             }

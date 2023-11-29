@@ -298,4 +298,4 @@ async function createWouldYRGame() {
     }
 }
 
-createWouldYRGame()
+// createWouldYRGame()
