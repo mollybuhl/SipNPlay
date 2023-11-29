@@ -69,6 +69,7 @@
     position: absolute;
     top: 36%;
     left: 37%;
+    z-index: 10;
 }
 
 #bottlePointer {

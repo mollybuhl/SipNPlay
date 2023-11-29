@@ -33,6 +33,10 @@ function renderGameDisplay() {
         renderCategories("Would You Rather");
     });
 
+    main.querySelector(".spinTheBottle").addEventListener("click", () => {
+        renderCategories("Spin The Bottle");
+    });
+
     //main.querySelector(".spinTheBottle").addEventListener("click", );
 
     // Remove quit button from footer
@@ -114,6 +118,9 @@ function startGame(game, category) {
             break;
         case 'Would You Rather':
             createWouldYRGame(category)
+            break;
+        case 'Spin The Bottle':
+            spinTheBottleHandle()
             break;
         default:
             console.log("No game detected");
