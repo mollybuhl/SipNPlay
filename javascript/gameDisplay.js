@@ -113,7 +113,7 @@ function startGame(game, category) {
             truthORDareHandle(category);
             break;
         case 'Would You Rather':
-            createWoldYRGame();
+            createWouldYRGame(category)
             break;
         default:
             console.log("No game detected");

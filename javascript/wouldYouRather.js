@@ -31,7 +31,7 @@ function getQuestionsArray() {
 }
 
 // Function fetches a random question from PHP depending on category
-async function renderWouldYouRather(gameId) {
+async function renderWouldYouRather(gameId, category) {
     let main = document.querySelector("main");
     main.removeAttribute("class");
     main.innerHTML = `
@@ -99,7 +99,7 @@ async function renderWouldYouRather(gameId) {
     document.querySelector(".nextButton").style.opacity = "0";
 
     let data = {
-        category: "The Basic Version",
+        category: category,
         action: "fetchQuestion"
     };
 
@@ -240,7 +240,7 @@ async function renderWouldYouRather(gameId) {
 
             // The Next-button should now be displayed to get next question
             document.querySelector(".nextButton").style.opacity = "100%";
-            enableNextButtonWYR()
+            enableNextButtonWYR(category)
         }
     }
 
@@ -251,23 +251,23 @@ async function renderWouldYouRather(gameId) {
     });
 }
 
-function enableNextButtonWYR() {
+function enableNextButtonWYR(category) {
     let data = getQuestionsArray();
     document.querySelector(".nextButton").addEventListener("click", () => {
         // Increment index to get new question or set index to 0 to restart
         if (getWouldYRIndex() < data.questions.length - 1) {
-            renderWouldYouRather(getWouldYRGameId())
             setWouldYRIndex(getWouldYRIndex() + 1)
 
         } else {
             setWouldYRIndex(0)
-            renderWouldYouRather(getWouldYRGameId())
         }
+
+        renderWouldYouRather(getWouldYRGameId(), category)
     });
 }
 
 // Function to create a game between players
-async function createWouldYRGame() {
+async function createWouldYRGame(category) {
 
     let data = {
         action: "createGame"
@@ -288,7 +288,7 @@ async function createWouldYRGame() {
             console.log(resource);
             let gameId = resource;
             setWouldYRGameId(gameId)
-            renderWouldYouRather(gameId);
+            renderWouldYouRather(gameId, category);
         } else {
             let error = await response.json();
             feedback(error.message);
