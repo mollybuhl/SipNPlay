@@ -24,6 +24,7 @@
 
 #wouldYouRatherWrapper section button p {
     margin: 0;
+    text-align: left;
 }
 
 #wouldYouRatherWrapper section button span {

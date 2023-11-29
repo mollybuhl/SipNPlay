@@ -25,6 +25,7 @@ function getDareIndex() {
 // Function handles when the client chooses truth or dare
 function truthORDareHandle() {
     let main = document.querySelector("main");
+    main.removeAttribute("class");
     main.innerHTML = `
         <div id="truthORDareWrapper">
             <h1>Truth OR Dare?</h1>

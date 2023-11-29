@@ -1,9 +1,11 @@
 "use strict";
 
-// Global variable to track index
+// Global variable to track index and gameId
 let wouldYRIIndex = 0;
+let gameId;
+let questionsArray;
 
-// Setter and getter function for would you rather question index
+// Setter and getter functions for would you rather question index and gameID
 function setWouldYRIndex(index) {
     wouldYRIIndex = index;
 }
@@ -12,9 +14,26 @@ function getWouldYRIndex() {
     return wouldYRIIndex;
 }
 
+function setWouldYRGameId(id) {
+    gameId = id;
+}
+
+function getWouldYRGameId() {
+    return gameId;
+}
+
+function saveQuestionsArray(array) {
+    questionsArray = array;
+}
+
+function getQuestionsArray() {
+    return questionsArray;
+}
+
 // Function fetches a random question from PHP depending on category
 async function renderWouldYouRather(gameId) {
     let main = document.querySelector("main");
+    main.removeAttribute("class");
     main.innerHTML = `
         <div id="wouldYouRatherWrapper">
             <h1>Would You Rather?</h1>
@@ -97,6 +116,7 @@ async function renderWouldYouRather(gameId) {
     if (response.status === 200) {
         let data = await response.json();
         console.log(data.questions);
+        saveQuestionsArray(data)
 
         function displayWouldYouRatherQuestion(data, index) {
             const thisQuestion = document.getElementById("btnThis");
@@ -116,6 +136,7 @@ async function renderWouldYouRather(gameId) {
 
         const questionIndex = getWouldYRIndex();
         displayWouldYouRatherQuestion(data, questionIndex)
+        console.log(questionIndex);
 
         async function updateSelectedQuestion(type) {
             let data = {
@@ -216,6 +237,10 @@ async function renderWouldYouRather(gameId) {
                 document.getElementById("thisResult").innerHTML = thisPercent + "%";
                 document.getElementById("thatResult").innerHTML = thatPercent + "%";
             }
+
+            // The Next-button should now be displayed to get next question
+            document.querySelector(".nextButton").style.opacity = "100%";
+            enableNextButtonWYR()
         }
     }
 
@@ -223,6 +248,21 @@ async function renderWouldYouRather(gameId) {
     let progressbar = document.querySelector(".progressbar");
     runTimer(15, progressbar, function () {
         readWouldYouRatherResults()
+    });
+}
+
+function enableNextButtonWYR() {
+    let data = getQuestionsArray();
+    document.querySelector(".nextButton").addEventListener("click", () => {
+        // Increment index to get new question or set index to 0 to restart
+        if (getWouldYRIndex() < data.questions.length - 1) {
+            renderWouldYouRather(getWouldYRGameId())
+            setWouldYRIndex(getWouldYRIndex() + 1)
+
+        } else {
+            setWouldYRIndex(0)
+            renderWouldYouRather(getWouldYRGameId())
+        }
     });
 }
 
@@ -247,6 +287,7 @@ async function createWouldYRGame() {
             let resource = await response.json();
             console.log(resource);
             let gameId = resource;
+            setWouldYRGameId(gameId)
             renderWouldYouRather(gameId);
         } else {
             let error = await response.json();
