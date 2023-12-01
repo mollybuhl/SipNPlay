@@ -96,6 +96,196 @@ function spinTheBottleHandle() {
     spin.addEventListener("click", () => {
         angle = angle + 4 * 360 + Math.random() * 360;
         pointer.style.transform = `rotate(${angle}deg)`;
-    })
 
+        setTimeout(() => {
+            let deg = angle - 360 * 4;
+            console.log(deg);
+            if (deg >= 0 && deg <= 60) {
+                // Take a sip of someone else's drink
+                displaySpinTheBottleResult("Take a sip of someone else's drink", "Lasse");
+            } else if (deg >= 60 && deg <= 120) {
+                // Take a shot
+                displaySpinTheBottleResult("Take a shot", "Lasse");
+            } else if (deg >= 120 && deg <= 180) {
+                // Down the rest of your drink
+                displaySpinTheBottleResult("Down the rest of your drink", "Lasse");
+            } else if (deg >= 180 && deg <= 240) {
+                // Pick a friend and take a sip together
+                displaySpinTheBottleResult("Pick a friend and take a sip together", "Lasse");
+            } else if (deg >= 240 && deg <= 300) {
+                // Take a sip of someone else's drink
+                displaySpinTheBottleResult("Take a sip of your drink", "Lasse");
+            } else if (deg >= 300 && deg <= 360) {
+                // Take 3 shots in a row
+                displaySpinTheBottleResult("Take 3 shots in a row", "Lasse");
+            }
+        }, 6000);
+    })
+}
+
+function displaySpinTheBottleResult(challenge, name) {
+    console.log(challenge);
+    console.log(name);
+    console.log("HEJ");
+
+    let svg;
+    switch (challenge) {
+        case "Take a sip of someone elses drink":
+            svg = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="139" height="158" viewBox="0 0 139 158" fill="none">
+                    <path d="M67.4455 69.3277L12.6903 10.0535C10.0279 7.17133 12.0721 2.5 15.9958 2.5L122.568 2.5C126.492 2.5 128.536 7.17133 125.874 10.0535L71.1183 69.3277C70.1285 70.3992 68.4353 70.3992 67.4455 69.3277Z" stroke="#C1C1C1" stroke-width="5"/>
+                    <path d="M70.6652 133.973L89.1699 143.588C91.9565 145.036 90.927 149.25 87.7866 149.25H50.7773C47.6369 149.25 46.6074 145.036 49.3941 143.588L67.8987 133.973C68.7659 133.522 69.7981 133.522 70.6652 133.973Z" stroke="#C1C1C1" stroke-width="4"/>
+                    <rect x="64.282" y="67" width="10" height="68" stroke="#C1C1C1" stroke-width="4"/>
+                    <rect x="66.282" y="58" width="6" height="28" fill="#1B1B1B"/>
+                    <rect x="66.282" y="125" width="6" height="19" fill="#1B1B1B"/>
+                    <path d="M70.282 24H76.282L77.282 51L70.782 59L70.282 24Z" fill="#1B1B1B"/>
+                    <path d="M62.282 43H68.282L66.782 57.5L61.282 51L62.282 43Z" fill="#1B1B1B"/>
+                    <path d="M70.7572 57.3894C69.9644 58.2551 68.6001 58.2551 67.8073 57.3894L32.5137 18.8507C31.3387 17.5677 32.2488 15.5 33.9886 15.5L104.576 15.5C106.316 15.5 107.226 17.5677 106.051 18.8508L70.7572 57.3894Z" fill="url(#paint0_linear_449_875)"/>
+                    <rect x="47.282" y="27.3779" width="5" height="30.0415" rx="2.5" transform="rotate(-42.4954 47.282 27.3779)" fill="#1B1B1B"/>
+                    <defs>
+                        <linearGradient id="paint0_linear_449_875" x1="14.2822" y1="85.5" x2="11.7822" y2="0.999999" gradientUnits="userSpaceOnUse">
+                            <stop offset="0.187716" stop-color="#B1C871"/>
+                            <stop offset="0.54924" stop-color="#E9A072"/>
+                            <stop offset="1" stop-color="#E16AB7"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            `;
+            break;
+        case "Take a shot":
+            svg = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="115" viewBox="0 0 100 115" fill="none">
+                    <path d="M11.5372 2.5H88.4628C93.0288 2.5 96.5353 6.5455 95.8868 11.0652L82.2563 106.065C81.7265 109.758 78.563 112.5 74.8324 112.5H25.1676C21.437 112.5 18.2735 109.758 17.7436 106.065L4.11321 11.0652C3.46474 6.5455 6.97123 2.5 11.5372 2.5Z" stroke="#C1C1C1" stroke-width="5"/>
+                    <path d="M16.9445 35.157C16.4738 31.8398 19.3349 29.0075 22.6471 29.5115L31.6516 30.8818C36.4776 31.6162 41.4099 31.1618 46.0205 29.5581L54.2114 26.7091C59.3093 24.9359 64.7911 24.5709 70.079 25.6525L79.3907 27.5572C81.9804 28.0869 83.7104 30.5409 83.3391 33.1581L74.3947 96.2023C74.045 98.6677 71.9344 100.5 69.4443 100.5H30.5557C28.0656 100.5 25.955 98.6677 25.6053 96.2023L16.9445 35.157Z" fill="url(#paint0_linear_449_1051)"/>
+                    <rect x="24" y="44.918" width="4.60314" height="44" rx="2.30157" transform="rotate(-8 24 44.918)" fill="#1B1B1B"/>
+                    <rect x="19" y="107" width="62" height="5" fill="#C1C1C1"/>
+                    <defs>
+                        <linearGradient id="paint0_linear_449_1051" x1="50" y1="101" x2="50" y2="24" gradientUnits="userSpaceOnUse">
+                            <stop offset="0.0743588" stop-color="#B1C871"/>
+                            <stop offset="0.484375" stop-color="#E9A072"/>
+                            <stop offset="1" stop-color="#E16AB7"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            `;
+            break;
+        case "Down the rest of your drink":
+            svg = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="76" height="147" viewBox="0 0 76 147" fill="none">
+                    <path d="M12.7223 2H64.9414C67.4258 2 69.5333 3.82414 69.8897 6.28285L71.2434 15.6236C73.0412 28.0284 72.4426 40.6629 69.4801 52.8421L64.6623 72.6485C61.8912 84.0408 61.105 95.8255 62.3382 107.485L65.3135 135.615C65.5929 138.257 63.7576 140.656 61.1346 141.078L55.4112 141.998C45.1996 143.639 34.7925 143.653 24.5765 142.04L18.1342 141.023C15.5775 140.619 13.7515 138.331 13.9253 135.748L15.8732 106.808C16.6311 95.548 15.515 84.2402 12.5705 73.3455L8.0968 56.7926C4.12303 42.0897 3.63088 26.6629 6.65942 11.7366L7.82219 6.00576C8.29508 3.67508 10.3442 2 12.7223 2Z" stroke="#C1C1C1" stroke-width="4"/>
+                    <path d="M11.775 22.7559C11.9021 21.1989 13.2029 20 14.7651 20H62.2768C63.5469 20 64.6182 20.9458 64.7758 22.2061V22.2061C66.242 33.9364 65.2143 45.8441 61.7598 57.1497L61.5 58L57.4087 73.7426L55.9268 84.5723C54.9782 91.505 54.7599 98.518 55.2754 105.496L57.2422 132.122C57.3373 133.408 56.4576 134.564 55.1921 134.814V134.814C44.5573 136.919 33.6182 136.971 22.9635 134.97L22.1714 134.821C20.8243 134.568 19.8858 133.338 19.9967 131.972L22.0632 106.533C22.6856 98.8699 22.4223 91.1605 21.2783 83.5577L21.0997 82.3708C20.2359 76.6296 18.8737 70.9745 17.0286 65.4696L16.5227 63.9602C12.2191 51.1206 10.5681 37.5406 11.6699 24.0438L11.775 22.7559Z" fill="url(#paint0_linear_457_1368)"/>
+                    <rect x="16.0625" y="27" width="5" height="9.35988" rx="2.5" transform="rotate(0.382961 16.0625 27)" fill="#1B1B1B"/>
+                    <path d="M16.2865 43.4137C16.1225 42.1611 16.9232 40.9844 18.1486 40.6771V40.6771C19.5883 40.3162 21.0218 41.288 21.2196 42.7591L22.0323 48.8029C22.6752 53.5846 23.8749 58.2747 25.6069 62.7779V62.7779C27.1977 66.914 28.3398 71.209 29.0137 75.5889L29.6581 79.7774C29.8542 81.0519 29.081 82.2759 27.846 82.6464V82.6464C26.3423 83.0975 24.787 82.1152 24.5483 80.5635L23.9075 76.3989C23.3039 72.4752 22.3278 68.618 20.9926 64.8795L20.6402 63.8927C18.8851 58.9784 17.6584 53.8912 16.9809 48.717L16.2865 43.4137Z" fill="#1B1B1B"/>
+                    <defs>
+                        <linearGradient id="paint0_linear_457_1368" x1="10" y1="80.439" x2="72.5551" y2="80.439" gradientUnits="userSpaceOnUse">
+                            <stop offset="0.0743588" stop-color="#B1C871"/>
+                            <stop offset="0.484375" stop-color="#E9A072"/>
+                            <stop offset="1" stop-color="#E16AB7"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            `;
+            break;
+        case "Pick a friend and take a sip together":
+            svg = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="203" height="184" viewBox="0 0 203 184" fill="none">
+                    <rect x="40" y="86" width="10" height="54" stroke="#C1C1C1" stroke-width="4"/>
+                    <path d="M22.0292 2H66.0733C68.5971 2 70.7252 3.88075 71.0354 6.38534L78.4967 66.62C79.2688 72.8533 75.6098 78.7871 69.6935 80.8961C53.4018 86.7035 35.5325 86.6801 19.2371 80.8713C13.3475 78.7719 9.65282 72.8878 10.3445 66.684L17.06 6.44601C17.3422 3.91465 19.4822 2 22.0292 2Z" stroke="#C1C1C1" stroke-width="4"/>
+                    <path d="M46.3833 139.973L64.8879 149.588C67.6746 151.036 66.6451 155.25 63.5046 155.25H26.4954C23.3549 155.25 22.3254 151.036 25.1121 149.588L43.6167 139.973C44.4839 139.522 45.5161 139.522 46.3833 139.973Z" stroke="#C1C1C1" stroke-width="4"/>
+                    <rect x="42" y="127" width="6" height="19" fill="#1B1B1B"/>
+                    <rect x="42" y="81" width="6" height="9" fill="#1B1B1B"/>
+                    <path d="M21.6898 24.6514C21.8667 23.1397 23.1475 22 24.6695 22H63.8562C65.3672 22 66.6424 23.1238 66.8324 24.6228L72.1909 66.8983C72.6584 70.5871 70.4023 74.0767 66.8466 75.1643V75.1643C52.282 79.6196 36.6812 79.6083 22.1165 75.153V75.153C18.5799 74.0712 16.3123 70.6128 16.7421 66.9396L21.6898 24.6514Z" fill="url(#paint0_linear_457_1501)"/>
+                    <rect x="26.4756" y="29" width="5" height="30.0415" rx="2.5" transform="rotate(6.64325 26.4756 29)" fill="#1B1B1B"/>
+                    <rect x="131.426" y="97.3132" width="10" height="54" transform="rotate(-17.4149 131.426 97.3132)" stroke="#C1C1C1" stroke-width="4"/>
+                    <path d="M89.1391 22.5416L131.164 9.3597C133.572 8.60437 136.166 9.762 137.211 12.0589L162.358 67.2995C164.961 73.016 163.245 79.7729 158.231 83.5559C144.424 93.9731 127.367 99.2988 110.08 98.6333C103.832 98.3928 98.5459 93.8843 97.3491 87.7577L85.7283 28.271C85.2399 25.7713 86.7088 23.3039 89.1391 22.5416Z" stroke="#C1C1C1" stroke-width="4"/>
+                    <path d="M153.67 146.902L174.204 150.538C177.297 151.086 177.576 155.415 174.579 156.355L139.266 167.431C136.27 168.371 134.026 164.658 136.252 162.442L151.031 147.73C151.723 147.04 152.708 146.731 153.67 146.902Z" stroke="#C1C1C1" stroke-width="4"/>
+                    <rect x="145.605" y="135.835" width="6" height="19" transform="rotate(-17.4149 145.605 135.835)" fill="#1B1B1B"/>
+                    <rect x="131.838" y="91.9438" width="6" height="9" transform="rotate(-17.4149 131.838 91.9438)" fill="#1B1B1B"/>
+                    <path d="M95.5946 44.2566C95.3109 42.7613 96.1919 41.2905 97.6441 40.835L135.035 29.1069C136.476 28.6546 138.03 29.3452 138.659 30.7187L156.425 69.4527C157.975 72.8324 156.867 76.8373 153.8 78.9393V78.9393C141.236 87.5493 126.347 92.2077 111.116 92.3157V92.3157C107.418 92.342 104.219 89.7208 103.53 86.0873L95.5946 44.2566Z" fill="url(#paint1_linear_457_1501)"/>
+                    <rect x="101.462" y="46.9736" width="5" height="30.0415" rx="2.5" transform="rotate(-10.7716 101.462 46.9736)" fill="#1B1B1B"/>
+                    <defs>
+                        <linearGradient id="paint0_linear_457_1501" x1="16" y1="52.7317" x2="78.5551" y2="52.7317" gradientUnits="userSpaceOnUse">
+                            <stop offset="0.0743588" stop-color="#B1C871"/>
+                            <stop offset="0.484375" stop-color="#E9A072"/>
+                            <stop offset="1" stop-color="#E16AB7"/>
+                        </linearGradient>
+                        <linearGradient id="paint1_linear_457_1501" x1="98.5697" y1="72.7527" x2="158.257" y2="54.0307" gradientUnits="userSpaceOnUse">
+                            <stop offset="0.0743588" stop-color="#B1C871"/>
+                            <stop offset="0.484375" stop-color="#E9A072"/>
+                            <stop offset="1" stop-color="#E16AB7"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            `;
+            break;
+        case "Take a sip of your drink":
+            svg = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="139" height="158" viewBox="0 0 139 158" fill="none">
+                    <path d="M67.4455 69.3277L12.6903 10.0535C10.0279 7.17133 12.0721 2.5 15.9958 2.5L122.568 2.5C126.492 2.5 128.536 7.17133 125.874 10.0535L71.1183 69.3277C70.1285 70.3992 68.4353 70.3992 67.4455 69.3277Z" stroke="#C1C1C1" stroke-width="5"/>
+                    <path d="M70.6652 133.973L89.1699 143.588C91.9565 145.036 90.927 149.25 87.7866 149.25H50.7773C47.6369 149.25 46.6074 145.036 49.3941 143.588L67.8987 133.973C68.7659 133.522 69.7981 133.522 70.6652 133.973Z" stroke="#C1C1C1" stroke-width="4"/>
+                    <rect x="64.282" y="67" width="10" height="68" stroke="#C1C1C1" stroke-width="4"/>
+                    <rect x="66.282" y="58" width="6" height="28" fill="#1B1B1B"/>
+                    <rect x="66.282" y="125" width="6" height="19" fill="#1B1B1B"/>
+                    <path d="M70.282 24H76.282L77.282 51L70.782 59L70.282 24Z" fill="#1B1B1B"/>
+                    <path d="M62.282 43H68.282L66.782 57.5L61.282 51L62.282 43Z" fill="#1B1B1B"/>
+                    <path d="M70.7572 57.3894C69.9644 58.2551 68.6001 58.2551 67.8073 57.3894L32.5137 18.8507C31.3387 17.5677 32.2488 15.5 33.9886 15.5L104.576 15.5C106.316 15.5 107.226 17.5677 106.051 18.8508L70.7572 57.3894Z" fill="url(#paint0_linear_449_875)"/>
+                    <rect x="47.282" y="27.3779" width="5" height="30.0415" rx="2.5" transform="rotate(-42.4954 47.282 27.3779)" fill="#1B1B1B"/>
+                    <defs>
+                        <linearGradient id="paint0_linear_449_875" x1="14.2822" y1="85.5" x2="11.7822" y2="0.999999" gradientUnits="userSpaceOnUse">
+                            <stop offset="0.187716" stop-color="#B1C871"/>
+                            <stop offset="0.54924" stop-color="#E9A072"/>
+                            <stop offset="1" stop-color="#E16AB7"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            `;
+            break;
+        case "Take 3 shots in a row":
+            svg = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="218" height="71" viewBox="0 0 218 71" fill="none">
+                    <path d="M5.74128 1H53.9356C56.3632 1 58.2311 3.14489 57.8976 5.54948L49.4378 66.5495C49.1635 68.5274 47.4726 70 45.4757 70H14.2011C12.2043 70 10.5133 68.5274 10.239 66.5495L1.77921 5.54949C1.44572 3.14489 3.31367 1 5.74128 1Z" stroke="#C1C1C1" stroke-width="2"/>
+                    <path d="M10.4295 24.0209C9.9905 20.8199 12.7632 18.1018 15.9548 18.6042L16.4438 18.6812C20.9249 19.3867 25.5116 18.9513 29.7799 17.4154V17.4154C34.4996 15.717 39.5991 15.3675 44.5064 16.4059L45.5782 16.6327C48.1428 17.1754 49.8528 19.6066 49.4967 22.2037L44.2696 60.3195C44.1338 61.3098 43.2877 62.0478 42.2882 62.0478H17.3888C16.3892 62.0478 15.5431 61.3098 15.4073 60.3195L10.4295 24.0209Z" fill="url(#paint0_linear_457_1500)"/>
+                    <rect x="11" y="66" width="38" height="3" fill="#C1C1C1"/>
+                    <rect width="2.74888" height="27.1479" rx="1.37444" transform="matrix(0.989594 -0.143885 0.13461 0.990899 14.3218 27.731)" fill="#2A2A2A"/>
+                    <path d="M84.9029 1H133.097C135.525 1 137.393 3.14489 137.059 5.54948L128.599 66.5495C128.325 68.5274 126.634 70 124.637 70H93.3627C91.3659 70 89.675 68.5274 89.4006 66.5495L80.9408 5.54949C80.6073 3.14489 82.4753 1 84.9029 1Z" stroke="#C1C1C1" stroke-width="2"/>
+                    <path d="M89.5911 24.0209C89.1521 20.8199 91.9248 18.1018 95.1165 18.6042L95.6054 18.6812C100.087 19.3867 104.673 18.9513 108.942 17.4154V17.4154C113.661 15.717 118.761 15.3675 123.668 16.4059L124.74 16.6327C127.304 17.1754 129.014 19.6066 128.658 22.2037L123.431 60.3195C123.295 61.3098 122.449 62.0478 121.45 62.0478H96.5504C95.5508 62.0478 94.7047 61.3098 94.5689 60.3195L89.5911 24.0209Z" fill="url(#paint1_linear_457_1500)"/>
+                    <rect x="90" y="66" width="38" height="3" fill="#C1C1C1"/>
+                    <rect width="2.74888" height="27.1479" rx="1.37444" transform="matrix(0.989594 -0.143885 0.13461 0.990899 93.4834 27.731)" fill="#2A2A2A"/>
+                    <path d="M164.065 1H212.259C214.686 1 216.554 3.14489 216.221 5.54948L207.761 66.5495C207.487 68.5274 205.796 70 203.799 70H172.524C170.528 70 168.837 68.5274 168.562 66.5495L160.102 5.54949C159.769 3.14489 161.637 1 164.065 1Z" stroke="#C1C1C1" stroke-width="2"/>
+                    <path d="M168.753 24.0209C168.314 20.8199 171.086 18.1018 174.278 18.6042L174.767 18.6812C179.248 19.3867 183.835 18.9513 188.103 17.4154V17.4154C192.823 15.717 197.922 15.3675 202.83 16.4059L203.901 16.6327C206.466 17.1754 208.176 19.6066 207.82 22.2037L202.593 60.3195C202.457 61.3098 201.611 62.0478 200.611 62.0478H175.712C174.712 62.0478 173.866 61.3098 173.731 60.3195L168.753 24.0209Z" fill="url(#paint2_linear_457_1500)"/>
+                    <rect x="169" y="66" width="38" height="3" fill="#C1C1C1"/>
+                    <rect width="2.74888" height="27.1479" rx="1.37444" transform="matrix(0.989594 -0.143885 0.13461 0.990899 172.645 27.731)" fill="#2A2A2A"/>
+                    <defs>
+                        <linearGradient id="paint0_linear_457_1500" x1="29.8387" y1="62.6471" x2="29.8387" y2="14.6177" gradientUnits="userSpaceOnUse">
+                            <stop offset="0.0743588" stop-color="#B1C871"/>
+                            <stop offset="0.484375" stop-color="#E9A072"/>
+                            <stop offset="1" stop-color="#E16AB7"/>
+                        </linearGradient>
+                        <linearGradient id="paint1_linear_457_1500" x1="109" y1="62.6471" x2="109" y2="14.6177" gradientUnits="userSpaceOnUse">
+                            <stop offset="0.0743588" stop-color="#B1C871"/>
+                            <stop offset="0.484375" stop-color="#E9A072"/>
+                            <stop offset="1" stop-color="#E16AB7"/>
+                        </linearGradient>
+                        <linearGradient id="paint2_linear_457_1500" x1="188.162" y1="62.6471" x2="188.162" y2="14.6177" gradientUnits="userSpaceOnUse">
+                            <stop offset="0.0743588" stop-color="#B1C871"/>
+                            <stop offset="0.484375" stop-color="#E9A072"/>
+                            <stop offset="1" stop-color="#E16AB7"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            `;
+            break;
+    }
+
+    let HTML = document.querySelector("#spinTheBottleWrapper");
+    HTML.innerHTML = `
+        <div class="resultName">${name}</div>
+        <h2 class="prompt">${challenge}</h2>
+        <div class="svgWrapper">${svg}</div>
+    `;
+
+    let footer = document.querySelector("footer");
+    footer.innerHTML += `
+        <button class="nextButton">NEXT</button>
+    `;
 }

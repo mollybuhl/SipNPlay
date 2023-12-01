@@ -34,7 +34,7 @@ function renderGameDisplay() {
     });
 
     main.querySelector(".spinTheBottle").addEventListener("click", () => {
-        renderCategories("Spin The Bottle");
+        startGame("Spin The Bottle");
     });
 
     //main.querySelector(".spinTheBottle").addEventListener("click", );
