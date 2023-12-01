@@ -62,25 +62,25 @@ function renderCategories(game){
     // The basic version
     main.querySelector(".theBasicVersion").addEventListener("click", () =>{
         let category = "The Basic Version";
-        startGame(game, category);  
+        renderStartGame(game, category);  
     });
 
     // Not safe for work
     main.querySelector(".notSafeForWork").addEventListener("click", () =>{
         let category = "Not Safe For Work";
-        startGame(game, category);
+        renderStartGame(game, category);
     });
 
     // Spicy edition
     main.querySelector(".spicyEdition").addEventListener("click", () =>{
         let category = "Spicy Edition";
-        startGame(game, category);
+        renderStartGame(game, category);
     });
 
     // Girl Dinner
     main.querySelector(".girlDinner").addEventListener("click", () =>{
         let category = "Girl Dinner";
-        startGame(game, category);
+        renderStartGame(game, category);
     });
 
     // When clicking exit go back to game display
@@ -96,26 +96,4 @@ function renderCategories(game){
     footer.querySelector(".buttonQuit").addEventListener("click", renderGameDisplay);
 }
 
-// Function to start game based on game-name and category selected
-function startGame(game, category){
-    
-    // Players should be fetched
-    let players = ["Molly", "Amanda", "Alex", "Buster", "Lasse"];
 
-    switch(game){
-        case'Never Have I Ever':
-            renderNeverHaveIEver(category)
-            break;
-        case 'Most Likely To':
-            createMostLikelyToGame(players, category);
-            break;
-        case 'Truth or Dare':
-            truthORDareHandle();
-            break;
-        case 'Would You Rather':
-            createWoldYRGame();
-            break;
-        default:
-            console.log("No game detected");
-    }
-}

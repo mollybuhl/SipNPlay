@@ -51,6 +51,7 @@ function renderMenu(){
 
     // Display Join Game
     menuPopup.querySelector(".startGame").addEventListener("click", () =>{
+        document.querySelector("body").removeChild(menuPopup);
         renderStartGame();
     });
 

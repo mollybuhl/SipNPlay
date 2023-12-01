@@ -6,7 +6,7 @@
 */
 
 // Function to render moste likely to question and handle votes
-async function renderMostLikelyTo(gameId, category, questionIndex = 0){
+async function renderMostLikelyTo(category, gameId, questionIndex = 0){
 
     // Set mostLikelyTo class to main and footer
     let main = document.querySelector("main");

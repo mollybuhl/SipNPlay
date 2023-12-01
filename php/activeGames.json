@@ -1,0 +1,33 @@
+[
+    {
+        "id": 6250,
+        "players": [
+            "Molly",
+            "Amanda"
+        ],
+        "activeGame": {
+            "game": "No Active Game",
+            "votes": []
+        }
+    },
+    {
+        "id": 6724,
+        "players": [
+            "Stella"
+        ],
+        "activeGame": {
+            "game": "No Active Game",
+            "votes": []
+        }
+    },
+    {
+        "id": 1361,
+        "players": [
+            "Molly"
+        ],
+        "activeGame": {
+            "game": "No Active Game",
+            "votes": []
+        }
+    }
+]

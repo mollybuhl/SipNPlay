@@ -1,6 +1,16 @@
 [
     {
-        "id": 7478,
+        "id": 7477,
+        "palyers": [
+            "Molly"
+        ],
+        "activeGame": {
+            "game": "No Active Game",
+            "votes": []
+        }
+    },
+    {
+        "id": 6410,
         "palyers": [
             "Molly",
             "Amanda",
@@ -11,66 +21,7 @@
         "votes": []
     },
     {
-        "id": 9179,
-        "palyers": [
-            "Molly",
-            "Amanda",
-            "Alex",
-            "Buster",
-            "Lasse"
-        ],
-        "votes": [
-            " Molly"
-        ]
-    },
-    {
-        "id": 2266,
-        "palyers": [
-            "Molly",
-            "Amanda",
-            "Alex",
-            "Buster",
-            "Lasse"
-        ],
-        "votes": []
-    },
-    {
-        "id": 8232,
-        "palyers": [
-            "Molly",
-            "Amanda",
-            "Alex",
-            "Buster",
-            "Lasse"
-        ],
-        "votes": []
-    },
-    {
-        "id": 5905,
-        "palyers": [
-            "Molly",
-            "Amanda",
-            "Alex",
-            "Buster",
-            "Lasse"
-        ],
-        "votes": [
-            " Molly"
-        ]
-    },
-    {
-        "id": 5283,
-        "palyers": [
-            "Molly",
-            "Amanda",
-            "Alex",
-            "Buster",
-            "Lasse"
-        ],
-        "votes": []
-    },
-    {
-        "id": 5519,
+        "id": 2195,
         "palyers": [
             "Molly",
             "Amanda",
