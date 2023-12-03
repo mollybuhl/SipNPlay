@@ -5,6 +5,8 @@ spinTheBottleHandle()
 function spinTheBottleHandle() {
     const main = document.querySelector("main");
     main.removeAttribute("class");
+
+    // The HTML structure of Spin The Bottle includes 7 svgs imported from FIGMA file
     main.innerHTML = `
         <div id="spinTheBottleWrapper">
             <h1>Spin The Bottle</h1>
@@ -81,6 +83,7 @@ function spinTheBottleHandle() {
         </div>
     `;
 
+    // Footer html
     let footer = document.querySelector("footer");
     footer.removeAttribute("class");
     footer.innerHTML = `
@@ -90,16 +93,21 @@ function spinTheBottleHandle() {
         </div>
     `;
 
+    // Event listener to add transition/animation to make bottle spin and point by randomly calculating an angle
     let angle = 0;
     const pointer = document.getElementById("bottlePointer");
     const spin = document.getElementById("spin");
     spin.addEventListener("click", () => {
         angle = angle + 4 * 360 + Math.random() * 360;
+
+        // transform has an ease-in-out transition with duration 4000ms
         pointer.style.transform = `rotate(${angle}deg)`;
 
         setTimeout(() => {
+            // deg calculates the angle between 0-360 since we added the previous angle to the new angle in our last calculation
             let deg = angle - 360 * 4;
             console.log(deg);
+
             if (deg >= 0 && deg <= 60) {
                 // Take a sip of someone else's drink
                 displaySpinTheBottleResult("Take a sip of someone else's drink", "Lasse");
@@ -119,18 +127,17 @@ function spinTheBottleHandle() {
                 // Take 3 shots in a row
                 displaySpinTheBottleResult("Take 3 shots in a row", "Lasse");
             }
-        }, 6000);
+        }, 5000);
     })
 }
 
 function displaySpinTheBottleResult(challenge, name) {
-    console.log(challenge);
-    console.log(name);
-    console.log("HEJ");
 
+    // Results should display different svgs using switch
     let svg;
     switch (challenge) {
-        case "Take a sip of someone elses drink":
+        case "Take a sip of someone else's drink":
+        case "Take a sip of your drink":
             svg = `
                 <svg xmlns="http://www.w3.org/2000/svg" width="139" height="158" viewBox="0 0 139 158" fill="none">
                     <path d="M67.4455 69.3277L12.6903 10.0535C10.0279 7.17133 12.0721 2.5 15.9958 2.5L122.568 2.5C126.492 2.5 128.536 7.17133 125.874 10.0535L71.1183 69.3277C70.1285 70.3992 68.4353 70.3992 67.4455 69.3277Z" stroke="#C1C1C1" stroke-width="5"/>
@@ -171,13 +178,13 @@ function displaySpinTheBottleResult(challenge, name) {
             break;
         case "Down the rest of your drink":
             svg = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="76" height="147" viewBox="0 0 76 147" fill="none">
-                    <path d="M12.7223 2H64.9414C67.4258 2 69.5333 3.82414 69.8897 6.28285L71.2434 15.6236C73.0412 28.0284 72.4426 40.6629 69.4801 52.8421L64.6623 72.6485C61.8912 84.0408 61.105 95.8255 62.3382 107.485L65.3135 135.615C65.5929 138.257 63.7576 140.656 61.1346 141.078L55.4112 141.998C45.1996 143.639 34.7925 143.653 24.5765 142.04L18.1342 141.023C15.5775 140.619 13.7515 138.331 13.9253 135.748L15.8732 106.808C16.6311 95.548 15.515 84.2402 12.5705 73.3455L8.0968 56.7926C4.12303 42.0897 3.63088 26.6629 6.65942 11.7366L7.82219 6.00576C8.29508 3.67508 10.3442 2 12.7223 2Z" stroke="#C1C1C1" stroke-width="4"/>
-                    <path d="M11.775 22.7559C11.9021 21.1989 13.2029 20 14.7651 20H62.2768C63.5469 20 64.6182 20.9458 64.7758 22.2061V22.2061C66.242 33.9364 65.2143 45.8441 61.7598 57.1497L61.5 58L57.4087 73.7426L55.9268 84.5723C54.9782 91.505 54.7599 98.518 55.2754 105.496L57.2422 132.122C57.3373 133.408 56.4576 134.564 55.1921 134.814V134.814C44.5573 136.919 33.6182 136.971 22.9635 134.97L22.1714 134.821C20.8243 134.568 19.8858 133.338 19.9967 131.972L22.0632 106.533C22.6856 98.8699 22.4223 91.1605 21.2783 83.5577L21.0997 82.3708C20.2359 76.6296 18.8737 70.9745 17.0286 65.4696L16.5227 63.9602C12.2191 51.1206 10.5681 37.5406 11.6699 24.0438L11.775 22.7559Z" fill="url(#paint0_linear_457_1368)"/>
-                    <rect x="16.0625" y="27" width="5" height="9.35988" rx="2.5" transform="rotate(0.382961 16.0625 27)" fill="#1B1B1B"/>
-                    <path d="M16.2865 43.4137C16.1225 42.1611 16.9232 40.9844 18.1486 40.6771V40.6771C19.5883 40.3162 21.0218 41.288 21.2196 42.7591L22.0323 48.8029C22.6752 53.5846 23.8749 58.2747 25.6069 62.7779V62.7779C27.1977 66.914 28.3398 71.209 29.0137 75.5889L29.6581 79.7774C29.8542 81.0519 29.081 82.2759 27.846 82.6464V82.6464C26.3423 83.0975 24.787 82.1152 24.5483 80.5635L23.9075 76.3989C23.3039 72.4752 22.3278 68.618 20.9926 64.8795L20.6402 63.8927C18.8851 58.9784 17.6584 53.8912 16.9809 48.717L16.2865 43.4137Z" fill="#1B1B1B"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="87" height="165" viewBox="0 0 87 165" fill="none">
+                    <path d="M13.7169 2H75.2319C77.7119 2 79.8171 3.81784 80.1785 6.27135L82.1535 19.6789C84.0094 32.278 83.3918 45.118 80.3354 57.4808L73.8413 83.7481C70.9824 95.3119 70.1712 107.287 71.4444 119.131L75.1417 153.523C75.4265 156.173 73.5833 158.58 70.9512 158.996L60.9583 160.577C50.9053 162.166 40.666 162.18 30.6087 160.618L19.819 158.942C17.2545 158.543 15.4211 156.249 15.5982 153.66L18.0075 118.442C18.7899 107.004 17.6386 95.5168 14.6018 84.462L8.29102 61.4884C4.1925 46.5684 3.68501 30.8899 6.81009 15.7361L8.81994 5.99013C9.29905 3.66684 11.3447 2 13.7169 2Z" stroke="#C1C1C1" stroke-width="4"/>
+                    <path d="M13.5084 25.2773C13.6375 23.722 14.9375 22.5254 16.4981 22.5254H71.3707C72.7795 22.5254 73.9685 23.5729 74.1461 24.9704V24.9704C75.8273 38.2034 74.65 51.643 70.6937 64.3822L70.4012 65.324L65.7177 83.0546L63.8615 96.4014C62.882 103.445 62.6565 110.572 63.1889 117.663L65.5207 148.719C65.6331 150.216 64.6075 151.56 63.1342 151.847V151.847C50.987 154.212 38.5035 154.272 26.3344 152.022L25.3351 151.837C23.8204 151.557 22.7639 150.176 22.8906 148.64L25.3612 118.717C26.0041 110.93 25.7322 103.095 24.551 95.3713L24.0056 91.8051C23.1152 85.9828 21.7122 80.2505 19.8128 74.6752L18.171 69.856C13.7362 56.8381 12.0342 43.0455 13.1713 29.3401L13.5084 25.2773Z" fill="url(#paint0_linear_457_1368)"/>
+                    <rect width="5.72368" height="10.5419" rx="2.86184" transform="matrix(0.999978 0.00657612 -0.00679341 0.999977 18.3872 30.4097)" fill="#1B1B1B"/>
+                    <path d="M18.6479 48.9266C18.4578 47.4977 19.3702 46.1605 20.7709 45.8149V45.8149C22.4206 45.408 24.0678 46.5255 24.2977 48.2075L25.2212 54.9654C25.9572 60.3506 27.3308 65.6341 29.3132 70.7055V70.7055C31.1341 75.3635 32.4419 80.2018 33.2132 85.1349L33.9455 89.8179C34.173 91.2729 33.2913 92.6654 31.8783 93.0824V93.0824C30.1564 93.5907 28.371 92.461 28.0937 90.6879L27.3757 86.096C26.6796 81.6442 25.5538 77.267 24.014 73.0253L23.6277 71.961C21.6187 66.4266 20.2142 60.6962 19.4388 54.8695L18.6479 48.9266Z" fill="#1B1B1B"/>
                     <defs>
-                        <linearGradient id="paint0_linear_457_1368" x1="10" y1="80.439" x2="72.5551" y2="80.439" gradientUnits="userSpaceOnUse">
+                        <linearGradient id="paint0_linear_457_1368" x1="11.4473" y1="90.5966" x2="83.0564" y2="90.5966" gradientUnits="userSpaceOnUse">
                             <stop offset="0.0743588" stop-color="#B1C871"/>
                             <stop offset="0.484375" stop-color="#E9A072"/>
                             <stop offset="1" stop-color="#E16AB7"/>
@@ -188,52 +195,30 @@ function displaySpinTheBottleResult(challenge, name) {
             break;
         case "Pick a friend and take a sip together":
             svg = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="203" height="184" viewBox="0 0 203 184" fill="none">
-                    <rect x="40" y="86" width="10" height="54" stroke="#C1C1C1" stroke-width="4"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="190" height="178" viewBox="0 0 190 178" fill="none">
+                <rect x="40" y="86" width="10" height="54" stroke="#C1C1C1" stroke-width="4"/>
                     <path d="M22.0292 2H66.0733C68.5971 2 70.7252 3.88075 71.0354 6.38534L78.4967 66.62C79.2688 72.8533 75.6098 78.7871 69.6935 80.8961C53.4018 86.7035 35.5325 86.6801 19.2371 80.8713C13.3475 78.7719 9.65282 72.8878 10.3445 66.684L17.06 6.44601C17.3422 3.91465 19.4822 2 22.0292 2Z" stroke="#C1C1C1" stroke-width="4"/>
                     <path d="M46.3833 139.973L64.8879 149.588C67.6746 151.036 66.6451 155.25 63.5046 155.25H26.4954C23.3549 155.25 22.3254 151.036 25.1121 149.588L43.6167 139.973C44.4839 139.522 45.5161 139.522 46.3833 139.973Z" stroke="#C1C1C1" stroke-width="4"/>
                     <rect x="42" y="127" width="6" height="19" fill="#1B1B1B"/>
                     <rect x="42" y="81" width="6" height="9" fill="#1B1B1B"/>
                     <path d="M21.6898 24.6514C21.8667 23.1397 23.1475 22 24.6695 22H63.8562C65.3672 22 66.6424 23.1238 66.8324 24.6228L72.1909 66.8983C72.6584 70.5871 70.4023 74.0767 66.8466 75.1643V75.1643C52.282 79.6196 36.6812 79.6083 22.1165 75.153V75.153C18.5799 74.0712 16.3123 70.6128 16.7421 66.9396L21.6898 24.6514Z" fill="url(#paint0_linear_457_1501)"/>
                     <rect x="26.4756" y="29" width="5" height="30.0415" rx="2.5" transform="rotate(6.64325 26.4756 29)" fill="#1B1B1B"/>
-                    <rect x="131.426" y="97.3132" width="10" height="54" transform="rotate(-17.4149 131.426 97.3132)" stroke="#C1C1C1" stroke-width="4"/>
-                    <path d="M89.1391 22.5416L131.164 9.3597C133.572 8.60437 136.166 9.762 137.211 12.0589L162.358 67.2995C164.961 73.016 163.245 79.7729 158.231 83.5559C144.424 93.9731 127.367 99.2988 110.08 98.6333C103.832 98.3928 98.5459 93.8843 97.3491 87.7577L85.7283 28.271C85.2399 25.7713 86.7088 23.3039 89.1391 22.5416Z" stroke="#C1C1C1" stroke-width="4"/>
-                    <path d="M153.67 146.902L174.204 150.538C177.297 151.086 177.576 155.415 174.579 156.355L139.266 167.431C136.27 168.371 134.026 164.658 136.252 162.442L151.031 147.73C151.723 147.04 152.708 146.731 153.67 146.902Z" stroke="#C1C1C1" stroke-width="4"/>
-                    <rect x="145.605" y="135.835" width="6" height="19" transform="rotate(-17.4149 145.605 135.835)" fill="#1B1B1B"/>
-                    <rect x="131.838" y="91.9438" width="6" height="9" transform="rotate(-17.4149 131.838 91.9438)" fill="#1B1B1B"/>
-                    <path d="M95.5946 44.2566C95.3109 42.7613 96.1919 41.2905 97.6441 40.835L135.035 29.1069C136.476 28.6546 138.03 29.3452 138.659 30.7187L156.425 69.4527C157.975 72.8324 156.867 76.8373 153.8 78.9393V78.9393C141.236 87.5493 126.347 92.2077 111.116 92.3157V92.3157C107.418 92.342 104.219 89.7208 103.53 86.0873L95.5946 44.2566Z" fill="url(#paint1_linear_457_1501)"/>
-                    <rect x="101.462" y="46.9736" width="5" height="30.0415" rx="2.5" transform="rotate(-10.7716 101.462 46.9736)" fill="#1B1B1B"/>
+                    <rect x="126.326" y="93.3757" width="10" height="54" transform="rotate(-10 126.326 93.3757)" stroke="#C1C1C1" stroke-width="4"/>
+                    <path d="M94.0417 13.7729L137.417 6.12472C139.902 5.68648 142.324 7.16912 143.065 9.58179L160.873 67.6057C162.715 73.6102 160.142 80.0892 154.682 83.1935C139.646 91.7418 122.044 94.8217 104.988 91.9308C98.8233 90.886 94.1629 85.7329 93.7667 79.5032L89.9201 19.0143C89.7584 16.4724 91.5334 14.2152 94.0417 13.7729Z" stroke="#C1C1C1" stroke-width="4"/>
+                    <path d="M141.985 145.42L161.878 151.676C164.874 152.618 164.592 156.947 161.499 157.492L125.052 163.919C121.959 164.464 120.214 160.493 122.707 158.583L139.26 145.9C140.036 145.306 141.053 145.127 141.985 145.42Z" stroke="#C1C1C1" stroke-width="4"/>
+                    <rect x="135.415" y="133.406" width="6" height="19" transform="rotate(-10 135.415 133.406)" fill="#1B1B1B"/>
+                    <rect x="127.427" y="88.1045" width="6" height="9" transform="rotate(-10 127.427 88.1045)" fill="#1B1B1B"/>
+                    <path d="M97.6409 36.1387C97.5526 34.6193 98.616 33.2745 100.115 33.0102L138.706 26.2055C140.194 25.9431 141.645 26.8283 142.093 28.2716L154.711 68.9744C155.812 72.5259 154.196 76.3543 150.883 78.0428V78.0428C137.313 84.9595 121.948 87.6575 106.831 85.799V85.799C103.16 85.3478 100.326 82.3357 100.112 78.6436L97.6409 36.1387Z" fill="url(#paint1_linear_457_1501)"/>
+                    <rect x="103.109" y="39.5903" width="5" height="30.0415" rx="2.5" transform="rotate(-3.35675 103.109 39.5903)" fill="#1B1B1B"/>
                     <defs>
                         <linearGradient id="paint0_linear_457_1501" x1="16" y1="52.7317" x2="78.5551" y2="52.7317" gradientUnits="userSpaceOnUse">
                             <stop offset="0.0743588" stop-color="#B1C871"/>
                             <stop offset="0.484375" stop-color="#E9A072"/>
                             <stop offset="1" stop-color="#E16AB7"/>
                         </linearGradient>
-                        <linearGradient id="paint1_linear_457_1501" x1="98.5697" y1="72.7527" x2="158.257" y2="54.0307" gradientUnits="userSpaceOnUse">
+                        <linearGradient id="paint1_linear_457_1501" x1="96.9137" y1="64.7804" x2="158.518" y2="53.9179" gradientUnits="userSpaceOnUse">
                             <stop offset="0.0743588" stop-color="#B1C871"/>
                             <stop offset="0.484375" stop-color="#E9A072"/>
-                            <stop offset="1" stop-color="#E16AB7"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
-            `;
-            break;
-        case "Take a sip of your drink":
-            svg = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="139" height="158" viewBox="0 0 139 158" fill="none">
-                    <path d="M67.4455 69.3277L12.6903 10.0535C10.0279 7.17133 12.0721 2.5 15.9958 2.5L122.568 2.5C126.492 2.5 128.536 7.17133 125.874 10.0535L71.1183 69.3277C70.1285 70.3992 68.4353 70.3992 67.4455 69.3277Z" stroke="#C1C1C1" stroke-width="5"/>
-                    <path d="M70.6652 133.973L89.1699 143.588C91.9565 145.036 90.927 149.25 87.7866 149.25H50.7773C47.6369 149.25 46.6074 145.036 49.3941 143.588L67.8987 133.973C68.7659 133.522 69.7981 133.522 70.6652 133.973Z" stroke="#C1C1C1" stroke-width="4"/>
-                    <rect x="64.282" y="67" width="10" height="68" stroke="#C1C1C1" stroke-width="4"/>
-                    <rect x="66.282" y="58" width="6" height="28" fill="#1B1B1B"/>
-                    <rect x="66.282" y="125" width="6" height="19" fill="#1B1B1B"/>
-                    <path d="M70.282 24H76.282L77.282 51L70.782 59L70.282 24Z" fill="#1B1B1B"/>
-                    <path d="M62.282 43H68.282L66.782 57.5L61.282 51L62.282 43Z" fill="#1B1B1B"/>
-                    <path d="M70.7572 57.3894C69.9644 58.2551 68.6001 58.2551 67.8073 57.3894L32.5137 18.8507C31.3387 17.5677 32.2488 15.5 33.9886 15.5L104.576 15.5C106.316 15.5 107.226 17.5677 106.051 18.8508L70.7572 57.3894Z" fill="url(#paint0_linear_449_875)"/>
-                    <rect x="47.282" y="27.3779" width="5" height="30.0415" rx="2.5" transform="rotate(-42.4954 47.282 27.3779)" fill="#1B1B1B"/>
-                    <defs>
-                        <linearGradient id="paint0_linear_449_875" x1="14.2822" y1="85.5" x2="11.7822" y2="0.999999" gradientUnits="userSpaceOnUse">
-                            <stop offset="0.187716" stop-color="#B1C871"/>
-                            <stop offset="0.54924" stop-color="#E9A072"/>
                             <stop offset="1" stop-color="#E16AB7"/>
                         </linearGradient>
                     </defs>
@@ -277,15 +262,25 @@ function displaySpinTheBottleResult(challenge, name) {
             break;
     }
 
-    let HTML = document.querySelector("#spinTheBottleWrapper");
-    HTML.innerHTML = `
-        <div class="resultName">${name}</div>
-        <h2 class="prompt">${challenge}</h2>
-        <div class="svgWrapper">${svg}</div>
+    // Change innerHTML for main to display result
+    const main = document.querySelector("main");
+    main.removeAttribute("class");
+    main.innerHTML = `
+        <div id="spinTheBottleResult">
+            <div class="resultName">${name}</div>
+            <h2 class="prompt">${challenge}</h2>
+            <div class="svgWrapper">${svg}</div>
+        </div>
     `;
 
+    // Add next button
     let footer = document.querySelector("footer");
     footer.innerHTML += `
         <button class="nextButton">NEXT</button>
     `;
+
+    // Render new round of Spin The Bottle
+    document.querySelector(".nextButton").addEventListener("click", () => {
+        spinTheBottleHandle()
+    });
 }
