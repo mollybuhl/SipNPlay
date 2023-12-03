@@ -150,7 +150,11 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 25vw;
+    gap: 23vw;
+}
+
+.instructions>div .fa-solid {
+    font-size: var(--fontSizeFour);
 }
 
 .instructions>div .stepsIndicator {
