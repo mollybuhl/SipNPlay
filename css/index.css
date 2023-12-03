@@ -106,6 +106,64 @@ footer {
     height: 10%;
 }
 
+/* INSTRUCTIONS */
+.instructions {
+    position: fixed;
+    top: 20vh;
+    bottom: 20vh;
+    right: 5%;
+    left: 5%;
+    z-index: 100;
+
+    font-family: outfit;
+    background-color: var(--blackGrey);
+    box-shadow: var(--boxShadow);
+    border-radius: 5px;
+    padding: 5vh 4vh;
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.instructions>.fa-xmark {
+    align-self: flex-end;
+    font-size: var(--fontSizeTwo);
+}
+
+.instructions>.steps {
+    height: 45vh;
+}
+
+.instructions>.steps>h3 {
+    font-size: var(--fontSizeTwo);
+    font-weight: var(--fontBold);
+    color: var(--orange);
+    margin-bottom: -1vh;
+}
+
+.instructions>.steps>p {
+    font-size: var(--fontSizeThree);
+}
+
+.instructions>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25vw;
+}
+
+.instructions>div .stepsIndicator {
+    display: flex;
+    gap: 1vh;
+}
+
+.instructions>div .stepsIndicator .circle {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+}
+
 /*SipNPlay header logo*/
 #headerLogo {
     font-family: museoModerno;
