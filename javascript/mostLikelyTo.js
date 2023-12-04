@@ -22,7 +22,6 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
     }
 
     let questions = await fetchMostLikelyTo(requestData);
-    console.log(questions);
     let questionData = questions[questionIndex];
     let question = questionData.question;
     

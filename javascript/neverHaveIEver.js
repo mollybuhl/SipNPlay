@@ -1,11 +1,10 @@
 /*
     TO DO:
     - Implement swipe animation
-    - Not random question
 */
 
 // Function to render Never have I Ever game
-async function renderNeverHaveIEver(category, gameId){
+async function renderNeverHaveIEver(category, questionIndex = 0){
 
     // Set neverHaveIEver class to main and footer
     let main = document.querySelector("main");
@@ -16,12 +15,13 @@ async function renderNeverHaveIEver(category, gameId){
     footer.removeAttribute("class");
     footer.classList.add("neverHaveIEver");
 
-    //Fetch card information
-    let questionData = await fetchNeverHaveIEverQuestion(category);
-    let question = questionData[1].question;
-    let questionCategory = questionData[1].category;
-    let questionNumber = questionData[1].id;
-    let numberOfQuestions = questionData[0];
+    //Fetch questions and display the first one
+    let questions = await fetchNeverHaveIEverQuestion(category);
+    let questionData = questions[questionIndex];
+    let question = questionData.question;
+    let numberOfQuestions = questions.length;
+    questionIndex = questionIndex +1;
+
 
     // Structure of main
     main.innerHTML=`
@@ -30,8 +30,8 @@ async function renderNeverHaveIEver(category, gameId){
         <div class="currentCard">
             <p class="question">${question}</p>
             <div class="cardInformation">
-                <p class="cardCategory">${questionCategory}</p>
-                <p class="cardNumber">${questionNumber}/${numberOfQuestions}</p>
+                <p class="cardCategory">${category}</p>
+                <p class="cardNumber">${questionIndex}/${numberOfQuestions}</p>
             </div>
         </div>
         <div class="backCard"></div>
@@ -55,8 +55,8 @@ async function renderNeverHaveIEver(category, gameId){
     `
 
     //Quit game when clicking on quit button
-    footer.querySelector("buttonQuit").addEventListener("click", () => {
-        renderCategories("Never Have I Ever");
+    footer.querySelector(".buttonQuit").addEventListener("click", () => {
+        renderCategoryLocalGame("Never Have I Ever");
     })
     
     //Swipe for next question
@@ -67,15 +67,13 @@ async function renderNeverHaveIEver(category, gameId){
     async function renderNewCard(){
        
         // Fetch new card information
-        let questionData = await fetchNeverHaveIEverQuestion(category);
-        let question = questionData[1].question;
-        let questionCategory = questionData[1].category;
-        let questionNumber = questionData[1].id;
-        let numberOfQuestions = questionData[0];
+        let questionData = questions[questionIndex];
+        let question = questionData.question;
+        questionIndex++
     
         // Display new card
         document.querySelector(".cards > .currentCard > .question").textContent = question;
-        document.querySelector(".cards > .currentCard > .cardInformation > .cardNumber").textContent = `${questionNumber}/${numberOfQuestions}`;
+        document.querySelector(".cards > .currentCard > .cardInformation > .cardNumber").textContent = `${questionIndex}/${numberOfQuestions}`;
     }
 };
 

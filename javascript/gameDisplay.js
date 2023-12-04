@@ -139,7 +139,7 @@ function renderGameDisplay(){
 
     // Display game category or render play when clicking on game
     main.querySelector(".neverHaveIEver").addEventListener("click",() => {
-        renderCategories("Never Have I Ever");
+        renderCategoryLocalGame("Never Have I Ever");
     });
 
     main.querySelector(".mostLikelyTo").addEventListener("click", () => {
@@ -154,7 +154,9 @@ function renderGameDisplay(){
         renderCategories("Would You Rather");
     });
 
-    //main.querySelector(".spinTheBottle").addEventListener("click", );
+    main.querySelector(".spinTheBottle").addEventListener("click",()=>{
+        renderCategoryLocaGame("Spin The Bottle");
+    } );
 
     // Render join game by ID on click
     main.querySelector(".joinGame").addEventListener("click",() => {
@@ -220,6 +222,73 @@ function renderCategories(game){
     `;
 
     footer.querySelector(".buttonQuit").addEventListener("click", renderGameDisplay);
+}
+
+// Function to render category page for localy hosted games
+function renderCategoryLocalGame(game){
+
+    // Structure of main
+    let main = document.querySelector("main");
+    main.removeAttribute("class");
+    main.classList.add("categoryDisplay");
+
+    main.innerHTML = `
+    <h1>${game}</h1>
+    <div class="theBasicVersion green">The Basic Version</div>
+    <div class="notSafeForWork orange">Not Safe For Work</div>
+    <div class="spicyEdition pink">Spicy Edition</div>
+    <div class="girlDinner green">Girl Dinner</div>
+    `;
+
+    // Selecting a category and render game on click
+    let category;
+    
+    // The basic version
+    main.querySelector(".theBasicVersion").addEventListener("click", () =>{
+        category = "The Basic Version";  
+        loadGame();
+    });
+
+    // Not safe for work
+    main.querySelector(".notSafeForWork").addEventListener("click", () =>{
+        category = "Not Safe For Work";
+        loadGame();
+    });
+
+    // Spicy edition
+    main.querySelector(".spicyEdition").addEventListener("click", () =>{
+        category = "Spicy Edition";
+        loadGame();
+    });
+
+    // Girl Dinner
+    main.querySelector(".girlDinner").addEventListener("click", () =>{
+        category = "Girl Dinner";
+        loadGame();
+    });
+
+    function loadGame(){
+        if(game === "Never Have I Ever"){
+            renderNeverHaveIEver(category);
+        }
+        if(game === "Spin The Bottle"){
+
+        }
+    }
+    
+
+    // When clicking exit go back to game display
+    let footer = document.querySelector("footer");
+
+    footer.innerHTML=`
+    <div class="buttonQuit">
+        <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
+        <p>BACK</p>
+    </div>
+    `;
+
+    footer.querySelector(".buttonQuit").addEventListener("click", renderGameDisplay);
+
 }
 
 
