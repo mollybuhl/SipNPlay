@@ -14,9 +14,8 @@
     // Base action on request action key
     $action = $requestData["action"];
 
+    // Get all active games
     $games = getFileContents("activeGames.json");
-
-    $action = $requestData["action"];
 
     // Create new game
     if($action == "createGame"){
@@ -75,7 +74,6 @@
             }
         }
 
-
         // If active game found return current players, otherwise inform user
         if($activeGame){
             $players = $activeGame["players"];
@@ -118,6 +116,8 @@
             sendJson($message, 404);
         }
 
+    }else if($action == "leaveGame"){
+        
     }
 
    

@@ -1,0 +1,104 @@
+.startGame{
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+/*Game pin*/
+.startGame > .gameId{
+    font-size: 70px;
+}
+
+/*Game pin text*/
+.startGame > h2{
+    font-size: var(--fontSizeTwo);
+    margin-top: 5vh;
+    margin-bottom: 0;
+}
+
+
+.startGame > h3{
+    font-family: outfit;
+    font-size: var(--fontSizeTwo);
+    font-weight: var(--fontMedium);
+}
+
+/*Participants text*/
+.startGame > h4{
+    font-family: outfit;
+    font-size: var(--fontSizeFour);
+    font-weight: var(--fontMedium);
+    margin-bottom: 0;
+}
+
+.startGame > p, .startGame > .participants > p{
+    font-family: outfit;
+    font-size: var(--fontSizeFive);
+}
+
+.startGame > input{
+    width: 100%;
+    height: 6vh;
+    background-color: var(--blackGrey);
+    border: none;
+    border-radius: 5px;
+    padding: 1vh;
+
+    font-family: outfit;
+    font-size: var(--fontSizeFive);
+    color: var(--textColor);
+    -moz-appearance: textfield;
+}
+
+.startGame > .participants{
+    text-align: center;
+}
+
+.startGame > button{
+    font-family: outfit;
+    font-weight: var(--fontRegular);
+    font-size: var(--fontSizeFive);
+
+    background-color: var(--buttonColor);
+    border-radius: 20px;
+
+    margin-top: 5vh;
+    height: 5vh;
+    width: 50vw;
+}
+
+.startGame > button.clearDesign{
+    background-color: transparent;
+    border: 1px solid var(--buttonColor);
+    color: var(--buttonColor);
+
+}
+
+.startGame > button.longButton{
+    width: 100%;
+    margin-top: 2vh;
+}
+
+
+footer #startGameButton {
+    font-family: outfit;
+    font-weight: var(--fontRegular);
+    font-size: var(--fontSizeFive);
+
+    background-color: var(--white);
+    height: 55%;
+    width: auto;
+    padding: 0 4vh;
+    border-radius: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer #startGameButton:disabled{
+    background-color: var(--blackGrey);
+    color: var(--black);
+    box-shadow: none;
+}
+

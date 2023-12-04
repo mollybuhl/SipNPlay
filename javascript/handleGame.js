@@ -1,35 +1,43 @@
 /*
     TO DO:
     - Leave a game
-    - Join a game by code
+    - Start game when host start game
 */
 
 "use strict";
 
-// Function to render start or join game
+// Function to render start game
 function renderStartGame(game, category){
     let main = document.querySelector("main");
     main.removeAttribute("class");
+    main.classList.add("startGame");
 
     main.innerHTML = `
-    <input class="creatorGame">Your Name</input>
-    <div></div>
-    <button class="createGame">Create Game</button>
-    <button class="joinGame">Join Game</button>
+    <h3>Your Name</h3>
+    <input type="text" class="name" placeholder="Type here..."></input>
+    <h4>What do you want to do?</h4>
+    <button class="createGame longButton">Create Game</button>
+    <button class="joinGame clearDesign longButton">Join Game</button>
     `;
 
+    // Render create game when clicking create
     main.querySelector(".createGame").addEventListener("click", () =>{
-        createGame(game, category);
+        let creatorName = document.querySelector(".name").value;
+        createGame(game, category, creatorName);
     });
 
-    main.querySelector(".joinGame").addEventListener("click", joinGame);
+    // Render join game when clicking join
+    main.querySelector(".joinGame").addEventListener("click", () =>{
+
+        // Send name to function
+        let playerName = document.querySelector(".name").value;
+        joinGame(playerName);
+    });
 
 }
 
 // Function to create new game
-async function createGame(game, category){
-
-    let creatorName = document.querySelector(".creatorGame").value;
+async function createGame(game, category, creatorName){
 
     // Create a game
     let requestData = {
@@ -38,18 +46,29 @@ async function createGame(game, category){
     }
 
     let gameId = await handleGameFetch(requestData);
-
-    // Save in data
     
+    // Present game status
     let main = document.querySelector("main");
     main.innerHTML = `
     <h2>GAME PIN</h2>
-    <h1>${gameId}</h1>
-    <p>Participants</p>
-    <div class="participants">
-    </div>
-    <button class="startGame">START GAME</button>
+    <div class="resultName gameId">${gameId}</div>
+    <h4>Participants</h4>
+    <div class="participants"></div>
+    <p class="waitingText">Waiting on others to join the game...</p>
     `;
+
+    let footer = document.querySelector("footer");
+    footer.innerHTML = `
+    <div class="buttonQuit">
+            <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
+            <p>QUIT</p>
+    </div>
+    <button id="startGameButton">START GAME</button>
+    `;
+
+    // Disable button until others have joined the game
+    let startButton = document.getElementById("startGameButton")
+    startButton.disabled = true;
 
     // Fetch current players every second
     requestData = {
@@ -84,13 +103,39 @@ async function createGame(game, category){
             }
             index++;
         });
+
+        // If more than 2 players joined the game, remove "waiting for others" and enable start button
+        if(displayedPlayers.length >= 2){
+
+            // Remove waiting text
+            if(document.querySelector(".waitingText")){
+                document.querySelector(".waitingText").remove();
+            }
+
+            // Enable start game button
+            let startButton = document.getElementById("startGameButton");
+            startButton.disabled = false;
+
+        }else if(!document.querySelector(".waitingText")){
+
+            // If game has less than 2 participants but there is no waiting text, creat this
+            let waitingText = document.createElement("p");
+            waitingText.classList.add("waitingText");
+            waitingText.textContent = "Waiting on others to join the game...";
+            main.appendChild(waitingText);
+
+            let startButton = document.getElementById("startGameButton");
+            startButton.disabled = true;
+        }
     },1000);
 
-    main.querySelector(".startGame").addEventListener("click", () => {
+    // When clicking start game stop updating players and start game based on user input
+    document.getElementById("startGameButton").addEventListener("click", () => {
+        
         // Stop fetching players
         clearInterval(updatePlayes);
 
-        // Start game
+        // Start game based on user input
         switch(game){
             case "Never Have I Ever":
                 renderNeverHaveIEver(category, gameId);
@@ -111,26 +156,48 @@ async function createGame(game, category){
 }
 
 // Function to join game
-function joinGame(){
-
-    let playerName = document.querySelector(".creatorGame").value;
+// player name will be sent as parameter if player join game by create game display
+// if player join game from homepage they will need to fill in their name
+function joinGame(playerName=null){
 
     let main = document.querySelector("main");
-    main.innerHTML = `
-    <h1>GAME PIN</h1>
-    <input class="gameId"></input>
-    <button class="joinGame">JOIN GAME</button>
-    `;
-    
+    main.removeAttribute("class");
+    main.classList.add("startGame");
 
+    console.log("parameter name:" + playerName);
+
+    // If name is not sent as parameter display input for player name
+    if(playerName != null){
+        main.innerHTML = `
+        <h2>GAME PIN</h2>
+        <input type="number" placeholder="Game Pin..." class="gameId"></input>
+        <button class="joinGame">JOIN GAME</button>
+        `;
+    }else{
+        main.innerHTML = `
+        <h2>Your Name</h2>
+        <input type="text" placeholder="Your name..."  class="name"></input>
+        <h2>Game Pin</h2>
+        <input type="number" placeholder="Game Pin..." class="gameId"></input>
+        <button class="joinGame">JOIN GAME</button>
+        `;
+    }
+
+    // Send join game request when clicking join game
     main.querySelector(".joinGame").addEventListener("click", async () =>{
         
-        let gameId = main.querySelector(".gameId").value;
+        
+        let gameId = document.querySelector(".gameId").value;
+
+        // Get name if not send as parameter
+        if(!playerName){
+            playerName = document.querySelector(".name").value;
+        }
 
         // Join game by id
         let requestData = {
             action: "joinGame",
-            gameId:gameId,
+            gameId: gameId,
             name: playerName
         }
 
@@ -142,9 +209,18 @@ function joinGame(){
         <h2>GAME PIN</h2>
         <h1>${gameId}</h1>
         <p>Participants</p>
-        <div class="participants">
-        </div>
+        <div class="participants"></div>
+        <p>Waiting for host to start the game...</p>
         `;
+
+        // Structure of footer
+        let footer = document.querySelector("footer");
+        footer.innerHTML=`
+        <div class="buttonQuit">
+            <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
+            <p>QUIT</p>
+        </div>
+        `
 
         // Fetch current players every second
         requestData = {
@@ -181,15 +257,14 @@ function joinGame(){
             });
         },1000);
 
+        // Leave game when clicking on exit
+
+        // Start game when host start game
+       /* requestData = {
+            action: "startGame",
+            gameId: gameId
+        }*/
     })
-
-    
-
-    
-
-    
-
-
 
 }
 

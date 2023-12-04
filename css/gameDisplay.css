@@ -1,11 +1,82 @@
+/*Game display*/
 .gameDisplay {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2vh;
+    grid-template-rows: repeat(10,1fr);
+    height: 90%;
+}
+
+/*Each game display*/
+.gameDisplay > div{
     display: flex;
     flex-direction: column;
-    gap: 5px;
-}
-.gameDisplay > div{
-    height: 10vh;
-    width: 70vw;
-    background-color: grey;
+    justify-content: space-between;
+    color: var(--textColor);
+    font-family: outfit;
+    
+    background-color: var(--blackGrey);
     cursor: pointer;
+    padding: 1.5vh;
+    border-radius: 10px;
+}
+
+.gameDisplay > .neverHaveIEver{
+    grid-column: 1/span 2;
+    grid-row: 1/span 2;
+}
+.truthOrDare{
+    grid-column: 1;
+    grid-row: 3/6;
+}
+.wouldYouRather{
+    grid-column: 2;
+    grid-row: 3/5;
+}
+.mostLikelyTo{
+    grid-column: 2;
+    grid-row: 5/8;
+}
+.spinTheBottle{
+    grid-column: 1;
+    grid-row: 6/8;
+}
+
+.fillInTheBlank{
+    grid-column: 1/span 2;
+    grid-row: 8/10;
+}
+
+.gameDisplay > div > h3{
+    margin: 0;
+    font-size: var(--fontSizeFour);
+    grid-column: 1/span 3;
+}
+
+.gameDisplay > div > div{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.gameDisplay > div > div > div {
+    display: flex;
+    gap: 1vw;
+}
+
+.gameDisplay > div > div > div > p{
+    margin: 0;
+}
+
+/*Join game by Id button*/
+.gameDisplay > div.joinGame{
+    background-color: var(--buttonColor);
+    color: var(--textOnWhite);
+    grid-column: 1/span 2;
+    grid-row: 10;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }

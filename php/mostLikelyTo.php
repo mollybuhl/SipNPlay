@@ -15,7 +15,7 @@
 
     // Continue bsed on action
     if($action == "fetchQuestion"){
-        // FETCH QUESTION
+        // FETCH QUESTIONS
 
         // Get all questions from json file
         $questions = getFileContents("mostLikelyTo.json");
@@ -46,7 +46,7 @@
         // UPDATE SELECTED
 
         // Get saved games and find
-        $games = getFileContents("mostLikelyToGame.json");
+        $games = getFileContents("activeGames.json");
         $gameId = $requestData["gameId"];
         $newVote = $requestData["vote"];
         $previousVote = $requestData["previousVote"];
@@ -66,71 +66,30 @@
         if($activeGame){
 
             // Remove vote
-            $votes = $activeGame["votes"];
+            $votes = $activeGame["activeGame"]["votes"];
             foreach($votes as $index => $vote){
                 if($vote == $previousVote){
-                    array_splice($games[$gameIndex]["votes"], $index,1);
+                    array_splice($games[$gameIndex]["activeGame"]["votes"], $index,1);
                 }
             }
 
             // Add new vote
             if(!$newVote == null){
-                $games[$gameIndex]["votes"][] = $newVote;
+                $games[$gameIndex]["activeGame"]["votes"][] = $newVote;
             }
 
-            saveToFile("mostLikelyToGame.json", $games);
-            sendJSON($games[$gameIndex]["votes"]);
+            saveToFile("activeGames.json", $games);
+            sendJSON($games[$gameIndex]["activeGame"]["votes"]);
 
         }else{
-            $message = ["message" => "no active game was found"];
+            $message = ["message" => "no game with matching Id was found"];
             sendJson($message, 404);
         }
-
-    }else if($action == "createGame"){
-        // CREATE NEW GAME
-
-        $games = getFileContents("mostLikelyToGame.json");
-        $players = $requestData["players"];
-       
-        // Give the game a randomized id
-        function setRandomId(){
-            return rand(1000,9999);
-        }
-
-        // Check if id is already used
-        function checkId($gameId){
-            global $games;
-            // Check if id already exists
-            foreach($games as $game){
-                if($game["id"] == $gameId){
-                    $newGameId = setRandomId();
-                    checkId($newGameId);
-                    return;
-                }
-            }
-        }
-
-        $gameId = setRandomId();
-        checkId($gameId);
-
-        // Set game parameters
-        $gameData = [
-            "id" => $gameId,
-            "palyers" => $players,
-            "votes" => []
-        ];
-          
-        $games[] = $gameData;
-
-        // Update json file and return game id
-        saveToFile("mostLikelyToGame.json", $games);
-        $message = $gameId;
-        sendJSON($message);
 
     }else if($action == "fetchResults"){
         // GET RESULTS
 
-        $games = getFileContents("mostLikelyToGame.json");
+        $games = getFileContents("activeGames.json");
         $gameId = $requestData["gameId"];
 
         // Find active game based on gameId from request
@@ -146,16 +105,16 @@
 
         // If active game found handle votes, otherwise inform user
         if($activeGame){
-            sendJSON($activeGame["votes"]);
+            sendJSON($activeGame["activeGame"]["votes"]);
 
         }else{
-            $message = ["message" => "no active game was found"];
+            $message = ["message" => "no game with matching Id was found"];
             sendJson($message, 404);
         }
     }else if($action == "clearVotes"){
         // CLEAR ALL VOTES
 
-        $games = getFileContents("mostLikelyToGame.json");
+        $games = getFileContents("activeGames.json");
         $gameId = $requestData["gameId"];
 
         // Find active game based on gameId from request
@@ -173,16 +132,13 @@
         if($activeGame){
             
             // Remove votes
-            $votes = $activeGame["votes"];
-            foreach($votes as $index => $vote){
-                array_splice($games[$gameIndex]["votes"], $index,1);
-            }
+            $games[$gameIndex]["activeGame"]["votes"] = [];
 
-            saveToFile("mostLikelyToGame.json", $games);
-            sendJSON($games[$gameIndex]["votes"]);
+            saveToFile("activeGames.json", $games);
+            sendJSON([$games[$gameIndex]["activeGame"]["votes"]]);
 
         }else{
-            $message = ["message" => "no active game was found"];
+            $message = ["message" => "no game with matching Id was found"];
             sendJson($message, 404);
         }
 

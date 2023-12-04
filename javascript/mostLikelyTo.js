@@ -1,8 +1,6 @@
 "use strict";
 /* TO DO:
-    - Import names
-    - Game should only be created for one person
-    - Others join by entering code
+    - Exit button
 */
 
 // Function to render moste likely to question and handle votes
@@ -24,6 +22,7 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
     }
 
     let questions = await fetchMostLikelyTo(requestData);
+    console.log(questions);
     let questionData = questions[questionIndex];
     let question = questionData.question;
     
@@ -41,9 +40,16 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
     </div>
     `;
 
+    // Fetch current players
+    requestData = {
+        action: "getPlayers",
+        gameId: gameId
+    }
+
+    let players = await handleGameFetch(requestData);
+    console.log("Players: " + players);
+
     // Fill options with name of players and give each player a color class
-    // Names should be fetched for each round in case of new players!?
-    let players = ["Molly", "Amanda", "Alex", "Buster", "Lasse"];
     let colorClasses = ["green", "orange", "pink"];
     let counter = 0; 
 
@@ -115,7 +121,9 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
     </div>
     `
     // When clicking quit go back to categories
-    footer.querySelector(".buttonQuit").addEventListener("click", renderMostLikelyToCategories);
+    footer.querySelector(".buttonQuit").addEventListener("click", () =>{
+        renderCategories("Most Likely To");
+    });
 
     // Function to fetch and display results after countdown is finished
     async function renderMostLikelyToResult(){
@@ -188,7 +196,9 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
         `;
 
         // When clicking quit button go back to categories
-        footer.querySelector(".buttonQuit").addEventListener("click", renderCategories);
+        footer.querySelector(".buttonQuit").addEventListener("click", footer.querySelector(".buttonQuit").addEventListener("click", () =>{
+            renderCategories("Most Likely To");
+        }));
 
         // When clicking on next button, clear votes and call to render next question
         footer.querySelector(".nextButton").addEventListener("click", async () => {
@@ -203,7 +213,7 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
             let clear = await fetchMostLikelyTo(requestData);
 
             // Render next question
-            renderMostLikelyTo(gameId, category, questionIndex+1);
+            renderMostLikelyTo(category, gameId, questionIndex+1);
 
         });
     }

@@ -1,10 +1,11 @@
 /*
     TO DO:
     - Implement swipe animation
+    - Not random question
 */
 
 // Function to render Never have I Ever game
-async function renderNeverHaveIEver(category){
+async function renderNeverHaveIEver(category, gameId){
 
     // Set neverHaveIEver class to main and footer
     let main = document.querySelector("main");
