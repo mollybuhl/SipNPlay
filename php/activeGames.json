@@ -1,3 +1,28 @@
 [
-    
+    {
+        "id": 2516,
+        "players": [
+            "molly",
+            "Saga"
+        ],
+        "activeGame": {
+            "game": "Most Likely To",
+            "category": "Not Safe For Work",
+            "votes": []
+        }
+    },
+    {
+        "id": 6174,
+        "players": [
+            "Sisi",
+            "Molly",
+            "Molly",
+            "Hylan"
+        ],
+        "activeGame": {
+            "game": "No Active Game",
+            "category": "No category",
+            "votes": []
+        }
+    }
 ]

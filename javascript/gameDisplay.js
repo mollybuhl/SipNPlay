@@ -1,7 +1,7 @@
 "use strict";
 
-// Function to render game display
-function renderGameDisplay(){
+// Function to render game display, current game will be true if the user have already joined a game, otherwise false
+function renderGameDisplay(currentGame = false){
 
     let main = document.querySelector("main");
     main.removeAttribute("class");
@@ -129,13 +129,35 @@ function renderGameDisplay(){
             </svg>
         </div>
     </div>
-    <div class="joinGame">
-            <h3>Join Game by ID</h3>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
-                <path d="M9 6.24072L15 11.6852L9 17.1296" stroke="#747474" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-        </div>
     `;
+
+    if(currentGame){
+        let gameId = localStorage.getItem("gameId");
+        let bottomBox = document.createElement("div");
+        bottomBox.classList.add("leavGameDisplay");
+        bottomBox.innerHTML = `
+        <button class="leaveGame">Leave Game</button>
+        <div>${gameId}</div>
+        `;
+        main.appendChild(bottomBox);
+
+        document.querySelector(".leaveGame").addEventListener("click", leaveGame);
+    }else{
+        let bottomBox = document.createElement("div");
+        bottomBox.classList.add("joinGame");
+        bottomBox.innerHTML = `
+        <h3>Join Game by ID</h3>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
+        <path d="M9 6.24072L15 11.6852L9 17.1296" stroke="#747474" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        `;
+        main.appendChild(bottomBox);
+
+        // Render join game by ID on click
+        main.querySelector(".joinGame").addEventListener("click",() => {
+            joinGame();
+        });
+    }
 
     // Display game category or render play when clicking on game
     main.querySelector(".neverHaveIEver").addEventListener("click",() => {
@@ -155,17 +177,12 @@ function renderGameDisplay(){
     });
 
     main.querySelector(".spinTheBottle").addEventListener("click",()=>{
-        renderCategoryLocaGame("Spin The Bottle");
+        renderCategoryLocalGame("Spin The Bottle");
     } );
-
-    // Render join game by ID on click
-    main.querySelector(".joinGame").addEventListener("click",() => {
-        joinGame();
-    });
     
     // Remove quit button from footer
     let footer = document.querySelector("footer");
-    footer.innerHTML = ``;
+    footer.classList.add("removed");
 }
 
 

@@ -80,3 +80,45 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.gameDisplay > div.leavGameDisplay{
+    grid-column: 1/span 2;
+    grid-row: 10;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    background-color: transparent;
+    padding: 0;
+}
+
+.gameDisplay > div.leavGameDisplay > button{
+    font-family: outfit;
+    font-weight: var(--fontRegular);
+    font-size: var(--fontSizeFive);
+
+    background-color: var(--white);
+    color: var(--textOnWhite);
+    height: 70%;
+    width: 40vw;
+    padding: 1vh;
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+
+.gameDisplay > div.leavGameDisplay > div{
+    font-size: 40px;
+    font-family: museoModerno;
+    font-weight: var(--fontBold);
+
+    background: var(--greenGradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+footer.removed{
+    height: 0;
+}
+

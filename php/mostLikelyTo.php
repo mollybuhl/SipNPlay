@@ -29,13 +29,13 @@
                 $questionsOfCategory = $questions[0]["The Basic Version"];
                 break;
             case "Not Safe For Work":
-                $questionsOfCategory = $questions[1]["Not Safe For Work"];
+                $questionsOfCategory = $questions[0]["Not Safe For Work"];
                 break;
             case "Spicy Edition":
-                $questionsOfCategory = $questions[2]["Spicy Edition"];
+                $questionsOfCategory = $questions[0]["Spicy Edition"];
                 break;
             case "Girl Dinner":
-                $questionsOfCategory = $questions[3]["Girl Dinner"];
+                $questionsOfCategory = $questions[0]["Girl Dinner"];
                 break;
         }
 

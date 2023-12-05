@@ -1,7 +1,9 @@
 /*
     TO DO:
     - Leave a game
-    - Start game when host start game
+    - Remove data in storage when you exit game
+    - Only host click next question
+    - PopUp design
 */
 
 "use strict";
@@ -36,7 +38,7 @@ function renderStartGame(game, category){
 
 }
 
-// Function to create new game
+// Function to create new game, will be called by host of the game
 async function createGame(game, category, creatorName){
 
     // Create a game
@@ -46,6 +48,11 @@ async function createGame(game, category, creatorName){
     }
 
     let gameId = await handleGameFetch(requestData);
+    
+    // Save gameId in local storage and set currentGame to true
+    window.localStorage.setItem("currentGame", "true");
+    window.localStorage.setItem("gameId", gameId);
+    window.localStorage.setItem("playerName", creatorName);
     
     // Present game status
     let main = document.querySelector("main");
@@ -130,16 +137,23 @@ async function createGame(game, category, creatorName){
     },1000);
 
     // When clicking start game stop updating players and start game based on user input
-    document.getElementById("startGameButton").addEventListener("click", () => {
+    document.getElementById("startGameButton").addEventListener("click", async () => {
         
         // Stop fetching players
         clearInterval(updatePlayes);
 
+        //Update game status for other players
+        requestData = {
+            action: "startGame",
+            gameId: gameId,
+            game: game,
+            category: category
+        }
+
+        let gameStarted = await handleGameFetch(requestData);
+
         // Start game based on user input
         switch(game){
-            case "Never Have I Ever":
-                renderNeverHaveIEver(category, gameId);
-                break;
             case "Most Likely To":
                 renderMostLikelyTo(category, gameId);
                 break;
@@ -157,14 +171,12 @@ async function createGame(game, category, creatorName){
 
 // Function to join game
 // player name will be sent as parameter if player join game by create game display
-// if player join game from homepage they will need to fill in their name
+// if player join game from homepage they will need to fill in their name as well
 function joinGame(playerName=null){
 
     let main = document.querySelector("main");
     main.removeAttribute("class");
     main.classList.add("startGame");
-
-    console.log("parameter name:" + playerName);
 
     // If name is not sent as parameter display input for player name
     if(playerName != null){
@@ -176,9 +188,9 @@ function joinGame(playerName=null){
     }else{
         main.innerHTML = `
         <h2>Your Name</h2>
-        <input type="text" placeholder="Your name..."  class="name"></input>
+        <input type="text" placeholder="Type here..."  class="name"></input>
         <h2>Game Pin</h2>
-        <input type="number" placeholder="Game Pin..." class="gameId"></input>
+        <input type="number" placeholder="Type here..." class="gameId"></input>
         <button class="joinGame">JOIN GAME</button>
         `;
     }
@@ -202,6 +214,11 @@ function joinGame(playerName=null){
         }
 
         let joinGame = await handleGameFetch(requestData);
+
+        // Save gameId in local storage and set currentGame to true
+        window.localStorage.setItem("currentGame", "true");
+        window.localStorage.setItem("gameId", gameId);
+        window.localStorage.setItem("playerName", playerName);
 
         // Display currently joined players
         let main = document.querySelector("main");
@@ -260,10 +277,40 @@ function joinGame(playerName=null){
         // Leave game when clicking on exit
 
         // Start game when host start game
-       /* requestData = {
-            action: "startGame",
+        let requestDataForStartingGame = {
+            action: "requestToStartGame",
             gameId: gameId
-        }*/
+        }
+
+        let requestStart = setInterval(async()=>{
+            let requestToStartGame = await handleGameFetch(requestDataForStartingGame);
+            console.log(requestToStartGame);
+
+            if(requestToStartGame){
+                // Stop fetching players
+                clearInterval(updatePlayes);
+                // Stop fetching request to start game
+                clearInterval(requestStart);
+
+                let game = requestToStartGame.game;
+                let category = requestToStartGame.category;
+
+                // Start game based on user input
+                switch(game){
+                    case "Most Likely To":
+                        renderMostLikelyTo(category, gameId);
+                        break;
+                    case "Truth or Dare":
+                        truthORDareHandle(category, gameId);
+                        break;
+                    case "Would You Rather":
+                        renderWouldYouRather(category, gameId);
+                        break;
+                }
+            }   
+
+        }, 1000);
+
     })
 
 }
@@ -289,10 +336,53 @@ async function handleGameFetch(requestData){
             return resource;
         }else{
             let error = await response.json();
-            feedback(error.message);
+            console.log(error);
         }
     }catch(error){
         console.log("Something went wrong", error);
     }
 
+}
+
+function leaveGame(){
+    let gameId = parseInt(localStorage.getItem("gameId"));
+    console.log(gameId);
+    let playerName = localStorage.getItem("playerName");
+
+    let popUp = document.createElement("div");
+    popUp.setAttribute("id", "leaveGamePopUp");
+    popUp.innerHTML = `
+    <div>
+        <p>Are you sure you want to leave the game</p>
+        <div>   
+            <button class="leaveGame">Leave</button>
+            <button class="closePopup">Stay</button>
+        </div>
+    </div>
+    `;
+
+    document.querySelector("main").appendChild(popUp);
+
+    popUp.querySelector(".closePopup").addEventListener("click", () => {
+        popUp.remove();
+    })
+
+    popUp.querySelector(".leaveGame").addEventListener("click", async () => {
+        
+        // Send request to leave game
+        let requestDataForLeavingGame = {
+            action: "leaveGame",
+            gameId: gameId,
+            player: playerName
+        }
+
+        let leftTheGame = await handleGameFetch(requestDataForLeavingGame);
+        if(leftTheGame){
+            window.localStorage.setItem("currentGame", false);
+            window.localStorage.removeItem("gameId");
+            window.localStorage.removeItem("playerName");  
+            
+            renderGameDisplay();
+        }
+    })
 }

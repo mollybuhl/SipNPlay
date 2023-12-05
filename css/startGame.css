@@ -13,7 +13,6 @@ align-items: center;
 .startGame > h2{
     font-size: var(--fontSizeTwo);
     margin-top: 5vh;
-    margin-bottom: 0;
 }
 
 
@@ -48,6 +47,10 @@ align-items: center;
     font-size: var(--fontSizeFive);
     color: var(--textColor);
     -moz-appearance: textfield;
+}
+
+.startGame > input.gameId{
+    font-size: var(--fontSizeFive);
 }
 
 .startGame > .participants{
@@ -102,3 +105,47 @@ footer #startGameButton:disabled{
     box-shadow: none;
 }
 
+/*Leave game popup*/
+#leaveGamePopUp{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: #0E0E0EB5;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#leaveGamePopUp > div{
+    background-color: var(--blackGrey);
+    display: flex;
+    flex-direction: column;
+
+    height: 20vh;
+    border-radius: 5px;
+    padding: 2vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#leaveGamePopUp > div > div > button{
+    font-family: outfit;
+    font-weight: var(--fontRegular);
+    font-size: var(--fontSizeFive);
+
+    background-color: var(--white);
+    height: 55%;
+    width: auto;
+    padding: 2vh;
+    border-radius: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+}
