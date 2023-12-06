@@ -178,7 +178,7 @@ function renderGameDisplay(currentGame = false){
     });
 
     main.querySelector(".spinTheBottle").addEventListener("click",()=>{
-        renderCategoryLocalGame("Spin The Bottle");
+        spinTheBottleHandle();
     } );
     
     // Remove quit button from footer
@@ -290,9 +290,7 @@ function renderCategoryLocalGame(game){
         if(game === "Never Have I Ever"){
             renderNeverHaveIEver(category);
         }
-        if(game === "Spin The Bottle"){
-
-        }
+        
     }
     
 
