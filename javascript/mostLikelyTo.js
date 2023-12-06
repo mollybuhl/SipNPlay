@@ -1,12 +1,11 @@
 "use strict";
 /* TO DO:
-    - Import names
-    - Game should only be created for one person
-    - Others join by entering code
+    - check for active game if not host
 */
 
 // Function to render moste likely to question and handle votes
-async function renderMostLikelyTo(gameId, category, questionIndex = 0){
+// Category and gameId should be sent as parameters, questionIndex will be 0 first time and incriment each time it call itself
+async function renderMostLikelyTo(category, gameId, questionIndex = 0){
 
     // Set mostLikelyTo class to main and footer
     let main = document.querySelector("main");
@@ -24,10 +23,12 @@ async function renderMostLikelyTo(gameId, category, questionIndex = 0){
     }
 
     let questions = await fetchMostLikelyTo(requestData);
+
+    // Select question based on index
     let questionData = questions[questionIndex];
     let question = questionData.question;
     
-    // Structure of main
+    // Structure of main, present question
     main.innerHTML=`
     <div class="wrapper">
         <h1>Who is most likely to...</h1>
@@ -41,9 +42,15 @@ async function renderMostLikelyTo(gameId, category, questionIndex = 0){
     </div>
     `;
 
+    // Fetch current players
+    requestData = {
+        action: "getPlayers",
+        gameId: gameId
+    }
+
+    let players = await handleGameFetch(requestData);
+
     // Fill options with name of players and give each player a color class
-    // Names should be fetched for each round in case of new players!?
-    let players = ["Molly", "Amanda", "Alex", "Buster", "Lasse"];
     let colorClasses = ["green", "orange", "pink"];
     let counter = 0; 
 
@@ -101,11 +108,13 @@ async function renderMostLikelyTo(gameId, category, questionIndex = 0){
         }
     });
 
-    // Set countdown timer for 30sec
+    // Set aswering timer for 30sec
     let progressbar = document.querySelector(".progressbar");
-    runTimer(30, progressbar,function(){
+    let answerTime = runTimer(30, progressbar,function(){
         renderMostLikelyToResult()
     });
+
+    // If not host, check if there is an ongoing game
 
     // Structure of footer
     footer.innerHTML=`
@@ -114,8 +123,66 @@ async function renderMostLikelyTo(gameId, category, questionIndex = 0){
         <p>QUIT</p>
     </div>
     `
-    // When clicking quit go back to categories
-    footer.querySelector(".buttonQuit").addEventListener("click", renderMostLikelyToCategories);
+    // When clicking quit leave game
+    footer.querySelector(".buttonQuit").addEventListener("click", () =>{
+
+        let isHost = window.localStorage.getItem("host");
+
+        // If user is host - ask to play another game or keep playing
+        if(isHost){
+            // Clear timer so no results are presented
+            clearInterval(answerTime);
+
+            // Display pop up
+            let gameId = parseInt(localStorage.getItem("gameId"));
+
+            let popUp = document.createElement("div");
+            popUp.setAttribute("id", "leaveGamePopUp");
+
+            popUp.innerHTML = `
+            <div>
+                <p>Are you sure you want to end this round?</p>
+                <div>   
+                    <button class="leaveGame">End Round</button>
+                    <button class="closePopup">Keep Playing</button>
+                </div>
+            </div>
+            `;
+
+            document.querySelector("main").appendChild(popUp);
+
+            // Close pop up and keep playing
+            popUp.querySelector(".closePopup").addEventListener("click", () => {
+                popUp.remove();
+            })
+
+            // End round and go back to category display
+            popUp.querySelector(".leaveGame").addEventListener("click", async () =>{
+                
+                // Send request to clear votes
+                let requestDataToClearVotes = {
+                    gameId: gameId,
+                    action: "clearVotes",
+                }
+                await fetchMostLikelyTo(requestDataToClearVotes);
+
+                let requestDataForEndingRound = {
+                    action: "endRound",
+                    gameId: gameId
+                }
+                
+                await handleGameFetch(requestDataForEndingRound);
+
+                // Go back to category page
+                renderCategories("Most Likely To");
+            })
+
+            
+        }else{
+            // If user is not host - ask to leave game or keep playing
+            leaveGame(answerTime);
+        }  
+    });
 
     // Function to fetch and display results after countdown is finished
     async function renderMostLikelyToResult(){
@@ -187,8 +254,64 @@ async function renderMostLikelyTo(gameId, category, questionIndex = 0){
         <button class="nextButton">NEXT</button>
         `;
 
-        // When clicking quit button go back to categories
-        footer.querySelector(".buttonQuit").addEventListener("click", renderCategories);
+        // When clicking quit button ask
+        footer.querySelector(".buttonQuit").addEventListener("click", footer.querySelector(".buttonQuit").addEventListener("click", () =>{
+            let isHost = window.localStorage.getItem("host");
+
+            // If user is host - ask to play another game or keep playing
+            if(isHost){
+
+                // Display pop up
+                let gameId = parseInt(localStorage.getItem("gameId"));
+
+                let popUp = document.createElement("div");
+                popUp.setAttribute("id", "leaveGamePopUp");
+
+                popUp.innerHTML = `
+                <div>
+                    <p>Are you sure you want to end this round?</p>
+                    <div>   
+                        <button class="leaveGame">End Round</button>
+                        <button class="closePopup">Keep Playing</button>
+                    </div>
+                </div>
+                `;
+
+                document.querySelector("main").appendChild(popUp);
+
+                // Close pop up and keep playing
+                popUp.querySelector(".closePopup").addEventListener("click", () => {
+                    popUp.remove();
+                })
+
+                // End round and go back to category display
+                popUp.querySelector(".leaveGame").addEventListener("click", async () =>{
+                    
+                    // Send request to clear votes
+                    let requestDataToClearVotes = {
+                        gameId: gameId,
+                        action: "clearVotes",
+                    }
+                    await fetchMostLikelyTo(requestDataToClearVotes);
+
+                    // Send request to end round
+                    let requestDataForEndingRound = {
+                        action: "endRound",
+                        gameId: gameId
+                    }
+                    
+                    await handleGameFetch(requestDataForEndingRound);
+
+                    // Go back to category page
+                    renderCategories("Most Likely To");
+                })
+
+                
+            }else{
+                // If user is not host - ask to leave game or keep playing
+                leaveGame(answerTime);
+            }
+        }));
 
         // When clicking on next button, clear votes and call to render next question
         footer.querySelector(".nextButton").addEventListener("click", async () => {
@@ -203,7 +326,7 @@ async function renderMostLikelyTo(gameId, category, questionIndex = 0){
             let clear = await fetchMostLikelyTo(requestData);
 
             // Render next question
-            renderMostLikelyTo(gameId, category, questionIndex+1);
+            renderMostLikelyTo(category, gameId, questionIndex+1);
 
         });
     }
@@ -235,20 +358,5 @@ async function fetchMostLikelyTo(requestData){
     }catch(error){
         console.log("Something went wrong", error);
     }
-}
-
-// Function to create a new most likely to game based on players and category
-async function createMostLikelyToGame(players, category){
-
-    // Set request parameters
-    let requestData = {
-        action: "createGame",
-        players: players
-    }
-
-    // Send request
-    let gameId= await fetchMostLikelyTo(requestData);
-    
-    renderMostLikelyTo(gameId, category);
 }
 
