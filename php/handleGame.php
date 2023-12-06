@@ -222,6 +222,76 @@
             $message = ["message" => "no game under that pin was found"];
             sendJson($message, 404);
         }
+    }else if($action == "endGame"){
+        // Get game by id
+        $gameId = $requestData["gameId"];
+        /*$gamePlayed = $requestData["game"];
+        $categoryPlayed = $requestData["category"];*/
+        
+
+        // Find active game based on gameId from request
+        $activeGame = false;
+        $gameIndex;
+
+        foreach($games as $index => $game){
+            if($game["id"] == $gameId){
+                $activeGame = $game;
+                $gameIndex = $index;
+            }
+        }   
+        
+        // If active game found update game status, otherwise inform user
+        if($activeGame){
+        
+            // Delete game
+            array_splice($games, $gameIndex, 1);
+
+            // Update json file and inform user
+            saveToFile("activeGames.json", $games);
+
+            $message = ["message" => "Game Deleted"];
+            sendJSON($message);
+
+        }else{
+            $message = ["message" => "no game under that pin was found"];
+            sendJson($message, 404);
+        }
+    }else if($action == "endRound"){
+
+        // Get game by id
+        $gameId = $requestData["gameId"];
+        /*$gamePlayed = $requestData["game"];
+        $categoryPlayed = $requestData["category"];*/
+        
+
+        // Find active game based on gameId from request
+        $activeGame = false;
+        $gameIndex;
+
+        foreach($games as $index => $game){
+            if($game["id"] == $gameId){
+                $activeGame = $game;
+                $gameIndex = $index;
+            }
+        }   
+        
+        // If active game found end current game round, otherwise inform user
+        if($activeGame){
+        
+            // Change game and category status
+            $games[$gameIndex]["activeGame"]["game"] = "No Active Game";
+            $games[$gameIndex]["activeGame"]["category"] = "No category";
+
+            // Update json file and inform user
+            saveToFile("activeGames.json", $games);
+
+            $message = ["message" => "Round Ended"];
+            sendJSON($message);
+
+        }else{
+            $message = ["message" => "no game under that pin was found"];
+            sendJson($message, 404);
+        }
     }
 
    

@@ -1,9 +1,3 @@
-/*
-    TO DO:
-    - Players 
-    - Instructions
-    - Language
-*/
 
 // Function to display menu
 function renderMenu(){
@@ -92,4 +86,6 @@ function runTimer(time, progressbar,callback){
 
 
     },1000);
+
+    return countdownTimer; // Return the time ID
 }

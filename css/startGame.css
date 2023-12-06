@@ -5,11 +5,18 @@ align-items: center;
 }
 
 /*Game pin*/
-.startGame > .gameId{
+.startGame > div.gameId{
     font-size: 70px;
+    font-family: museoModerno;
+    font-weight: var(--fontBold);
+
+    background: var(--greenGradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /*Game pin text*/
+
 .startGame > h2{
     font-size: var(--fontSizeTwo);
     margin-top: 5vh;
@@ -68,6 +75,8 @@ align-items: center;
     margin-top: 5vh;
     height: 5vh;
     width: 50vw;
+
+    cursor: pointer;
 }
 
 .startGame > button.clearDesign{

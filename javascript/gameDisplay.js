@@ -21,7 +21,7 @@ function renderGameDisplay(currentGame = false){
                 <path d="M14.25 6.75C15.5617 6.75 16.625 5.74264 16.625 4.5C16.625 3.25736 15.5617 2.25 14.25 2.25C12.9383 2.25 11.875 3.25736 11.875 4.5C11.875 5.74264 12.9383 6.75 14.25 6.75Z" stroke="#747474" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
 
-                <p>2+</p>
+                <p>1+</p>
             </div>
 
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
@@ -101,7 +101,7 @@ function renderGameDisplay(currentGame = false){
                 <path d="M14.25 6.75C15.5617 6.75 16.625 5.74264 16.625 4.5C16.625 3.25736 15.5617 2.25 14.25 2.25C12.9383 2.25 11.875 3.25736 11.875 4.5C11.875 5.74264 12.9383 6.75 14.25 6.75Z" stroke="#747474" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
 
-                <p>2+</p>
+                <p>1+</p>
             </div>
 
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
@@ -131,6 +131,7 @@ function renderGameDisplay(currentGame = false){
     </div>
     `;
 
+    // If user is already in a game load otion to leave game, otherwise load option to join game
     if(currentGame){
         let gameId = localStorage.getItem("gameId");
         let bottomBox = document.createElement("div");
@@ -182,6 +183,7 @@ function renderGameDisplay(currentGame = false){
     
     // Remove quit button from footer
     let footer = document.querySelector("footer");
+    footer.innerHTML=``;
     footer.classList.add("removed");
 }
 
@@ -241,7 +243,7 @@ function renderCategories(game){
     footer.querySelector(".buttonQuit").addEventListener("click", renderGameDisplay);
 }
 
-// Function to render category page for localy hosted games
+// Function to render category page for localy hosted games - not multiplayer
 function renderCategoryLocalGame(game){
 
     // Structure of main
@@ -304,7 +306,9 @@ function renderCategoryLocalGame(game){
     </div>
     `;
 
-    footer.querySelector(".buttonQuit").addEventListener("click", renderGameDisplay);
+    footer.querySelector(".buttonQuit").addEventListener("click", () => {
+        renderGameDisplay(false);
+    });
 
 }
 

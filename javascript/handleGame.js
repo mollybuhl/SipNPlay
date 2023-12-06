@@ -1,7 +1,5 @@
 /*
     TO DO:
-    - Leave a game
-    - Remove data in storage when you exit game
     - Only host click next question
     - PopUp design
 */
@@ -53,6 +51,7 @@ async function createGame(game, category, creatorName){
     window.localStorage.setItem("currentGame", "true");
     window.localStorage.setItem("gameId", gameId);
     window.localStorage.setItem("playerName", creatorName);
+    window.localStorage.setItem("host", true);
     
     // Present game status
     let main = document.querySelector("main");
@@ -65,6 +64,7 @@ async function createGame(game, category, creatorName){
     `;
 
     let footer = document.querySelector("footer");
+    footer.removeAttribute("class");
     footer.innerHTML = `
     <div class="buttonQuit">
             <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
@@ -72,6 +72,12 @@ async function createGame(game, category, creatorName){
     </div>
     <button id="startGameButton">START GAME</button>
     `;
+
+    // Leave game when clicking QUIT
+    document.querySelector(".buttonQuit").addEventListener("click", () => {
+        clearInterval(updatePlayes);
+        leaveGame();
+    })
 
     // Disable button until others have joined the game
     let startButton = document.getElementById("startGameButton")
@@ -224,7 +230,7 @@ function joinGame(playerName=null){
         let main = document.querySelector("main");
         main.innerHTML = `
         <h2>GAME PIN</h2>
-        <h1>${gameId}</h1>
+        <div class="gameId">${gameId}</div>
         <p>Participants</p>
         <div class="participants"></div>
         <p>Waiting for host to start the game...</p>
@@ -274,7 +280,6 @@ function joinGame(playerName=null){
             });
         },1000);
 
-        // Leave game when clicking on exit
 
         // Start game when host start game
         let requestDataForStartingGame = {
@@ -284,7 +289,6 @@ function joinGame(playerName=null){
 
         let requestStart = setInterval(async()=>{
             let requestToStartGame = await handleGameFetch(requestDataForStartingGame);
-            console.log(requestToStartGame);
 
             if(requestToStartGame){
                 // Stop fetching players
@@ -311,8 +315,11 @@ function joinGame(playerName=null){
 
         }, 1000);
 
+        // Leave game when clicking on exit, send current intervals as paremeters to be stoped if leaving the game
+        document.querySelector(".buttonQuit").addEventListener("click", () =>{
+            leaveGame(updatePlayes, requestStart);
+        });
     })
-
 }
 
 // Function to handle game fetch
@@ -344,24 +351,39 @@ async function handleGameFetch(requestData){
 
 }
 
-function leaveGame(){
+function leaveGame(interval1 = false, interval2 = false){
     let gameId = parseInt(localStorage.getItem("gameId"));
-    console.log(gameId);
     let playerName = localStorage.getItem("playerName");
+    let isHost = window.localStorage.getItem("host");
 
+    // If host ask if use want to end game for all, if player ask if user want to leave game
     let popUp = document.createElement("div");
     popUp.setAttribute("id", "leaveGamePopUp");
-    popUp.innerHTML = `
-    <div>
-        <p>Are you sure you want to leave the game</p>
-        <div>   
-            <button class="leaveGame">Leave</button>
-            <button class="closePopup">Stay</button>
-        </div>
-    </div>
-    `;
 
+    if(!isHost){
+        popUp.innerHTML = `
+        <div>
+            <p>Are you sure you want to leave the game?</p>
+            <div>   
+                <button class="leaveGame">Leave Game</button>
+                <button class="closePopup">Keep Playing</button>
+            </div>
+        </div>
+        `;
+    }else{
+        popUp.innerHTML = `
+        <div>
+            <p>Are you sure you want to end the game for all players?</p>
+            <div>   
+                <button class="leaveGame">End Game</button>
+                <button class="closePopup">Keep Playing</button>
+            </div>
+        </div>
+        `;
+    }
+    
     document.querySelector("main").appendChild(popUp);
+
 
     popUp.querySelector(".closePopup").addEventListener("click", () => {
         popUp.remove();
@@ -369,20 +391,45 @@ function leaveGame(){
 
     popUp.querySelector(".leaveGame").addEventListener("click", async () => {
         
-        // Send request to leave game
-        let requestDataForLeavingGame = {
-            action: "leaveGame",
-            gameId: gameId,
-            player: playerName
+        let leftTheGame = false; 
+
+        if(!isHost){
+            // Send request to leave game
+            let requestDataForLeavingGame = {
+                action: "leaveGame",
+                gameId: gameId,
+                player: playerName
+            }
+
+            leftTheGame = await handleGameFetch(requestDataForLeavingGame);
+           
+
+        }else{
+            // Send request to end game
+            let requestDataForEndingGame = {
+                action: "endGame",
+                gameId: gameId,
+            }
+
+            leftTheGame = await handleGameFetch(requestDataForEndingGame);
+
+            window.localStorage.removeItem("host"); 
         }
 
-        let leftTheGame = await handleGameFetch(requestDataForLeavingGame);
-        if(leftTheGame){
-            window.localStorage.setItem("currentGame", false);
-            window.localStorage.removeItem("gameId");
-            window.localStorage.removeItem("playerName");  
-            
-            renderGameDisplay();
-        }
+            if(leftTheGame){
+                    
+                // If any running intervals, clear
+                if(interval1){
+                    clearInterval(interval1);
+                }
+                if(interval2){
+                    clearInterval(interval2);
+                }
+        
+                window.localStorage.setItem("currentGame", false);
+                window.localStorage.removeItem("gameId");
+                window.localStorage.removeItem("playerName"); 
+                renderGameDisplay();
+            }
     })
 }
