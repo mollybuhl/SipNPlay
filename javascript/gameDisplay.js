@@ -240,7 +240,14 @@ function renderCategories(game) {
     </div>
     `;
 
-    footer.querySelector(".buttonQuit").addEventListener("click", renderGameDisplay);
+    footer.querySelector(".buttonQuit").addEventListener("click", () => {
+        if(localStorage.getItem("currentGame") === "true"){
+            renderGameDisplay(true);
+        }else{
+            renderGameDisplay();
+        }
+        
+    });
 }
 
 // Function to render category page for localy hosted games - not multiplayer

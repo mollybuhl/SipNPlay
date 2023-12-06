@@ -69,5 +69,16 @@
             "category": "No category",
             "votes": []
         }
+    },
+    {
+        "id": 7128,
+        "players": [
+            "steven"
+        ],
+        "activeGame": {
+            "game": "No Active Game",
+            "category": "No category",
+            "votes": []
+        }
     }
 ]
