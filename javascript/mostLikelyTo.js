@@ -1,6 +1,5 @@
 "use strict";
 /* TO DO:
-    - Exit as player
     - check for active game if not host
 */
 
@@ -179,7 +178,7 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
             
         }else{
             // If user is not host - ask to leave game or keep playing
-            leaveGame();
+            leaveGame(answerTime);
         }
        
 
@@ -312,7 +311,7 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
                 
             }else{
                 // If user is not host - ask to leave game or keep playing
-                leaveGame();
+                leaveGame(answerTime);
             }
         }));
 
