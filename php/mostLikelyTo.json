@@ -1,10 +1,11 @@
 [
+    
     {
         "The Basic Version": [
             {
                 "id": 1,
                 "category": "The Basic Version",
-                "question": " become a millionaire"
+                "question": "become a millionaire"
             },
             {
                 "id": 2,
@@ -21,24 +22,24 @@
             {
             "id": 1,
             "category": "Not Safe For Work",
-            "question": "have a wardrobe malfunction"
+            "question": " have a wardrobe malfunction"
             },
             {
                 "id": 2,
                 "category": "Not Safe For Work",
-                "question": " get too drunk at pre drinks"
+                "question": "get too drunk at pre drinks"
             },
             {
                 "id": 3,
                 "category": "Not Safe For Work",
-                "question": "get thrown out of the clu"
+                "question": "get thrown out of the club"
             }
         ],
         "Spicy Edition": [
             {
             "id": 1,
             "category": "Spicy Edition",
-            "question": "have a threesome?"
+            "question": "have a threesome"
             },
             {
                 "id": 2,

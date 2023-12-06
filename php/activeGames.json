@@ -1,0 +1,73 @@
+[
+    {
+        "id": 1832,
+        "players": [
+            "Tilly"
+        ],
+        "activeGame": {
+            "game": "No Active Game",
+            "category": "No category",
+            "votes": []
+        }
+    },
+    {
+        "id": 6109,
+        "players": [
+            "Safari",
+            "Tutu"
+        ],
+        "activeGame": {
+            "game": "Most Likely To",
+            "category": "The Basic Version",
+            "votes": []
+        }
+    },
+    {
+        "id": 9139,
+        "players": [
+            "Kiki",
+            "koko"
+        ],
+        "activeGame": {
+            "game": "No Active Game",
+            "category": "No category",
+            "votes": []
+        }
+    },
+    {
+        "id": 2524,
+        "players": [
+            "sussi",
+            "kalle"
+        ],
+        "activeGame": {
+            "game": "No Active Game",
+            "category": "No category",
+            "votes": []
+        }
+    },
+    {
+        "id": 4453,
+        "players": [
+            "Simba",
+            "timon"
+        ],
+        "activeGame": {
+            "game": "No Active Game",
+            "category": "No category",
+            "votes": []
+        }
+    },
+    {
+        "id": 3652,
+        "players": [
+            "cool",
+            "mr_cool"
+        ],
+        "activeGame": {
+            "game": "No Active Game",
+            "category": "No category",
+            "votes": []
+        }
+    }
+]
