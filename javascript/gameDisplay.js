@@ -246,7 +246,6 @@ function renderCategories(game) {
         }else{
             renderGameDisplay();
         }
-        
     });
 }
 
