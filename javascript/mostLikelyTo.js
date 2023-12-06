@@ -4,7 +4,7 @@
 */
 
 // Function to render moste likely to question and handle votes
-// Category and gameId should be sent as parameters, questionIndex will
+// Category and gameId should be sent as parameters, questionIndex will be 0 first time and incriment each time it call itself
 async function renderMostLikelyTo(category, gameId, questionIndex = 0){
 
     // Set mostLikelyTo class to main and footer
@@ -114,6 +114,8 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
         renderMostLikelyToResult()
     });
 
+    // If not host, check if there is an ongoing game
+
     // Structure of footer
     footer.innerHTML=`
     <div class="buttonQuit">
@@ -179,11 +181,7 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
         }else{
             // If user is not host - ask to leave game or keep playing
             leaveGame(answerTime);
-        }
-       
-
-        
-        
+        }  
     });
 
     // Function to fetch and display results after countdown is finished
