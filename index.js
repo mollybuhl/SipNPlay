@@ -27,7 +27,7 @@ TO DO:
     - Make it
 
     Spin the bottle
-    - Connect to rest of page
+    - 
 */
 
 // Display Menu when clicking hamburger icon

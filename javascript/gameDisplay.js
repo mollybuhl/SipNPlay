@@ -178,7 +178,7 @@ function renderGameDisplay(currentGame = false){
     });
 
     main.querySelector(".spinTheBottle").addEventListener("click",()=>{
-        renderCategoryLocalGame("Spin The Bottle");
+        spinTheBottleHandle();
     } );
     
     // Remove quit button from footer
@@ -240,7 +240,13 @@ function renderCategories(game) {
     </div>
     `;
 
-    footer.querySelector(".buttonQuit").addEventListener("click", renderGameDisplay);
+    footer.querySelector(".buttonQuit").addEventListener("click", () => {
+        if(localStorage.getItem("currentGame") === "true"){
+            renderGameDisplay(true);
+        }else{
+            renderGameDisplay();
+        }
+    });
 }
 
 // Function to render category page for localy hosted games - not multiplayer
@@ -290,9 +296,7 @@ function renderCategoryLocalGame(game){
         if(game === "Never Have I Ever"){
             renderNeverHaveIEver(category);
         }
-        if(game === "Spin The Bottle"){
-
-        }
+        
     }
     
 

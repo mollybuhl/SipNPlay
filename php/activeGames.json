@@ -90,7 +90,14 @@
         "activeGame": {
             "game": "Truth or Dare",
             "category": "The Basic Version",
-            "votes": []
+            "id": 7128,
+            "players": [
+                "steven"
+            ],
+            "activeGame": {
+                "game": "No Active Game",
+                "category": "No category",
+                "votes": []
+            }
         }
-    }
-]
+    ]
