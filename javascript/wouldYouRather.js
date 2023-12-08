@@ -31,7 +31,8 @@ function getQuestionsArray() {
 }
 
 // Function fetches a random question from PHP depending on category
-async function renderWouldYouRather(gameId, category) {
+async function renderWouldYouRather(category, gameId) {
+    setWouldYRGameId(gameId)
     let main = document.querySelector("main");
     main.removeAttribute("class");
     main.innerHTML = `
@@ -129,20 +130,52 @@ async function renderWouldYouRather(gameId, category) {
                 button.addEventListener("click", (e) => {
                     let questionType = e.target.dataset["set"];
                     console.log(e.target.dataset["set"]);
-                    updateSelectedQuestion(questionType)
+                    console.log(e.target);
+                    e.target.classList.toggle("selected");
+                    updateSelectedQuestion(questionType, e.target)
                 })
             });
         }
 
-        const questionIndex = getWouldYRIndex();
-        displayWouldYouRatherQuestion(data, questionIndex)
-        console.log(questionIndex);
+        let rqstData = {
+            gameId: gameId,
+            action: "replaceVotesStructure"
+        };
 
-        async function updateSelectedQuestion(type) {
+        const rqst = new Request("php/wouldYouRather.php", {
+            method: "POST",
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+            body: JSON.stringify(rqstData)
+        });
+
+        const rsponse = await fetch(rqst);
+
+        console.log(localStorage.getItem("playerName"));
+
+        if (rsponse.status === 200) {
+            const questionIndex = getWouldYRIndex();
+            displayWouldYouRatherQuestion(data, questionIndex)
+            console.log(questionIndex);
+        }
+
+        async function updateSelectedQuestion(type, target) {
+
+            let previousVote = null;
+
+            document.querySelectorAll("section>button").forEach(button => {
+                if (button.classList.contains("selected")) {
+                    previousVote = button.dataset["set"];
+                    button.classList.remove("selected");
+                }
+            });
+
+            target.classList.toggle("selected");
+
             let data = {
                 gameId: gameId,
                 questionType: type,
-                vote: "one",
+                previousVote: previousVote,
+                vote: localStorage.getItem("playerName"),
                 action: "updateVotes"
             };
 
@@ -199,18 +232,18 @@ async function renderWouldYouRather(gameId, category) {
                 button.style.border = "0px";
             })
 
-            let numOfPlayers = data.this.votes.length + data.that.votes.length;
+            let numOfPlayers = data.players.length;
             let thisPercent;
             let thatPercent;
 
-            if (!data.this.votes.length == 0) {
-                thisPercent = (data.this.votes.length / numOfPlayers) * 100;
+            if (!data.activeGame.votes.this.length == 0) {
+                thisPercent = (data.activeGame.votes.this.length / numOfPlayers) * 100;
             } else {
                 thisPercent = 0;
             }
 
-            if (!data.that.votes.length == 0) {
-                thatPercent = (data.that.votes.length / numOfPlayers) * 100;
+            if (!data.activeGame.votes.that.length == 0) {
+                thatPercent = (data.activeGame.votes.that.length / numOfPlayers) * 100;
             } else {
                 thatPercent = 0;
             }
@@ -262,40 +295,7 @@ function enableNextButtonWYR(category) {
             setWouldYRIndex(0)
         }
 
-        renderWouldYouRather(getWouldYRGameId(), category)
+        renderWouldYouRather(category, getWouldYRGameId())
     });
 }
 
-// Function to create a game between players
-async function createWouldYRGame(category) {
-
-    let data = {
-        action: "createGame"
-    }
-
-    const request = new Request("php/wouldYouRather.php", {
-        method: "POST",
-        headers: { "Content-type": "application/json; charset=UTF-8" },
-        body: JSON.stringify(data)
-    });
-
-    // Fetch request and handle response
-    try {
-        let response = await fetch(request);
-
-        if (response.ok) {
-            let resource = await response.json();
-            console.log(resource);
-            let gameId = resource;
-            setWouldYRGameId(gameId)
-            renderWouldYouRather(gameId, category);
-        } else {
-            let error = await response.json();
-            feedback(error.message);
-        }
-    } catch (error) {
-        console.log("Something went wrong", error);
-    }
-}
-
-// createWouldYRGame()

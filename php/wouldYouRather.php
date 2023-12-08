@@ -8,7 +8,7 @@
     checkMethod($requestMethod, $allowed);
 
     $questions = getFileContents("wouldYouRatherQuestions.json");
-    $games = getFileContents("wouldYouRatherGame.json");
+    $games = getFileContents("activeGames.json");
 
     // Get data from the request body
     $requestData = getFileContents("php://input");
@@ -41,47 +41,6 @@
 
         sendJSON($response);
 
-    } else if($action == "createGame") {
-          // Give the game a randomized id
-          function setRandomId(){
-            return rand(1000,9999);
-        }
-
-        // Check if id is already used
-        function checkId($gameId){
-            global $games;
-            // Check if id already exists
-            foreach($games as $game){
-                if($game["gameId"] == $gameId){
-                    $newGameId = setRandomId();
-                    checkId($newGameId);
-                    return;
-                }
-            }
-        }
-
-        // Create new game and check if id already exists
-        $gameId = setRandomId();
-        checkId($gameId);
-
-        // Set game parameters
-        $gameData = [
-            "gameId" => $gameId,
-            "this" => [
-                "votes" => []
-            ],
-            "that" => [
-                "votes" => []
-            ]
-        ];
-          
-        $games[] = $gameData;
-
-        // Update json file and return game id
-        saveToFile("wouldYouRatherGame.json", $games);
-        $message = $gameId;
-        sendJSON($message);
-
     } else if($action == "fetchResults") {
         $gameId = $requestData["gameId"];
 
@@ -90,7 +49,7 @@
         $gameIndex;
 
         foreach($games as $index => $game){
-            if($game["gameId"] == $gameId){
+            if($game["id"] == $gameId){
                 $activeGame = $game;
                 $gameIndex = $index;
             }
@@ -99,7 +58,6 @@
         // If active game found handle votes, otherwise inform user
         if($activeGame){
             sendJSON($activeGame);
-
         }else{
             $message = ["message" => "No active game was found"];
             sendJson($message, 404);
@@ -108,40 +66,97 @@
         // Get saved values from request body
         $gameId = $requestData["gameId"];
         $questionType = $requestData["questionType"];
-        $vote = $requestData["vote"];
+        $player = $requestData["vote"];
+        $previousVote = $requestData["previousVote"];
 
         // Find active game based on gameId from request
         $activeGame = false;
         $gameIndex;
 
         foreach($games as $index => $game){
-            if($game["gameId"] == $gameId){
+            if($game["id"] == $gameId){
                 $activeGame = $game;
                 $gameIndex = $index;
             }
         }
 
-        // If active game found handle votes, otherwise inform user
         if($activeGame){
-            // Remove vote and add new vote
-            if(!$vote == null) {
-                if($questionType == "this") {
-                    array_shift($games[$gameIndex]["that"]["votes"]);
-        
-                    $games[$gameIndex]["this"]["votes"][] = $vote;
-                } else {
-                    array_shift($games[$gameIndex]["this"]["votes"]);
-        
-                    $games[$gameIndex]["that"]["votes"][] = $vote;
+            if($previousVote == "this") {
+                // Find the index of the lowercase player name in the lowercase array
+                $votes = $games[$gameIndex]["activeGame"]["votes"]["this"];
+                $indexToRemove = array_search($player, $votes);
+
+                // Check if the value was found before attempting to remove
+                if ($indexToRemove !== false) {
+                    // Remove the value at the found index
+                    array_splice($games[$gameIndex]["activeGame"]["votes"]["this"], $indexToRemove, 1);
+
+                    $games[$gameIndex]["activeGame"]["votes"]["that"][] = $player;
+                }
+            } elseif($previousVote == "that") {
+                $votes = $games[$gameIndex]["activeGame"]["votes"]["that"];
+                $indexToRemove = array_search($player, $votes);
+
+                if ($indexToRemove !== false) {
+                    array_splice($games[$gameIndex]["activeGame"]["votes"]["that"], $indexToRemove, 1);
+
+                    $games[$gameIndex]["activeGame"]["votes"]["this"][] = $player;
+                }
+            } else {
+                // Add new vote
+                if(!$player == null) {
+                    if ($questionType == "this") {
+                        $games[$gameIndex]["activeGame"]["votes"]["this"][] = $player;
+
+                        // Find the index of the lowercase player name in the lowercase array
+                        $votes = $games[$gameIndex]["activeGame"]["votes"]["that"];
+                        $indexToRemove = array_search($player, $votes);
+
+                        // Check if the value was found before attempting to remove
+                        if ($indexToRemove !== false) {
+                        // Remove the value at the found index
+                        array_splice($games[$gameIndex]["activeGame"]["votes"]["that"], $indexToRemove, 1);
+                        }
+                    } else {
+                        $games[$gameIndex]["activeGame"]["votes"]["that"][] = $player;
+
+                        $votes = $games[$gameIndex]["activeGame"]["votes"]["this"];
+                        $indexToRemove = array_search($player, $votes);
+
+                        if ($indexToRemove !== false) {
+                            array_splice($games[$gameIndex]["activeGame"]["votes"]["this"], $indexToRemove, 1);
+                        }
+                    }
                 }
             }
 
-            saveToFile("wouldYouRatherGame.json", $games);
+            saveToFile("activeGames.json", $games);
             sendJSON($games[$gameIndex]);
 
         } else{
             $message = ["message" => "No active game was found"];
             sendJson($message, 404);
         }
+    } else if($action == "replaceVotesStructure") {
+        $gameId = $requestData["gameId"];
+
+        // Add keys this or that in votes key to store votes
+        // Find active game based on gameId from request
+        $activeGame = false;
+        $gameIndex;
+
+        foreach($games as $index => $game){
+            if($game["id"] == $gameId){
+                $activeGame = $game;
+                $gameIndex = $index;
+            }
+        }
+
+        if($activeGame){
+            $games[$gameIndex]["activeGame"]["votes"]["this"] = [];
+            $games[$gameIndex]["activeGame"]["votes"]["that"] = [];
+        }
+        
+        saveToFile("activeGames.json", $games);
     }
 ?> 
