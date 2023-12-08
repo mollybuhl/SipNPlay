@@ -1,32 +1,3 @@
-/*
-    TO DO:
-    - Only host click next question
-*/
-
- /*
-        If host ends a round - all other players should go to a loading page 
-        If host ends game - all other players should clear local storage and load game display
-
-
-        Player on game page:
-            - gameId do not exist anymore
-                - inform user, clear localstorage, render start page
-            
-            - no active game
-                - go to loading page
-
-        Player on waiting page (COMPLETED)
-            - gameId do not exist anymore
-                - clear localstorage, render start page
-            
-            - game is starting
-                - start game for player as well
-
-            - no active game
-                - keep updating the waiting page
-
-    */
-
 "use strict";
 
 // Function to render start game
@@ -392,10 +363,12 @@ function joinGame(playerName=null){
 }
 
 // Function to render page for waiting for game to start
+// This function will be called for players, not hosts, when no ongoing game is currently running
 function renderWaitingForGame(gameId){
     let main = document.querySelector("main");
     main.classList.add("startGame");
 
+    // Display current players
     main.innerHTML = `
     <h2>GAME PIN</h2>
     <div class="gameId">${gameId}</div>
@@ -494,35 +467,6 @@ function renderWaitingForGame(gameId){
     });
 }
 
-// Function to handle game fetch
-async function handleGameFetch(requestData){
-
-    // Set request parameters
-    let requestParameters = {
-        method: "POST",
-        headers: {"Content-Type": "application/json; charset=UTF-8"},
-        body: JSON.stringify(requestData)
-    }
-
-    let request = new Request("php/handleGame.php", requestParameters);
-
-    // Fetch request and handle response
-    try{
-        let response = await fetch(request);
-
-        if(response.ok){
-            let resource = await response.json();
-            return resource;
-        }else{
-            let error = await response.json();
-            console.log(error.message);
-        }
-    }catch(error){
-        console.log("Something went wrong", error);
-    }
-
-}
-
 // Function to display pop up asking user if they want to leave/end game
 // Intervals that needs to be cleared when leaving the game can be sent as parameters 
 function leaveGame(interval1 = false, interval2 = false, interval3 = false){
@@ -617,6 +561,7 @@ function leaveGame(interval1 = false, interval2 = false, interval3 = false){
 }
 
 // Function to check if game with provided gameId exist
+// Function will be called by players when activly in a game to make sure the game is still active
 async function checkIfGameExist(gameId, interval1, interval2, interval3){
 
     let requestDataForCheckingGameId = {
@@ -661,4 +606,33 @@ async function checkIfGameExist(gameId, interval1, interval2, interval3){
             renderGameDisplay();
         });
     }
+}
+
+// Function to handle game fetch
+async function handleGameFetch(requestData){
+
+    // Set request parameters
+    let requestParameters = {
+        method: "POST",
+        headers: {"Content-Type": "application/json; charset=UTF-8"},
+        body: JSON.stringify(requestData)
+    }
+
+    let request = new Request("php/handleGame.php", requestParameters);
+
+    // Fetch request and handle response
+    try{
+        let response = await fetch(request);
+
+        if(response.ok){
+            let resource = await response.json();
+            return resource;
+        }else{
+            let error = await response.json();
+            console.log(error.message);
+        }
+    }catch(error){
+        console.log("Something went wrong", error);
+    }
+
 }
