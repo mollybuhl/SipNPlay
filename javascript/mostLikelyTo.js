@@ -104,8 +104,7 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
             }
 
             fetchMostLikelyTo(requestData);  
-
-        }
+        }   
     });
 
     // Set aswering timer for 30sec
@@ -114,7 +113,18 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
         renderMostLikelyToResult()
     });
 
-    // If not host, check if there is an ongoing game
+    // If player is not host, check if game still exist and if there is an ongoing game
+    let isHost = window.localStorage.getItem("host");
+    if(!isHost){
+        let checkActiveGame = setInterval( () => {
+            checkIfGameExist(gameId, checkActiveGame);
+            checkForActiveGame(gameId, answerTime, checkActiveGame);
+        },1000);
+
+        // check for active game
+        // - if there is an active game keep running game
+        // - if there is no active game, inform user and render loading page
+    }
 
     // Structure of footer
     footer.innerHTML=`
@@ -360,3 +370,53 @@ async function fetchMostLikelyTo(requestData){
     }
 }
 
+// This function is called by the players, not the host to check if a game is active or not
+async function checkForActiveGame(gameId, timer, interval1, interval2){
+
+  
+    let requestDataForCheckingActiveGame= {
+        gameId: gameId,
+        action: "checkActiveGame",
+    }
+
+    let activeGame = await handleGameFetch(requestDataForCheckingActiveGame);
+
+    console.log(activeGame);
+
+    // If there is no active game return this information
+    if(activeGame){
+        return "Active game";
+    }else{
+        console.log("No active game");
+
+        let infoBox = document.createElement("div");
+        infoBox.classList.add("infoBox");
+        infoBox.innerHTML = `
+        <div>
+            <p>Your host ended this round</p>
+            <p>You will be taken back to the waiting page</p>
+        </div>
+        `;
+        document.querySelector("main").appendChild(infoBox);
+
+        // Clear timer
+        if(timer){
+            clearTimeout(timer);
+        }
+        // Clear interval
+        if(interval1){
+            clearInterval(interval1);
+        }
+        if(interval2){
+            clearInterval(interval2);
+        }
+        
+
+        setTimeout(() => {
+            renderWaitingForGame(gameId);
+        }, 5000)
+    }
+
+    
+        
+}

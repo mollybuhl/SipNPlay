@@ -1,7 +1,6 @@
 "use strict";
 /*
 TO DO:
-    - Pop up design
     - Hamburger menu
     - Register more prompts
     - Entering game when already in a game
@@ -33,11 +32,22 @@ TO DO:
 // Display Menu when clicking hamburger icon
 document.querySelector(".fa-bars").addEventListener("click", renderMenu);
 
-// If player is already in a game display this, otherwise display join game
+// On load, if user is already in a game display this, otherwise render game display
 if(localStorage.getItem("currentGame") === "true"){
 
-    // Render game display
-    renderGameDisplay(true)
+    // If user is in a game check if user is host 
+    let isHost = window.localStorage.getItem("host");
+
+    // If host, render game display, otherwise render waiting page
+    if(!isHost){
+        console.log("loading waiting page");
+        let gameId = localStorage.getItem("gameId");
+        renderWaitingForGame(gameId);
+    }else{
+        // Render game display
+        renderGameDisplay(true)
+    }
+    
 }else{
     // Render game display
     renderGameDisplay()

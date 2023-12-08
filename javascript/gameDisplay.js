@@ -1,8 +1,13 @@
 "use strict";
 
-// Function to render game display, current game will be true if the user have already joined a game, otherwise false
-function renderGameDisplay(currentGame = false){
+/*
+If there is a current game, if not host - go to waiting page
+If host display current game view on game display
+*/
 
+// Function to render game display, current game will be true if the user have already joined a game, otherwise false
+async function renderGameDisplay(currentGame = false){
+ 
     let main = document.querySelector("main");
     main.removeAttribute("class");
     main.classList.add("gameDisplay");
@@ -197,7 +202,7 @@ function renderCategories(game) {
     main.classList.add("categoryDisplay");
 
     main.innerHTML = `
-    <h1>${game}</h1>
+    <h1>Select Category</h1>
     <div class="theBasicVersion green">The Basic Version</div>
     <div class="notSafeForWork orange">Not Safe For Work</div>
     <div class="spicyEdition pink">Spicy Edition</div>
@@ -258,7 +263,7 @@ function renderCategoryLocalGame(game){
     main.classList.add("categoryDisplay");
 
     main.innerHTML = `
-    <h1>${game}</h1>
+    <h1>Select Category</h1>
     <div class="theBasicVersion green">The Basic Version</div>
     <div class="notSafeForWork orange">Not Safe For Work</div>
     <div class="spicyEdition pink">Spicy Edition</div>

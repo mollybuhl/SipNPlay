@@ -1,8 +1,31 @@
 /*
     TO DO:
     - Only host click next question
-    - PopUp design
 */
+
+ /*
+        If host ends a round - all other players should go to a loading page 
+        If host ends game - all other players should clear local storage and load game display
+
+
+        Player on game page:
+            - gameId do not exist anymore
+                - inform user, clear localstorage, render start page
+            
+            - no active game
+                - go to loading page
+
+        Player on waiting page (COMPLETED)
+            - gameId do not exist anymore
+                - clear localstorage, render start page
+            
+            - game is starting
+                - start game for player as well
+
+            - no active game
+                - keep updating the waiting page
+
+    */
 
 "use strict";
 
@@ -36,7 +59,7 @@ function renderStartGame(game, category){
 
 }
 
-// Function to create new game, will be called by host of the game
+// Function to create new game, will be called by host of the game after clicking create game
 async function createGame(game, category, creatorName){
 
     // Create a game
@@ -204,10 +227,9 @@ function joinGame(playerName=null){
     // Send join game request when clicking join game
     main.querySelector(".joinGame").addEventListener("click", async () =>{
         
-        
         let gameId = document.querySelector(".gameId").value;
 
-        // Get name if not send as parameter
+        // Get name if not sent as parameter
         if(!playerName){
             playerName = document.querySelector(".name").value;
         }
@@ -226,100 +248,114 @@ function joinGame(playerName=null){
         window.localStorage.setItem("gameId", gameId);
         window.localStorage.setItem("playerName", playerName);
 
-        // Display currently joined players
-        let main = document.querySelector("main");
-        main.innerHTML = `
-        <h2>GAME PIN</h2>
-        <div class="gameId">${gameId}</div>
-        <p>Participants</p>
-        <div class="participants"></div>
-        <p>Waiting for host to start the game...</p>
-        `;
+        // Call function to display currently joined players
+        renderWaitingForGame(gameId);
 
-        // Structure of footer
-        let footer = document.querySelector("footer");
-        footer.innerHTML=`
-        <div class="buttonQuit">
-            <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
-            <p>QUIT</p>
-        </div>
-        `
-
-        // Fetch current players every second
-        requestData = {
-            action: "getPlayers",
-            gameId: gameId
-        }
         
-        let displayedPlayers = []; //To keep track of who is already displaying
-        let updatePlayes = setInterval(async()=>{
-            let currentPlayers = await handleGameFetch(requestData);
-            let index = 0;
-
-            // Display new palyers
-            currentPlayers.forEach(player => {
-                if(!displayedPlayers.includes(player)){
-                    let playerName = document.createElement("p");
-                    playerName.classList.add(player);
-                    playerName.textContent = player;
-                    displayedPlayers.push(player);
-            
-                    document.querySelector(".participants").appendChild(playerName);
-                }
-            });  
-
-            // Remove display of players who no longer is playing
-            displayedPlayers.forEach(displayedPlayer => {
-                if(!currentPlayers.includes(displayedPlayer)){
-                    displayedPlayers.splice(index, 1);
-
-                    let displayedName = document.querySelector(`.${displayedPlayer}`);
-                    displayedName.remove();
-                }
-                index++;
-            });
-        },1000);
-
-
-        // Start game when host start game
-        let requestDataForStartingGame = {
-            action: "requestToStartGame",
-            gameId: gameId
-        }
-
-        let requestStart = setInterval(async()=>{
-            let requestToStartGame = await handleGameFetch(requestDataForStartingGame);
-
-            if(requestToStartGame){
-                // Stop fetching players
-                clearInterval(updatePlayes);
-                // Stop fetching request to start game
-                clearInterval(requestStart);
-
-                let game = requestToStartGame.game;
-                let category = requestToStartGame.category;
-
-                // Start game based on user input
-                switch(game){
-                    case "Most Likely To":
-                        renderMostLikelyTo(category, gameId);
-                        break;
-                    case "Truth or Dare":
-                        truthORDareHandle(category, gameId);
-                        break;
-                    case "Would You Rather":
-                        renderWouldYouRather(category, gameId);
-                        break;
-                }
-            }   
-
-        }, 1000);
-
-        // Leave game when clicking on exit, send current intervals as paremeters to be stoped if leaving the game
-        document.querySelector(".buttonQuit").addEventListener("click", () =>{
-            leaveGame(updatePlayes, requestStart);
-        });
     })
+}
+
+// Function to render page for waiting for game to start
+function renderWaitingForGame(gameId){
+    let main = document.querySelector("main");
+    main.classList.add("startGame");
+    
+    main.innerHTML = `
+    <h2>GAME PIN</h2>
+    <div class="gameId">${gameId}</div>
+    <p>Participants</p>
+    <div class="participants"></div>
+    <p>Waiting for host to start the game...</p>
+    `;
+
+    // Structure of footer
+    let footer = document.querySelector("footer");
+    footer.innerHTML=`
+    <div class="buttonQuit">
+        <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
+        <p>QUIT</p>
+    </div>
+    `;
+
+    // Fetch current players every second
+    let requestData = {
+        action: "getPlayers",
+        gameId: gameId
+    }
+    
+    let displayedPlayers = []; //To keep track of who is already displaying
+    let updatePlayes = setInterval(async()=>{
+        let currentPlayers = await handleGameFetch(requestData);
+        let index = 0;
+
+        // Display new palyers
+        currentPlayers.forEach(player => {
+            if(!displayedPlayers.includes(player)){
+                let playerName = document.createElement("p");
+                playerName.classList.add(player);
+                playerName.textContent = player;
+                displayedPlayers.push(player);
+        
+                document.querySelector(".participants").appendChild(playerName);
+            }
+        });  
+
+        // Remove display of players who no longer is playing
+        displayedPlayers.forEach(displayedPlayer => {
+            if(!currentPlayers.includes(displayedPlayer)){
+                displayedPlayers.splice(index, 1);
+
+                let displayedName = document.querySelector(`.${displayedPlayer}`);
+                displayedName.remove();
+            }
+            index++;
+        });
+    },1000);
+
+
+    // Start game when host start game
+    let requestDataForStartingGame = {
+        action: "requestToStartGame",
+        gameId: gameId
+    }
+
+    let requestStart = setInterval(async()=>{
+        let requestToStartGame = await handleGameFetch(requestDataForStartingGame);
+
+        if(requestToStartGame){
+            // Stop fetching players
+            clearInterval(updatePlayes);
+            // Stop fetching request to start game
+            clearInterval(requestStart);
+
+            let game = requestToStartGame.game;
+            let category = requestToStartGame.category;
+
+            // Start game based on user input
+            switch(game){
+                case "Most Likely To":
+                    renderMostLikelyTo(category, gameId);
+                    break;
+                case "Truth or Dare":
+                    truthORDareHandle(category, gameId);
+                    break;
+                case "Would You Rather":
+                    renderWouldYouRather(category, gameId);
+                    break;
+            }
+        }   
+
+    }, 1000);
+
+    // send request to check game status
+    let gameExist = setInterval(async () => {
+        checkIfGameExist(gameId, gameExist, requestStart, updatePlayes);
+    }, 1000);
+    
+    // Leave game when clicking on exit, send current intervals as paremeters to be stoped if leaving the game
+    document.querySelector(".buttonQuit").addEventListener("click", () =>{
+        leaveGame(updatePlayes, requestStart, gameExist);
+    });
 }
 
 // Function to handle game fetch
@@ -343,7 +379,7 @@ async function handleGameFetch(requestData){
             return resource;
         }else{
             let error = await response.json();
-            console.log(error);
+            console.log(error.message);
         }
     }catch(error){
         console.log("Something went wrong", error);
@@ -351,7 +387,7 @@ async function handleGameFetch(requestData){
 
 }
 
-function leaveGame(interval1 = false, interval2 = false){
+function leaveGame(interval1 = false, interval2 = false, interval3 = false){
     let gameId = parseInt(localStorage.getItem("gameId"));
     let playerName = localStorage.getItem("playerName");
     let isHost = window.localStorage.getItem("host");
@@ -425,6 +461,9 @@ function leaveGame(interval1 = false, interval2 = false){
                 if(interval2){
                     clearInterval(interval2);
                 }
+                if(interval3){
+                    clearInterval(interval3);
+                }
         
                 window.localStorage.setItem("currentGame", false);
                 window.localStorage.removeItem("gameId");
@@ -432,4 +471,51 @@ function leaveGame(interval1 = false, interval2 = false){
                 renderGameDisplay();
             }
     })
+}
+
+// Function to check if game with provided gameId exist
+async function checkIfGameExist(gameId, interval1, interval2, interval3){
+
+    let requestDataForCheckingGameId = {
+        action: "checkGameId",
+        gameId: gameId
+    }
+
+    let gameExist = await handleGameFetch(requestDataForCheckingGameId);
+
+    // If game does not exist, clear local storage, stop fetching and load game display
+    if(!gameExist){
+
+        // Clear interval
+        if(interval1){
+            clearInterval(interval1);
+        }
+        if(interval2){
+            clearInterval(interval2);
+        }
+        if(interval3){
+            clearInterval(interval3);
+        }
+
+        // Clear localstorage
+        window.localStorage.setItem("currentGame", false);
+        window.localStorage.removeItem("gameId");
+        window.localStorage.removeItem("playerName"); 
+
+        // Infor user the game has ended
+
+        let infoBox = document.createElement("div");
+        infoBox.classList.add("infoBox");
+        infoBox.innerHTML = `
+        <div>
+            <p>Looks like your host ended the game</p>
+            <button>Back to homepage</button>
+        </div>
+        `;
+        document.querySelector("main").appendChild(infoBox);
+
+        infoBox.querySelector("button").addEventListener("click", () =>{
+            renderGameDisplay();
+        });
+    }
 }

@@ -260,10 +260,7 @@
 
         // Get game by id
         $gameId = $requestData["gameId"];
-        /*$gamePlayed = $requestData["game"];
-        $categoryPlayed = $requestData["category"];*/
         
-
         // Find active game based on gameId from request
         $activeGame = false;
         $gameIndex;
@@ -292,8 +289,64 @@
             $message = ["message" => "no game under that pin was found"];
             sendJson($message, 404);
         }
+    }else if($action == "checkGameId"){
+
+        // Get game by id
+        $gameId = $requestData["gameId"];
+                
+        // Find active game based on gameId from request
+        $activeGame = false;
+        $gameIndex;
+
+        foreach($games as $index => $game){
+            if($game["id"] == $gameId){
+                $activeGame = $game;
+                $gameIndex = $index;
+            }
+        }   
+        
+        // If active game found return true, if not found return false
+        if($activeGame){
+            $message = [true];
+            sendJSON($message);
+        }else{
+            $message = [false];
+            sendJson($message, 404);
+        }
+    }else if($action == "checkActiveGame"){
+
+        // Get game by id
+        $gameId = $requestData["gameId"];
+            
+        // Find active game based on gameId from request
+        $activeGame = false;
+        $gameIndex;
+
+        foreach($games as $index => $game){
+            if($game["id"] == $gameId){
+                $activeGame = $game;
+                $gameIndex = $index;
+            }
+        }   
+        
+        // If active game found return true, if not found return false
+        if($activeGame){
+
+            if($activeGame["activeGame"]["game"] == "No Active Game"){
+                $message = false;
+                sendJSON($message);
+            }else{
+                $currentGame = $activeGame["activeGame"]["game"];
+                $message = $currentGame;
+                sendJSON($message);
+            }
+
+            $message = true;
+            sendJSON($message);
+        }else{
+            $message = ["No game under that pin was found"];
+            sendJson($message, 404);
+        }
+
     }
-
-   
-
 ?>
