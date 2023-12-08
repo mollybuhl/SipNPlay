@@ -1,3 +1,6 @@
+// TO-DO: 
+// - Fix quit button
+
 "use strict";
 
 // Global variable to track index and gameId

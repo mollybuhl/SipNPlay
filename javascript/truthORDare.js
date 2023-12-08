@@ -3,6 +3,7 @@
 // Global variables to track index
 let truthIndex = 0;
 let dareIndex = 0;
+let playerIndex = 0;
 
 // Setter and getter function for truth index
 function setTruthIndex(index) {
@@ -22,15 +23,40 @@ function getDareIndex() {
     return dareIndex;
 }
 
+function setPlayerIndex(index) {
+    playerIndex = index;
+}
+
+function getPlayerIndex() {
+    return playerIndex;
+}
+
+
 // Function handles when the client chooses truth or dare
-function truthORDareHandle(category) {
-    console.log(category);
+async function truthORDareHandle(category, gameId) {
+    console.log(gameId)
+    // Fetch current players
+    let requestData = {
+        action: "getPlayers",
+        gameId: gameId
+    }
+
+    let players = await handleGameFetch(requestData);
+
+    let index;
+    if (players.length - 1 < getPlayerIndex()) {
+        setPlayerIndex(0);
+        index = getPlayerIndex()
+    } else {
+        index = getPlayerIndex()
+    }
+
     let main = document.querySelector("main");
     main.removeAttribute("class");
     main.innerHTML = `
         <div id="truthORDareWrapper">
             <h1>Truth OR Dare?</h1>
-            <h2>It's <span>Lasse</span>'s turn</h2>
+            <h2>It's <span>${players[index]}</span>'s turn</h2>
 
             <section>
                 <button id="truth">Truth</button>
@@ -57,14 +83,14 @@ function truthORDareHandle(category) {
     document.querySelectorAll("section>button").forEach(button => {
         button.addEventListener("click", (e) => {
             // e.target.attributes.id.value will be either truth or dare
-            renderTruthORDareQuestion(e.target.attributes.id.value, category)
+            renderTruthORDareQuestion(e.target.attributes.id.value, category, gameId)
             console.log(e.target.attributes.id.value);
         })
     });
 }
 
 // Function fetches a random question from PHP depending on type and category
-async function renderTruthORDareQuestion(type, category) {
+async function renderTruthORDareQuestion(type, category, gameId) {
     let data = {
         type: type,
         category: category,
@@ -137,7 +163,10 @@ async function renderTruthORDareQuestion(type, category) {
                     setDareIndex(0)
                 }
             }
-            truthORDareHandle(category)
+
+            setPlayerIndex(getPlayerIndex() + 1)
+
+            truthORDareHandle(category, gameId)
         });
 
     } else {
