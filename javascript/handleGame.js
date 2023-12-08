@@ -70,7 +70,8 @@ async function createGame(game, category, creatorName){
     // Leave game when clicking QUIT
     document.querySelector(".buttonQuit").addEventListener("click", () => {
         clearInterval(updatePlayes);
-        leaveGame();
+        
+        renderCategories(game);
     })
 
     // Disable button until others have joined the game
@@ -186,6 +187,9 @@ async function startNewGame(game, category){
     // Loading page for current players
     // Present game status
     let main = document.querySelector("main");
+    main.removeAttribute("class");
+    main.classList.add("startGame");
+
     main.innerHTML = `
     <h2>GAME PIN</h2>
     <div class="resultName gameId">${gameId}</div>
@@ -207,7 +211,7 @@ async function startNewGame(game, category){
     // Leave game when clicking QUIT
     document.querySelector(".buttonQuit").addEventListener("click", () => {
         clearInterval(updatePlayes);
-        leaveGame();
+        renderCategories(game);
     })
 
     // Disable button until others have joined the game

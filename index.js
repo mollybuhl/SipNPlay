@@ -3,7 +3,6 @@
 TO DO:
     - Hamburger menu
     - Register more prompts
-    - Entering game when already in a game
     - Timer should be saved in game array so if you join in the middle you will not have as long
 
 
@@ -11,9 +10,7 @@ TO DO:
     - Swipe for next card
 
     Whos most likely to
-    - Only host clicking next question
     - If equal votes
-    - check for active game if not host
 
     Truth or Dare
     - Connect to handle game

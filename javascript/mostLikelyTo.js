@@ -1,7 +1,6 @@
 "use strict";
 /* TO DO:
     - Timer should be saved in game array so if you join in the middle you will not have as long
-    - renderMostLikelyTo should always be called with question index fetched from json
 */
 
 // Function to render moste likely to question and handle votes
@@ -121,10 +120,6 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
             checkIfGameExist(gameId, checkActiveGame);
             checkForActiveGame(gameId, answerTime, checkActiveGame);
         },1000);
-
-        // check for active game
-        // - if there is an active game keep running game
-        // - if there is no active game, inform user and render loading page
     }
 
     // Structure of footer

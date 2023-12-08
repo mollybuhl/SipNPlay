@@ -208,6 +208,7 @@
             // Change game and category status
             $games[$gameIndex]["activeGame"]["game"] = "No Active Game";
             $games[$gameIndex]["activeGame"]["category"] = "No category";
+            $games[$gameIndex]["activeGame"]["questionIndex"] = 0;
 
             // Update json file and inform user
             saveToFile("activeGames.json", $games);
@@ -272,6 +273,7 @@
             // Change game and category status
             $games[$gameIndex]["activeGame"]["game"] = $requestData["game"];
             $games[$gameIndex]["activeGame"]["category"] = $requestData["category"];
+            $games[$gameIndex]["activeGame"]["questionIndex"] = 0;
 
             // Update json file and inform user
             saveToFile("activeGames.json", $games);
