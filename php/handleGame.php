@@ -302,8 +302,8 @@
             // Update json file and inform user
             saveToFile("activeGames.json", $games);
 
-            //$message = $games[$gameIndex]["activeGame"]["questionIndex"];
-            $message = ["Updated!"];
+            $message = $games[$gameIndex]["activeGame"]["questionIndex"];
+            //$message = ["Updated!"];
             
             sendJson($message);
         }else{

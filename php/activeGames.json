@@ -168,18 +168,16 @@
         }
     },
     {
-        "id": 6761,
+        "id": 3649,
         "players": [
-            "candie",
-            "sandy"
+            "samantha",
+            "miranda"
         ],
         "activeGame": {
             "game": "Most Likely To",
-            "category": "The Basic Version",
-            "questionIndex": 0,
-            "votes": [
-                " sandy"
-            ]
+            "category": "Spicy Edition",
+            "questionIndex": 2,
+            "votes": []
         }
     }
 ]
