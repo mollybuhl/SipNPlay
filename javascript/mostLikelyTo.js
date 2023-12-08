@@ -1,10 +1,10 @@
 "use strict";
 /* TO DO:
     - Timer should be saved in game array so if you join in the middle you will not have as long
+    - renderMostLikelyTo should always be called with question index fetched from json
 */
 
 // Function to render moste likely to question and handle votes
-// Category and gameId should be sent as parameters, questionIndex will be 0 first time and incriment each time it call itself
 async function renderMostLikelyTo(category, gameId, questionIndex = 0){
 
     // Set mostLikelyTo class to main and footer

@@ -523,12 +523,15 @@ async function handleGameFetch(requestData){
 
 }
 
+// Function to display pop up asking user if they want to leave/end game
+// Intervals that needs to be cleared when leaving the game can be sent as parameters 
 function leaveGame(interval1 = false, interval2 = false, interval3 = false){
+    
     let gameId = parseInt(localStorage.getItem("gameId"));
     let playerName = localStorage.getItem("playerName");
     let isHost = window.localStorage.getItem("host");
 
-    // If host ask if use want to end game for all, if player ask if user want to leave game
+    // If host, ask if use want to end game for all, if player ask if user want to leave game
     let popUp = document.createElement("div");
     popUp.setAttribute("id", "leaveGamePopUp");
 
@@ -556,11 +559,12 @@ function leaveGame(interval1 = false, interval2 = false, interval3 = false){
     
     document.querySelector("main").appendChild(popUp);
 
-
+    // Close pop up if user wants to keep playing
     popUp.querySelector(".closePopup").addEventListener("click", () => {
         popUp.remove();
     })
 
+    // Send request to leave game when user click leave
     popUp.querySelector(".leaveGame").addEventListener("click", async () => {
         
         let leftTheGame = false; 
@@ -575,9 +579,9 @@ function leaveGame(interval1 = false, interval2 = false, interval3 = false){
 
             leftTheGame = await handleGameFetch(requestDataForLeavingGame);
            
-
         }else{
-            // Send request to end game
+            
+            // If user is host, send request to end game for all players
             let requestDataForEndingGame = {
                 action: "endGame",
                 gameId: gameId,
@@ -588,9 +592,9 @@ function leaveGame(interval1 = false, interval2 = false, interval3 = false){
             window.localStorage.removeItem("host"); 
         }
 
+            // If leaving/ending game was successfull, clear any running intervals
             if(leftTheGame){
                     
-                // If any running intervals, clear
                 if(interval1){
                     clearInterval(interval1);
                 }
@@ -601,9 +605,12 @@ function leaveGame(interval1 = false, interval2 = false, interval3 = false){
                     clearInterval(interval3);
                 }
         
+                // Clear local storage
                 window.localStorage.setItem("currentGame", false);
                 window.localStorage.removeItem("gameId");
                 window.localStorage.removeItem("playerName"); 
+
+                // Render game display
                 renderGameDisplay();
             }
     })
