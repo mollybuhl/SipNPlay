@@ -1,8 +1,8 @@
 "use strict";
 
 // Function to render game display, current game will be true if the user have already joined a game, otherwise false
-function renderGameDisplay(currentGame = false){
-
+async function renderGameDisplay(currentGame = false){
+ 
     let main = document.querySelector("main");
     main.removeAttribute("class");
     main.classList.add("gameDisplay");
@@ -189,7 +189,9 @@ function renderGameDisplay(currentGame = false){
 
 
 // Function to display categories after selecting a game
-function renderCategories(game) {
+function renderCategories(game){
+
+    let currentGame = (localStorage.getItem("currentGame") === "true");
 
     // Structure of main
     let main = document.querySelector("main");
@@ -197,7 +199,7 @@ function renderCategories(game) {
     main.classList.add("categoryDisplay");
 
     main.innerHTML = `
-    <h1>${game}</h1>
+    <h1>Select Category</h1>
     <div class="theBasicVersion green">The Basic Version</div>
     <div class="notSafeForWork orange">Not Safe For Work</div>
     <div class="spicyEdition pink">Spicy Edition</div>
@@ -209,25 +211,41 @@ function renderCategories(game) {
     // The basic version
     main.querySelector(".theBasicVersion").addEventListener("click", () => {
         let category = "The Basic Version";
-        renderStartGame(game, category);  
+        if(currentGame){
+            startNewGame(game, category)
+        }else{
+            renderStartGame(game, category);  
+        }
     });
 
     // Not safe for work
     main.querySelector(".notSafeForWork").addEventListener("click", () => {
         let category = "Not Safe For Work";
-        renderStartGame(game, category);
+        if(currentGame){
+            startNewGame(game, category);
+        }else{
+            renderStartGame(game, category);
+        }
     });
 
     // Spicy edition
     main.querySelector(".spicyEdition").addEventListener("click", () => {
         let category = "Spicy Edition";
-        renderStartGame(game, category);
+        if(currentGame){
+            startNewGame(game, category);
+        }else{
+            renderStartGame(game, category);
+        }
     });
 
     // Girl Dinner
     main.querySelector(".girlDinner").addEventListener("click", () => {
         let category = "Girl Dinner";
-        renderStartGame(game, category);
+        if(currentGame){
+            startNewGame(game, category);
+        }else{
+            renderStartGame(game, category);
+        }
     });
 
     // When clicking exit go back to game display
@@ -258,7 +276,7 @@ function renderCategoryLocalGame(game){
     main.classList.add("categoryDisplay");
 
     main.innerHTML = `
-    <h1>${game}</h1>
+    <h1>Select Category</h1>
     <div class="theBasicVersion green">The Basic Version</div>
     <div class="notSafeForWork orange">Not Safe For Work</div>
     <div class="spicyEdition pink">Spicy Edition</div>

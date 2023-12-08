@@ -27,4 +27,23 @@
             sendJSON($message, 405);
         }
     }
+
+    function checkForActiveGame($gameId){
+        // Get all active games
+        $games = getFileContents("activeGames.json");
+
+        // Find active game based on gameId from request
+        $activeGame = false;
+        $gameIndex;
+ 
+        foreach($games as $index => $game){
+            if($game["id"] == $gameId){
+                $activeGame = $game;
+                $gameIndex = $index;
+            }
+        }
+
+        return [$activeGame, $gameIndex];
+
+    }
 ?>

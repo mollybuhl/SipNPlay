@@ -50,6 +50,7 @@
         "activeGame" => [
             "game" => "No Active Game",
             "category" => "No category",
+            "questionIndex" => 0,
             "votes" => []
         ]];
           
@@ -59,21 +60,12 @@
         saveToFile("activeGames.json", $games);
         $message = $gameId;
         sendJSON($message);
+
     }else if($action == "getPlayers"){
 
         // Get game by id
         $gameId = $requestData["gameId"];
-
-        // Find active game based on gameId from request
-        $activeGame = false;
-        $gameIndex;
- 
-        foreach($games as $index => $game){
-            if($game["id"] == $gameId){
-                $activeGame = $game;
-                $gameIndex = $index;
-            }
-        }
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId); 
 
         // If active game found return current players, otherwise inform user
         if($activeGame){
@@ -88,18 +80,7 @@
 
         // Get game by id
         $gameId = $requestData["gameId"];
-        
-
-        // Find active game based on gameId from request
-        $activeGame = false;
-        $gameIndex;
-
-        foreach($games as $index => $game){
-            if($game["id"] == $gameId){
-                $activeGame = $game;
-                $gameIndex = $index;
-            }
-        }   
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId); 
         
         // If active game found return current players, otherwise inform user
         if($activeGame){
@@ -121,19 +102,10 @@
 
         // Get game by id
         $gameId = $requestData["gameId"];
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId); 
+
         // Get name of player
         $playerName = $requestData["player"];
-
-        // Find active game based on gameId from request
-        $activeGame = false;
-        $gameIndex;
- 
-        foreach($games as $index => $game){
-            if($game["id"] == $gameId){
-                $activeGame = $game;
-                $gameIndex = $index;
-            }
-        }
 
         // If active game found delete user from game, otherwise inform user
         if($activeGame){
@@ -156,18 +128,7 @@
     }else if($action == "requestToStartGame"){
         // Get game by id
         $gameId = $requestData["gameId"];
-        
-
-        // Find active game based on gameId from request
-        $activeGame = false;
-        $gameIndex;
-
-        foreach($games as $index => $game){
-            if($game["id"] == $gameId){
-                $activeGame = $game;
-                $gameIndex = $index;
-            }
-        }   
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId); 
         
         // If active game found return current players, otherwise inform user
         if($activeGame){
@@ -190,20 +151,10 @@
     }else if($action == "startGame"){
         // Get game by id
         $gameId = $requestData["gameId"];
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId); 
+
         $gamePlayed = $requestData["game"];
         $categoryPlayed = $requestData["category"];
-        
-
-        // Find active game based on gameId from request
-        $activeGame = false;
-        $gameIndex;
-
-        foreach($games as $index => $game){
-            if($game["id"] == $gameId){
-                $activeGame = $game;
-                $gameIndex = $index;
-            }
-        }   
         
         // If active game found update game status, otherwise inform user
         if($activeGame){
@@ -222,23 +173,11 @@
             $message = ["message" => "no game under that pin was found"];
             sendJson($message, 404);
         }
+
     }else if($action == "endGame"){
         // Get game by id
         $gameId = $requestData["gameId"];
-        /*$gamePlayed = $requestData["game"];
-        $categoryPlayed = $requestData["category"];*/
-        
-
-        // Find active game based on gameId from request
-        $activeGame = false;
-        $gameIndex;
-
-        foreach($games as $index => $game){
-            if($game["id"] == $gameId){
-                $activeGame = $game;
-                $gameIndex = $index;
-            }
-        }   
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId); 
         
         // If active game found update game status, otherwise inform user
         if($activeGame){
@@ -256,24 +195,12 @@
             $message = ["message" => "no game under that pin was found"];
             sendJson($message, 404);
         }
+
     }else if($action == "endRound"){
 
         // Get game by id
         $gameId = $requestData["gameId"];
-        /*$gamePlayed = $requestData["game"];
-        $categoryPlayed = $requestData["category"];*/
-        
-
-        // Find active game based on gameId from request
-        $activeGame = false;
-        $gameIndex;
-
-        foreach($games as $index => $game){
-            if($game["id"] == $gameId){
-                $activeGame = $game;
-                $gameIndex = $index;
-            }
-        }   
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId); 
         
         // If active game found end current game round, otherwise inform user
         if($activeGame){
@@ -292,8 +219,119 @@
             $message = ["message" => "no game under that pin was found"];
             sendJson($message, 404);
         }
+
+    }else if($action == "checkGameId"){
+
+        // Get game by id
+        $gameId = $requestData["gameId"];
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId); 
+        
+        // If active game found return true, if not found return false
+        if($activeGame){
+            $message = [true];
+            sendJSON($message);
+        }else{
+            $message = [false];
+            sendJson($message, 404);
+        }
+
+    }else if($action == "checkActiveGame"){
+
+        // Get game by id
+        $gameId = $requestData["gameId"];
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId); 
+        
+        // If active game found return true, if not found return false
+        if($activeGame){
+
+            if($activeGame["activeGame"]["game"] == "No Active Game"){
+                $message = false;
+                sendJSON($message);
+            }else{
+                $currentGame = $activeGame["activeGame"]["game"];
+                $message = $currentGame;
+                sendJSON($message);
+            }
+
+            $message = true;
+            sendJSON($message);
+        }else{
+            $message = ["No game under that pin was found"];
+            sendJson($message, 404);
+        }
+
+    }else if($action == "changeGameStatus"){
+
+        // Get game by id
+        $gameId = $requestData["gameId"];
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId); 
+        
+        // If active game found change game status, otherwise inform user
+        if($activeGame){
+
+            // Change game and category status
+            $games[$gameIndex]["activeGame"]["game"] = $requestData["game"];
+            $games[$gameIndex]["activeGame"]["category"] = $requestData["category"];
+
+            // Update json file and inform user
+            saveToFile("activeGames.json", $games);
+
+            $message = ["message" => "Round Ended"];
+            sendJSON($message);
+
+            $message = true;
+            sendJSON($message);
+        }else{
+            $message = ["No game under that pin was found"];
+            sendJson($message, 404);
+        }
+
+    }else if($action == "updateQuestionIndex"){
+
+        // Get game by id
+        $gameId = $requestData["gameId"];
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId); 
+        
+        // If active game found change game status, otherwise inform user
+        if($activeGame){
+
+            // Change game and category status
+            $questionIndex = $games[$gameIndex]["activeGame"]["questionIndex"];
+            $games[$gameIndex]["activeGame"]["questionIndex"]++;
+
+            // Update json file and inform user
+            saveToFile("activeGames.json", $games);
+
+            $message = $games[$gameIndex]["activeGame"]["questionIndex"];
+            //$message = ["Updated!"];
+            
+            sendJson($message);
+        }else{
+            $message = ["No game under that pin was found"];
+            sendJson($message, 404);
+        }
+
+    }else if($action == "requestNextQuestion"){
+
+        // Get game by id
+        $gameId = $requestData["gameId"];
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId);  
+        
+        // If active game found change game status, otherwise inform user
+        if($activeGame){
+
+            // Check if current question index is the same as question index saved in json
+            $currentQuestion = $requestData["currentQuestion"];
+            $activeGameQuestion = $games[$gameIndex]["activeGame"]["questionIndex"];
+
+            
+            $message = $activeGameQuestion;
+            sendJson($message);
+            
+            
+        }else{
+            $message = ["No game under that pin was found"];
+            sendJson($message, 404);
+        }
     }
-
-   
-
 ?>

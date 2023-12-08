@@ -1,7 +1,5 @@
 "use strict";
 
-spinTheBottleHandle()
-
 function spinTheBottleHandle() {
     const main = document.querySelector("main");
     main.removeAttribute("class");
