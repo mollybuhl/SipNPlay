@@ -1,6 +1,6 @@
 "use strict";
 /* TO DO:
-    - check for active game if not host
+    - Timer should be saved in game array so if you join in the middle you will not have as long
 */
 
 // Function to render moste likely to question and handle votes
@@ -110,7 +110,7 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
     // Set aswering timer for 30sec
     let progressbar = document.querySelector(".progressbar");
     let answerTime = runTimer(30, progressbar,function(){
-        renderMostLikelyToResult()
+        renderMostLikelyToResult(questionIndex);
     });
 
     // If player is not host, check if game still exist and if there is an ongoing game
@@ -195,7 +195,7 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
     });
 
     // Function to fetch and display results after countdown is finished
-    async function renderMostLikelyToResult(){
+    async function renderMostLikelyToResult(questionIndex){
 
         // Send request to fetch results
         let requestData = {
@@ -256,17 +256,53 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
         let footer = document.querySelector("footer");
 
         // Structure of footer
-        footer.innerHTML=`
-        <div class="buttonQuit">
-            <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
-            <p>QUIT</p>
-        </div>
-        <button class="nextButton">NEXT</button>
-        `;
+        let isHost = window.localStorage.getItem("host");
+
+        if(isHost){
+            footer.innerHTML=`
+            <div class="buttonQuit">
+                <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
+                <p>QUIT</p>
+            </div>
+            <button class="nextButton">NEXT</button>
+            `;
+
+            // When host clicks on next button, clear votes and call to render next question
+            footer.querySelector(".nextButton").addEventListener("click", async () => {
+                
+                // Send request to clear votes
+                let requestDataToClearVotes = {
+                    gameId: gameId,
+                    action: "clearVotes",
+                }
+
+                await fetchMostLikelyTo(requestDataToClearVotes);
+
+                // Send request to update question index
+                let requestDataToUpdateQuestionIndex = {
+                    gameId: gameId,
+                    action: "updateQuestionIndex",
+                }
+
+                let questionIndex = await handleGameFetch(requestDataToUpdateQuestionIndex);
+
+                console.log(questionIndex);
+                // Render next question
+                renderMostLikelyTo(category, gameId, questionIndex);
+
+            });
+        }else{
+            footer.innerHTML=`
+            <div class="buttonQuit">
+                <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
+                <p>QUIT</p>
+            </div>
+            `;
+        }
+        
 
         // When clicking quit button ask
         footer.querySelector(".buttonQuit").addEventListener("click", footer.querySelector(".buttonQuit").addEventListener("click", () =>{
-            let isHost = window.localStorage.getItem("host");
 
             // If user is host - ask to play another game or keep playing
             if(isHost){
@@ -298,7 +334,7 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
                 popUp.querySelector(".leaveGame").addEventListener("click", async () =>{
                     
                     // Send request to clear votes
-                    let requestDataToClearVotes = {
+                   let requestDataToClearVotes = {
                         gameId: gameId,
                         action: "clearVotes",
                     }
@@ -323,22 +359,29 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
             }
         }));
 
-        // When clicking on next button, clear votes and call to render next question
-        footer.querySelector(".nextButton").addEventListener("click", async () => {
-            
-            // Send request to fetch results
-            let requestData = {
-                gameId: gameId,
-                action: "clearVotes",
-            }
+        // If player is not host, check if game still exist and if there is an ongoing game
+        // Also check if next question should be run
+        if(!isHost){
+            let checkActiveGame = setInterval( async () => {
+                checkIfGameExist(gameId, checkActiveGame);
+                checkForActiveGame(gameId, answerTime, checkActiveGame);
 
-            // Clear votes
-            let clear = await fetchMostLikelyTo(requestData);
+                let requestDataForNextQuestion = {
+                    action: "requestNextQuestion",
+                    gameId: gameId,
+                    currentQuestion: questionIndex
+                };
 
-            // Render next question
-            renderMostLikelyTo(category, gameId, questionIndex+1);
+                let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
+                console.log(activeQuestion, questionIndex);
+                
+                if(activeQuestion != questionIndex){
+                    clearInterval(checkActiveGame);
+                    renderMostLikelyTo(category, gameId, activeQuestion);
+                }
 
-        });
+            },1000);
+        }   
     }
 }
 
@@ -381,8 +424,6 @@ async function checkForActiveGame(gameId, timer, interval1, interval2){
 
     let activeGame = await handleGameFetch(requestDataForCheckingActiveGame);
 
-    console.log(activeGame);
-
     // If there is no active game return this information
     if(activeGame){
         return "Active game";
@@ -414,9 +455,6 @@ async function checkForActiveGame(gameId, timer, interval1, interval2){
 
         setTimeout(() => {
             renderWaitingForGame(gameId);
-        }, 5000)
-    }
-
-    
-        
+        }, 5000);
+    }         
 }

@@ -198,6 +198,142 @@ async function createGame(game, category, creatorName){
 
 }
 
+// This function will be called when the host has already created a game but is starting a new gameplay
+async function startNewGame(game, category){
+    let gameId = localStorage.getItem("gameId");
+
+    // Change game and category
+    let requestDataForChngingGameStatus = {
+        action: "changeGameStatus",
+        gameId: gameId,
+        game: game,
+        category: category
+    }
+
+    handleGameFetch(requestDataForChngingGameStatus);
+
+    // Loading page for current players
+    // Present game status
+    let main = document.querySelector("main");
+    main.innerHTML = `
+    <h2>GAME PIN</h2>
+    <div class="resultName gameId">${gameId}</div>
+    <h4>Participants</h4>
+    <div class="participants"></div>
+    <p class="waitingText">Waiting on others to join the game...</p>
+    `;
+
+    let footer = document.querySelector("footer");
+    footer.removeAttribute("class");
+    footer.innerHTML = `
+    <div class="buttonQuit">
+            <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
+            <p>QUIT</p>
+    </div>
+    <button id="startGameButton">START GAME</button>
+    `;
+
+    // Leave game when clicking QUIT
+    document.querySelector(".buttonQuit").addEventListener("click", () => {
+        clearInterval(updatePlayes);
+        leaveGame();
+    })
+
+    // Disable button until others have joined the game
+    let startButton = document.getElementById("startGameButton")
+    startButton.disabled = true;
+
+    // Fetch current players every second
+    let requestData = {
+        action: "getPlayers",
+        gameId: gameId
+    }
+    
+    let displayedPlayers = []; //To keep track of who is already displaying
+    let updatePlayes = setInterval(async()=>{
+        let currentPlayers = await handleGameFetch(requestData);
+        let index = 0;
+
+        // Display new palyers
+        currentPlayers.forEach(player => {
+            if(!displayedPlayers.includes(player)){
+                let playerName = document.createElement("p");
+                playerName.classList.add(player);
+                playerName.textContent = player;
+                displayedPlayers.push(player);
+        
+                document.querySelector(".participants").appendChild(playerName);
+            }
+        });  
+
+        // Remove display of players who no longer is playing
+        displayedPlayers.forEach(displayedPlayer => {
+            if(!currentPlayers.includes(displayedPlayer)){
+                displayedPlayers.splice(index, 1);
+
+                let displayedName = document.querySelector(`.${displayedPlayer}`);
+                displayedName.remove();
+            }
+            index++;
+        });
+
+        // If more than 2 players joined the game, remove "waiting for others" and enable start button
+        if(displayedPlayers.length >= 2){
+
+            // Remove waiting text
+            if(document.querySelector(".waitingText")){
+                document.querySelector(".waitingText").remove();
+            }
+
+            // Enable start game button
+            let startButton = document.getElementById("startGameButton");
+            startButton.disabled = false;
+
+        }else if(!document.querySelector(".waitingText")){
+
+            // If game has less than 2 participants but there is no waiting text, creat this
+            let waitingText = document.createElement("p");
+            waitingText.classList.add("waitingText");
+            waitingText.textContent = "Waiting on others to join the game...";
+            main.appendChild(waitingText);
+
+            let startButton = document.getElementById("startGameButton");
+            startButton.disabled = true;
+        }
+    },1000);
+
+    // When clicking start game stop updating players and start game based on user input
+    document.getElementById("startGameButton").addEventListener("click", async () => {
+        
+        // Stop fetching players
+        clearInterval(updatePlayes);
+
+        //Update game status for other players
+        requestData = {
+            action: "startGame",
+            gameId: gameId,
+            game: game,
+            category: category
+        }
+
+        let gameStarted = await handleGameFetch(requestData);
+
+        // Start game based on user input
+        switch(game){
+            case "Most Likely To":
+                renderMostLikelyTo(category, gameId);
+                break;
+            case "Truth or Dare":
+                truthORDareHandle(category, gameId);
+                break;
+            case "Would You Rather":
+                renderWouldYouRather(category, gameId);
+                break;
+        }
+
+    });
+}
+
 // Function to join game
 // player name will be sent as parameter if player join game by create game display
 // if player join game from homepage they will need to fill in their name as well
@@ -259,7 +395,7 @@ function joinGame(playerName=null){
 function renderWaitingForGame(gameId){
     let main = document.querySelector("main");
     main.classList.add("startGame");
-    
+
     main.innerHTML = `
     <h2>GAME PIN</h2>
     <div class="gameId">${gameId}</div>

@@ -4,7 +4,8 @@ TO DO:
     - Hamburger menu
     - Register more prompts
     - Entering game when already in a game
-    - check for active game if not host
+    - Timer should be saved in game array so if you join in the middle you will not have as long
+
 
     Never Have I ever
     - Swipe for next card
@@ -27,25 +28,23 @@ TO DO:
 
     Spin the bottle
     - 
+
+
 */
 
-// Display Menu when clicking hamburger icon
-document.querySelector(".fa-bars").addEventListener("click", renderMenu);
 
 // On load, if user is already in a game display this, otherwise render game display
 if(localStorage.getItem("currentGame") === "true"){
 
-    // If user is in a game check if user is host 
     let isHost = window.localStorage.getItem("host");
 
-    // If host, render game display, otherwise render waiting page
+    // If user is host, render game display, otherwise render waiting page
     if(!isHost){
-        console.log("loading waiting page");
         let gameId = localStorage.getItem("gameId");
         renderWaitingForGame(gameId);
     }else{
-        // Render game display
-        renderGameDisplay(true)
+        // Render game display for host
+        renderGameDisplay(true);
     }
     
 }else{
@@ -53,7 +52,9 @@ if(localStorage.getItem("currentGame") === "true"){
     renderGameDisplay()
 }
 
-;
+// Display Menu when clicking hamburger icon
+document.querySelector(".fa-bars").addEventListener("click", renderMenu);
+
 
 
 
