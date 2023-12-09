@@ -5,12 +5,11 @@ TO DO:
     - Register more prompts
     - Timer should be saved in game array so if you join in the middle you will not have as long
 
-
     Never Have I ever
     - Swipe for next card
 
     Whos most likely to
-    - If equal votes
+    - 
 
     Truth or Dare
     - Connect to handle game
