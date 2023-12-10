@@ -164,6 +164,9 @@ async function createGame(game, category, creatorName){
             case "Would You Rather":
                 renderWouldYouRather(category, gameId);
                 break;
+            case "Fill In The Blank":
+                renderFillInTheBlank(category, gameId);
+                break;
         }
 
     });
@@ -303,6 +306,9 @@ async function startNewGame(game, category){
                 break;
             case "Would You Rather":
                 renderWouldYouRather(category, gameId);
+                break;
+            case "Fill In The Blank":
+                renderFillInTheBlank(category, gameId);
                 break;
         }
 
@@ -454,6 +460,9 @@ function renderWaitingForGame(gameId){
                     break;
                 case "Would You Rather":
                     renderWouldYouRather(category, gameId);
+                    break;
+                case "Fill In The Blank":
+                    renderFillInTheBlank(category, gameId);
                     break;
             }
         }   

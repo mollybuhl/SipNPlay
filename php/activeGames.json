@@ -1,15 +1,20 @@
 [
     {
-        "id": 7555,
+        "id": 2988,
         "players": [
-            "m",
-            "j"
+            "stacy",
+            "macy"
         ],
         "activeGame": {
-            "game": "No Active Game",
-            "category": "No category",
+            "game": "Fill In The Blank",
+            "category": "The Basic Version",
             "questionIndex": 0,
-            "votes": []
+            "votes": [
+                "a pod"
+            ],
+            "answers": {
+                "stacy": "a pod"
+            }
         }
     }
 ]

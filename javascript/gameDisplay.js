@@ -180,6 +180,10 @@ async function renderGameDisplay(currentGame = false){
     main.querySelector(".spinTheBottle").addEventListener("click",()=>{
         spinTheBottleHandle();
     } );
+
+    main.querySelector(".fillInTheBlank").addEventListener("click",()=>{
+        renderCategories("Fill In The Blank");
+    } );
     
     // Remove quit button from footer
     let footer = document.querySelector("footer");

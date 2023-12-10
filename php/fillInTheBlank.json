@@ -1,0 +1,74 @@
+[
+    
+    {
+        "The Basic Version": [
+            {
+                "id": 1,
+                "category": "The Basic Version",
+                "question": "If _ had a podcast it would be called"
+            },
+            {
+                "id": 2,
+                "category": "The Basic Version",
+                "question": "_'s dream vacation is"
+            },
+            {
+                "id": 3,
+                "category": "The Basic Version",
+                "question": "_ biggest pet peeve is"
+            }
+        ],
+        "Not Safe For Work": [
+            {
+            "id": 1,
+            "category": "Not Safe For Work",
+            "question": "If _ wrote a self-help book this would be called:"
+            },
+            {
+                "id": 2,
+                "category": "Not Safe For Work",
+                "question": "_ latest google search is"
+            },
+            {
+                "id": 3,
+                "category": "Not Safe For Work",
+                "question": "_ got thrown out of the club because of:"
+            }
+        ],
+        "Spicy Edition": [
+            {
+            "id": 1,
+            "category": "Spicy Edition",
+            "question": "If _ invented a new position, what would it be called?"
+            },
+            {
+                "id": 2,
+                "category": "Spicy Edition",
+                "question": "In their dreams, who is _ making out with?"
+            },
+            {
+                "id": 3,
+                "category": "Spicy Edition",
+                "question": "If _ were to take an art class, who would they like to be the nude model?"
+            }
+        ],
+        "Girl Dinner":
+        [
+            {
+            "id": 1,
+            "category": "Girl Dinner",
+            "question": "_'s ideal first date would be"
+            },
+            {
+            "id": 2,
+            "category": "Girl Dinner",
+            "question": "What is the first search result when you google _'s name?"
+            },
+            {
+            "id": 3,
+            "category": "Girl Dinner",
+            "question": "What does _ spend too much time thinking about?"
+            }  
+        ]  
+    }
+]
