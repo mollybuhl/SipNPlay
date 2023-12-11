@@ -1,12 +1,11 @@
 "use strict";
 /* TO DO:
     - Timer should be saved in game array so if you join in the middle you will not have as long
-    - render with fetch q index
+    l leave game stop fetch
 */
 
 // Function to render moste likely to question and handle votes
 async function renderMostLikelyTo(category, gameId, questionIndex = 0){
-    console.log(questionIndex);
 
     // Set mostLikelyTo class to main and footer
     let main = document.querySelector("main");
@@ -108,18 +107,14 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
         }   
     });
 
-    // Set aswering timer for 30sec
-    let progressbar = document.querySelector(".progressbar");
-    let answerTime = runTimer(30, progressbar,function(){
-        renderMostLikelyToResult(questionIndex);
-    });
-
     // If player is not host, check if game still exist and if there is an ongoing game
     let isHost = window.localStorage.getItem("host");
+    let checkActiveGame;
     if(!isHost){
-        let checkActiveGame = setInterval( () => {
+        checkActiveGame = setInterval( () => {
             checkIfGameExist(gameId, checkActiveGame);
             checkForActiveGame(gameId, answerTime, checkActiveGame);
+  
         },1000);
     }
 
@@ -187,8 +182,16 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
             
         }else{
             // If user is not host - ask to leave game or keep playing
+            clearInterval(checkActiveGame);
             leaveGame(answerTime);
         }  
+    });
+
+    // Set aswering timer for 30sec
+    let progressbar = document.querySelector(".progressbar");
+    let answerTime = runTimer(30, progressbar,function(){
+        clearInterval(checkActiveGame);
+        renderMostLikelyToResult(questionIndex);
     });
 
     // Function to fetch and display results after countdown is finished
@@ -283,7 +286,6 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
 
                 let questionIndex = await handleGameFetch(requestDataToUpdateQuestionIndex);
 
-                console.log(questionIndex);
                 // Render next question
                 renderMostLikelyTo(category, gameId, questionIndex);
 
@@ -296,7 +298,31 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
             </div>
             `;
         }
-        
+
+        // If player is not host, check if game still exist and if there is an ongoing game
+        // Also check if next question should be run
+        let checkActiveGame;
+        if(!isHost){
+            checkActiveGame = setInterval( async () => {
+                //checkIfGameExist(gameId, checkActiveGame);
+                //checkForActiveGame(gameId, answerTime, checkActiveGame);
+
+                let requestDataForNextQuestion = {
+                    action: "requestNextQuestion",
+                    gameId: gameId,
+                    currentQuestion: questionIndex
+                };
+
+                let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
+                
+                if(activeQuestion != questionIndex){
+                    clearInterval(checkActiveGame);
+                    renderMostLikelyTo(category, gameId, activeQuestion);
+                }
+
+
+            },1000);
+        }   
 
         // When clicking quit button ask
         footer.querySelector(".buttonQuit").addEventListener("click", footer.querySelector(".buttonQuit").addEventListener("click", () =>{
@@ -352,32 +378,10 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
                 
             }else{
                 // If user is not host - ask to leave game or keep playing
+                clearInterval(checkActiveGame);
                 leaveGame(answerTime);
             }
         }));
-
-        // If player is not host, check if game still exist and if there is an ongoing game
-        // Also check if next question should be run
-        if(!isHost){
-            let checkActiveGame = setInterval( async () => {
-                checkIfGameExist(gameId, checkActiveGame);
-                checkForActiveGame(gameId, answerTime, checkActiveGame);
-
-                let requestDataForNextQuestion = {
-                    action: "requestNextQuestion",
-                    gameId: gameId,
-                    currentQuestion: questionIndex
-                };
-
-                let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
-                
-                if(activeQuestion != questionIndex){
-                    clearInterval(checkActiveGame);
-                    renderMostLikelyTo(category, gameId, activeQuestion);
-                }
-
-            },1000);
-        }   
     }
 }
 
@@ -391,7 +395,7 @@ async function checkForActiveGame(gameId, timer, interval1, interval2){
 
     let activeGame = await handleGameFetch(requestDataForCheckingActiveGame);
 
-    // If there is no active game return this information
+    // If there is an active game return this information
     if(activeGame){
         return "Active game";
     }else{
@@ -418,7 +422,6 @@ async function checkForActiveGame(gameId, timer, interval1, interval2){
         if(interval2){
             clearInterval(interval2);
         }
-        
 
         setTimeout(() => {
             renderWaitingForGame(gameId);

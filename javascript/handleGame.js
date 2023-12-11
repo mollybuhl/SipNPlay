@@ -428,6 +428,10 @@ function renderWaitingForGame(gameId){
         });
     },1000);
 
+    // send request to check game status
+    let gameExist = setInterval(async () => {
+    checkIfGameExist(gameId, gameExist, requestStart, updatePlayes);
+    }, 1000);
 
     // Start game when host start game
     let requestDataForStartingGame = {
@@ -443,6 +447,8 @@ function renderWaitingForGame(gameId){
             clearInterval(updatePlayes);
             // Stop fetching request to start game
             clearInterval(requestStart);
+            // Stop fetching check game status
+            clearInterval(gameExist);
 
             let game = requestToStartGame.game;
             let category = requestToStartGame.category;
@@ -465,11 +471,6 @@ function renderWaitingForGame(gameId){
             }
         }   
 
-    }, 1000);
-
-    // send request to check game status
-    let gameExist = setInterval(async () => {
-        checkIfGameExist(gameId, gameExist, requestStart, updatePlayes);
     }, 1000);
     
     // Leave game when clicking on exit, send current intervals as paremeters to be stoped if leaving the game
