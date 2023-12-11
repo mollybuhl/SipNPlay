@@ -131,13 +131,13 @@ async function renderGameDisplay(currentGame = false){
     </div>
     `;
 
-    // If user is already in a game load otion to leave game, otherwise load option to join game
+    // If host is already in a game load opion to end game, otherwise load option to join game
     if(currentGame){
         let gameId = localStorage.getItem("gameId");
         let bottomBox = document.createElement("div");
         bottomBox.classList.add("leavGameDisplay");
         bottomBox.innerHTML = `
-        <button class="leaveGame">Leave Game</button>
+        <button class="leaveGame">End Game</button>
         <div>${gameId}</div>
         `;
         main.appendChild(bottomBox);
@@ -195,6 +195,7 @@ async function renderGameDisplay(currentGame = false){
 // Function to display categories after selecting a game
 function renderCategories(game){
 
+    // Will be true if player is currently host in a game, otherwise false
     let currentGame = (localStorage.getItem("currentGame") === "true");
 
     // Structure of main
@@ -263,6 +264,7 @@ function renderCategories(game){
     `;
 
     footer.querySelector(".buttonQuit").addEventListener("click", () => {
+        // If player is host in a game render game display with gameId
         if(localStorage.getItem("currentGame") === "true"){
             renderGameDisplay(true);
         }else{
@@ -318,11 +320,9 @@ function renderCategoryLocalGame(game){
         if(game === "Never Have I Ever"){
             renderNeverHaveIEver(category);
         }
-        
     }
     
-
-    // When clicking exit go back to game display
+    // When clicking back go back to game display
     let footer = document.querySelector("footer");
 
     footer.innerHTML=`

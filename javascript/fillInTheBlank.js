@@ -2,9 +2,8 @@
 
 /*
     Fortsätt:
-    - presentera röstnings resultat
-    - ny input tar inte bort existerande
-    - ta bort eget svar från röstningen
+    - inform of no answers to vote on
+    - always call function with questionIndex from fetch
 */
 
 async function renderFillInTheBlank(category, gameId, questionIndex = 0){
@@ -37,10 +36,32 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0){
     }
 
     let players = await handleGameFetch(requestDataForPlayers);
+    let player;
 
-    // Select random player for question
-    let randomIndex = Math.floor(Math.random() * players.length);
-    let player = players[randomIndex];
+    let isHost = window.localStorage.getItem("host");
+    // If host, select random player for question. If player get selected player
+    if(isHost){
+        let randomIndex = Math.floor(Math.random() * players.length);
+        player = players[randomIndex];
+
+        // Send request to update playerInQuestion
+        let requestDataForUpdatingPlayerInQuestion = {
+            action: "updatePlayerInQuestion",
+            gameId: gameId,
+            player: player
+        }
+
+        handleGameFetch(requestDataForUpdatingPlayerInQuestion);
+    }else{
+        // Send request to update playerInQuestion
+        let requestDataForGettingPlayerInQuestion = {
+            action: "getPlayerInQuestion",
+            gameId: gameId
+        }
+
+        player = await handleGameFetch(requestDataForGettingPlayerInQuestion);
+    }
+    
 
     // Construct question by adding random players name
     let modifiedQuestion = question.replace("_", player);
@@ -50,7 +71,7 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0){
     <div class="wrapper">
         <h1>Fill in the blank</h1>
         <div class="questionBox">
-            <p>${modifiedQuestion}?</p>
+            <p>${modifiedQuestion}</p>
         </div>
         <div class="timer">
             <div class="progressbar"></div>
@@ -77,11 +98,10 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0){
         await fetchFillInTheBlank(requestDataToSaveAnswer);
 
         // Render all players answers for voting
-        renderFillInTheBlankVoting(modifiedQuestion, questionIndex);
+        renderFillInTheBlankVoting(modifiedQuestion, category, questionIndex);
     });
 
     // If player is not host, check if game still exist and if there is an ongoing game
-    let isHost = window.localStorage.getItem("host");
     if(!isHost){
         let checkActiveGame = setInterval( () => {
             checkIfGameExist(gameId, checkActiveGame);
@@ -160,7 +180,7 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0){
     })
 }
 
-async function renderFillInTheBlankVoting(modifiedQuestion){
+async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIndex){
 
     let main = document.querySelector("main");
 
@@ -188,12 +208,18 @@ async function renderFillInTheBlankVoting(modifiedQuestion){
 
     let allAnswers = await fetchFillInTheBlank(requestDataToFetchAnswers);
 
-    // Remove players own answer
+    // Remove players own answer for voting
+    let allAnswersExceptPlayer = Object.assign({}, allAnswers); 
+    let playerName = localStorage.getItem("playerName");
 
-    // Present each answer
-    for(let answer in allAnswers){
+    if(allAnswersExceptPlayer.hasOwnProperty(playerName)){
+        delete allAnswersExceptPlayer[playerName];
+    }
+
+    // Present each of the other players answer
+    for(let answer in allAnswersExceptPlayer){
         let answerBox = document.createElement("div");
-        answerBox.innerHTML = `<p>${allAnswers[answer]}</p>`;
+        answerBox.innerHTML = `<p>${allAnswersExceptPlayer[answer]}</p>`;
 
         document.querySelector(".answers").appendChild(answerBox);
 
@@ -233,6 +259,9 @@ async function renderFillInTheBlankVoting(modifiedQuestion){
     // Set aswering timer for 15sec, then present results
     let progressbar = document.querySelector(".progressbar");
     let answerTime = runTimer(15, progressbar, async function(){
+
+        // Clear voting boxes to replace with result boxes
+        document.querySelector(".answers").innerHTML = ``;
         
         // Fetch voting results
         let requestDataToFetchVotes = {
@@ -242,14 +271,20 @@ async function renderFillInTheBlankVoting(modifiedQuestion){
 
         let votes = await fetchFillInTheBlank(requestDataToFetchVotes);
 
+        // Initialize vote counter for all answers
         let answerVoteCounter = {};
+        for (let name in allAnswers) {
+            answerVoteCounter[name] = 0;
+        }
 
         // Count votes for each answer
         votes.forEach((votedAnswer) => {
-            if(allAnswers[votedAnswer]){
-                answerVoteCounter[votedAnswer] = (answerVoteCounter[votedAnswer] || 0) +1;
+            for (let name in allAnswers) {
+                if (allAnswers[name] === votedAnswer) {
+                    answerVoteCounter[name]++;
+                }
             }
-        })
+        });
 
         // Convert answerVotesCount to an array of objects for sorting
         const sortedAnswers = Object.keys(answerVoteCounter).map((answer) => ({
@@ -262,23 +297,82 @@ async function renderFillInTheBlankVoting(modifiedQuestion){
 
         // Display results
         sortedAnswers.forEach((item) => {
-            console.log(`${item.answer}: ${item.votes} votes`);
+            let answerBox = document.createElement("div");
+            answerBox.classList.add("result");
 
+            // Give mostVoted class to person with most votes
+            if (item.votes === sortedAnswers[0].votes) {
+                answerBox.classList.add("mostVoted");
+            }
 
-        });
+            answerBox.innerHTML = `
+                <p>${allAnswers[item.answer]}</p>
+                <div>${item.votes}</div>
+                <div class="answerName">${item.answer}</div>
+            `;
 
+            document.querySelector(".answers").appendChild(answerBox);
+        })
+
+        let isHost = window.localStorage.getItem("host");
+        // If host, display next button
+        if(isHost){
+            let footer = document.querySelector("footer");
+
+            footer.innerHTML=`
+            <div class="buttonQuit">
+                <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
+                <p>QUIT</p>
+            </div>
+            <button class="nextButton">NEXT</button>
+            `;
+
+            // When host clicks on next button, clear votes and call to render next question
+            footer.querySelector(".nextButton").addEventListener("click", async () => {
+                
+                // Send request to clear votes
+                let requestDataToClearVotes = {
+                    gameId: gameId,
+                    action: "clearVotes",
+                }
+
+                await fetchFillInTheBlank(requestDataToClearVotes);
+
+                // Send request to update question index
+                let requestDataToUpdateQuestionIndex = {
+                    gameId: gameId,
+                    action: "updateQuestionIndex",
+                }
+
+                let questionIndex = await handleGameFetch(requestDataToUpdateQuestionIndex);
+
+                // Render next question
+                renderFillInTheBlank(category, gameId, questionIndex);
+            });
+        }else{
+            // If player is not host, check if game still exist and if there is an ongoing game
+            // Also check if next question should be run
+            let checkActiveGame = setInterval( async () => {
+                checkIfGameExist(gameId, checkActiveGame);
+                checkForActiveGame(gameId, answerTime, checkActiveGame);
+
+                let requestDataForNextQuestion = {
+                    action: "requestNextQuestion",
+                    gameId: gameId,
+                    currentQuestion: questionIndex
+                };
+
+                let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
+                console.log(activeQuestion);
+                if(activeQuestion != questionIndex){
+                    clearInterval(checkActiveGame);
+                    renderFillInTheBlank(category, gameId, activeQuestion);
+                }
+
+            },1000);
+            
+        }
     });
-
-
-    // If player is not host, check if game still exist and if there is an ongoing game
-    let isHost = window.localStorage.getItem("host");
-    if(!isHost){
-        let checkActiveGame = setInterval( () => {
-            checkIfGameExist(gameId, checkActiveGame);
-            checkForActiveGame(gameId, answerTime, checkActiveGame);
-        },1000);
-    }
-    
 }
 
 // Function to handle fill in the blank fetch

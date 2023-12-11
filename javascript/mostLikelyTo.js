@@ -1,6 +1,7 @@
 "use strict";
 /* TO DO:
     - Timer should be saved in game array so if you join in the middle you will not have as long
+    - render with fetch q index
 */
 
 // Function to render moste likely to question and handle votes
@@ -266,7 +267,7 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
             // When host clicks on next button, clear votes and call to render next question
             footer.querySelector(".nextButton").addEventListener("click", async () => {
                 
-                // Send request to clear votes
+                // Send request to clear votes and answers
                 let requestDataToClearVotes = {
                     gameId: gameId,
                     action: "clearVotes",
@@ -369,7 +370,6 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
                 };
 
                 let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
-                console.log(activeQuestion, questionIndex);
                 
                 if(activeQuestion != questionIndex){
                     clearInterval(checkActiveGame);
@@ -381,37 +381,8 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
     }
 }
 
-// Function to fetch a most likely to question
-async function fetchMostLikelyTo(requestData){
-
-    // Set request parameters
-    let requestParameters = {
-        method: "POST",
-        headers: {"Content-Type": "application/json; charset=UTF-8"},
-        body: JSON.stringify(requestData)
-    }
-
-    let request = new Request("php/mostLikelyTo.php", requestParameters);
-
-    // Fetch request and handle response
-    try{
-        let response = await fetch(request);
-
-        if(response.ok){
-            let resource = await response.json();
-            return resource;
-        }else{
-            let error = await response.json();
-            feedback(error.message);
-        }
-    }catch(error){
-        console.log("Something went wrong", error);
-    }
-}
-
 // This function is called by the players, not the host to check if a game is active or not
 async function checkForActiveGame(gameId, timer, interval1, interval2){
-
   
     let requestDataForCheckingActiveGame= {
         gameId: gameId,
@@ -453,4 +424,32 @@ async function checkForActiveGame(gameId, timer, interval1, interval2){
             renderWaitingForGame(gameId);
         }, 5000);
     }         
+}
+
+// Function to handle most likely to fetch
+async function fetchMostLikelyTo(requestData){
+
+    // Set request parameters
+    let requestParameters = {
+        method: "POST",
+        headers: {"Content-Type": "application/json; charset=UTF-8"},
+        body: JSON.stringify(requestData)
+    }
+
+    let request = new Request("php/mostLikelyTo.php", requestParameters);
+
+    // Fetch request and handle response
+    try{
+        let response = await fetch(request);
+
+        if(response.ok){
+            let resource = await response.json();
+            return resource;
+        }else{
+            let error = await response.json();
+            feedback(error.message);
+        }
+    }catch(error){
+        console.log("Something went wrong", error);
+    }
 }

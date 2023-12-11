@@ -1,5 +1,34 @@
 <?php
 
+/*
+    To:
+    - host create new game (createGame)    
+    - get all current players (getPlayers)  
+
+    Player joining/leaving game
+    - player join an active game(joinGame)    
+    - player leave game (leaveGame) 
+
+    Game status
+    - player check if game has started (requestToStartGame)    
+    - host starting game (startGame)
+    - host end game for all players (endGame)
+    - host end current round for all players (endRound)
+
+
+    - check if there is a registered game with provided gameid (checkGameId)
+    - player check if there is an active game to join (checkActiveGame)
+    - (changeGameStatus)
+
+    Next question
+    - host update question index to indicate next question (updateQuestionIndex)
+    - player check if next question should be run (requestNextQuestion)
+
+    Current question
+    - host update which player current question is about (updatePlayerInQuestion)
+    - player check which player current question should be about (getPlayerInQuestion)
+*/
+
     ini_set("display_errors", 1); 
     require_once("functions.php");
 
@@ -17,8 +46,10 @@
     // Get all active games
     $games = getFileContents("activeGames.json");
 
-    // Create new game
+    // Continue based on actio key
     if($action == "createGame"){
+        // CREATE NEW GAME
+        // Requestparameters 
 
         // function to get a random Id
         function setRandomId(){
@@ -48,9 +79,11 @@
         "id" => $gameId,
         "players" => [$creatorName],
         "activeGame" => [
+            "host" => $creatorName,
             "game" => "No Active Game",
             "category" => "No category",
             "questionIndex" => 0,
+            "playerInQuestion" => "No player",
             "votes" => []
         ]];
           
@@ -71,7 +104,6 @@
         if($activeGame){
             $players = $activeGame["players"];
             sendJSON($players);
-
         }else{
             $message = ["message" => "no active game was found"];
             sendJson($message, 404);
@@ -135,13 +167,13 @@
 
             $game = $games[$gameIndex]["activeGame"]["game"];
             $category = $games[$gameIndex]["activeGame"]["category"];
+            $questionIndex = $games[$gameIndex]["activeGame"]["questionIndex"];
 
             if($game == "No Active Game"){
                 $message = False;
             }else{
-                $message = ["game" => $game, "category" => $category];
+                $message = ["game" => $game, "category" => $category, "questionIndex" => $questionIndex];
             }
-
             sendJSON($message);
 
         }else{
@@ -331,6 +363,38 @@
             sendJson($message);
             
             
+        }else{
+            $message = ["No game under that pin was found"];
+            sendJson($message, 404);
+        }
+    }else if($action == "updatePlayerInQuestion"){
+        // Get game by id
+        $gameId = $requestData["gameId"];
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId);  
+        
+        // If active game found change player in question status, otherwise infrom user
+        if($activeGame){
+
+            $player = $requestData["player"];
+            $games[$gameIndex]["activeGame"]["playerInQuestion"] = $player;
+            
+            // Update json file and inform user
+            saveToFile("activeGames.json", $games);
+
+            sendJson($games[$gameIndex]["activeGame"]["playerInQuestion"]);
+            
+        }else{
+            $message = ["No game under that pin was found"];
+            sendJson($message, 404);
+        }
+    }else if($action == "getPlayerInQuestion"){
+        // Get game by id
+        $gameId = $requestData["gameId"];
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId);  
+        
+        // If active game found change player in question status, otherwise infrom user
+        if($activeGame){
+            sendJson($games[$gameIndex]["activeGame"]["playerInQuestion"]);
         }else{
             $message = ["No game under that pin was found"];
             sendJson($message, 404);

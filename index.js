@@ -2,6 +2,7 @@
 /*
 TO DO:
     - Hamburger menu
+    - Overall CSS
     - Register more prompts
     - Timer should be saved in game array so if you join in the middle you will not have as long
 
@@ -9,7 +10,8 @@ TO DO:
     - Swipe for next card
 
     Whos most likely to
-    - 
+    - Timer should be saved in game array so if you join in the middle you will not have as long
+    - render with fetch q index
 
     Truth or Dare
     - Connect to handle game

@@ -15,6 +15,8 @@
     height: 17vh;
     border-radius: 5px;
     padding: 2vh;
+    font-family: outfit;
+    font-size: var(--fontSizeThree);
 }
 
 .fillInTheBlank > .wrapper > .questionBox > p{
@@ -24,12 +26,14 @@
 }
 
 .fillInTheBlank > .wrapper > .answers{
-
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
 }
 
 .fillInTheBlank > .wrapper > .answers > div{
-    border: 1px solid var(--blackGrey);
-    height: 6vh;
+    border: 3px solid var(--blackGrey);
+    height: 7vh;
     border-radius: 5px;
     padding: 2vh;
 
@@ -38,4 +42,38 @@
 
     font-family: outfit;
     font-size: var(--fontSizeFive);
+}
+
+.fillInTheBlank > .wrapper > .answers > div.mostVoted{
+    border: 3px solid var(--green);   
+}
+
+.fillInTheBlank > .wrapper > .answers > div.result{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.fillInTheBlank > .wrapper > .answers > div.result > .answerName{
+    background-color: var(--black);
+    color: var(--blackGrey);
+    position: absolute;
+    width: 17vw;
+    top: -17px;
+}
+
+.fillInTheBlank > .wrapper > .answers > div.result > .mostVoted{
+    color: var(--green);
+}
+
+.fillInTheBlank > .wrapper > .answers > div.result > div{
+    background-color: var(--blackGrey);
+    color: var(--orange);
+    font-size: var(--fontSizeFive);
+    height: 4vh;
+    width: 4vh;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

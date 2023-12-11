@@ -58,11 +58,11 @@
 
             // Look for answer key
             if(!isset($activeGame["activeGame"]["answers"])){
-                // If not found, create "answerW key and initialize it as an empty array
+                // If not found, create "answer key and initialize it as an empty array
                 $activeGame["activeGame"]["answers"] = [];
             }
 
-            // Save playwer answer
+            // Save player answer
             $activeGame["activeGame"]["answers"][$playerName] = $playerAnswer;
 
             // Update the game in the $games array
@@ -130,6 +130,28 @@
         if($activeGame){
             // Send back votes
             sendJSON($activeGame["activeGame"]["votes"]);
+        }else{
+            $message = ["message" => "no game with matching Id was found"];
+            sendJson($message, 404);
+        }
+    }else if($action == "clearVotes"){
+
+        $games = getFileContents("activeGames.json");
+
+        // Find active game based on gameId from request
+        $gameId = $requestData["gameId"];
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId); 
+
+        // If active game found handle votes, otherwise inform user
+        if($activeGame){
+            
+            // Remove votes
+            $games[$gameIndex]["activeGame"]["votes"] = [];
+            $games[$gameIndex]["activeGame"]["answers"] = [];
+
+            saveToFile("activeGames.json", $games);
+            sendJSON([$games[$gameIndex]["activeGame"]["votes"]]);
+
         }else{
             $message = ["message" => "no game with matching Id was found"];
             sendJson($message, 404);

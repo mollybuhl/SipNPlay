@@ -1,6 +1,6 @@
 "use strict";
 
-// Function to render start game
+// Function to render start game page
 function renderStartGame(game, category){
     let main = document.querySelector("main");
     main.removeAttribute("class");
@@ -30,7 +30,7 @@ function renderStartGame(game, category){
 
 }
 
-// Function to create new game, will be called by host of the game after clicking create game
+// Function to create a new game, will be called by host of the game after clicking create game
 async function createGame(game, category, creatorName){
 
     // Create a game
@@ -67,8 +67,9 @@ async function createGame(game, category, creatorName){
     <button id="startGameButton">START GAME</button>
     `;
 
-    // Leave game when clicking QUIT
+    // Leave current game when clicking QUIT
     document.querySelector(".buttonQuit").addEventListener("click", () => {
+        // Stop fetching current players
         clearInterval(updatePlayes);
         
         renderCategories(game);
@@ -168,9 +169,7 @@ async function createGame(game, category, creatorName){
                 renderFillInTheBlank(category, gameId);
                 break;
         }
-
     });
-
 }
 
 // This function will be called when the host has already created a game but is starting a new gameplay
@@ -367,8 +366,6 @@ function joinGame(playerName=null){
 
         // Call function to display currently joined players
         renderWaitingForGame(gameId);
-
-        
     })
 }
 
@@ -449,11 +446,12 @@ function renderWaitingForGame(gameId){
 
             let game = requestToStartGame.game;
             let category = requestToStartGame.category;
+            let questionIndex = requestToStartGame.questionIndex;
 
             // Start game based on user input
             switch(game){
                 case "Most Likely To":
-                    renderMostLikelyTo(category, gameId);
+                    renderMostLikelyTo(category, gameId, questionIndex);
                     break;
                 case "Truth or Dare":
                     truthORDareHandle(category, gameId);
@@ -462,7 +460,7 @@ function renderWaitingForGame(gameId){
                     renderWouldYouRather(category, gameId);
                     break;
                 case "Fill In The Blank":
-                    renderFillInTheBlank(category, gameId);
+                    renderFillInTheBlank(category, gameId, questionIndex);
                     break;
             }
         }   
