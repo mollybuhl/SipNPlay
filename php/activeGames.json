@@ -93,11 +93,19 @@
         ],
         "activeGame": {
             "host": "hel",
-            "game": "No Active Game",
-            "category": "No category",
-            "questionIndex": 0,
-            "playerInQuestion": "No player",
-            "votes": []
+            "game": "Fill In The Blank",
+            "category": "The Basic Version",
+            "questionIndex": 1,
+            "playerInQuestion": "stel",
+            "votes": [
+                "tooo",
+                "togethertogethrtogethereveryone"
+            ],
+            "answers": {
+                "moll": "tooo",
+                "molly": "togethertogethrtogethereveryone",
+                "mollytrolly": "wereallinthistogether"
+            }
         }
     }
 ]

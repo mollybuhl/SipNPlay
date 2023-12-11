@@ -1,7 +1,6 @@
 "use strict";
 /* TO DO:
     - Timer should be saved in game array so if you join in the middle you will not have as long
-    l leave game stop fetch
 */
 
 // Function to render moste likely to question and handle votes

@@ -11,7 +11,6 @@ TO DO:
 
     Whos most likely to
     - Timer should be saved in game array so if you join in the middle you will not have as long
-    - render with fetch q index
 
     Truth or Dare
     - Connect to handle game
@@ -22,7 +21,9 @@ TO DO:
     - Connect to leave game
 
     Fill in the blank
-    - Make it
+    - inform of no answers to vote on
+    - always call function with questionIndex from fetch
+    - clear current player in question on ending round
 
     Spin the bottle
     - 
