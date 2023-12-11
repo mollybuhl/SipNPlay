@@ -1,34 +1,4 @@
 <?php
-
-/*
-    To:
-    - host create new game (createGame)    
-    - get all current players (getPlayers)  
-
-    Player joining/leaving game
-    - player join an active game(joinGame)    
-    - player leave game (leaveGame) 
-
-    Game status
-    - player check if game has started (requestToStartGame)    
-    - host starting game (startGame)
-    - host end game for all players (endGame)
-    - host end current round for all players (endRound)
-
-
-    - check if there is a registered game with provided gameid (checkGameId)
-    - player check if there is an active game to join (checkActiveGame)
-    - (changeGameStatus)
-
-    Next question
-    - host update question index to indicate next question (updateQuestionIndex)
-    - player check if next question should be run (requestNextQuestion)
-
-    Current question
-    - host update which player current question is about (updatePlayerInQuestion)
-    - player check which player current question should be about (getPlayerInQuestion)
-*/
-
     ini_set("display_errors", 1); 
     require_once("functions.php");
 
@@ -337,7 +307,6 @@
             saveToFile("activeGames.json", $games);
 
             $message = $games[$gameIndex]["activeGame"]["questionIndex"];
-            //$message = ["Updated!"];
             
             sendJson($message);
         }else{
