@@ -211,6 +211,7 @@
             $games[$gameIndex]["activeGame"]["game"] = "No Active Game";
             $games[$gameIndex]["activeGame"]["category"] = "No category";
             $games[$gameIndex]["activeGame"]["questionIndex"] = 0;
+            $games[$gameIndex]["activeGame"]["playerInQuestion"] = "No player";
 
             // Update json file and inform user
             saveToFile("activeGames.json", $games);

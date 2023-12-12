@@ -1,12 +1,5 @@
 "use strict";
 
-/*
-    Fortsätt:
-    - inform of no answers to vote on
-    - always call function with questionIndex from fetch
-    - clear current player in question on ending round
-*/
-
 async function renderFillInTheBlank(category, gameId, questionIndex = 0){
 
     let main = document.querySelector("main");
@@ -221,7 +214,17 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
         delete allAnswersExceptPlayer[playerName];
     }
 
+    let length = Object.keys(allAnswersExceptPlayer).length;
+    console.log(length);
     // Present each of the other players answer
+    if(length === 0){
+        let infoBox = document.createElement("div");
+        infoBox.innerHTML = `
+        <p>No other players gave an answer</p>
+        `;
+        document.querySelector(".answers").appendChild(infoBox);
+    }
+
     for(let answer in allAnswersExceptPlayer){
         let answerBox = document.createElement("div");
         answerBox.innerHTML = `<p>${allAnswersExceptPlayer[answer]}</p>`;
