@@ -19,7 +19,6 @@
     // Continue based on actio key
     if($action == "createGame"){
         // CREATE NEW GAME
-        // Requestparameters 
 
         // function to get a random Id
         function setRandomId(){
@@ -54,6 +53,7 @@
             "category" => "No category",
             "questionIndex" => 0,
             "playerInQuestion" => "No player",
+            "timeLeft" => 30,
             "votes" => []
         ]];
           
@@ -365,6 +365,34 @@
         // If active game found change player in question status, otherwise infrom user
         if($activeGame){
             sendJson($games[$gameIndex]["activeGame"]["playerInQuestion"]);
+        }else{
+            $message = ["No game under that pin was found"];
+            sendJson($message, 404);
+        }
+    }else if($action == "updateTime"){
+        // Get game by id
+        $gameId = $requestData["gameId"];
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId);  
+        
+        // If active game found update time
+        if($activeGame){
+            $games[$gameIndex]["activeGame"]["timeLeft"] = $requestData["timeLeft"];
+            saveToFile("activeGames.json", $games);
+
+            sendJson($games[$gameIndex]["activeGame"]["timeLeft"]);
+        }else{
+            $message = ["No game under that pin was found"];
+            sendJson($message, 404);
+        }
+    }else if($action == "getTime"){
+        // Get game by id
+        $gameId = $requestData["gameId"];
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId);  
+
+        // If active game found return time
+        if($activeGame){
+
+            sendJson($games[$gameIndex]["activeGame"]["timeLeft"]);
         }else{
             $message = ["No game under that pin was found"];
             sendJson($message, 404);

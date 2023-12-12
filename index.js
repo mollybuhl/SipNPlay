@@ -4,14 +4,12 @@ TO DO:
     - Hamburger menu
     - Overall CSS
     - Register more prompts
-    - Timer should be saved in game array so if you join in the middle you will not have as long
+    - animate progresbar
 
     Never Have I ever
     - Swipe for next card
 
-    Whos most likely to
-    - Timer should be saved in game array so if you join in the middle you will not have as long
-
+ 
     Truth or Dare
     - Connect to handle game
     - Connect to leave game
@@ -21,9 +19,6 @@ TO DO:
     - Connect to leave game
 
     Fill in the blank
-    - inform of no answers to vote on
-    - always call function with questionIndex from fetch
-    - clear current player in question on ending round
 
     Spin the bottle
     - 

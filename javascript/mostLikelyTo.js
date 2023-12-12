@@ -1,7 +1,4 @@
 "use strict";
-/* TO DO:
-    - Timer should be saved in game array so if you join in the middle you will not have as long
-*/
 
 // Function to render moste likely to question and handle votes
 async function renderMostLikelyTo(category, gameId, questionIndex = 0){
@@ -113,7 +110,6 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
         checkActiveGame = setInterval( () => {
             checkIfGameExist(gameId, checkActiveGame);
             checkForActiveGame(gameId, answerTime, checkActiveGame);
-  
         },1000);
     }
 
@@ -186,9 +182,22 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
         }  
     });
 
-    // Set aswering timer for 30sec
+    // If host set initial timer
+    if(isHost){
+        let gameId = parseInt(localStorage.getItem("gameId"));
+
+        let requestDataForUpdateTimer = {
+            gameId: gameId,
+            action: "updateTime",
+            timeLeft: 30
+        }
+    
+        await handleGameFetch(requestDataForUpdateTimer);
+    }
+
+    // Get and display answering time
     let progressbar = document.querySelector(".progressbar");
-    let answerTime = runTimer(30, progressbar,function(){
+    let answerTime = await runTimer(30,progressbar,function(){
         clearInterval(checkActiveGame);
         renderMostLikelyToResult(questionIndex);
     });

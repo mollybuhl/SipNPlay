@@ -136,29 +136,48 @@ function renderInstructions(steps) {
 
 }
 
-// Function to run a set timer
-function runTimer(time, progressbar, callback) {
+// Function to set and run a timer
+async function runTimer(totalTime, progressbar, callback) {
+    
+    let gameId = parseInt(localStorage.getItem("gameId"));
 
-    let timeLeft = time;
+    // Request tofetch time for timer
+    let requestDataToGetTimeLeft = {
+        gameId: gameId,
+        action: "getTime",
+    }
+
+    let timeLeft = await handleGameFetch(requestDataToGetTimeLeft);
+    //let timeLeft = time;
 
     function isTimeLeft() {
         return timeLeft > -1;
     }
 
-    let countdownTimer = setInterval(function () {
+    let countdownTimer = setInterval(async function () {
         if (isTimeLeft()) {
             const timeRemaining = timeLeft--;
-            const progress = (100 / time) * timeRemaining;
+            const progress = (100 / totalTime) * timeRemaining;
             progressbar.style.width = `${progress}%`;
+
+            // Update timer key in active game
+            let requestDataForUpdateTimer = {
+                gameId: gameId,
+                action: "updateTime",
+                timeLeft: timeLeft
+            }
+
+            await handleGameFetch(requestDataForUpdateTimer);
+
         } else {
             clearInterval(countdownTimer);
             if (callback) {
                 callback();
             }
         }
-
-
     },1000);
 
     return countdownTimer; // Return the time ID
 }
+
+

@@ -153,9 +153,22 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0){
         }
     })
 
+    // If host set initial timer
+    if(isHost){
+        let gameId = parseInt(localStorage.getItem("gameId"));
+
+        let requestDataForUpdateTimer = {
+            gameId: gameId,
+            action: "updateTime",
+            timeLeft: 30
+        }
+    
+        await handleGameFetch(requestDataForUpdateTimer);
+    }
+
     // Set aswering timer for 15sec
     let progressbar = document.querySelector(".progressbar");
-    let answerTime = runTimer(15, progressbar, async function(){
+    let answerTime = await runTimer(30, progressbar, async function(){
         // Save players answer
         let playerAnswer = document.querySelector(".fillInTheBlankAnswer").value;
         let playerName = window.localStorage.getItem("playerName");
@@ -215,7 +228,7 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
     }
 
     let length = Object.keys(allAnswersExceptPlayer).length;
-    console.log(length);
+
     // Present each of the other players answer
     if(length === 0){
         let infoBox = document.createElement("div");
@@ -333,9 +346,23 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
     
     })
 
-    // Set aswering timer for 15sec, then present results
+    let isHost = window.localStorage.getItem("host");
+    //If host set timer for voting
+    if(isHost){
+        let gameId = parseInt(localStorage.getItem("gameId"));
+
+        let requestDataForUpdateTimer = {
+            gameId: gameId,
+            action: "updateTime",
+            timeLeft: 15
+        }
+    
+        await handleGameFetch(requestDataForUpdateTimer);
+    }
+
+    // Set aswering timer for 15 sec, then present results
     let progressbar = document.querySelector(".progressbar");
-    let answerTime = runTimer(15, progressbar, async function(){
+    let answerTime = await runTimer(15, progressbar, async function(){
 
         // Clear voting boxes to replace with result boxes
         document.querySelector(".answers").innerHTML = ``;

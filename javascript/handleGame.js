@@ -483,6 +483,8 @@ function renderWaitingForGame(gameId){
 // Intervals that needs to be cleared when leaving the game can be sent as parameters 
 function leaveGame(interval1 = false, interval2 = false, interval3 = false){
     
+    console.log("leaving");
+
     let gameId = parseInt(localStorage.getItem("gameId"));
     let playerName = localStorage.getItem("playerName");
     let isHost = window.localStorage.getItem("host");
