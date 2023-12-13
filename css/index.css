@@ -49,7 +49,6 @@ body {
     padding: 4vh;
 }
 
-/*header*/
 header {
     height: 10%;
     width: 100%;
@@ -57,7 +56,44 @@ header {
     justify-content: space-between;
 }
 
-/*MENU*/
+main {
+    height: 80%;
+}
+
+footer {
+    height: 10%;
+}
+
+/*SipNPlay header logo*/
+#headerLogo {
+    font-family: museoModerno;
+    font-weight: var(--fontMedium);
+    font-size: var(--fontSizeThree);
+
+    height: 100%;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/*Hamburger menu*/
+.menuPopupBackground{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #0000007a;
+    transition: 0.3s;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.menuPopupBackground.active{
+    opacity: 1;
+    pointer-events: fill;
+}
+
 .menuPopup {
     height: 100%;
     width: 70%;
@@ -75,22 +111,34 @@ header {
     justify-content: space-between;
     flex-direction: column;
     padding: 4vh;
+
+    transition: 0.3s;
+    opacity: 0;
+    right: -500px;
+    pointer-events: none;
+    
+}
+
+.menuPopup.active{
+   opacity: 1;
+   right: 0px;
+   pointer-events: fill;
 }
 
 .menuPopup>.fa-xmark {
     align-self: flex-end;
 }
 
-.menuOption {
+.menuOption{
     display: flex;
-    gap: 1vh;
+    gap: 2vh;
 }
 
 .menuOptions>div {
     cursor: pointer;
 }
 
-.fa-martini-glass-empty,
+.games > svg,
 .fa-user-group,
 .fa-earth-americas,
 .fa-circle-info {
@@ -98,12 +146,10 @@ header {
     align-self: center;
 }
 
-main {
-    height: 80%;
-}
-
-footer {
-    height: 10%;
+.fa-bars,
+.fa-xl {
+    margin-top: 1vh;
+    margin-left: 4vh;
 }
 
 /* INSTRUCTIONS */
@@ -166,25 +212,6 @@ footer {
     height: 10px;
     width: 10px;
     border-radius: 50%;
-}
-
-/*SipNPlay header logo*/
-#headerLogo {
-    font-family: museoModerno;
-    font-weight: var(--fontMedium);
-    font-size: var(--fontSizeThree);
-
-    height: 100%;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/*Hamburger menu*/
-.fa-bars,
-.fa-xl {
-    margin-top: 1vh;
-    margin-left: 4vh;
 }
 
 /*Category page*/

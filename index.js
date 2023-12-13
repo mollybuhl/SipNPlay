@@ -10,7 +10,6 @@ TO DO:
     Never Have I ever
     - Swipe for next card
 
- 
     Truth or Dare
     - Connect to handle game
     - Connect to leave game
@@ -25,6 +24,9 @@ TO DO:
 
 
 */
+createMenu();
+// Display Menu when clicking hamburger icon
+document.querySelector(".fa-bars").addEventListener("click", renderMenu);
 
 
 // On load, if user is already in a game display this, otherwise render game display
@@ -45,9 +47,6 @@ if(localStorage.getItem("currentGame") === "true"){
     // Render game display
     renderGameDisplay()
 }
-
-// Display Menu when clicking hamburger icon
-document.querySelector(".fa-bars").addEventListener("click", renderMenu);
 
 
 
