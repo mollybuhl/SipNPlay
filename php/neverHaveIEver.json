@@ -15,6 +15,91 @@
                 "id": 3,
                 "category": "The Basic Version",
                 "question": "had a holiday romance"
+            },
+            {
+                "id": 4,
+                "category": "The Basic Version",
+                "question": "used someone else's toothbrush"
+            },
+            {
+                "id": 5,
+                "category": "The Basic Version",
+                "question": "broken a bone"
+            },
+            {
+                "id": 6,
+                "category": "The Basic Version",
+                "question": "been mugged"
+            },
+            {
+                "id": 7,
+                "category": "The Basic Version",
+                "question": "eaten leftover food from another table at a restaurant"
+            },
+            {
+                "id": 8,
+                "category": "The Basic Version",
+                "question": "stolen anything"
+            },
+            {
+                "id": 9,
+                "category": "The Basic Version",
+                "question": "had a celebrity crush"
+            },
+            {
+                "id": 10,
+                "category": "The Basic Version",
+                "question": "had a crush on a childhood teacher"
+            },
+            {
+                "id": 11,
+                "category": "The Basic Version",
+                "question": "met an idol"
+            },
+            {
+                "id": 12,
+                "category": "The Basic Version",
+                "question": "tried a new hobby"
+            },
+            {
+                "id": 13,
+                "category": "The Basic Version",
+                "question": "been in love before"
+            },
+            {
+                "id": 14,
+                "category": "The Basic Version",
+                "question": "made a bucket list"
+            },
+            {
+                "id": 15,
+                "category": "The Basic Version",
+                "question": "googled myself"
+            },
+            {
+                "id": 16,
+                "category": "The Basic Version",
+                "question": "traveled solo"
+            },
+            {
+                "id": 17,
+                "category": "The Basic Version",
+                "question": "pretended to be on the phone"
+            },
+            {
+                "id": 18,
+                "category": "The Basic Version",
+                "question": "met a celebrity"
+            },
+            {
+                "id": 19,
+                "category": "The Basic Version",
+                "question": "sleepwalked"
+            },
+            {
+                "id": 20,
+                "category": "The Basic Version",
+                "question": "stayed up all night"
             }
         ],
         "Not Safe For Work": [
@@ -32,23 +117,193 @@
                 "id": 3,
                 "category": "Not Safe For Work",
                 "question": "been sick on public transport"
+            },
+            {
+                "id": 4,
+                "category": "Not Safe For Work",
+                "question": "kissed a friend's sibling"
+            },
+            {
+                "id": 5,
+                "category": "Not Safe For Work",
+                "question": "been refused entry to a club"
+            },
+            {
+                "id": 6,
+                "category": "Not Safe For Work",
+                "question": "been thrown out of a bar or club"
+            },
+            {
+                "id": 7,
+                "category": "Not Safe For Work",
+                "question": "kissed a celebrity"
+            },
+            {
+                "id": 8,
+                "category": "Not Safe For Work",
+                "question": "gone on a blind date"
+            },
+            {
+                "id": 9,
+                "category": "Not Safe For Work",
+                "question": "dined and dashed"
+            },
+            {
+                "id": 10,
+                "category": "Not Safe For Work",
+                "question": "spent more than 2000kr on a night out"
+            },
+            {
+                "id": 11,
+                "category": "Not Safe For Work",
+                "question": "flirted with a bartender for a free drink"
+            },
+            {
+                "id": 12,
+                "category": "Not Safe For Work",
+                "question": "hid a hickey with clothing"
+            },
+            {
+                "id": 13,
+                "category": "Not Safe For Work",
+                "question": "flirted with a teacher"
+            },
+            {
+                "id": 14,
+                "category": "Not Safe For Work",
+                "question": "snuck someone into the house"
+            },
+            {
+                "id": 15,
+                "category": "Not Safe For Work",
+                "question": "participated in a lap dance"
+            },
+            {
+                "id": 16,
+                "category": "Not Safe For Work",
+                "question": "kept someone’s worn piece of clothing just to smell them"
+            },
+            {
+                "id": 17,
+                "category": "Not Safe For Work",
+                "question": "sent a dirty text to the wrong person"
+            },
+            {
+                "id": 18,
+                "category": "Not Safe For Work",
+                "question": "gone to a party I wasn’t invited to."
+            },
+            {
+                "id": 19,
+                "category": "Not Safe For Work",
+                "question": "stalked an ex on social media"
+            },
+            {
+                "id": 20,
+                "category": "Not Safe For Work",
+                "question": "kissed my best friend"
             }
         ],
         "Spicy Edition": [
             {
-            "id": 1,
-            "category": "Spicy Edition",
-            "question": "gone skinny dipping with someone"
+                "id": 1,
+                "category": "Spicy Edition",
+                "question": "gone skinny dipping with someone"
             },
             {
                 "id": 2,
                 "category": "Spicy Edition",
-                "question": "hid a hickey with clothing"
+                "question": "tried role-playing"
             },
             {
                 "id": 3,
                 "category": "Spicy Edition",
                 "question": "played strip poker"
+            },
+            {
+                "id": 4,
+                "category": "Spicy Edition",
+                "question": "sent a naughty photo to my spouse"
+            },
+            {
+                "id": 5,
+                "category": "Spicy Edition",
+                "question": "used a safe word"
+            },
+            {
+                "id": 6,
+                "category": "Spicy Edition",
+                "question": "licked food off someone"
+            },
+            {
+                "id": 7,
+                "category": "Spicy Edition",
+                "question": "joined the mile high club"
+            },
+            {
+                "id": 8,
+                "category": "Spicy Edition",
+                "question": "faked an orgasm"
+            },
+            {
+                "id": 9,
+                "category": "Spicy Edition",
+                "question": "made a sex tape"
+            },
+            {
+                "id": 10,
+                "category": "Spicy Edition",
+                "question": "played strip poker"
+            },
+            {
+                "id": 11,
+                "category": "Spicy Edition",
+                "question": "skipped foreplay"
+            },
+            {
+                "id": 12,
+                "category": "Spicy Edition",
+                "question": "fallen asleep during sex"
+            },
+            {
+                "id": 13,
+                "category": "Spicy Edition",
+                "question": "had a one night stand"
+            },
+            {
+                "id": 14,
+                "category": "Spicy Edition",
+                "question": "taken a sexy selfie"
+            },
+            {
+                "id": 15,
+                "category": "Spicy Edition",
+                "question": "been caught having sex"
+            },
+            {
+                "id": 16,
+                "category": "Spicy Edition",
+                "question": "given a massage with a happy ending"
+            },
+            {
+                "id": 17,
+                "category": "Spicy Edition",
+                "question": "shaved my partner’s pubic hair"
+            },
+            {
+                "id": 18,
+                "category": "Spicy Edition",
+                "question": "had sex underwater"
+            },
+            {
+                "id": 19,
+                "category": "Spicy Edition",
+                "question": "done it in a public place"
+            },
+            {
+                "id": 20,
+                "category": "Spicy Edition",
+                "question": "been to an adult store"
             }
         ],
         "Girl Dinner":
@@ -67,7 +322,92 @@
             "id": 3,
             "category": "Girl Dinner",
             "question": "dumped someone over text"
-            }  
+            },
+            {
+            "id": 4,
+            "category": "Girl Dinner",
+            "question": "ghosted someone"
+            }  ,
+            {
+            "id": 5,
+            "category": "Girl Dinner",
+            "question": "lied to someone in this room"
+            }  ,
+            {
+            "id": 6,
+            "category": "Girl Dinner",
+            "question": "catfished someone"
+            }  ,
+            {
+            "id": 7,
+            "category": "Girl Dinner",
+            "question": "stalked an ex's new partner on social media"
+            }  ,
+            {
+            "id": 8,
+            "category": "Girl Dinner",
+            "question": "gone out with a friend's ex"
+            }  ,
+            {
+            "id": 9,
+            "category": "Girl Dinner",
+            "question": "said 'I love you' when I didn't mean it"
+            }  ,
+            {
+            "id": 10,
+            "category": "Girl Dinner",
+            "question": "been sick on a friend"
+            }  ,
+            {
+            "id": 11,
+            "category": "Girl Dinner",
+            "question": "been cheated on"
+            }  ,
+            {
+            "id": 12,
+            "category": "Girl Dinner",
+            "question": "cheated on someone"
+            }  ,
+            {
+            "id": 13,
+            "category": "Girl Dinner",
+            "question": "slid into someone's DMs"
+            }  ,
+            {
+            "id": 14,
+            "category": "Girl Dinner",
+            "question": "been in love"
+            }  ,
+            {
+            "id": 15,
+            "category": "Girl Dinner",
+            "question": "snooped through someone's phone"
+            }  ,
+            {
+            "id": 16,
+            "category": "Girl Dinner",
+            "question": "used a dating app"
+            }  ,
+            {
+            "id": 17,
+            "category": "Girl Dinner",
+            "question": "kissed more than one person in 24 hours"
+            }  ,
+            {
+            "id": 18,
+            "category": "Girl Dinner",
+            "question": "made out in a movie theater"
+            }  ,
+            {
+            "id": 19,
+            "category": "Girl Dinner",
+            "question": "dated someone older than me"
+            }  ,
+            {
+            "id": 20,
+            "category": "Girl Dinner",
+            "question": "dated someone younger than me"
+            }    
         ]  
     }
 ]
