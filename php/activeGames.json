@@ -1,129 +1,17 @@
 [
     {
-        "id": 3518,
+        "id": 9377,
         "players": [
-            "molls",
-            "mand",
-            "mamama"
+            "mollan"
         ],
         "activeGame": {
-            "game": "Fill In The Blank",
-            "category": "The Basic Version",
-            "questionIndex": 2,
-            "playerInQuestion": "molls",
-            "votes": [
-                "negativity"
-            ],
-            "answers": {
-                "majs": "negativity",
-                "miriam": "svar",
-                "mamama": ""
-            }
-        }
-    },
-    {
-        "id": 1294,
-        "players": [
-            "myGame"
-        ],
-        "activeGame": {
-            "host": "myGame",
-            "game": "Fill In The Blank",
-            "category": "The Basic Version",
-            "questionIndex": 0,
-            "playerInQuestion": "No player",
-            "votes": [],
-            "answers": {
-                "mollymollymolly": ""
-            }
-        }
-    },
-    {
-        "id": 5829,
-        "players": [
-            "stayyy"
-        ],
-        "activeGame": {
-            "host": "stayyy",
+            "host": "mollan",
             "game": "No Active Game",
             "category": "No category",
             "questionIndex": 0,
             "playerInQuestion": "No player",
+            "timeLeft": 30,
             "votes": []
-        }
-    },
-    {
-        "id": 9496,
-        "players": [
-            "testignCheat"
-        ],
-        "activeGame": {
-            "host": "testignCheat",
-            "game": "Most Likely To",
-            "category": "The Basic Version",
-            "questionIndex": 1,
-            "playerInQuestion": "No player",
-            "votes": [
-                " mollytolly",
-                " lolol",
-                " testignCheat",
-                " testignCheat"
-            ]
-        }
-    },
-    {
-        "id": 1125,
-        "players": [
-            "testagain"
-        ],
-        "activeGame": {
-            "host": "testagain",
-            "game": "No Active Game",
-            "category": "No category",
-            "questionIndex": 0,
-            "playerInQuestion": "No player",
-            "votes": []
-        }
-    },
-    {
-        "id": 2081,
-        "players": [
-            "hel",
-            "stel"
-        ],
-        "activeGame": {
-            "host": "hel",
-            "game": "Fill In The Blank",
-            "category": "The Basic Version",
-            "questionIndex": 1,
-            "playerInQuestion": "stel",
-            "votes": [
-                "tooo",
-                "togethertogethrtogethereveryone"
-            ],
-            "answers": {
-                "moll": "tooo",
-                "molly": "togethertogethrtogethereveryone",
-                "mollytrolly": "wereallinthistogether"
-            }
-        }
-    },
-    {
-        "id": 7639,
-        "players": [
-            "stacy",
-            "macy"
-        ],
-        "activeGame": {
-            "host": "stacy",
-            "game": "Most Likely To",
-            "category": "The Basic Version",
-            "questionIndex": 1,
-            "playerInQuestion": "No player",
-            "timeLeft": -1,
-            "votes": [
-                " stacy"
-            ]
         }
     }
 ]
