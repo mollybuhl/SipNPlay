@@ -51,7 +51,7 @@ async function createGame(game, category, creatorName){
     let main = document.querySelector("main");
     main.innerHTML = `
     <h2>GAME PIN</h2>
-    <div class="resultName gameId">${gameId}</div>
+    <div class="gameId">${gameId}</div>
     <h4>Participants</h4>
     <div class="participants"></div>
     <p class="waitingText">Waiting on others to join the game...</p>
@@ -64,7 +64,7 @@ async function createGame(game, category, creatorName){
             <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
             <p>QUIT</p>
     </div>
-    <button id="startGameButton">START GAME</button>
+    <button id="startGameButton">START</button>
     `;
 
     // Leave current game when clicking QUIT
@@ -93,7 +93,7 @@ async function createGame(game, category, creatorName){
         // Display new palyers
         currentPlayers.forEach(player => {
             if(!displayedPlayers.includes(player)){
-                let playerName = document.createElement("p");
+                let playerName = document.createElement("div");
                 playerName.classList.add(player);
                 playerName.textContent = player;
                 displayedPlayers.push(player);
@@ -194,7 +194,7 @@ async function startNewGame(game, category){
 
     main.innerHTML = `
     <h2>GAME PIN</h2>
-    <div class="resultName gameId">${gameId}</div>
+    <div class="gameId">${gameId}</div>
     <h4>Participants</h4>
     <div class="participants"></div>
     <p class="waitingText">Waiting on others to join the game...</p>
@@ -207,7 +207,7 @@ async function startNewGame(game, category){
             <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
             <p>QUIT</p>
     </div>
-    <button id="startGameButton">START GAME</button>
+    <button id="startGameButton">START</button>
     `;
 
     // Leave game when clicking QUIT
@@ -234,7 +234,7 @@ async function startNewGame(game, category){
         // Display new palyers
         currentPlayers.forEach(player => {
             if(!displayedPlayers.includes(player)){
-                let playerName = document.createElement("p");
+                let playerName = document.createElement("div");
                 playerName.classList.add(player);
                 playerName.textContent = player;
                 displayedPlayers.push(player);
@@ -328,7 +328,7 @@ function joinGame(playerName=null){
         main.innerHTML = `
         <h2>GAME PIN</h2>
         <input type="number" placeholder="Game Pin..." class="gameId"></input>
-        <button class="joinGame">JOIN GAME</button>
+        <button class="joinGame longButton">JOIN GAME</button>
         `;
     }else{
         main.innerHTML = `
@@ -336,7 +336,7 @@ function joinGame(playerName=null){
         <input type="text" placeholder="Type here..."  class="name"></input>
         <h2>Game Pin</h2>
         <input type="number" placeholder="Type here..." class="gameId"></input>
-        <button class="joinGame">JOIN GAME</button>
+        <button class="joinGame longButton">JOIN GAME</button>
         `;
     }
 
@@ -407,7 +407,7 @@ function renderWaitingForGame(gameId){
         // Display new palyers
         currentPlayers.forEach(player => {
             if(!displayedPlayers.includes(player)){
-                let playerName = document.createElement("p");
+                let playerName = document.createElement("div");
                 playerName.classList.add(player);
                 playerName.textContent = player;
                 displayedPlayers.push(player);
@@ -483,8 +483,6 @@ function renderWaitingForGame(gameId){
 // Intervals that needs to be cleared when leaving the game can be sent as parameters 
 function leaveGame(interval1 = false, interval2 = false, interval3 = false){
     
-    console.log("leaving");
-
     let gameId = parseInt(localStorage.getItem("gameId"));
     let playerName = localStorage.getItem("playerName");
     let isHost = window.localStorage.getItem("host");
@@ -498,8 +496,8 @@ function leaveGame(interval1 = false, interval2 = false, interval3 = false){
         <div>
             <p>Are you sure you want to leave the game?</p>
             <div>   
-                <button class="leaveGame">Leave Game</button>
-                <button class="closePopup">Keep Playing</button>
+                <button class="leaveGame">YES</button>
+                <button class="closePopup clearDesign">NO</button>
             </div>
         </div>
         `;
@@ -508,8 +506,8 @@ function leaveGame(interval1 = false, interval2 = false, interval3 = false){
         <div>
             <p>Are you sure you want to end the game for all players?</p>
             <div>   
-                <button class="leaveGame">End Game</button>
-                <button class="closePopup">Keep Playing</button>
+                <button class="leaveGame">YES</button>
+                <button class="closePopup clearDesign">NO</button>
             </div>
         </div>
         `;

@@ -1,7 +1,6 @@
 "use strict";
 /*
 TO DO:
-    - Hamburger menu
     - Overall CSS
     - Register more prompts
     - animate progresbar

@@ -11,7 +11,7 @@
 }
 
 .fillInTheBlank > .wrapper > .questionBox{
-    background-color: var(--blackGrey);
+    background-color: var(--darkGrey);
     height: 17vh;
     border-radius: 5px;
     padding: 2vh;
@@ -32,7 +32,7 @@
 }
 
 .fillInTheBlank > .wrapper > .answers > div{
-    border: 3px solid var(--blackGrey);
+    border: 3px solid var(--darkGrey);
     height: 7vh;
     border-radius: 5px;
     padding: 2vh;
@@ -46,6 +46,7 @@
 
 .fillInTheBlank > .wrapper > .answers > div.mostVoted{
     border: 3px solid var(--green);   
+    color: var(--green);
 }
 
 .fillInTheBlank > .wrapper > .answers > div.result{
@@ -55,14 +56,14 @@
 }
 
 .fillInTheBlank > .wrapper > .answers > div.result > .answerName{
-    background-color: var(--black);
-    color: var(--blackGrey);
+    background-color: var(--darkGrey);
+    color: var(--darkGrey);
     position: absolute;
     width: 17vw;
     top: -17px;
 }
 
-.fillInTheBlank > .wrapper > .answers > div.result > .mostVoted{
+.fillInTheBlank > .wrapper > .answers > div.mostVoted > .answerName {
     color: var(--green);
 }
 
