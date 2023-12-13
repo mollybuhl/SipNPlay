@@ -3,7 +3,7 @@
 // Global variables to track index
 let truthIndex = 0;
 let dareIndex = 0;
-let playerIndex = 0;
+let playerTODIndex = 0;
 
 // Setter and getter function for truth index
 function setTruthIndex(index) {
@@ -23,12 +23,12 @@ function getDareIndex() {
     return dareIndex;
 }
 
-function setPlayerIndex(index) {
-    playerIndex = index;
+function setPlayerTODIndex(index) {
+    playerTODIndex = index;
 }
 
-function getPlayerIndex() {
-    return playerIndex;
+function getPlayerTODIndex() {
+    return playerTODIndex;
 }
 
 
@@ -44,11 +44,11 @@ async function truthORDareHandle(category, gameId) {
     let players = await handleGameFetch(requestData);
 
     let index;
-    if (players.length - 1 < getPlayerIndex()) {
-        setPlayerIndex(0);
-        index = getPlayerIndex()
+    if (players.length - 1 < getPlayerTODIndex()) {
+        setPlayerTODIndex(0);
+        index = getPlayerTODIndex()
     } else {
-        index = getPlayerIndex()
+        index = getPlayerTODIndex()
     }
 
     let main = document.querySelector("main");
@@ -164,7 +164,7 @@ async function renderTruthORDareQuestion(type, category, gameId) {
                 }
             }
 
-            setPlayerIndex(getPlayerIndex() + 1)
+            setPlayerTODIndex(getPlayerTODIndex() + 1)
 
             truthORDareHandle(category, gameId)
         });

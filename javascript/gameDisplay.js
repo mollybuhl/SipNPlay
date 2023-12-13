@@ -1,7 +1,7 @@
 "use strict";
 
 // Function to render game display, current game will be true if the user have already joined a game, otherwise false
-function renderGameDisplay(currentGame = false){
+function renderGameDisplay(currentGame = false) {
 
     let main = document.querySelector("main");
     main.removeAttribute("class");
@@ -132,7 +132,7 @@ function renderGameDisplay(currentGame = false){
     `;
 
     // If user is already in a game load otion to leave game, otherwise load option to join game
-    if(currentGame){
+    if (currentGame) {
         let gameId = localStorage.getItem("gameId");
         let bottomBox = document.createElement("div");
         bottomBox.classList.add("leavGameDisplay");
@@ -143,7 +143,7 @@ function renderGameDisplay(currentGame = false){
         main.appendChild(bottomBox);
 
         document.querySelector(".leaveGame").addEventListener("click", leaveGame);
-    }else{
+    } else {
         let bottomBox = document.createElement("div");
         bottomBox.classList.add("joinGame");
         bottomBox.innerHTML = `
@@ -155,13 +155,13 @@ function renderGameDisplay(currentGame = false){
         main.appendChild(bottomBox);
 
         // Render join game by ID on click
-        main.querySelector(".joinGame").addEventListener("click",() => {
+        main.querySelector(".joinGame").addEventListener("click", () => {
             joinGame();
         });
     }
 
     // Display game category or render play when clicking on game
-    main.querySelector(".neverHaveIEver").addEventListener("click",() => {
+    main.querySelector(".neverHaveIEver").addEventListener("click", () => {
         renderCategoryLocalGame("Never Have I Ever");
     });
 
@@ -177,13 +177,13 @@ function renderGameDisplay(currentGame = false){
         renderCategories("Would You Rather");
     });
 
-    main.querySelector(".spinTheBottle").addEventListener("click",()=>{
-        spinTheBottleHandle();
-    } );
-    
+    main.querySelector(".spinTheBottle").addEventListener("click", () => {
+        renderStartGame("Spin The Bottle", "No Category");
+    });
+
     // Remove quit button from footer
     let footer = document.querySelector("footer");
-    footer.innerHTML=``;
+    footer.innerHTML = ``;
     footer.classList.add("removed");
 }
 
@@ -209,7 +209,7 @@ function renderCategories(game) {
     // The basic version
     main.querySelector(".theBasicVersion").addEventListener("click", () => {
         let category = "The Basic Version";
-        renderStartGame(game, category);  
+        renderStartGame(game, category);
     });
 
     // Not safe for work
@@ -241,16 +241,16 @@ function renderCategories(game) {
     `;
 
     footer.querySelector(".buttonQuit").addEventListener("click", () => {
-        if(localStorage.getItem("currentGame") === "true"){
+        if (localStorage.getItem("currentGame") === "true") {
             renderGameDisplay(true);
-        }else{
+        } else {
             renderGameDisplay();
         }
     });
 }
 
 // Function to render category page for localy hosted games - not multiplayer
-function renderCategoryLocalGame(game){
+function renderCategoryLocalGame(game) {
 
     // Structure of main
     let main = document.querySelector("main");
@@ -267,43 +267,43 @@ function renderCategoryLocalGame(game){
 
     // Selecting a category and render game on click
     let category;
-    
+
     // The basic version
-    main.querySelector(".theBasicVersion").addEventListener("click", () =>{
-        category = "The Basic Version";  
+    main.querySelector(".theBasicVersion").addEventListener("click", () => {
+        category = "The Basic Version";
         loadGame();
     });
 
     // Not safe for work
-    main.querySelector(".notSafeForWork").addEventListener("click", () =>{
+    main.querySelector(".notSafeForWork").addEventListener("click", () => {
         category = "Not Safe For Work";
         loadGame();
     });
 
     // Spicy edition
-    main.querySelector(".spicyEdition").addEventListener("click", () =>{
+    main.querySelector(".spicyEdition").addEventListener("click", () => {
         category = "Spicy Edition";
         loadGame();
     });
 
     // Girl Dinner
-    main.querySelector(".girlDinner").addEventListener("click", () =>{
+    main.querySelector(".girlDinner").addEventListener("click", () => {
         category = "Girl Dinner";
         loadGame();
     });
 
-    function loadGame(){
-        if(game === "Never Have I Ever"){
+    function loadGame() {
+        if (game === "Never Have I Ever") {
             renderNeverHaveIEver(category);
         }
-        
+
     }
-    
+
 
     // When clicking exit go back to game display
     let footer = document.querySelector("footer");
 
-    footer.innerHTML=`
+    footer.innerHTML = `
     <div class="buttonQuit">
         <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
         <p>BACK</p>

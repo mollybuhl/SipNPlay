@@ -1,8 +1,32 @@
 "use strict";
+let playerSTBIndex = 0;
 
-spinTheBottleHandle()
+function setPlayerSTBIndex(index) {
+    playerSTBIndex = index;
+}
 
-function spinTheBottleHandle() {
+function getPlayerSTBIndex() {
+    return playerSTBIndex;
+}
+
+async function spinTheBottleHandle(gameId) {
+    console.log(gameId)
+    // Fetch current players
+    let requestData = {
+        action: "getPlayers",
+        gameId: gameId
+    }
+
+    let players = await handleGameFetch(requestData);
+
+    let index;
+    if (players.length - 1 < getPlayerSTBIndex()) {
+        setPlayerSTBIndex(0);
+        index = getPlayerSTBIndex()
+    } else {
+        index = getPlayerSTBIndex()
+    }
+
     const main = document.querySelector("main");
     main.removeAttribute("class");
 
@@ -10,7 +34,7 @@ function spinTheBottleHandle() {
     main.innerHTML = `
         <div id="spinTheBottleWrapper">
             <h1>Spin The Bottle</h1>
-            <h2>It's <span>Lasse</span>'s turn</h2>
+            <h2>It's <span>${players[index]}</span>'s turn</h2>
             <div id="circle">
                 <div class="challenge" style="--i:1;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
@@ -110,28 +134,28 @@ function spinTheBottleHandle() {
 
             if (deg >= 0 && deg <= 60) {
                 // Take a sip of someone else's drink
-                displaySpinTheBottleResult("Take a sip of someone else's drink", "Lasse");
+                displaySpinTheBottleResult("Take a sip of someone else's drink", players[index], gameId);
             } else if (deg >= 60 && deg <= 120) {
                 // Take a shot
-                displaySpinTheBottleResult("Take a shot", "Lasse");
+                displaySpinTheBottleResult("Take a shot", players[index], gameId);
             } else if (deg >= 120 && deg <= 180) {
                 // Down the rest of your drink
-                displaySpinTheBottleResult("Down the rest of your drink", "Lasse");
+                displaySpinTheBottleResult("Down the rest of your drink", players[index], gameId);
             } else if (deg >= 180 && deg <= 240) {
                 // Pick a friend and take a sip together
-                displaySpinTheBottleResult("Pick a friend and take a sip together", "Lasse");
+                displaySpinTheBottleResult("Pick a friend and take a sip together", players[index], gameId);
             } else if (deg >= 240 && deg <= 300) {
                 // Take a sip of someone else's drink
-                displaySpinTheBottleResult("Take a sip of your drink", "Lasse");
+                displaySpinTheBottleResult("Take a sip of your drink", players[index], gameId);
             } else if (deg >= 300 && deg <= 360) {
                 // Take 3 shots in a row
-                displaySpinTheBottleResult("Take 3 shots in a row", "Lasse");
+                displaySpinTheBottleResult("Take 3 shots in a row", players[index], gameId);
             }
         }, 5000);
     })
 }
 
-function displaySpinTheBottleResult(challenge, name) {
+function displaySpinTheBottleResult(challenge, name, gameId) {
 
     // Results should display different svgs using switch
     let svg;
@@ -281,6 +305,7 @@ function displaySpinTheBottleResult(challenge, name) {
 
     // Render new round of Spin The Bottle
     document.querySelector(".nextButton").addEventListener("click", () => {
-        spinTheBottleHandle()
+        setPlayerSTBIndex(getPlayerSTBIndex() + 1)
+        spinTheBottleHandle(gameId)
     });
 }
