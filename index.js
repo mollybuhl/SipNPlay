@@ -20,8 +20,6 @@ TO DO:
     Spin the bottle
     - Connect to handle game
     - Connect to leave game
-
-
 */
 createMenu();
 // Display Menu when clicking hamburger icon
