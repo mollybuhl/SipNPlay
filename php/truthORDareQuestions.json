@@ -5,60 +5,31 @@
                 "When was the last time you cried?",
                 "When was the last time you lied?",
                 "What's your biggest fear?",
-                "Who was your first celebrity crush?",
-                "Have you ever broken the law?",
-                "Have you ever cheated in an exam?",
-                "What's a bad habit of yours?",
-                "Have you ever peed in the shower?",
-                "What's the biggest misconception about you?",
-                "What's the best piece of advice you've been given?",
-                "Have you ever returned or re-gifted a present?"
+                "Who was your first celebrity crush?"
             ],
             "dare": [
                 "Show the most embarrassing photo on your phone",
-                "Eat a raw piece of garlic",
-                "Down the rest of your drink",
-                "Text someone you know 'I love you'",
-                "Show a hidden talent of yours",
-                "Do 10 push ups",
-                "Do your best celebrity impression"
+                "Eat a raw piece of garlic"
             ]
         },
         "spicy": {
             "truth": [
                 "Do you have any fetishes?",
-                "Have you ever cheated on someone?",
-                "What's the worst thing you've ever done?",
-                "What are your thoughts on polyamory?",
-                "Who is the hottest in this room?",
-                "Who was the last person you stalked on Instagram?",
-                "Have you ever stayed friends with someone even if you didn't like that person?",
-                "What's your guilty pleasure?"
+                "Have you ever cheated on someone?"
             ],
             "dare": [
-                "Give a foot massage to the person on your right",
-                "Show a pic when you were drunk af",
-                "Say one honest thing about everyone in this room",
-                "Take 3 shots of the strongest liquor in a row"
+                "Give a foot massage to the person on your right"
             ]
         },
         "girls": {
             "truth": [
                 "What's the worst date you've been on?",
                 "Have you ever lied to get out of a bad date?",
-                "Why did your last relationship break down?",
-                "Who was your first celebrity crush?",
-                "What's your biggest insecurity?",
-                "Who was the last person you stalked on Instagram?",
-                "Have you ever stayed friends with someone even if you didn't like that person?",
-                "What's one thing you wish people knew about you?",
-                "What's your biggest pet peeve?"
+                "Why did your last relationship break down?"
             ],
             "dare": [
                 "Say two honest things about everyone in this room",
-                "Show the last five people you texted and what the messages said",
-                "Post the oldest selfie in your phone on Instagram Stories",
-                "Text your crush that you have a crush on them"
+                "Show the last five people you texted and what the messages said"
             ]
         }
     }
