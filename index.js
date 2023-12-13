@@ -19,10 +19,9 @@ TO DO:
     - Connect to handle game
     - Connect to leave game
 
-    Fill in the blank
-
     Spin the bottle
-    - 
+    - Connect to handle game
+    - Connect to leave game
 
 
 */
