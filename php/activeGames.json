@@ -125,22 +125,5 @@
                 " stacy"
             ]
         }
-    },
-    {
-        "id": 6278,
-        "players": [
-            "biggestHits",
-            "smallestTits"
-        ],
-        "activeGame": {
-            "host": "biggestHits",
-            "game": "No Active Game",
-            "category": "No category",
-            "questionIndex": 0,
-            "playerInQuestion": "No player",
-            "timeLeft": 28,
-            "votes": [],
-            "answers": []
-        }
     }
 ]

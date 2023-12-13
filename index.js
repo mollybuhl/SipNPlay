@@ -26,7 +26,7 @@ TO DO:
 */
 createMenu();
 // Display Menu when clicking hamburger icon
-document.querySelector(".fa-bars").addEventListener("click", renderMenu);
+document.querySelector(".menuIcon").addEventListener("click", renderMenu);
 
 
 // On load, if user is already in a game display this, otherwise render game display

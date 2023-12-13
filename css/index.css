@@ -5,13 +5,15 @@
     --gradient: linear-gradient(90deg, rgba(177, 200, 113, 1) 0%, rgba(233, 160, 114, 1) 50%, rgba(231, 83, 140, 1) 100%);
     --pinkGradient: linear-gradient(180deg, rgba(233, 160, 114, 1) 0%, rgba(231, 83, 140, 1) 100%);
     --greenGradient: linear-gradient(177deg, #B1C871 32.27%, #E9A072 64.13%);
-    --black: #1B1B1B;
-    --blackGrey: #2A2A2A;
-    --darkGrey: #5D5D5D;
+    --black: #131313;
+    --darkGrey: #2A2A2A;
+    --mediumGrey: #373737;
+    --grey: #747474;
+    --lightGrey: #C1C1C1;
     --white: #E6E6E6;
     --textColor: #C1C1C1;
     --textOnWhite: #5D5D5D;
-    --buttonColor: #C1C1C1;
+    --buttonColor: var(--lightGrey);
 
 
     --fontSizeHeader: 30px;
@@ -42,7 +44,7 @@
 }
 
 body {
-    background-color: var(--black);
+    background-color: var(--darkGrey);
     color: var(--textColor);
     height: 100vh;
     margin: 0;
@@ -104,11 +106,11 @@ footer {
     color: var(--textColor);
     font-family: outfit;
     font-size: var(--fontSizeFour);
-    background-color: var(--blackGrey);
+    background-color: var(--darkGrey);
     box-shadow: var(--boxShadow);
 
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     flex-direction: column;
     padding: 4vh;
 
@@ -162,7 +164,7 @@ footer {
     z-index: 100;
 
     font-family: outfit;
-    background-color: var(--blackGrey);
+    background-color: var(--darkGrey);
     box-shadow: var(--boxShadow);
     border-radius: 5px;
     padding: 5vh 4vh;
@@ -226,7 +228,9 @@ footer {
 }
 
 .categoryDisplay>div {
-    background-color: var(--blackGrey);
+    background-color: var(--black);
+    border: 1px solid var(--mediumGrey);
+
     border-radius: 5px;
 
     height: 10vh;
@@ -234,7 +238,7 @@ footer {
     padding: 2vh;
 
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
 
     color: var(--green, #B1C871);

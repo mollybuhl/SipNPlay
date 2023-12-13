@@ -2,7 +2,7 @@
 .gameDisplay {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2vh;
+    gap: 15px;
     grid-template-rows: repeat(10,1fr);
     height: 90%;
 }
@@ -14,10 +14,10 @@
     justify-content: space-between;
     color: var(--textColor);
     font-family: outfit;
-    
-    background-color: var(--blackGrey);
+    border: 1px solid var(--mediumGrey);
+    background-color: var(--black);
     cursor: pointer;
-    padding: 1.5vh;
+    padding: 20px;
     border-radius: 10px;
 }
 
@@ -72,12 +72,14 @@
 .gameDisplay > div.joinGame{
     background-color: var(--buttonColor);
     color: var(--textOnWhite);
+    font-size: var(--fontSizeFive);
     grid-column: 1/span 2;
     grid-row: 10;
+    height: 80%;
 
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 

@@ -12,8 +12,6 @@ function createMenu() {
     menuPopup.classList.add("menuPopup");
 
     menuPopup.innerHTML = `
-        <i class="fa-solid fa-xmark fa-lg exit" style="color: #747474;"></i>
-
         <div class="menuOptions">
             <div class="menuOption games">
                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="22" viewBox="0 0 21 22" fill="none">
@@ -53,9 +51,6 @@ function createMenu() {
     // Display instructions
     //menuPopup.querySelector(".instructions").addEventListener("click", renderGameDisplay);
 
-    // Close menu on exit
-    let exit = menuPopup.querySelector(".exit");
-    exit.addEventListener("click", closeMenu);
 
     function closeMenu(event) {
         background.classList.remove("active");
