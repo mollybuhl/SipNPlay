@@ -6,8 +6,16 @@ let dareIndex = 0;
 let playerIndex = 0;
 
 // Setter and getter function for truth index
-async function setTruthIndex(index) {
+async function setTruthIndex(index, gameId) {
     truthIndex = index;
+
+    let rqstToSetnewIndex = {
+        action: "setQuestionIndex",
+        gameId: gameId,
+        index: truthIndex
+    };
+
+    await handleGameFetch(rqstToSetnewIndex);
 }
 
 function getTruthIndex() {
@@ -15,8 +23,16 @@ function getTruthIndex() {
 }
 
 // Setter and getter function for dare index
-function setDareIndex(index) {
+async function setDareIndex(index, gameId) {
     dareIndex = index;
+
+    let rqstToSetnewIndex = {
+        action: "setQuestionIndex",
+        gameId: gameId,
+        index: dareIndex
+    };
+
+    await handleGameFetch(rqstToSetnewIndex);
 }
 
 function getDareIndex() {
@@ -82,14 +98,6 @@ async function truthORDareHandle(category, gameId) {
                 </section>
             </div>
         `;
-
-        // Assigns an event listener to truth or dare buttons and calls renderTruthORDareQuestion function to generate a question
-        document.querySelectorAll("section>button").forEach(button => {
-            button.addEventListener("click", (e) => {
-                // e.target.attributes.id.value will be either truth or dare
-                renderTruthORDareQuestion(e.target.attributes.id.value, category, gameId, player)
-            })
-        });
     } else {
         main.innerHTML = `
             <div id="truthORDareWrapper">
@@ -97,20 +105,15 @@ async function truthORDareHandle(category, gameId) {
                 <h2>It's <span>${players[index]}</span>'s turn</h2>
             </div>
         `;
-
-        setInterval(async () => {
-            let getPlayerInQuestion = {
-                action: "getPlayerInQuestion",
-                gameId: gameId
-            }
-            let playerInQuestion = await handleGameFetch(getPlayerInQuestion);
-
-            if (localStorage.getItem("playerName") === playerInQuestion) {
-                truthORDareHandle(category, gameId)
-            }
-
-        }, 5000);
     }
+
+    // Assigns an event listener to truth or dare buttons and calls renderTruthORDareQuestion function to generate a question
+    document.querySelectorAll("section>button").forEach(button => {
+        button.addEventListener("click", (e) => {
+            // e.target.attributes.id.value will be either truth or dare
+            renderTruthORDareQuestion(e.target.attributes.id.value, category, gameId, player)
+        });
+    });
 
     // Structure of footer
     footer.innerHTML = `
@@ -218,17 +221,17 @@ async function renderTruthORDareQuestion(type, category, gameId, player) {
         if (type === "truth") {
             // Increment index to get new truth question or set index to 0 to restart
             if (tIndex < data.questions.length - 1) {
-                setTruthIndex(tIndex + 1)
+                setTruthIndex(tIndex + 1, gameId)
             } else {
-                setTruthIndex(0)
+                setTruthIndex(0, gameId)
             }
         }
 
         if (type === "dare") {
             if (dIndex < data.questions.length - 1) {
-                setDareIndex(dIndex + 1)
+                setDareIndex(dIndex + 1, gameId)
             } else {
-                setDareIndex(0)
+                setDareIndex(0, gameId)
             }
         }
 
@@ -302,6 +305,30 @@ async function renderTruthORDareQuestion(type, category, gameId, player) {
         renderNewQuestion()
     });
 
+    // if (player !== window.localStorage.getItem("playerName")) {
+    //     let currentIndex;
+    //     if (type === "truth") {
+    //         currentIndex = getTruthIndex();
+    //     } else {
+    //         currentIndex = getDareIndex();
+    //     }
+
+    //     // Check if next question should be run
+    //     setInterval(async () => {
+    //         let requestDataForNextQuestion = {
+    //             action: "requestNextQuestion",
+    //             gameId: gameId,
+    //             currentQuestion: currentIndex
+    //         };
+
+    //         let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
+    //         console.log(activeQuestion);
+    //         if (activeQuestion != currentIndex) {
+    //             truthORDareHandle(category, gameId)
+    //         }
+
+    //     }, 1000);
+    // }
 }
 
 // Function to handle truth or dare fetch
