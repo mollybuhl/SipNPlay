@@ -1,5 +1,4 @@
 [
-    
     {
         "The Basic Version": [
             {
@@ -16,13 +15,98 @@
                 "id": 3,
                 "category": "The Basic Version",
                 "question": "join a cult"
+            },
+            {
+                "id": 4,
+                "category": "The Basic Version",
+                "question": "still own a Nokia 3310"
+            },
+            {
+                "id": 5,
+                "category": "The Basic Version",
+                "question": "be killed first if they were in a horror movie"
+            },
+            {
+                "id": 6,
+                "category": "The Basic Version",
+                "question": "become a TikTok star"
+            },
+            {
+                "id": 7,
+                "category": "The Basic Version",
+                "question": "end up in jail"
+            },
+            {
+                "id": 8,
+                "category": "The Basic Version",
+                "question": "buy the best presents"
+            },
+            {
+                "id": 9,
+                "category": "The Basic Version",
+                "question": "drop everything and travel the world"
+            },
+            {
+                "id": 10,
+                "category": "The Basic Version",
+                "question": "eat something off the ground"
+            },
+            {
+                "id": 11,
+                "category": "The Basic Version",
+                "question": "fake their own death"
+            },
+            {
+                "id": 12,
+                "category": "The Basic Version",
+                "question": "actually be a spy"
+            },
+            {
+                "id": 13,
+                "category": "The Basic Version",
+                "question": "be late for brunch because they stopped to pet a dog"
+            },
+            {
+                "id": 14,
+                "category": "The Basic Version",
+                "question": "lock themselves out of their own home"
+            },
+            {
+                "id": 15,
+                "category": "The Basic Version",
+                "question": "miss their flight"
+            },
+            {
+                "id": 16,
+                "category": "The Basic Version",
+                "question": "clap when their plane lands"
+            },
+            {
+                "id": 17,
+                "category": "The Basic Version",
+                "question": "live a double life"
+            },
+            {
+                "id": 18,
+                "category": "The Basic Version",
+                "question": "be a lowkey conspiracy theorist"
+            },
+            {
+                "id": 19,
+                "category": "The Basic Version",
+                "question": "lie on their resume"
+            },
+            {
+                "id": 20,
+                "category": "The Basic Version",
+                "question": "become president"
             }
         ],
         "Not Safe For Work": [
             {
-            "id": 1,
-            "category": "Not Safe For Work",
-            "question": " have a wardrobe malfunction"
+                "id": 1,
+                "category": "Not Safe For Work",
+                "question": "have a wardrobe malfunction"
             },
             {
                 "id": 2,
@@ -33,13 +117,98 @@
                 "id": 3,
                 "category": "Not Safe For Work",
                 "question": "get thrown out of the club"
+            },
+            {
+                "id": 4,
+                "category": "Not Safe For Work",
+                "question": "become a CEO"
+            },
+            {
+                "id": 5,
+                "category": "Not Safe For Work",
+                "question": "lie to get a new job"
+            },
+            {
+                "id": 6,
+                "category": "Not Safe For Work",
+                "question": "date three people at the same time"
+            },
+            {
+                "id": 7,
+                "category": "Not Safe For Work",
+                "question": "fall asleep during sex"
+            },
+            {
+                "id": 8,
+                "category": "Not Safe For Work",
+                "question": "go to the strip club on their birthday"
+            },
+            {
+                "id": 9,
+                "category": "Not Safe For Work",
+                "question": "say “I love you” to a one-night stand"
+            },
+            {
+                "id": 10,
+                "category": "Not Safe For Work",
+                "question": "date someone twice their age"
+            },
+            {
+                "id": 11,
+                "category": "Not Safe For Work",
+                "question": "visit a nude beach on vacation"
+            },
+            {
+                "id": 12,
+                "category": "Not Safe For Work",
+                "question": "say the wrong name in bed"
+            },
+            {
+                "id": 13,
+                "category": "Not Safe For Work",
+                "question": "get married in Vegas"
+            },
+            {
+                "id": 14,
+                "category": "Not Safe For Work",
+                "question": "have a fling while on vacation"
+            },
+            {
+                "id": 15,
+                "category": "Not Safe For Work",
+                "question": "save you from a bad first date"
+            },
+            {
+                "id": 16,
+                "category": "Not Safe For Work",
+                "question": "get drunk first on a night out"
+            },
+            {
+                "id": 17,
+                "category": "Not Safe For Work",
+                "question": "dream about their ex"
+            },
+            {
+                "id": 18,
+                "category": "Not Safe For Work",
+                "question": "marry for money"
+            },
+            {
+                "id": 19,
+                "category": "Not Safe For Work",
+                "question": "date their best friend’s ex"
+            },
+            {
+                "id": 20,
+                "category": "Not Safe For Work",
+                "question": "get arrested for urinating in public"
             }
         ],
         "Spicy Edition": [
             {
-            "id": 1,
-            "category": "Spicy Edition",
-            "question": "have a threesome"
+                "id": 1,
+                "category": "Spicy Edition",
+                "question": "have a threesome"
             },
             {
                 "id": 2,
@@ -50,6 +219,91 @@
                 "id": 3,
                 "category": "Spicy Edition",
                 "question": "have a one night stand"
+            },
+            {
+                "id": 4,
+                "category": "Spicy Edition",
+                "question": "get caught having sex in public"
+            },
+            {
+                "id": 5,
+                "category": "Spicy Edition",
+                "question": "sleep with a friend's family member"
+            },
+            {
+                "id": 6,
+                "category": "Spicy Edition",
+                "question": "have sex outside"
+            },
+            {
+                "id": 7,
+                "category": "Spicy Edition",
+                "question": "go skinny dipping"
+            },
+            {
+                "id": 8,
+                "category": "Spicy Edition",
+                "question": "have a foot fetish"
+            },
+            {
+                "id": 9,
+                "category": "Spicy Edition",
+                "question": "marry someone they just met"
+            },
+            {
+                "id": 10,
+                "category": "Spicy Edition",
+                "question": "forget the name of a person they hooked up with"
+            },
+            {
+                "id": 11,
+                "category": "Spicy Edition",
+                "question": "enjoy role play"
+            },
+            {
+                "id": 12,
+                "category": "Spicy Edition",
+                "question": "be a stripper"
+            },
+            {
+                "id": 13,
+                "category": "Spicy Edition",
+                "question": "go commando"
+            },
+            {
+                "id": 14,
+                "category": "Spicy Edition",
+                "question": "have an affair"
+            },
+            {
+                "id": 15,
+                "category": "Spicy Edition",
+                "question": "have an affair with a celebrity"
+            },
+            {
+                "id": 16,
+                "category": "Spicy Edition",
+                "question": "create a sex room in their home?"
+            },
+            {
+                "id": 17,
+                "category": "Spicy Edition",
+                "question": "own the most sex toys"
+            },
+            {
+                "id": 18,
+                "category": "Spicy Edition",
+                "question": "sleep with someone on the first date"
+            },
+            {
+                "id": 19,
+                "category": "Spicy Edition",
+                "question": "hook up with their boss"
+            },
+            {
+                "id": 20,
+                "category": "Spicy Edition",
+                "question": "sleep with a colleague"
             }
         ],
         "Girl Dinner":
@@ -68,7 +322,92 @@
             "id": 3,
             "category": "Girl Dinner",
             "question": "have their own reality show"
-            }  
+            },
+            {
+            "id": 4,
+            "category": "Girl Dinner",
+            "question": " become an influencer"
+            }  ,
+            {
+            "id": 5,
+            "category": "Girl Dinner",
+            "question": "take a week to reply to a text"
+            }  ,
+            {
+            "id": 6,
+            "category": "Girl Dinner",
+            "question": "ask for advice but never take it"
+            }  ,
+            {
+            "id": 7,
+            "category": "Girl Dinner",
+            "question": "cancel plans at the last moment"
+            }  ,
+            {
+            "id": 8,
+            "category": "Girl Dinner",
+            "question": "have used fake I.D."
+            }  ,
+            {
+            "id": 9,
+            "category": "Girl Dinner",
+            "question": "become a TikTok star"
+            }  ,
+            {
+            "id": 10,
+            "category": "Girl Dinner",
+            "question": "have the most children"
+            }  ,
+            {
+            "id": 11,
+            "category": "Girl Dinner",
+            "question": "have a one night stand"
+            },
+            {
+            "id": 12,
+            "category": "Girl Dinner",
+            "question": "sleep with their ex"
+            },
+            {
+            "id": 13,
+            "category": "Girl Dinner",
+            "question": "marry someone they just met"
+            },
+            {
+            "id": 14,
+            "category": "Girl Dinner",
+            "question": "go on a TV show to look for love"
+            },
+            {
+            "id": 15,
+            "category": "Girl Dinner",
+            "question": "get a random tattoo on a night out"
+            }  ,
+            {
+            "id": 16,
+            "category": "Girl Dinner",
+            "question": "and on the New York Times bestsellers list"
+            },
+            {
+            "id": 17,
+            "category": "Girl Dinner",
+            "question": "spend all weekend bingeing a new TV series"
+            },
+            {
+            "id": 18,
+            "category": "Girl Dinner",
+            "question": "move to a foreign country"
+            },
+            {
+            "id": 19,
+            "category": "Girl Dinner",
+            "question": "host a reality dating series"
+            },
+            {
+            "id": 20,
+            "category": "Girl Dinner",
+            "question": "write a memoir"
+            }    
         ]  
     }
 ]
