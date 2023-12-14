@@ -85,6 +85,7 @@ async function truthORDareHandle(category, gameId) {
     footer.removeAttribute("class");
     footer.classList.add("truthORDare");
 
+    let checkPlayer;
     if (player === localStorage.getItem("playerName")) {
         main.innerHTML = `
             <div id="truthORDareWrapper">
@@ -105,6 +106,28 @@ async function truthORDareHandle(category, gameId) {
                 <h2>It's <span>${players[index]}</span>'s turn</h2>
             </div>
         `;
+
+        // Check if next question should be run
+        checkPlayer = setInterval(async () => {
+            let requestPlayerInQuestion = {
+                action: "getPlayerInQuestion",
+                gameId: gameId
+            };
+
+            let playerInQuestion = await handleGameFetch(requestPlayerInQuestion);
+            console.log(playerInQuestion);
+            if (playerInQuestion === localStorage.getItem("playerName")) {
+                let requestUpdatePlayerInQuestion = {
+                    action: "getPlayerInQuestion",
+                    gameId: gameId
+                };
+
+                await handleGameFetch(requestUpdatePlayerInQuestion);
+                setPlayerIndex(getPlayerIndex() + 1)
+                truthORDareHandle(category, gameId)
+            }
+
+        }, 5000);
     }
 
     // Assigns an event listener to truth or dare buttons and calls renderTruthORDareQuestion function to generate a question
@@ -114,6 +137,16 @@ async function truthORDareHandle(category, gameId) {
             renderTruthORDareQuestion(e.target.attributes.id.value, category, gameId, player)
         });
     });
+
+    let isHost = window.localStorage.getItem("host");
+    let checkActiveGame;
+    if (!isHost) {
+        checkActiveGame = setInterval(() => {
+            checkIfGameExist(gameId, checkActiveGame, checkPlayer);
+            checkForActiveGame(gameId, checkActiveGame, checkPlayer);
+        }, 1000);
+    }
+
 
     // Structure of footer
     footer.innerHTML = `
@@ -125,9 +158,6 @@ async function truthORDareHandle(category, gameId) {
 
     // When clicking quit leave game
     footer.querySelector(".buttonQuit").addEventListener("click", () => {
-
-        let isHost = window.localStorage.getItem("host");
-
         // If user is host - ask to play another game or keep playing
         if (isHost) {
 
@@ -163,6 +193,10 @@ async function truthORDareHandle(category, gameId) {
 
                 await handleGameFetch(requestDataForEndingRound);
 
+                if (localStorage.getItem("playerName") !== player) {
+                    clearInterval(checkPlayer)
+                }
+
                 // Go back to category page
                 renderCategories("Truth or Dare");
             })
@@ -170,6 +204,10 @@ async function truthORDareHandle(category, gameId) {
 
         } else {
             // If user is not host - ask to leave game or keep playing
+            if (localStorage.getItem("playerName") !== player) {
+                clearInterval(checkPlayer)
+            }
+            clearInterval(checkActiveGame)
             leaveGame();
         }
     })
@@ -240,6 +278,15 @@ async function renderTruthORDareQuestion(type, category, gameId, player) {
         truthORDareHandle(category, gameId)
     }
 
+    let isHost = window.localStorage.getItem("host");
+    let checkActiveGame;
+    if (!isHost) {
+        checkActiveGame = setInterval(() => {
+            checkIfGameExist(gameId, checkActiveGame);
+            checkForActiveGame(gameId, checkActiveGame);
+        }, 1000);
+    }
+
     let footer = document.querySelector("footer");
     // Structure of footer
     footer.innerHTML = `
@@ -252,8 +299,6 @@ async function renderTruthORDareQuestion(type, category, gameId, player) {
 
     // When clicking quit leave game
     footer.querySelector(".buttonQuit").addEventListener("click", () => {
-
-        let isHost = window.localStorage.getItem("host");
 
         // If user is host - ask to play another game or keep playing
         if (isHost) {
@@ -296,6 +341,7 @@ async function renderTruthORDareQuestion(type, category, gameId, player) {
 
         } else {
             // If user is not host - ask to leave game or keep playing
+            clearInterval(checkActiveGame)
             leaveGame();
             renderNewQuestion()
         }
@@ -304,31 +350,6 @@ async function renderTruthORDareQuestion(type, category, gameId, player) {
     document.querySelector(".nextButton").addEventListener("click", () => {
         renderNewQuestion()
     });
-
-    // if (player !== window.localStorage.getItem("playerName")) {
-    //     let currentIndex;
-    //     if (type === "truth") {
-    //         currentIndex = getTruthIndex();
-    //     } else {
-    //         currentIndex = getDareIndex();
-    //     }
-
-    //     // Check if next question should be run
-    //     setInterval(async () => {
-    //         let requestDataForNextQuestion = {
-    //             action: "requestNextQuestion",
-    //             gameId: gameId,
-    //             currentQuestion: currentIndex
-    //         };
-
-    //         let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
-    //         console.log(activeQuestion);
-    //         if (activeQuestion != currentIndex) {
-    //             truthORDareHandle(category, gameId)
-    //         }
-
-    //     }, 1000);
-    // }
 }
 
 // Function to handle truth or dare fetch

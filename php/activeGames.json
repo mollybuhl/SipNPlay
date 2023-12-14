@@ -13,5 +13,21 @@
             "timeLeft": 30,
             "votes": []
         }
+    },
+    {
+        "id": 8961,
+        "players": [
+            "tranen",
+            "buhl"
+        ],
+        "activeGame": {
+            "host": "tranen",
+            "game": "No Active Game",
+            "category": "No category",
+            "questionIndex": 0,
+            "playerInQuestion": "No player",
+            "timeLeft": 30,
+            "votes": []
+        }
     }
 ]

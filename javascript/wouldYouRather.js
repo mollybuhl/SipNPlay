@@ -3,39 +3,39 @@
 
 "use strict";
 
-// Global variable to track index and gameId
-let wouldYRIIndex = 0;
-let gameId;
-let questionsArray;
+// // Global variable to track index and gameId
+// let wouldYRIIndex = 0;
+// let gameId;
+// let questionsArray;
 
-// Setter and getter functions for would you rather question index and gameID
-function setWouldYRIndex(index) {
-    wouldYRIIndex = index;
-}
+// // Setter and getter functions for would you rather question index and gameID
+// function setWouldYRIndex(index) {
+//     wouldYRIIndex = index;
+// }
 
-function getWouldYRIndex() {
-    return wouldYRIIndex;
-}
+// function getWouldYRIndex() {
+//     return wouldYRIIndex;
+// }
 
-function setWouldYRGameId(id) {
-    gameId = id;
-}
+// function setWouldYRGameId(id) {
+//     gameId = id;
+// }
 
-function getWouldYRGameId() {
-    return gameId;
-}
+// function getWouldYRGameId() {
+//     return gameId;
+// }
 
-function saveQuestionsArray(array) {
-    questionsArray = array;
-}
+// function saveQuestionsArray(array) {
+//     questionsArray = array;
+// }
 
-function getQuestionsArray() {
-    return questionsArray;
-}
+// function getQuestionsArray() {
+//     return questionsArray;
+// }
 
 // Function fetches a random question from PHP depending on category
-async function renderWouldYouRather(category, gameId) {
-    setWouldYRGameId(gameId)
+async function renderWouldYouRather(category, gameId, questionIndex = 0) {
+
     let main = document.querySelector("main");
     main.removeAttribute("class");
     main.innerHTML = `
@@ -91,16 +91,13 @@ async function renderWouldYouRather(category, gameId) {
 
     // Add footer with quit button and next button
     let footer = document.querySelector("footer");
+    footer.removeAttribute("class");
     footer.innerHTML = `
-         <div class="buttonQuit">
-             <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
-             <p>QUIT</p>
-         </div>
-         <button class="nextButton">NEXT</button>
-     `;
-
-    // Next-button should not be displayed when choosing truth or dare options
-    document.querySelector(".nextButton").style.opacity = "0";
+        <div class="buttonQuit">
+            <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
+            <p>QUIT</p>
+        </div>
+    `;
 
     let data = {
         category: category,
@@ -274,9 +271,15 @@ async function renderWouldYouRather(category, gameId) {
                 document.getElementById("thatResult").innerHTML = thatPercent + "%";
             }
 
-            // The Next-button should now be displayed to get next question
-            document.querySelector(".nextButton").style.opacity = "100%";
-            enableNextButtonWYR(category)
+            let isHost = window.localStorage.getItem("host");
+            if (isHost) {
+                document.querySelector("footer").innerHTML += `
+                    <button class="nextButton">NEXT</button>
+                `;
+
+                enableNextButtonWYR(category)
+            }
+
         }
     }
 
@@ -302,3 +305,30 @@ function enableNextButtonWYR(category) {
     });
 }
 
+// Function to handle truth or dare fetch
+async function fetchWouldYouRather(requestData) {
+
+    // Set request parameters
+    let requestParameters = {
+        method: "POST",
+        headers: { "Content-Type": "application/json; charset=UTF-8" },
+        body: JSON.stringify(requestData)
+    }
+
+    let request = new Request("php/wouldYouRather.php", requestParameters);
+
+    // Fetch request and handle response
+    try {
+        let response = await fetch(request);
+
+        if (response.ok) {
+            let resource = await response.json();
+            return resource;
+        } else {
+            let error = await response.json();
+            feedback(error.message);
+        }
+    } catch (error) {
+        console.log("Something went wrong", error);
+    }
+}
