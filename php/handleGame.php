@@ -397,5 +397,17 @@
             $message = ["No game under that pin was found"];
             sendJson($message, 404);
         }
+    }else if($action == "getHost"){
+        // Get game by id
+        $gameId = $requestData["gameId"];
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId);  
+
+        // If active game found return time
+        if($activeGame){
+            sendJson($games[$gameIndex]["activeGame"]["host"]);
+        }else{
+            $message = ["No game under that pin was found"];
+            sendJson($message, 404);
+        }
     }
 ?>

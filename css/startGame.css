@@ -49,9 +49,7 @@ align-items: center;
     grid-auto-rows: 1fr;
 }
 
-.startGame > p{
 
-}
 
 .startGame > .participants > div{
     border: 3px solid var(--mediumGrey);
@@ -63,6 +61,11 @@ align-items: center;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.startGame > .participants > div.host{
+    display: flex;
+    gap: 1vh;
 }
 
 .startGame > p{
