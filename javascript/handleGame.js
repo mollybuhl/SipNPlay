@@ -168,6 +168,9 @@ async function createGame(game, category, creatorName) {
             case "Fill In The Blank":
                 renderFillInTheBlank(category, gameId);
                 break;
+            case "Spin The Bottle":
+                spinTheBottleHandle(gameId)
+                break;
         }
     });
 }
@@ -308,6 +311,9 @@ async function startNewGame(game, category) {
                 break;
             case "Fill In The Blank":
                 renderFillInTheBlank(category, gameId);
+                break;
+            case "Spin The Bottle":
+                spinTheBottleHandle(category, gameId);
                 break;
         }
 
@@ -467,6 +473,9 @@ function renderWaitingForGame(gameId) {
                     break;
                 case "Fill In The Blank":
                     renderFillInTheBlank(category, gameId, questionIndex);
+                    break;
+                case "Spin The Bottle":
+                    spinTheBottleHandle(gameId);
                     break;
             }
         }
