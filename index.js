@@ -4,7 +4,7 @@ TO DO:
     - Overall CSS
     - Register more prompts
     - animate progresbar
-    - Only host updating timer
+    - set name to max 10 characters
 
     Never Have I ever
     - Swipe for next card

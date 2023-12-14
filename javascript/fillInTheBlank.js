@@ -508,8 +508,8 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
                 <div>
                     <p>Are you sure you want to end this round?</p>
                     <div>   
-                        <button class="leaveGame">End Round</button>
-                        <button class="closePopup">Keep Playing</button>
+                        <button class="leaveGame">YES</button>
+                        <button class="closePopup clearDesign">NO</button>
                     </div>
                 </div>
                 `;

@@ -17,7 +17,30 @@ function renderStartGame(game, category) {
     // Render create game when clicking create
     main.querySelector(".createGame").addEventListener("click", () => {
         let creatorName = document.querySelector(".name").value;
-        createGame(game, category, creatorName);
+
+        // If name is longer than 10 characters, ask to pick another name
+        if(creatorName.length > 10){
+            let popUp = document.createElement("div");
+            popUp.setAttribute("id", "leaveGamePopUp");
+
+            popUp.innerHTML = `
+            <div class="oneButtonPopUp">
+                <p>Please pick another name, your name can only be 10 characters long</p>
+                <div>   
+                    <button class="closePopup">OK</button>
+                </div>
+            </div>
+            `;
+
+            document.querySelector("main").appendChild(popUp);
+
+            // Close pop up and keep playing
+            popUp.querySelector(".closePopup").addEventListener("click", () => {
+                popUp.remove();
+            })
+        }else{
+            createGame(game, category, creatorName);
+        }
     });
 
     // Render join game when clicking join
@@ -25,7 +48,29 @@ function renderStartGame(game, category) {
 
         // Send name to function
         let playerName = document.querySelector(".name").value;
-        joinGame(playerName);
+
+        if(playerName.length > 10){
+            let popUp = document.createElement("div");
+            popUp.setAttribute("id", "leaveGamePopUp");
+
+            popUp.innerHTML = `
+            <div class="oneButtonPopUp">
+                <p>Please pick another name, your name can only be 10 characters long</p>
+                <div>   
+                    <button class="closePopup">OK</button>
+                </div>
+            </div>
+            `;
+
+            document.querySelector("main").appendChild(popUp);
+
+            // Close pop up and keep playing
+            popUp.querySelector(".closePopup").addEventListener("click", () => {
+                popUp.remove();
+            })
+        }else{
+            joinGame(playerName);
+        }
     });
 
 }
@@ -61,8 +106,10 @@ async function createGame(game, category, creatorName) {
     footer.removeAttribute("class");
     footer.innerHTML = `
     <div class="buttonQuit">
-            <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
-            <p>QUIT</p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
+        <path d="M0.325756 8.7026C0.337756 8.7126 0.353755 8.7166 0.365755 8.7266L8.07976 15.7086C8.51376 16.0986 9.21776 16.0986 9.65176 15.7086C9.65576 15.7046 9.65776 15.7006 9.65976 15.6966C9.76485 15.6098 9.84972 15.5012 9.90845 15.3782C9.96717 15.2552 9.99833 15.1209 9.99976 14.9846L9.99976 1.0186C9.99751 0.879825 9.96483 0.743234 9.904 0.618477C9.84318 0.49372 9.7557 0.383841 9.64776 0.2966L9.65176 0.292601C9.43338 0.103861 9.15439 0 8.86576 0C8.57712 0 8.29813 0.103861 8.07976 0.292601L0.325756 7.2906C0.223635 7.37772 0.141628 7.48596 0.0853958 7.60784C0.0291634 7.72973 4.19617e-05 7.86237 4.19617e-05 7.9966C4.19617e-05 8.13083 0.0291634 8.26347 0.0853958 8.38536C0.141628 8.50724 0.223635 8.61548 0.325756 8.7026Z" fill="#C1C1C1"/>
+        </svg>
+        <p>QUIT</p>
     </div>
     <button id="startGameButton">START</button>
     `;
@@ -204,8 +251,10 @@ async function startNewGame(game, category) {
     footer.removeAttribute("class");
     footer.innerHTML = `
     <div class="buttonQuit">
-            <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
-            <p>QUIT</p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
+        <path d="M0.325756 8.7026C0.337756 8.7126 0.353755 8.7166 0.365755 8.7266L8.07976 15.7086C8.51376 16.0986 9.21776 16.0986 9.65176 15.7086C9.65576 15.7046 9.65776 15.7006 9.65976 15.6966C9.76485 15.6098 9.84972 15.5012 9.90845 15.3782C9.96717 15.2552 9.99833 15.1209 9.99976 14.9846L9.99976 1.0186C9.99751 0.879825 9.96483 0.743234 9.904 0.618477C9.84318 0.49372 9.7557 0.383841 9.64776 0.2966L9.65176 0.292601C9.43338 0.103861 9.15439 0 8.86576 0C8.57712 0 8.29813 0.103861 8.07976 0.292601L0.325756 7.2906C0.223635 7.37772 0.141628 7.48596 0.0853958 7.60784C0.0291634 7.72973 4.19617e-05 7.86237 4.19617e-05 7.9966C4.19617e-05 8.13083 0.0291634 8.26347 0.0853958 8.38536C0.141628 8.50724 0.223635 8.61548 0.325756 8.7026Z" fill="#C1C1C1"/>
+        </svg>            
+        <p>QUIT</p>
     </div>
     <button id="startGameButton">START</button>
     `;
@@ -348,24 +397,54 @@ function joinGame(playerName = null) {
         // Get name if not sent as parameter
         if (!playerName) {
             playerName = document.querySelector(".name").value;
+
+            // If name is longer than 10 characters ask to pick another name
+            if(playerName.length > 10){
+                let popUp = document.createElement("div");
+                popUp.setAttribute("id", "leaveGamePopUp");
+    
+                popUp.innerHTML = `
+                <div class="oneButtonPopUp">
+                    <p>Please pick another name, your name can only be 10 characters long</p>
+                    <div>   
+                        <button class="closePopup">OK</button>
+                    </div>
+                </div>
+                `;
+    
+                document.querySelector("main").appendChild(popUp);
+    
+                // Close pop up and keep playing
+                popUp.querySelector(".closePopup").addEventListener("click", () => {
+                    popUp.remove();
+                })
+            }else{
+                sendRequestToJoin();
+            }
+
+        }else{
+            sendRequestToJoin();
         }
 
-        // Join game by id
-        let requestData = {
-            action: "joinGame",
-            gameId: gameId,
-            name: playerName
+        async function sendRequestToJoin(){
+            // Join game by id
+            let requestData = {
+                action: "joinGame",
+                gameId: gameId,
+                name: playerName
+            }
+
+            let joinGame = await handleGameFetch(requestData);
+
+            // Save gameId in local storage and set currentGame to true
+            window.localStorage.setItem("currentGame", "true");
+            window.localStorage.setItem("gameId", gameId);
+            window.localStorage.setItem("playerName", playerName);
+
+            // Call function to display currently joined players
+            renderWaitingForGame(gameId);
         }
-
-        let joinGame = await handleGameFetch(requestData);
-
-        // Save gameId in local storage and set currentGame to true
-        window.localStorage.setItem("currentGame", "true");
-        window.localStorage.setItem("gameId", gameId);
-        window.localStorage.setItem("playerName", playerName);
-
-        // Call function to display currently joined players
-        renderWaitingForGame(gameId);
+        
     })
 }
 
@@ -388,7 +467,9 @@ function renderWaitingForGame(gameId) {
     let footer = document.querySelector("footer");
     footer.innerHTML = `
     <div class="buttonQuit">
-        <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
+        <path d="M0.325756 8.7026C0.337756 8.7126 0.353755 8.7166 0.365755 8.7266L8.07976 15.7086C8.51376 16.0986 9.21776 16.0986 9.65176 15.7086C9.65576 15.7046 9.65776 15.7006 9.65976 15.6966C9.76485 15.6098 9.84972 15.5012 9.90845 15.3782C9.96717 15.2552 9.99833 15.1209 9.99976 14.9846L9.99976 1.0186C9.99751 0.879825 9.96483 0.743234 9.904 0.618477C9.84318 0.49372 9.7557 0.383841 9.64776 0.2966L9.65176 0.292601C9.43338 0.103861 9.15439 0 8.86576 0C8.57712 0 8.29813 0.103861 8.07976 0.292601L0.325756 7.2906C0.223635 7.37772 0.141628 7.48596 0.0853958 7.60784C0.0291634 7.72973 4.19617e-05 7.86237 4.19617e-05 7.9966C4.19617e-05 8.13083 0.0291634 8.26347 0.0853958 8.38536C0.141628 8.50724 0.223635 8.61548 0.325756 8.7026Z" fill="#C1C1C1"/>
+        </svg>
         <p>QUIT</p>
     </div>
     `;
