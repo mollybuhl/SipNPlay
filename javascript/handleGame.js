@@ -436,13 +436,37 @@ function joinGame(playerName = null) {
 
             let joinGame = await handleGameFetch(requestData);
 
-            // Save gameId in local storage and set currentGame to true
-            window.localStorage.setItem("currentGame", "true");
-            window.localStorage.setItem("gameId", gameId);
-            window.localStorage.setItem("playerName", playerName);
+            if(joinGame){
+                // Save gameId in local storage and set currentGame to true
+                window.localStorage.setItem("currentGame", "true");
+                window.localStorage.setItem("gameId", gameId);
+                window.localStorage.setItem("playerName", playerName);
 
-            // Call function to display currently joined players
-            renderWaitingForGame(gameId);
+                // Call function to display currently joined players
+                renderWaitingForGame(gameId);
+            }else{
+                // If game Id did not exist, inform user
+                let popUp = document.createElement("div");
+                popUp.setAttribute("id", "leaveGamePopUp");
+    
+                popUp.innerHTML = `
+                <div class="oneButtonPopUp">
+                    <p>No game under this ID was found</p>
+                    <div>   
+                        <button class="closePopup">OK</button>
+                    </div>
+                </div>
+                `;
+    
+                document.querySelector("main").appendChild(popUp);
+    
+                // Close pop up and keep playing
+                popUp.querySelector(".closePopup").addEventListener("click", () => {
+                    popUp.remove();
+                })
+            }
+
+            
         }
         
     })
