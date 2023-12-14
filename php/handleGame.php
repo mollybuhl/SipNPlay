@@ -315,7 +315,30 @@
             sendJson($message, 404);
         }
 
-    }else if($action == "requestNextQuestion"){
+    } else if($action == "setQuestionIndex") {
+        // Get game by id
+        $gameId = $requestData["gameId"];
+        $index = $requestData["index"];
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId); 
+
+        // If active game found change game status, otherwise inform user
+        if($activeGame){
+
+            // Change questionIndex
+            $games[$gameIndex]["activeGame"]["questionIndex"] = $index;
+
+            // Update json file and inform user
+            saveToFile("activeGames.json", $games);
+
+            $message = $games[$gameIndex]["activeGame"]["questionIndex"];
+            
+            sendJson($message);
+        }else{
+            $message = ["No game under that pin was found"];
+            sendJson($message, 404);
+        }        
+
+    } else if($action == "requestNextQuestion"){
 
         // Get game by id
         $gameId = $requestData["gameId"];

@@ -1,54 +1,16 @@
 [
     {
-        "id": 3518,
+        "id": 9377,
         "players": [
-            "molls",
-            "mand",
-            "mamama"
+            "mollan"
         ],
         "activeGame": {
-            "game": "Fill In The Blank",
-            "category": "The Basic Version",
-            "questionIndex": 2,
-            "playerInQuestion": "molls",
-            "votes": [
-                "negativity"
-            ],
-            "answers": {
-                "majs": "negativity",
-                "miriam": "svar",
-                "mamama": ""
-            }
-        }
-    },
-    {
-        "id": 1294,
-        "players": [
-            "myGame"
-        ],
-        "activeGame": {
-            "host": "myGame",
-            "game": "Fill In The Blank",
-            "category": "The Basic Version",
-            "questionIndex": 0,
-            "playerInQuestion": "No player",
-            "votes": [],
-            "answers": {
-                "mollymollymolly": ""
-            }
-        }
-    },
-    {
-        "id": 5829,
-        "players": [
-            "stayyy"
-        ],
-        "activeGame": {
-            "host": "stayyy",
+            "host": "mollan",
             "game": "No Active Game",
             "category": "No category",
             "questionIndex": 0,
             "playerInQuestion": "No player",
+            "timeLeft": 30,
             "votes": []
         }
     },

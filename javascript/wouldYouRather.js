@@ -3,26 +3,26 @@
 
 "use strict";
 
-// Global variable to track index and gameId
+// // Global variable to track index and gameId
 let wouldYRIIndex = 0;
-let gameId;
+// let gameId;
 let questionsArray;
 
-// Setter and getter functions for would you rather question index and gameID
-function setWouldYRIndex(index) {
+// // Setter and getter functions for would you rather question index and gameID
+async function setWouldYRIndex(index, gameId) {
     wouldYRIIndex = index;
+
+    let rqstToSetnewIndex = {
+        action: "setQuestionIndex",
+        gameId: gameId,
+        index: wouldYRIIndex
+    };
+
+    await handleGameFetch(rqstToSetnewIndex);
 }
 
 function getWouldYRIndex() {
     return wouldYRIIndex;
-}
-
-function setWouldYRGameId(id) {
-    gameId = id;
-}
-
-function getWouldYRGameId() {
-    return gameId;
 }
 
 function saveQuestionsArray(array) {
@@ -35,7 +35,7 @@ function getQuestionsArray() {
 
 // Function fetches a random question from PHP depending on category
 async function renderWouldYouRather(category, gameId) {
-    setWouldYRGameId(gameId)
+
     let main = document.querySelector("main");
     main.removeAttribute("class");
     main.innerHTML = `
@@ -91,214 +91,286 @@ async function renderWouldYouRather(category, gameId) {
 
     // Add footer with quit button and next button
     let footer = document.querySelector("footer");
+    footer.removeAttribute("class");
     footer.innerHTML = `
-         <div class="buttonQuit">
-             <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
-             <p>QUIT</p>
-         </div>
-         <button class="nextButton">NEXT</button>
-     `;
+        <div class="buttonQuit">
+            <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
+            <p>QUIT</p>
+        </div>
+    `;
 
-    // Next-button should not be displayed when choosing truth or dare options
-    document.querySelector(".nextButton").style.opacity = "0";
+    //add event for quit
 
-    let data = {
+    // When clicking quit leave game
+    footer.querySelector(".buttonQuit").addEventListener("click", () => {
+        // If user is host - ask to play another game or keep playing
+        if (isHost) {
+
+            clearInterval(answerTime);
+
+            // Display pop up
+            let gameId = parseInt(localStorage.getItem("gameId"));
+
+            let popUp = document.createElement("div");
+            popUp.setAttribute("id", "leaveGamePopUp");
+
+            popUp.innerHTML = `
+            <div>
+                <p>Are you sure you want to end this round?</p>
+                <div>   
+                    <button class="leaveGame">End Round</button>
+                    <button class="closePopup">Keep Playing</button>
+                </div>
+            </div>
+            `;
+
+            document.querySelector("main").appendChild(popUp);
+
+            // Close pop up and keep playing
+            popUp.querySelector(".closePopup").addEventListener("click", () => {
+                popUp.remove();
+            });
+
+            // End round and go back to category display
+            popUp.querySelector(".leaveGame").addEventListener("click", async () => {
+                let requestDataForEndingRound = {
+                    action: "endRound",
+                    gameId: gameId
+                }
+
+                await handleGameFetch(requestDataForEndingRound);
+
+                // Go back to category page
+                renderCategories("Would You Rather");
+            })
+
+
+        } else {
+            // If user is not host - ask to leave game or keep playing
+            clearInterval(checkActiveGame);
+            leaveGame();
+        }
+    })
+
+    let rqstToChangeVotesStructure = {
+        gameId: gameId,
+        action: "replaceVotesStructure"
+    };
+
+    await fetchWouldYouRather(rqstToChangeVotesStructure);
+
+    const questionIndex = getWouldYRIndex();
+    console.log(questionIndex);
+
+    let rqstToSetnewIndex = {
+        action: "setQuestionIndex",
+        gameId: gameId,
+        index: questionIndex
+    };
+
+    await handleGameFetch(rqstToSetnewIndex);
+
+    let rqstQuestion = {
         category: category,
         action: "fetchQuestion"
     };
 
-    // POST-request to wouldYouRather.php
-    const request = new Request("php/wouldYouRather.php", {
-        method: "POST",
-        headers: { "Content-type": "application/json; charset=UTF-8" },
-        body: JSON.stringify(data)
+    let data = await fetchWouldYouRather(rqstQuestion);
+    console.log(data.questions);
+
+    const thisQuestion = document.getElementById("btnThis");
+    const thatQuestion = document.getElementById("btnThat");
+
+    thisQuestion.querySelector("p").innerHTML = `${data.questions[getWouldYRIndex()].this}`;
+    thatQuestion.querySelector("p").innerHTML = `${data.questions[getWouldYRIndex()].that}`;
+
+    document.querySelectorAll("section>button").forEach((button) => {
+        button.addEventListener("click", (e) => {
+            let questionType = e.target.dataset["set"];
+            console.log(e.target.dataset["set"]);
+            console.log(e.target);
+            e.target.classList.toggle("selected");
+            updateSelectedQuestion(questionType, e.target)
+        })
     });
 
-    const response = await fetch(request);
+    async function updateSelectedQuestion(type, target) {
 
-    // If response is OK, render new innerHTML that displays the results
-    if (response.status === 200) {
-        let data = await response.json();
-        console.log(data.questions);
-        saveQuestionsArray(data)
+        let previousVote = null;
 
-        function displayWouldYouRatherQuestion(data, index) {
-            const thisQuestion = document.getElementById("btnThis");
-            const thatQuestion = document.getElementById("btnThat");
-
-            thisQuestion.querySelector("p").innerHTML = `${data.questions[index].this}`;
-            thatQuestion.querySelector("p").innerHTML = `${data.questions[index].that}`;
-
-            document.querySelectorAll("section>button").forEach((button) => {
-                button.addEventListener("click", (e) => {
-                    let questionType = e.target.dataset["set"];
-                    console.log(e.target.dataset["set"]);
-                    console.log(e.target);
-                    e.target.classList.toggle("selected");
-                    updateSelectedQuestion(questionType, e.target)
-                })
-            });
-        }
-
-        let rqstData = {
-            gameId: gameId,
-            action: "replaceVotesStructure"
-        };
-
-        const rqst = new Request("php/wouldYouRather.php", {
-            method: "POST",
-            headers: { "Content-type": "application/json; charset=UTF-8" },
-            body: JSON.stringify(rqstData)
+        document.querySelectorAll("section>button").forEach(button => {
+            if (button.classList.contains("selected")) {
+                previousVote = button.dataset["set"];
+                button.classList.remove("selected");
+            }
         });
 
-        const rsponse = await fetch(rqst);
+        target.classList.toggle("selected");
 
-        console.log(localStorage.getItem("playerName"));
+        let rqstToUpdateVotes = {
+            gameId: gameId,
+            questionType: type,
+            previousVote: previousVote,
+            vote: localStorage.getItem("playerName"),
+            action: "updateVotes"
+        };
 
-        if (rsponse.status === 200) {
-            const questionIndex = getWouldYRIndex();
-            displayWouldYouRatherQuestion(data, questionIndex)
-            console.log(questionIndex);
+        await fetchWouldYouRather(rqstToUpdateVotes);
+
+        // If response OK, display css for which option is selected
+        if (type == "this") {
+            document.getElementById("btnThis").style.border = `3px solid var(--green)`;
+            document.getElementById("btnThat").style.border = `0px`;
+        } else {
+            document.getElementById("btnThat").style.border = `3px solid var(--green)`;
+            document.getElementById("btnThis").style.border = `0px`;
         }
-
-        async function updateSelectedQuestion(type, target) {
-
-            let previousVote = null;
-
-            document.querySelectorAll("section>button").forEach(button => {
-                if (button.classList.contains("selected")) {
-                    previousVote = button.dataset["set"];
-                    button.classList.remove("selected");
-                }
-            });
-
-            target.classList.toggle("selected");
-
-            let data = {
-                gameId: gameId,
-                questionType: type,
-                previousVote: previousVote,
-                vote: localStorage.getItem("playerName"),
-                action: "updateVotes"
-            };
-
-            // POST-request to wouldYouRather.php
-            const request = new Request("php/wouldYouRather.php", {
-                method: "POST",
-                headers: { "Content-type": "application/json; charset=UTF-8" },
-                body: JSON.stringify(data)
-            });
-
-            const response = await fetch(request);
-
-            // If response OK, display css for which option is selected
-            if (response.status === 200) {
-                let data = await response.json();
-                console.log(data);
-
-                if (type == "this") {
-                    document.getElementById("btnThis").style.border = `3px solid var(--green)`;
-                    document.getElementById("btnThat").style.border = `0px`;
-                } else {
-                    document.getElementById("btnThat").style.border = `3px solid var(--green)`;
-                    document.getElementById("btnThis").style.border = `0px`;
-                }
-            }
-        }
-    } else {
-        let error = await response.json();
-        feedback(error.message);
     }
 
-    async function readWouldYouRatherResults() {
-        let data = {
+
+    async function readWouldYouRatherResults(questions) {
+        let rqstFetchResults = {
             gameId: gameId,
             action: "fetchResults"
         };
 
-        // POST-request to wouldYouRather.php
-        const request = new Request("php/wouldYouRather.php", {
-            method: "POST",
-            headers: { "Content-type": "application/json; charset=UTF-8" },
-            body: JSON.stringify(data)
-        });
+        const data = await fetchWouldYouRather(rqstFetchResults);
 
-        const response = await fetch(request);
+        document.querySelectorAll("section>button").forEach((button) => {
+            button.disabled = true;
+            button.style.border = "0px";
+        })
 
-        // If response OK, display results
-        if (response.status === 200) {
-            let data = await response.json();
-            console.log(data);
+        let numOfPlayers = data.players.length;
+        let thisPercent;
+        let thatPercent;
 
-            document.querySelectorAll("section>button").forEach((button) => {
-                button.disabled = true;
-                button.style.border = "0px";
-            })
-
-            let numOfPlayers = data.players.length;
-            let thisPercent;
-            let thatPercent;
-
-            if (!data.activeGame.votes.this.length == 0) {
-                thisPercent = (data.activeGame.votes.this.length / numOfPlayers) * 100;
-            } else {
-                thisPercent = 0;
-            }
-
-            if (!data.activeGame.votes.that.length == 0) {
-                thatPercent = (data.activeGame.votes.that.length / numOfPlayers) * 100;
-            } else {
-                thatPercent = 0;
-            }
-
-            if (thisPercent < thatPercent) {
-                document.querySelector("#btnThis > span").style.opacity = "100%";
-                document.querySelector("#btnThat > span").style.opacity = "100%";
-                document.getElementById("btnThis").style.border = "3px solid var(--green)";
-                document.querySelector("#btnThat > span svg").style.opacity = "0";
-                document.getElementById("thisResult").innerHTML = thisPercent + "%";
-                document.getElementById("thatResult").innerHTML = thatPercent + "%";
-
-            } else if (thisPercent > thatPercent) {
-                document.querySelector("#btnThat > span").style.opacity = "100%";
-                document.querySelector("#btnThis > span").style.opacity = "100%";
-                document.querySelector("#btnThis > span svg").style.opacity = "0";
-                document.getElementById("btnThat").style.border = "3px solid var(--green)";
-                document.getElementById("thisResult").innerHTML = thisPercent + "%";
-                document.getElementById("thatResult").innerHTML = thatPercent + "%";
-
-            } else if (thisPercent === thatPercent) {
-                document.querySelector("#btnThat > span").style.opacity = "100%";
-                document.querySelector("#btnThis > span").style.opacity = "100%";
-                document.getElementById("thisResult").innerHTML = thisPercent + "%";
-                document.getElementById("thatResult").innerHTML = thatPercent + "%";
-            }
-
-            // The Next-button should now be displayed to get next question
-            document.querySelector(".nextButton").style.opacity = "100%";
-            enableNextButtonWYR(category)
+        if (!data.activeGame.votes.this.length == 0) {
+            thisPercent = (data.activeGame.votes.this.length / numOfPlayers) * 100;
+        } else {
+            thisPercent = 0;
         }
+
+        if (!data.activeGame.votes.that.length == 0) {
+            thatPercent = (data.activeGame.votes.that.length / numOfPlayers) * 100;
+        } else {
+            thatPercent = 0;
+        }
+
+        if (thisPercent < thatPercent) {
+            document.querySelector("#btnThis > span").style.opacity = "100%";
+            document.querySelector("#btnThat > span").style.opacity = "100%";
+            document.getElementById("btnThis").style.border = "3px solid var(--green)";
+            document.querySelector("#btnThat > span svg").style.opacity = "0";
+            document.getElementById("thisResult").innerHTML = thisPercent + "%";
+            document.getElementById("thatResult").innerHTML = thatPercent + "%";
+
+        } else if (thisPercent > thatPercent) {
+            document.querySelector("#btnThat > span").style.opacity = "100%";
+            document.querySelector("#btnThis > span").style.opacity = "100%";
+            document.querySelector("#btnThis > span svg").style.opacity = "0";
+            document.getElementById("btnThat").style.border = "3px solid var(--green)";
+            document.getElementById("thisResult").innerHTML = thisPercent + "%";
+            document.getElementById("thatResult").innerHTML = thatPercent + "%";
+
+        } else if (thisPercent === thatPercent) {
+            document.querySelector("#btnThat > span").style.opacity = "100%";
+            document.querySelector("#btnThis > span").style.opacity = "100%";
+            document.getElementById("thisResult").innerHTML = thisPercent + "%";
+            document.getElementById("thatResult").innerHTML = thatPercent + "%";
+        }
+
+        let isHost = window.localStorage.getItem("host");
+        if (isHost) {
+            document.querySelector("footer").innerHTML += `
+                    <button class="nextButton">NEXT</button>
+                `;
+
+            // enableNextButtonWYR(category)
+            document.querySelector(".nextButton").addEventListener("click", () => {
+                // Increment index to get new question or set index to 0 to restart
+                if (getWouldYRIndex() < questions.length - 1) {
+                    setWouldYRIndex(getWouldYRIndex() + 1, gameId)
+
+                } else {
+                    setWouldYRIndex(0, gameId)
+                }
+
+                renderWouldYouRather(category, gameId)
+            });
+        }
+    }
+
+    let isHost = window.localStorage.getItem("host");
+    // If host set initial timer
+    if (isHost) {
+        let gameId = parseInt(localStorage.getItem("gameId"));
+
+        let requestDataForUpdateTimer = {
+            gameId: gameId,
+            action: "updateTime",
+            timeLeft: 15
+        }
+
+        await handleGameFetch(requestDataForUpdateTimer);
     }
 
     // Set countdown timer for 15 seconds
     let progressbar = document.querySelector(".progressbar");
-    runTimer(15, progressbar, function () {
-        readWouldYouRatherResults()
+    let answerTime = await runTimer(15, progressbar, async function () {
+        readWouldYouRatherResults(data.questions)
     });
+
+    let checkActiveGame;
+    if (!isHost) {
+        // If player is not host, check if game still exist and if there is an ongoing game
+        // Also check if next question should be run
+        checkActiveGame = setInterval(async () => {
+            checkIfGameExist(gameId, checkActiveGame);
+            checkForActiveGame(gameId, answerTime, checkActiveGame);
+
+            let requestDataForNextQuestion = {
+                action: "requestNextQuestion",
+                gameId: gameId,
+                currentQuestion: questionIndex
+            };
+
+            let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
+            console.log(activeQuestion);
+            if (activeQuestion != questionIndex) {
+                clearInterval(checkActiveGame);
+                setWouldYRIndex(getWouldYRIndex() + 1, gameId)
+                renderWouldYouRather(category, gameId)
+            }
+
+        }, 1000);
+    }
 }
 
-function enableNextButtonWYR(category) {
-    let data = getQuestionsArray();
-    document.querySelector(".nextButton").addEventListener("click", () => {
-        // Increment index to get new question or set index to 0 to restart
-        if (getWouldYRIndex() < data.questions.length - 1) {
-            setWouldYRIndex(getWouldYRIndex() + 1)
+// Function to handle truth or dare fetch
+async function fetchWouldYouRather(requestData) {
 
+    // Set request parameters
+    let requestParameters = {
+        method: "POST",
+        headers: { "Content-Type": "application/json; charset=UTF-8" },
+        body: JSON.stringify(requestData)
+    }
+
+    let request = new Request("php/wouldYouRather.php", requestParameters);
+
+    // Fetch request and handle response
+    try {
+        let response = await fetch(request);
+
+        if (response.ok) {
+            let resource = await response.json();
+            return resource;
         } else {
-            setWouldYRIndex(0)
+            let error = await response.json();
+            feedback(error.message);
         }
-
-        renderWouldYouRather(category, getWouldYRGameId())
-    });
+    } catch (error) {
+        console.log("Something went wrong", error);
+    }
 }
-

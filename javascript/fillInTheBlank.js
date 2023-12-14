@@ -1,6 +1,6 @@
 "use strict";
 
-async function renderFillInTheBlank(category, gameId, questionIndex = 0){
+async function renderFillInTheBlank(category, gameId, questionIndex = 0) {
 
     let main = document.querySelector("main");
     main.removeAttribute("class");
@@ -34,7 +34,7 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0){
 
     let isHost = window.localStorage.getItem("host");
     // If host, select random player for question. If player get selected player
-    if(isHost){
+    if (isHost) {
         let randomIndex = Math.floor(Math.random() * players.length);
         player = players[randomIndex];
 
@@ -46,7 +46,7 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0){
         }
 
         handleGameFetch(requestDataForUpdatingPlayerInQuestion);
-    }else{
+    } else {
         // Send request to update playerInQuestion
         let requestDataForGettingPlayerInQuestion = {
             action: "getPlayerInQuestion",
@@ -60,7 +60,7 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0){
     let modifiedQuestion = question.replace("_", player);
 
     // Structure of main, present question
-    main.innerHTML=`
+    main.innerHTML = `
     <div class="wrapper">
         <h1>Fill in the blank</h1>
         <div class="questionBox">
@@ -75,15 +75,15 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0){
 
     // If player is not host, check if game still exist and if there is an ongoing game
     let checkActiveGame;
-    if(!isHost){
-        checkActiveGame = setInterval( () => {
+    if (!isHost) {
+        checkActiveGame = setInterval(() => {
             checkIfGameExist(gameId, checkActiveGame);
             checkForActiveGame(gameId, answerTime, checkActiveGame);
-        },1000);
+        }, 1000);
     }
 
     // Structure of footer
-    footer.innerHTML=`
+    footer.innerHTML = `
     <div class="buttonQuit">
         <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
         <p>QUIT</p>
@@ -91,12 +91,12 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0){
     `;
 
     // When clicking quit leave game
-    footer.querySelector(".buttonQuit").addEventListener("click", () =>{
+    footer.querySelector(".buttonQuit").addEventListener("click", () => {
 
         let isHost = window.localStorage.getItem("host");
 
         // If user is host - ask to play another game or keep playing
-        if(isHost){
+        if (isHost) {
 
             // Display pop up
             let gameId = parseInt(localStorage.getItem("gameId"));
@@ -122,8 +122,8 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0){
             });
 
             // End round and go back to category display
-            popUp.querySelector(".leaveGame").addEventListener("click", async () =>{
-                
+            popUp.querySelector(".leaveGame").addEventListener("click", async () => {
+
                 // Clear timer so no results are presented
                 clearInterval(answerTime);
 
@@ -139,15 +139,15 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0){
                     action: "endRound",
                     gameId: gameId
                 }
-                
+
                 await handleGameFetch(requestDataForEndingRound);
 
                 // Go back to category page
                 renderCategories("Fill In The Blank");
             })
 
-            
-        }else{
+
+        } else {
             // If user is not host - ask to leave game or keep playing
             clearInterval(checkActiveGame);
             leaveGame(answerTime);
@@ -155,7 +155,7 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0){
     })
 
     // If host set initial timer
-    if(isHost){
+    if (isHost) {
         let gameId = parseInt(localStorage.getItem("gameId"));
 
         let requestDataForUpdateTimer = {
@@ -163,13 +163,13 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0){
             action: "updateTime",
             timeLeft: 30
         }
-    
+
         await handleGameFetch(requestDataForUpdateTimer);
     }
 
     // Set aswering timer for 15sec
     let progressbar = document.querySelector(".progressbar");
-    let answerTime = await runTimer(30, progressbar, async function(){
+    let answerTime = await runTimer(30, progressbar, async function () {
         // Save players answer
         let playerAnswer = document.querySelector(".fillInTheBlankAnswer").value;
         let playerName = window.localStorage.getItem("playerName");
@@ -192,11 +192,11 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0){
     });
 }
 
-async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIndex){
+async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIndex) {
 
     let main = document.querySelector("main");
 
-    main.innerHTML=`
+    main.innerHTML = `
     <div class="wrapper">
         <h1>Fill in the blank</h1>
         <div class="questionBox">
@@ -212,7 +212,7 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
 
     // Send request to fetch all answers
     let gameId = localStorage.getItem("gameId");
-    
+
     let requestDataToFetchAnswers = {
         gameId: gameId,
         action: "fetchAnswers",
@@ -221,17 +221,17 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
     let allAnswers = await fetchFillInTheBlank(requestDataToFetchAnswers);
 
     // Remove players own answer for voting
-    let allAnswersExceptPlayer = Object.assign({}, allAnswers); 
+    let allAnswersExceptPlayer = Object.assign({}, allAnswers);
     let playerName = localStorage.getItem("playerName");
 
-    if(allAnswersExceptPlayer.hasOwnProperty(playerName)){
+    if (allAnswersExceptPlayer.hasOwnProperty(playerName)) {
         delete allAnswersExceptPlayer[playerName];
     }
 
     let length = Object.keys(allAnswersExceptPlayer).length;
 
     // Present each of the other players answer
-    if(length === 0){
+    if (length === 0) {
         let infoBox = document.createElement("div");
         infoBox.innerHTML = `
         <p>No other players gave an answer</p>
@@ -239,7 +239,7 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
         document.querySelector(".answers").appendChild(infoBox);
     }
 
-    for(let answer in allAnswersExceptPlayer){
+    for (let answer in allAnswersExceptPlayer) {
         let answerBox = document.createElement("div");
         answerBox.innerHTML = `<p>${allAnswersExceptPlayer[answer]}</p>`;
 
@@ -252,12 +252,12 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
             let newVote = null;
 
             // Update who is voted for and if a previous vote needs to be removed
-            if(answerBox.classList.contains("selected")){
+            if (answerBox.classList.contains("selected")) {
                 previousVote = answerBox.textContent;
-                answerBox.classList.remove("selected"); 
-            }else{
+                answerBox.classList.remove("selected");
+            } else {
                 document.querySelectorAll(".answers > div").forEach(answer => {
-                    if(answer.classList.contains("selected")){
+                    if (answer.classList.contains("selected")) {
                         previousVote = answer.textContent;
                         answer.classList.remove("selected");
                     }
@@ -280,18 +280,18 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
 
     let footer = document.querySelector("footer");
 
-    footer.innerHTML=`
+    footer.innerHTML = `
     <div class="buttonQuit">
         <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
         <p>QUIT</p>
-    </div>`;             
+    </div>`;
 
     // When clicking quit button ask user to confirm
-    footer.querySelector(".buttonQuit").addEventListener("click", () =>{
+    footer.querySelector(".buttonQuit").addEventListener("click", () => {
         let isHost = window.localStorage.getItem("host");
 
         // If user is host - ask to play another game or keep playing
-        if(isHost){
+        if (isHost) {
 
             // Display pop up
             let gameId = parseInt(localStorage.getItem("gameId"));
@@ -317,8 +317,8 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
             })
 
             // End round and go back to category display
-            popUp.querySelector(".leaveGame").addEventListener("click", async () =>{
-                
+            popUp.querySelector(".leaveGame").addEventListener("click", async () => {
+
                 // Clear timer so no results are presented
                 clearInterval(answerTime);
 
@@ -333,24 +333,24 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
                     action: "endRound",
                     gameId: gameId
                 }
-                
+
                 await handleGameFetch(requestDataForEndingRound);
 
                 // Go back to category page
                 renderCategories("Fill In The Blank");
             })
 
-        }else{
+        } else {
             // If user is not host - ask to leave game or keep playing
             //clearInterval(checkActiveGame);
             leaveGame(answerTime);
-        }  
-    
+        }
+
     })
 
     let isHost = window.localStorage.getItem("host");
     //If host set timer for voting
-    if(isHost){
+    if (isHost) {
         let gameId = parseInt(localStorage.getItem("gameId"));
 
         let requestDataForUpdateTimer = {
@@ -358,17 +358,17 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
             action: "updateTime",
             timeLeft: 15
         }
-    
+
         await handleGameFetch(requestDataForUpdateTimer);
     }
 
     // Set aswering timer for 15 sec, then present results
     let progressbar = document.querySelector(".progressbar");
-    let answerTime = await runTimer(15, progressbar, async function(){
+    let answerTime = await runTimer(15, progressbar, async function () {
 
         // Clear voting boxes to replace with result boxes
         document.querySelector(".answers").innerHTML = ``;
-        
+
         // Fetch voting results
         let requestDataToFetchVotes = {
             gameId: gameId,
@@ -425,10 +425,10 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
         let isHost = window.localStorage.getItem("host");
 
         // If host, display next button
-        if(isHost){
+        if (isHost) {
             let footer = document.querySelector("footer");
 
-            footer.innerHTML=`
+            footer.innerHTML = `
             <div class="buttonQuit">
                 <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
                 <p>QUIT</p>
@@ -438,7 +438,7 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
 
             // When host clicks on next button, clear votes and call to render next question
             footer.querySelector(".nextButton").addEventListener("click", async () => {
-                
+
                 // Send request to clear votes
                 let requestDataToClearVotes = {
                     gameId: gameId,
@@ -459,19 +459,19 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
                 renderFillInTheBlank(category, gameId, questionIndex);
             });
 
-        }else{
-            footer.innerHTML=`
+        } else {
+            footer.innerHTML = `
             <div class="buttonQuit">
                 <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
                 <p>QUIT</p>
-            </div>`;            
+            </div>`;
         }
 
         let checkActiveGame;
-        if(!isHost){
+        if (!isHost) {
             // If player is not host, check if game still exist and if there is an ongoing game
             // Also check if next question should be run
-            checkActiveGame = setInterval( async () => {
+            checkActiveGame = setInterval(async () => {
                 checkIfGameExist(gameId, checkActiveGame);
                 checkForActiveGame(gameId, answerTime, checkActiveGame);
 
@@ -483,20 +483,20 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
 
                 let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
                 console.log(activeQuestion);
-                if(activeQuestion != questionIndex){
+                if (activeQuestion != questionIndex) {
                     clearInterval(checkActiveGame);
                     renderFillInTheBlank(category, gameId, activeQuestion);
                 }
 
-            },1000);
+            }, 1000);
         }
 
-         // When clicking quit button ask user to confirm
-        footer.querySelector(".buttonQuit").addEventListener("click", () =>{
+        // When clicking quit button ask user to confirm
+        footer.querySelector(".buttonQuit").addEventListener("click", () => {
             let isHost = window.localStorage.getItem("host");
 
             // If user is host - ask to play another game or keep playing
-            if(isHost){
+            if (isHost) {
 
                 // Display pop up
                 let gameId = parseInt(localStorage.getItem("gameId"));
@@ -522,8 +522,8 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
                 })
 
                 // End round and go back to category display
-                popUp.querySelector(".leaveGame").addEventListener("click", async () =>{
-                    
+                popUp.querySelector(".leaveGame").addEventListener("click", async () => {
+
                     // Clear timer so no results are presented
                     clearInterval(answerTime);
 
@@ -538,48 +538,48 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
                         action: "endRound",
                         gameId: gameId
                     }
-                    
+
                     await handleGameFetch(requestDataForEndingRound);
 
                     // Go back to category page
                     renderCategories("Fill In The Blank");
                 })
 
-            }else{
+            } else {
                 // If user is not host - ask to leave game or keep playing
                 clearInterval(checkActiveGame);
                 leaveGame(answerTime);
-            }  
-        
+            }
+
         })
     });
 
 }
 
 // Function to handle fill in the blank fetch
-async function fetchFillInTheBlank(requestData){
+async function fetchFillInTheBlank(requestData) {
 
     // Set request parameters
     let requestParameters = {
         method: "POST",
-        headers: {"Content-Type": "application/json; charset=UTF-8"},
+        headers: { "Content-Type": "application/json; charset=UTF-8" },
         body: JSON.stringify(requestData)
     }
 
     let request = new Request("php/fillInTheBlank.php", requestParameters);
 
     // Fetch request and handle response
-    try{
+    try {
         let response = await fetch(request);
 
-        if(response.ok){
+        if (response.ok) {
             let resource = await response.json();
             return resource;
-        }else{
+        } else {
             let error = await response.json();
             feedback(error.message);
         }
-    }catch(error){
+    } catch (error) {
         console.log("Something went wrong", error);
     }
 }

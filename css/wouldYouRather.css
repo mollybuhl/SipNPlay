@@ -47,7 +47,7 @@
 
 #wouldYouRatherWrapper section div {
     top: 44%;
-    z-index: 100;
+    z-index: 2;
 }
 
 #wouldYouRatherWrapper .timer {

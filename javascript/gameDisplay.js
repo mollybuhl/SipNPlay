@@ -157,7 +157,7 @@ async function renderGameDisplay(currentGame = false) {
     });
 
     main.querySelector(".spinTheBottle").addEventListener("click", () => {
-        spinTheBottleHandle();
+        renderStartGame("Spin The Bottle", "No Category")
     });
 
     main.querySelector(".fillInTheBlank").addEventListener("click", () => {
@@ -231,6 +231,15 @@ function renderCategories(game) {
             renderStartGame(game, category);
         }
     });
+
+    if (game === "Spin The Bottle") {
+        let category = "No Category";
+        if (currentGame) {
+            startNewGame(game, category);
+        } else {
+            renderStartGame(game, category);
+        }
+    }
 
     // When clicking exit go back to game display
     let footer = document.querySelector("footer");
