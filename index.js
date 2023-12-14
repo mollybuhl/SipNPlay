@@ -4,7 +4,7 @@ TO DO:
     - Overall CSS
     - Register more prompts
     - animate progresbar
-    - Only host updating timer
+    - display who is host
 
     Never Have I ever
     - Swipe for next card
@@ -20,8 +20,6 @@ TO DO:
     Spin the bottle
     - Connect to handle game
     - Connect to leave game
-
-
 */
 createMenu();
 // Display Menu when clicking hamburger icon

@@ -28,6 +28,7 @@
     --fontRegular: 400;
 
     --boxShadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    --boxShadowForMultipleCards: 0 -5px 15px 0 rgba(0, 0, 0, 0.2);
 }
 
 @font-face {
@@ -40,7 +41,7 @@
     src: url(../outfit/Outfit-VariableFont_wght.ttf);
 }
 
-* {
+*{
     box-sizing: border-box;
 }
 

@@ -34,7 +34,7 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0) {
 
     let isHost = window.localStorage.getItem("host");
     // If host, select random player for question. If player get selected player
-    if(isHost){
+    if (isHost) {
         let randomIndex = Math.floor(Math.random() * players.length);
         player = players[randomIndex];
 
@@ -97,8 +97,6 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0) {
 
         // If user is host - ask to play another game or keep playing
         if (isHost) {
-            // Clear timer so no results are presented
-            clearInterval(answerTime);
 
             // Display pop up
             let gameId = parseInt(localStorage.getItem("gameId"));
@@ -125,6 +123,9 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0) {
 
             // End round and go back to category display
             popUp.querySelector(".leaveGame").addEventListener("click", async () => {
+
+                // Clear timer so no results are presented
+                clearInterval(answerTime);
 
                 // Send request to clear votes
                 let requestDataToClearVotes = {
@@ -291,8 +292,6 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
 
         // If user is host - ask to play another game or keep playing
         if (isHost) {
-            // Clear timer so no results are presented
-            clearInterval(answerTime);
 
             // Display pop up
             let gameId = parseInt(localStorage.getItem("gameId"));
@@ -319,6 +318,9 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
 
             // End round and go back to category display
             popUp.querySelector(".leaveGame").addEventListener("click", async () => {
+
+                // Clear timer so no results are presented
+                clearInterval(answerTime);
 
                 // Send request to clear votes
                 let requestDataToClearVotes = {
@@ -495,8 +497,6 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
 
             // If user is host - ask to play another game or keep playing
             if (isHost) {
-                // Clear timer so no results are presented
-                clearInterval(answerTime);
 
                 // Display pop up
                 let gameId = parseInt(localStorage.getItem("gameId"));
@@ -508,8 +508,8 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
                 <div>
                     <p>Are you sure you want to end this round?</p>
                     <div>   
-                        <button class="leaveGame">End Round</button>
-                        <button class="closePopup">Keep Playing</button>
+                        <button class="leaveGame">YES</button>
+                        <button class="closePopup clearDesign">NO</button>
                     </div>
                 </div>
                 `;
@@ -523,6 +523,9 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
 
                 // End round and go back to category display
                 popUp.querySelector(".leaveGame").addEventListener("click", async () => {
+
+                    // Clear timer so no results are presented
+                    clearInterval(answerTime);
 
                     // Send request to clear votes
                     let requestDataToClearVotes = {

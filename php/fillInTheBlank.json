@@ -16,13 +16,48 @@
                 "id": 3,
                 "category": "The Basic Version",
                 "question": "_ biggest pet peeve is"
+            },
+            {
+                "id": 4,
+                "category": "The Basic Version",
+                "question": "if _ became a millionaire, how did they make their money"
+            },
+            {
+                "id": 5,
+                "category": "The Basic Version",
+                "question": "_ joined a cult where they praise"
+            },
+            {
+                "id": 6,
+                "category": "The Basic Version",
+                "question": "The name of the movie about _'s life is"
+            },
+            {
+                "id": 7,
+                "category": "The Basic Version",
+                "question": "_ went viral on TikTok for"
+            },
+            {
+                "id": 8,
+                "category": "The Basic Version",
+                "question": "If _ could travel anywhere they would go to"
+            },
+            {
+                "id": 9,
+                "category": "The Basic Version",
+                "question": "This is what _ is doing for their birthday"
+            },
+            {
+                "id": 10,
+                "category": "The Basic Version",
+                "question": "_'s memoir would be called"
             }
         ],
         "Not Safe For Work": [
             {
-            "id": 1,
-            "category": "Not Safe For Work",
-            "question": "If _ wrote a self-help book this would be called:"
+                "id": 1,
+                "category": "Not Safe For Work",
+                "question": "If _ wrote a self-help book this would be called:"
             },
             {
                 "id": 2,
@@ -32,14 +67,49 @@
             {
                 "id": 3,
                 "category": "Not Safe For Work",
-                "question": "_ got thrown out of the club because of:"
+                "question": "_ got thrown out of the club because of"
+            },
+            {
+                "id": 4,
+                "category": "Not Safe For Work",
+                "question": "_ went to jail for commiting this crime"
+            },
+            {
+                "id": 5,
+                "category": "Not Safe For Work",
+                "question": "This is how _ faked their own death"
+            },
+            {
+                "id": 6,
+                "category": "Not Safe For Work",
+                "question": "_ missed their flight because of this"
+            },
+            {
+                "id": 7,
+                "category": "Not Safe For Work",
+                "question": "_ would not marry for money but they would mary for"
+            },
+            {
+                "id": 8,
+                "category": "Not Safe For Work",
+                "question": "You get a drunk call from _, they wanted to tell you"
+            },
+            {
+                "id": 9,
+                "category": "Not Safe For Work",
+                "question": "When getting a speeding ticket _'s excuse to the police is"
+            },
+            {
+                "id": 10,
+                "category": "Not Safe For Work",
+                "question": "If _ hooked up with this celebrity I would not be surprised"
             }
         ],
         "Spicy Edition": [
             {
-            "id": 1,
-            "category": "Spicy Edition",
-            "question": "If _ invented a new position, what would it be called?"
+                "id": 1,
+                "category": "Spicy Edition",
+                "question": "If _ invented a new position, what would it be called?"
             },
             {
                 "id": 2,
@@ -49,7 +119,42 @@
             {
                 "id": 3,
                 "category": "Spicy Edition",
-                "question": "If _ were to take an art class, who would they like to be the nude model?"
+                "question": "If _ were to take an art class, who would they like to be the nude model"
+            },
+            {
+                "id": 4,
+                "category": "Spicy Edition",
+                "question": "_'s stripper name would be"
+            },
+            {
+                "id": 5,
+                "category": "Spicy Edition",
+                "question": "To get out of work _ told their boss"
+            },
+            {
+                "id": 6,
+                "category": "Spicy Edition",
+                "question": "_'s biggest redflag is"
+            },
+            {
+                "id": 7,
+                "category": "Spicy Edition",
+                "question": "Nobody would know that _'s secret feetish is"
+            },
+            {
+                "id": 8,
+                "category": "Spicy Edition",
+                "question": "The lie _ told to get out of a date was"
+            },
+            {
+                "id": 9,
+                "category": "Spicy Edition",
+                "question": "_'s most watched porn category is"
+            },
+            {
+                "id": 10,
+                "category": "Spicy Edition",
+                "question": "On the way home from the club _ ended up"
             }
         ],
         "Girl Dinner":
@@ -68,6 +173,41 @@
             "id": 3,
             "category": "Girl Dinner",
             "question": "What does _ spend too much time thinking about?"
+            },
+            {
+            "id": 4,
+            "category": "Girl Dinner",
+            "question": "The reality show about _'s life would be called"
+            },
+            {
+            "id": 5,
+            "category": "Girl Dinner",
+            "question": "_ did not want to marry their partner because of"
+            },
+            {
+            "id": 6,
+            "category": "Girl Dinner",
+            "question": "_ got famous for"
+            },
+            {
+            "id": 7,
+            "category": "Girl Dinner",
+            "question": "_'s excuse for not replaying to your text for a week"
+            },
+            {
+            "id": 8,
+            "category": "Girl Dinner",
+            "question": "The greatest love advice _ ever gave was"
+            },
+            {
+            "id": 9,
+            "category": "Girl Dinner",
+            "question": "If _ could go on any reality show they would go on"
+            },
+            {
+            "id": 10,
+            "category": "Girl Dinner",
+            "question": "This yeasr instead of celebraiting their birthday, _ is"
             }  
         ]  
     }

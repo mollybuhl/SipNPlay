@@ -6,7 +6,6 @@
 
 .neverHaveIEver > h1{
     text-align: center;
-    font-family: museoModerno;
     font-size:  var(--fontSizeHeader);
     margin-top: 2vh;
     margin-bottom: 4vh;
@@ -21,7 +20,7 @@
 
 .cards > div{
     background-color: var(--blackGrey);
-    box-shadow: var(--boxShadow);
+    box-shadow: 0 -5px 5px 0px rgba(0, 0, 0, 0.2);
 
     font-family: outfit;
     font-size: var(--fontSizeThree);
@@ -36,7 +35,8 @@
 }
 
 /*Current card on display*/
-.currentCard{
+.neverHaveIEver > .cards > .currentCard{
+    box-shadow: var(--boxShadowForMultipleCards);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -51,7 +51,7 @@
 }
 
 .cardInformation{
-    color: var(--textOnWhite);
+    color: var(--green);
     font-size: var(--fontSizeFive);
 
     align-self: flex-end;
@@ -59,15 +59,10 @@
     flex-direction: column;
 }
 
-.cardInformation > .cardNumber{
-    align-self: flex-end;
-}
-
 /*Cards in stack*/
 .cards > .backCard{
     position: absolute;
     top: 0;
-    box-shadow: 0px -5px 15px 0px rgba(0, 0, 0, 0.20);
 }
 
 .cards > :nth-child(2){

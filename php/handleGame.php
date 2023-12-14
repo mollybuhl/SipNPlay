@@ -96,7 +96,7 @@
             sendJSON($message);
 
         }else{
-            $message = ["message" => "no game under that pin was found"];
+            $message = false;
             sendJson($message, 404);
         }
 

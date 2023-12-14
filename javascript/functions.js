@@ -154,6 +154,7 @@ function renderInstructions(steps) {
 async function runTimer(totalTime, progressbar, callback) {
     
     let gameId = parseInt(localStorage.getItem("gameId"));
+    let isHost = window.localStorage.getItem("host");
 
     // Request tofetch time for timer
     let requestDataToGetTimeLeft = {
@@ -174,14 +175,18 @@ async function runTimer(totalTime, progressbar, callback) {
             const progress = (100 / totalTime) * timeRemaining;
             progressbar.style.width = `${progress}%`;
 
-            // Update timer key in active game
-            let requestDataForUpdateTimer = {
-                gameId: gameId,
-                action: "updateTime",
-                timeLeft: timeLeft
-            }
+            // Only host updating timer
+            if(isHost){
+                // Update timer key in active game
+                let requestDataForUpdateTimer = {
+                    gameId: gameId,
+                    action: "updateTime",
+                    timeLeft: timeLeft
+                }
 
-            await handleGameFetch(requestDataForUpdateTimer);
+                await handleGameFetch(requestDataForUpdateTimer);
+            }
+            
 
         } else {
             clearInterval(countdownTimer);
