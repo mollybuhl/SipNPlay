@@ -167,5 +167,20 @@
             "timeLeft": 30,
             "votes": []
         }
+    },
+    {
+        "id": 4859,
+        "players": [
+            "looo"
+        ],
+        "activeGame": {
+            "host": "looo",
+            "game": "No Active Game",
+            "category": "No category",
+            "questionIndex": 0,
+            "playerInQuestion": "No player",
+            "timeLeft": 30,
+            "votes": []
+        }
     }
 ]

@@ -4,6 +4,7 @@ TO DO:
     - Overall CSS
     - Register more prompts
     - animate progresbar
+    - display who is host
 
     Never Have I ever
     - Swipe for next card

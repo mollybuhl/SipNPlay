@@ -464,11 +464,8 @@ function joinGame(playerName = null) {
                 popUp.querySelector(".closePopup").addEventListener("click", () => {
                     popUp.remove();
                 })
-            }
-
-            
+            } 
         }
-        
     })
 }
 
