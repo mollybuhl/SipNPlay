@@ -41,12 +41,14 @@
     src: url(../outfit/Outfit-VariableFont_wght.ttf);
 }
 
-*{
+* {
     box-sizing: border-box;
 }
 
 body {
-    background-color: var(--darkGrey);
+    /* background-color: var(--darkGrey); */
+    background-image: url("../Media/BACKGROUND.png");
+    background-repeat: no-repeat;
     color: var(--textColor);
     height: 100vh;
     margin: 0;
@@ -81,7 +83,7 @@ footer {
 }
 
 /*Hamburger menu*/
-.menuPopupBackground{
+.menuPopupBackground {
     height: 100%;
     width: 100%;
     position: absolute;
@@ -93,7 +95,7 @@ footer {
     pointer-events: none;
 }
 
-.menuPopupBackground.active{
+.menuPopupBackground.active {
     opacity: 1;
     pointer-events: fill;
 }
@@ -120,20 +122,20 @@ footer {
     opacity: 0;
     right: -500px;
     pointer-events: none;
-    
+
 }
 
-.menuPopup.active{
-   opacity: 1;
-   right: 0px;
-   pointer-events: fill;
+.menuPopup.active {
+    opacity: 1;
+    right: 0px;
+    pointer-events: fill;
 }
 
 .menuPopup>.fa-xmark {
     align-self: flex-end;
 }
 
-.menuOption{
+.menuOption {
     display: flex;
     gap: 2vh;
 }
@@ -142,7 +144,7 @@ footer {
     cursor: pointer;
 }
 
-.games > svg,
+.games>svg,
 .fa-user-group,
 .fa-earth-americas,
 .fa-circle-info {
