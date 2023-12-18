@@ -414,8 +414,6 @@ async function checkForActiveGame(gameId, timer, interval1, interval2){
     if(activeGame){
         return "Active game";
     }else{
-        console.log("No active game");
-
         let infoBox = document.createElement("div");
         infoBox.classList.add("infoBox");
         infoBox.innerHTML = `
@@ -440,7 +438,7 @@ async function checkForActiveGame(gameId, timer, interval1, interval2){
 
         setTimeout(() => {
             renderWaitingForGame(gameId);
-        }, 5000);
+        }, 3000);
     }         
 }
 

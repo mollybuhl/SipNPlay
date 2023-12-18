@@ -236,16 +236,6 @@ async function createGame(game, category, creatorName) {
 async function startNewGame(game, category) {
     let gameId = localStorage.getItem("gameId");
 
-    // Change game and category
-    let requestDataForChngingGameStatus = {
-        action: "changeGameStatus",
-        gameId: gameId,
-        game: game,
-        category: category
-    }
-
-    handleGameFetch(requestDataForChngingGameStatus);
-
     // Loading page for current players
     // Present game status
     let main = document.querySelector("main");
@@ -510,7 +500,7 @@ async function renderWaitingForGame(gameId) {
     <div class="gameId">${gameId}</div>
     <p>Participants</p>
     <div class="participants"></div>
-    <p>Waiting for host to start the game...</p>
+    <p class="waitingText">Waiting for host to start the game...</p>
     `;
 
     // Structure of footer
@@ -524,15 +514,13 @@ async function renderWaitingForGame(gameId) {
     </div>
     `;
 
-      // Fetch the host
-      let requestDataToGetHost = {
+    // Fetch the host
+    let requestDataToGetHost = {
         action: "getHost",
         gameId: gameId
     }
 
     let hostName = await handleGameFetch(requestDataToGetHost);
-    console.log(hostName);
-
 
     // Fetch current players every second
     let requestData = {
@@ -592,6 +580,7 @@ async function renderWaitingForGame(gameId) {
 
     let requestStart = setInterval(async () => {
         let requestToStartGame = await handleGameFetch(requestDataForStartingGame);
+        console.log(requestToStartGame);
 
         if (requestToStartGame) {
             // Stop fetching players

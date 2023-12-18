@@ -21,7 +21,6 @@ align-items: center;
 }
 
 /*Game pin text*/
-
 .startGame > h2{
     font-size: var(--fontSizeTwo);
     margin-top: 5vh;
@@ -222,7 +221,7 @@ footer #startGameButton:disabled{
     color: var(--buttonColor);
 }
 
-.startGame > .infoBox{
+.infoBox, .startGame > .infoBox{
     position: absolute;
     height: 100%;
     width: 100%;
@@ -235,18 +234,19 @@ footer #startGameButton:disabled{
     align-items: center;
 }
 
-.startGame > .infoBox > div{
-    background-color: var(--blackGrey);
+.infoBox > div, .startGame > .infoBox > div{
+    background-color: var(--darkGrey);
     display: flex;
     flex-direction: column;
 
     height: 20vh;
+    width: 80%;
     border-radius: 5px;
     padding: 2vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    z-index: 4;
 }
 
 .startGame > .infoBox > div > button{

@@ -164,6 +164,7 @@
             // Update game status
             $games[$gameIndex]["activeGame"]["game"] = $gamePlayed;
             $games[$gameIndex]["activeGame"]["category"] = $categoryPlayed;
+            $games[$gameIndex]["activeGame"]["questionIndex"] = 0;
 
             // Update json file and return game id
             saveToFile("activeGames.json", $games);
@@ -416,6 +417,18 @@
         if($activeGame){
 
             sendJson($games[$gameIndex]["activeGame"]["timeLeft"]);
+        }else{
+            $message = ["No game under that pin was found"];
+            sendJson($message, 404);
+        }
+    }else if($action == "getHost"){
+        // Get game by id
+        $gameId = $requestData["gameId"];
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId);  
+
+        // If active game found return time
+        if($activeGame){
+            sendJson($games[$gameIndex]["activeGame"]["host"]);
         }else{
             $message = ["No game under that pin was found"];
             sendJson($message, 404);

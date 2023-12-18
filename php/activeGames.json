@@ -134,14 +134,15 @@
         "id": 4859,
         "players": [
             "looo",
-            "tanja"
+            "tanja",
+            "molly"
         ],
         "activeGame": {
             "host": "looo",
             "game": "No Active Game",
-            "category": "No category",
+            "category": "The Basic Version",
             "questionIndex": 0,
-            "playerInQuestion": "No player",
+            "playerInQuestion": "molly",
             "timeLeft": 30,
             "votes": []
         }
