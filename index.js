@@ -6,7 +6,6 @@ TO DO:
     - animate progresbar
     - display who is host
     - Intro animation 
-    - Enable instructions
 
     Never Have I ever
     - Swipe for next card
