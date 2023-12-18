@@ -49,7 +49,36 @@ function createMenu() {
     });
 
     // Display instructions
-    //menuPopup.querySelector(".instructions").addEventListener("click", renderGameDisplay);
+    menuPopup.querySelector(".instruction").addEventListener("click", () => {
+        let game = window.localStorage.getItem("game");
+        switch (game) {
+            case "main":
+                renderInstructions(instructionsArray["Main"]);
+                break;
+            case "Never Have I Ever":
+                renderInstructions(instructionsArray["Never Have I Ever"]);
+                break;
+            case "Truth or Dare":
+                renderInstructions(instructionsArray["Truth or Dare"]);
+                break;
+            case "Would You Rather":
+                renderInstructions(instructionsArray["Would You Rather"]);
+                break;
+            case "Spin The Bottle":
+                renderInstructions(instructionsArray["Spin The Bottle"]);
+                break;
+            case "Most Likely To":
+                renderInstructions(instructionsArray["Most Likely To"]);
+                break;
+            case "Fill In The Blank":
+                renderInstructions(instructionsArray["Fill In The Blank"]);
+                break;
+            default:
+                renderInstructions(instructionsArray["Main"]);
+                break;
+        }
+        closeMenu()
+    });
 
 
     function closeMenu(event) {
@@ -60,7 +89,7 @@ function createMenu() {
 }
 
 // Display menu when clicking icon
-function renderMenu(){
+function renderMenu() {
     document.querySelector(".menuPopup").classList.toggle("active");
     document.querySelector(".menuPopupBackground").classList.toggle("active");
 
@@ -69,21 +98,13 @@ function renderMenu(){
     let background = document.querySelector(".menuPopupBackground");
 
     // Close menu on click outside menu 
-    document.onclick = function(e){
-        if(!menuPopup.contains(e.target) && !menuIcon.contains(e.target)){
+    document.onclick = function (e) {
+        if (!menuPopup.contains(e.target) && !menuIcon.contains(e.target)) {
             background.classList.remove("active");
             menuPopup.classList.remove("active");
         }
     }
 }
-
-let array = [
-    "Have friends",
-    "Add players",
-    "Start Game",
-    "Live, Laugh, Love",
-    "Success"
-]
 
 // renderInstructions(array)
 function renderInstructions(steps) {
@@ -152,7 +173,7 @@ function renderInstructions(steps) {
 
 // Function to set and run a timer
 async function runTimer(totalTime, progressbar, callback) {
-    
+
     let gameId = parseInt(localStorage.getItem("gameId"));
     let isHost = window.localStorage.getItem("host");
 
@@ -176,7 +197,7 @@ async function runTimer(totalTime, progressbar, callback) {
             progressbar.style.width = `${progress}%`;
 
             // Only host updating timer
-            if(isHost){
+            if (isHost) {
                 // Update timer key in active game
                 let requestDataForUpdateTimer = {
                     gameId: gameId,
@@ -186,7 +207,7 @@ async function runTimer(totalTime, progressbar, callback) {
 
                 await handleGameFetch(requestDataForUpdateTimer);
             }
-            
+
 
         } else {
             clearInterval(countdownTimer);
@@ -194,7 +215,7 @@ async function runTimer(totalTime, progressbar, callback) {
                 callback();
             }
         }
-    },1000);
+    }, 1000);
 
     return countdownTimer; // Return the time ID
 }
