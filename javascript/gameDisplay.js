@@ -142,26 +142,32 @@ async function renderGameDisplay(currentGame = false) {
     // Display game category or render play when clicking on game
     main.querySelector(".neverHaveIEver").addEventListener("click", () => {
         renderCategoryLocalGame("Never Have I Ever");
+        window.localStorage.setItem("game", "Never Have I Ever");
     });
 
     main.querySelector(".mostLikelyTo").addEventListener("click", () => {
         renderCategories("Most Likely To");
+        window.localStorage.setItem("game", "Most Likely To");
     });
 
     main.querySelector(".truthOrDare").addEventListener("click", () => {
         renderCategories("Truth or Dare");
+        window.localStorage.setItem("game", "Truth or Dare");
     });
 
     main.querySelector(".wouldYouRather").addEventListener("click", () => {
         renderCategories("Would You Rather");
+        window.localStorage.setItem("game", "Would You Rather");
     });
 
     main.querySelector(".spinTheBottle").addEventListener("click", () => {
-        renderStartGame("Spin The Bottle", "No Category")
+        renderCategories("Spin The Bottle")
+        window.localStorage.setItem("game", "Spin The Bottle");
     });
 
     main.querySelector(".fillInTheBlank").addEventListener("click", () => {
         renderCategories("Fill In The Blank");
+        window.localStorage.setItem("game", "Fill In The Blank");
     });
 
     // Remove quit button from footer
@@ -261,6 +267,7 @@ function renderCategories(game) {
         } else {
             renderGameDisplay();
         }
+        window.localStorage.setItem("game", "main");
     });
 }
 
@@ -328,6 +335,7 @@ function renderCategoryLocalGame(game) {
 
     footer.querySelector(".buttonQuit").addEventListener("click", () => {
         renderGameDisplay(false);
+        window.localStorage.setItem("game", "main");
     });
 
 }

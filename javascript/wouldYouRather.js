@@ -99,10 +99,9 @@ async function renderWouldYouRather(category, gameId) {
         </div>
     `;
 
-    //add event for quit
-
     // When clicking quit leave game
     footer.querySelector(".buttonQuit").addEventListener("click", () => {
+        let isHost = window.localStorage.getItem("host");
         // If user is host - ask to play another game or keep playing
         if (isHost) {
 
@@ -196,21 +195,18 @@ async function renderWouldYouRather(category, gameId) {
 
     async function updateSelectedQuestion(type, target) {
 
-        let previousVote = null;
-
         document.querySelectorAll("section>button").forEach(button => {
             if (button.classList.contains("selected")) {
-                previousVote = button.dataset["set"];
                 button.classList.remove("selected");
+                button.disabled = true;
+            } else {
+                button.disabled = false;
             }
         });
-
-        target.classList.toggle("selected");
 
         let rqstToUpdateVotes = {
             gameId: gameId,
             questionType: type,
-            previousVote: previousVote,
             vote: localStorage.getItem("playerName"),
             action: "updateVotes"
         };
@@ -281,10 +277,88 @@ async function renderWouldYouRather(category, gameId) {
         }
 
         let isHost = window.localStorage.getItem("host");
+
+        let checkActiveGame;
+        if (!isHost) {
+            // If player is not host, check if game still exist and if there is an ongoing game
+            // Also check if next question should be run
+            checkActiveGame = setInterval(async () => {
+                checkIfGameExist(gameId, checkActiveGame);
+                checkForActiveGame(gameId, answerTime, checkActiveGame);
+
+                let requestDataForNextQuestion = {
+                    action: "requestNextQuestion",
+                    gameId: gameId,
+                    currentQuestion: questionIndex
+                };
+
+                let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
+                console.log(activeQuestion);
+                if (activeQuestion != questionIndex) {
+                    clearInterval(checkActiveGame);
+                    setWouldYRIndex(getWouldYRIndex() + 1, gameId)
+                    renderWouldYouRather(category, gameId)
+                }
+
+            }, 1000);
+        }
+
         if (isHost) {
             document.querySelector("footer").innerHTML += `
                     <button class="nextButton">NEXT</button>
                 `;
+
+            // When clicking quit leave game
+            footer.querySelector(".buttonQuit").addEventListener("click", () => {
+                let isHost = window.localStorage.getItem("host");
+                // If user is host - ask to play another game or keep playing
+                if (isHost) {
+
+                    clearInterval(answerTime);
+
+                    // Display pop up
+                    let gameId = parseInt(localStorage.getItem("gameId"));
+
+                    let popUp = document.createElement("div");
+                    popUp.setAttribute("id", "leaveGamePopUp");
+
+                    popUp.innerHTML = `
+            <div>
+                <p>Are you sure you want to end this round?</p>
+                <div>   
+                    <button class="leaveGame">End Round</button>
+                    <button class="closePopup">Keep Playing</button>
+                </div>
+            </div>
+            `;
+
+                    document.querySelector("main").appendChild(popUp);
+
+                    // Close pop up and keep playing
+                    popUp.querySelector(".closePopup").addEventListener("click", () => {
+                        popUp.remove();
+                    });
+
+                    // End round and go back to category display
+                    popUp.querySelector(".leaveGame").addEventListener("click", async () => {
+                        let requestDataForEndingRound = {
+                            action: "endRound",
+                            gameId: gameId
+                        }
+
+                        await handleGameFetch(requestDataForEndingRound);
+
+                        // Go back to category page
+                        renderCategories("Would You Rather");
+                    })
+
+
+                } else {
+                    // If user is not host - ask to leave game or keep playing
+                    clearInterval(checkActiveGame);
+                    leaveGame();
+                }
+            })
 
             // enableNextButtonWYR(category)
             document.querySelector(".nextButton").addEventListener("click", () => {

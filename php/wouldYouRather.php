@@ -67,7 +67,6 @@
         $gameId = $requestData["gameId"];
         $questionType = $requestData["questionType"];
         $player = $requestData["vote"];
-        $previousVote = $requestData["previousVote"];
 
         // Find active game based on gameId from request
         $activeGame = false;
@@ -81,28 +80,6 @@
         }
 
         if($activeGame){
-            if($previousVote == "this") {
-                // Find the index of the lowercase player name in the lowercase array
-                $votes = $games[$gameIndex]["activeGame"]["votes"]["this"];
-                $indexToRemove = array_search($player, $votes);
-
-                // Check if the value was found before attempting to remove
-                if ($indexToRemove !== false) {
-                    // Remove the value at the found index
-                    array_splice($games[$gameIndex]["activeGame"]["votes"]["this"], $indexToRemove, 1);
-
-                    $games[$gameIndex]["activeGame"]["votes"]["that"][] = $player;
-                }
-            } elseif($previousVote == "that") {
-                $votes = $games[$gameIndex]["activeGame"]["votes"]["that"];
-                $indexToRemove = array_search($player, $votes);
-
-                if ($indexToRemove !== false) {
-                    array_splice($games[$gameIndex]["activeGame"]["votes"]["that"], $indexToRemove, 1);
-
-                    $games[$gameIndex]["activeGame"]["votes"]["this"][] = $player;
-                }
-            } else {
                 // Add new vote
                 if(!$player == null) {
                     if ($questionType == "this") {
@@ -128,8 +105,7 @@
                         }
                     }
                 }
-            }
-
+            
             saveToFile("activeGames.json", $games);
             sendJSON($games[$gameIndex]);
 

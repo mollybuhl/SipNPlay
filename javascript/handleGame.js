@@ -19,7 +19,7 @@ function renderStartGame(game, category) {
         let creatorName = document.querySelector(".name").value;
 
         // If name is longer than 10 characters, ask to pick another name
-        if(creatorName.length > 10){
+        if (creatorName.length > 10) {
             let popUp = document.createElement("div");
             popUp.setAttribute("id", "leaveGamePopUp");
 
@@ -38,7 +38,7 @@ function renderStartGame(game, category) {
             popUp.querySelector(".closePopup").addEventListener("click", () => {
                 popUp.remove();
             })
-        }else{
+        } else {
             createGame(game, category, creatorName);
         }
     });
@@ -49,7 +49,7 @@ function renderStartGame(game, category) {
         // Send name to function
         let playerName = document.querySelector(".name").value;
 
-        if(playerName.length > 10){
+        if (playerName.length > 10) {
             let popUp = document.createElement("div");
             popUp.setAttribute("id", "leaveGamePopUp");
 
@@ -68,7 +68,7 @@ function renderStartGame(game, category) {
             popUp.querySelector(".closePopup").addEventListener("click", () => {
                 popUp.remove();
             })
-        }else{
+        } else {
             joinGame(playerName);
         }
     });
@@ -215,18 +215,23 @@ async function createGame(game, category, creatorName) {
         switch (game) {
             case "Most Likely To":
                 renderMostLikelyTo(category, gameId);
+                window.localStorage.setItem("game", "Most Likely To");
                 break;
             case "Truth or Dare":
                 truthORDareHandle(category, gameId);
+                window.localStorage.setItem("game", "Truth or Dare");
                 break;
             case "Would You Rather":
                 renderWouldYouRather(category, gameId);
+                window.localStorage.setItem("game", "Would You Rather");
                 break;
             case "Fill In The Blank":
                 renderFillInTheBlank(category, gameId);
+                window.localStorage.setItem("game", "Fill In The Blank");
                 break;
             case "Spin The Bottle":
                 spinTheBottleHandle(gameId)
+                window.localStorage.setItem("game", "Spin The Bottle");
                 break;
         }
     });
@@ -364,18 +369,25 @@ async function startNewGame(game, category) {
         switch (game) {
             case "Most Likely To":
                 renderMostLikelyTo(category, gameId);
+
+                // Save game to know which instructions to show
+                window.localStorage.setItem("game", "Most Likely To");
                 break;
             case "Truth or Dare":
                 truthORDareHandle(category, gameId);
+                window.localStorage.setItem("game", "Truth or Dare");
                 break;
             case "Would You Rather":
                 renderWouldYouRather(category, gameId);
+                window.localStorage.setItem("game", "Would You Rather");
                 break;
             case "Fill In The Blank":
                 renderFillInTheBlank(category, gameId);
+                window.localStorage.setItem("game", "Fill In The Blank");
                 break;
             case "Spin The Bottle":
                 spinTheBottleHandle(category, gameId);
+                window.localStorage.setItem("game", "Spin The Bottle");
                 break;
         }
 
@@ -418,10 +430,10 @@ function joinGame(playerName = null) {
             playerName = document.querySelector(".name").value;
 
             // If name is longer than 10 characters ask to pick another name
-            if(playerName.length > 10){
+            if (playerName.length > 10) {
                 let popUp = document.createElement("div");
                 popUp.setAttribute("id", "leaveGamePopUp");
-    
+
                 popUp.innerHTML = `
                 <div class="oneButtonPopUp">
                     <p>Please pick another name, your name can only be 10 characters long</p>
@@ -430,22 +442,22 @@ function joinGame(playerName = null) {
                     </div>
                 </div>
                 `;
-    
+
                 document.querySelector("main").appendChild(popUp);
-    
+
                 // Close pop up and keep playing
                 popUp.querySelector(".closePopup").addEventListener("click", () => {
                     popUp.remove();
                 })
-            }else{
+            } else {
                 sendRequestToJoin();
             }
 
-        }else{
+        } else {
             sendRequestToJoin();
         }
 
-        async function sendRequestToJoin(){
+        async function sendRequestToJoin() {
             // Join game by id
             let requestData = {
                 action: "joinGame",
@@ -455,7 +467,7 @@ function joinGame(playerName = null) {
 
             let joinGame = await handleGameFetch(requestData);
 
-            if(joinGame){
+            if (joinGame) {
                 // Save gameId in local storage and set currentGame to true
                 window.localStorage.setItem("currentGame", "true");
                 window.localStorage.setItem("gameId", gameId);
@@ -463,11 +475,11 @@ function joinGame(playerName = null) {
 
                 // Call function to display currently joined players
                 renderWaitingForGame(gameId);
-            }else{
+            } else {
                 // If game Id did not exist, inform user
                 let popUp = document.createElement("div");
                 popUp.setAttribute("id", "leaveGamePopUp");
-    
+
                 popUp.innerHTML = `
                 <div class="oneButtonPopUp">
                     <p>No game under this ID was found</p>
@@ -476,14 +488,14 @@ function joinGame(playerName = null) {
                     </div>
                 </div>
                 `;
-    
+
                 document.querySelector("main").appendChild(popUp);
-    
+
                 // Close pop up and keep playing
                 popUp.querySelector(".closePopup").addEventListener("click", () => {
                     popUp.remove();
                 })
-            } 
+            }
         }
     })
 }
@@ -598,18 +610,24 @@ async function renderWaitingForGame(gameId) {
             switch (game) {
                 case "Most Likely To":
                     renderMostLikelyTo(category, gameId, questionIndex);
+                    // Save game to know which instructions to display
+                    window.localStorage.setItem("game", "Most Likely To");
                     break;
                 case "Truth or Dare":
                     truthORDareHandle(category, gameId);
+                    window.localStorage.setItem("game", "Truth or Dare");
                     break;
                 case "Would You Rather":
                     renderWouldYouRather(category, gameId);
+                    window.localStorage.setItem("game", "Would You Rather");
                     break;
                 case "Fill In The Blank":
                     renderFillInTheBlank(category, gameId, questionIndex);
+                    window.localStorage.setItem("game", "Fill In The Blank");
                     break;
                 case "Spin The Bottle":
                     spinTheBottleHandle(gameId);
+                    window.localStorage.setItem("game", "Spin The Bottle");
                     break;
             }
         }
@@ -708,6 +726,7 @@ function leaveGame(interval1 = false, interval2 = false, interval3 = false) {
             window.localStorage.setItem("currentGame", false);
             window.localStorage.removeItem("gameId");
             window.localStorage.removeItem("playerName");
+            window.localStorage.setItem("game", "main");
 
             // Render game display
             renderGameDisplay();
@@ -744,6 +763,7 @@ async function checkIfGameExist(gameId, interval1, interval2, interval3) {
         window.localStorage.setItem("currentGame", false);
         window.localStorage.removeItem("gameId");
         window.localStorage.removeItem("playerName");
+        window.localStorage.setItem("game", "main");
 
         // Infor user the game has ended
 

@@ -147,7 +147,6 @@ async function truthORDareHandle(category, gameId) {
         }, 1000);
     }
 
-
     // Structure of footer
     footer.innerHTML = `
         <div class="buttonQuit">
