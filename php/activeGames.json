@@ -130,5 +130,24 @@
             "timeLeft": 30,
             "votes": []
         }
+    },
+    {
+        "id": 4236,
+        "players": [
+            "troll",
+            "bill"
+        ],
+        "activeGame": {
+            "host": "troll",
+            "game": "No Active Game",
+            "category": "No category",
+            "questionIndex": 0,
+            "playerInQuestion": "No player",
+            "timeLeft": 12,
+            "votes": [],
+            "answers": {
+                "troll": "hejhej"
+            }
+        }
     }
 ]

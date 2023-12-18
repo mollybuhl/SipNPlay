@@ -4,6 +4,8 @@
     flex-direction: column;
     gap: 2vh;
     color: var(--textColor);
+    height: 100%;
+    width: 100%;
 }
 
 .fillInTheBlank > .wrapper > h1{
@@ -23,6 +25,32 @@
     margin: 0;
     font-family: outfit;
     font-size: var(--fontSizeThree);
+}
+
+.fillInTheBlank > .wrapper > .inputWrapper{
+    background-color: var(--black);
+    width: 100%;
+    position: relative;
+}
+
+.fillInTheBlank > .wrapper > .inputWrapper > textarea{
+    font-size: var(--fontSizeSix);
+    width: 90%;
+    height: 10vh;
+    background-color: var(--darkGrey);
+    color: var(--textColor);
+    border: none;
+    padding: 2vh;
+}
+
+.fillInTheBlank > .wrapper > .inputWrapper> input:focus{
+    outline: none;
+}
+
+.fillInTheBlank > .wrapper > .inputWrapper > .sendIcon{
+    position: absolute;
+    top: 25px;
+    right: 40px;
 }
 
 .fillInTheBlank > .wrapper > .answers{
