@@ -125,6 +125,7 @@ footer .nextButton {
     font-family: outfit;
     font-weight: var(--fontRegular);
     font-size: var(--fontSizeFive);
+    color: var(--black);
 
     background-color: var(--white);
     height: 55%;

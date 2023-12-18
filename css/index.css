@@ -96,6 +96,7 @@ footer {
     transition: 0.3s;
     opacity: 0;
     pointer-events: none;
+    z-index: 5;
 }
 
 .menuPopupBackground.active {
@@ -125,7 +126,7 @@ footer {
     opacity: 0;
     right: -500px;
     pointer-events: none;
-
+    z-index: 6;
 }
 
 .menuPopup.active {

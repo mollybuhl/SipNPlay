@@ -44,6 +44,16 @@
     font-size: var(--fontSizeFive);
 }
 
+.fillInTheBlank > .wrapper > .answers > div.selected{
+    border: 1px solid var(--green);
+}
+
+.fillInTheBlank > .wrapper > .answers > div.infoBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .fillInTheBlank > .wrapper > .answers > div.mostVoted{
     border: 3px solid var(--green);   
     color: var(--green);
@@ -56,7 +66,8 @@
 }
 
 .fillInTheBlank > .wrapper > .answers > div.result > .answerName{
-    background-color: var(--darkGrey);
+    background-color: #161616;
+    border-radius: 0;
     color: var(--darkGrey);
     position: absolute;
     width: 17vw;
@@ -68,7 +79,7 @@
 }
 
 .fillInTheBlank > .wrapper > .answers > div.result > div{
-    background-color: var(--blackGrey);
+    background-color: var(--darkGrey);
     color: var(--orange);
     font-size: var(--fontSizeFive);
     height: 4vh;

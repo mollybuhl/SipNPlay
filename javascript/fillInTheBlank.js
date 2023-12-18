@@ -174,15 +174,19 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0) {
         let playerAnswer = document.querySelector(".fillInTheBlankAnswer").value;
         let playerName = window.localStorage.getItem("playerName");
 
-        // Send request to save answer
-        let requestDataToSaveAnswer = {
-            gameId: gameId,
-            action: "saveAnswer",
-            playerName: playerName,
-            playerAnswer: playerAnswer
-        }
+        // If player has given an answer save this in json file
+        if(playerAnswer.length > 0){
+            // Send request to save answer
+            let requestDataToSaveAnswer = {
+                gameId: gameId,
+                action: "saveAnswer",
+                playerName: playerName,
+                playerAnswer: playerAnswer
+            }
 
-        await fetchFillInTheBlank(requestDataToSaveAnswer);
+            await fetchFillInTheBlank(requestDataToSaveAnswer);
+        }
+        
 
         // Stop checking for active game
         clearInterval(checkActiveGame);
@@ -233,6 +237,7 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
     // Present each of the other players answer
     if (length === 0) {
         let infoBox = document.createElement("div");
+        infoBox.classList.add("infoBox");
         infoBox.innerHTML = `
         <p>No other players gave an answer</p>
         `;
@@ -377,6 +382,15 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
 
         let votes = await fetchFillInTheBlank(requestDataToFetchVotes);
 
+        if(votes.length < 1){
+            let infoBox = document.createElement("div");
+            infoBox.classList.add("infoBox");
+            infoBox.innerHTML = `
+            <p>No answers was given</p>
+            `;
+            document.querySelector(".answers").appendChild(infoBox);
+        }
+
         // Initialize vote counter for all answers
         let answerVoteCounter = {};
         for (let name in allAnswers) {
@@ -482,7 +496,6 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
                 };
 
                 let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
-                console.log(activeQuestion);
                 if (activeQuestion != questionIndex) {
                     clearInterval(checkActiveGame);
                     renderFillInTheBlank(category, gameId, activeQuestion);
