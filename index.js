@@ -10,13 +10,9 @@ TO DO:
 
     Never Have I ever
     - Swipe for next card
-
-    Truth or Dare
-    - Fix bug with selection
-  
+   
     Spin the bottle
-    - Swipe to spin
-    - Animation for result
+    - End game, check for !isHost
 */
 createMenu();
 // Display Menu when clicking hamburger icon

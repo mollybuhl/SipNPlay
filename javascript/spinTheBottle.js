@@ -188,9 +188,41 @@ async function spinTheBottleHandle(gameId) {
     let isHost = window.localStorage.getItem("host");
     let checkActiveGame;
     if (!isHost) {
-        checkActiveGame = setInterval(() => {
+        checkActiveGame = setInterval(async () => {
             checkIfGameExist(gameId, checkActiveGame, checkPlayer);
-            checkForActiveGame(gameId, checkActiveGame, checkPlayer);
+
+            let requestDataForCheckingActiveGame = {
+                gameId: gameId,
+                action: "checkActiveGame",
+            }
+
+            let activeGame = await handleGameFetch(requestDataForCheckingActiveGame);
+
+            // If there is an active game return this information
+            if (activeGame) {
+                return "Active game";
+            } else {
+                console.log("No active game");
+
+                let infoBox = document.createElement("div");
+                infoBox.classList.add("infoBox");
+                infoBox.innerHTML = `
+                <div>
+                    <p>Your host ended this round</p>
+                    <p>You will be taken back to the waiting page</p>
+                </div>
+                `;
+
+                document.querySelector("main").appendChild(infoBox);
+
+                // Clear interval
+                clearInterval(checkActiveGame);
+                clearInterval(checkPlayer);
+
+                setTimeout(() => {
+                    renderWaitingForGame(gameId);
+                }, 5000);
+            }
         }, 1000);
     }
 
@@ -207,6 +239,8 @@ async function spinTheBottleHandle(gameId) {
     // When clicking quit leave game
     footer.querySelector(".buttonQuit").addEventListener("click", () => {
         // If user is host - ask to play another game or keep playing
+        isHost = window.localStorage.getItem("host");
+
         if (isHost) {
 
             // Display pop up
@@ -241,9 +275,7 @@ async function spinTheBottleHandle(gameId) {
 
                 await handleGameFetch(requestDataForEndingRound);
 
-                if (localStorage.getItem("playerName") !== player) {
-                    clearInterval(checkPlayer)
-                }
+                clearInterval(checkPlayer)
 
                 // Go back to category page
                 renderCategories("Spin The Bottle");
@@ -252,7 +284,7 @@ async function spinTheBottleHandle(gameId) {
 
         } else {
             // If user is not host - ask to leave game or keep playing
-            if (localStorage.getItem("playerName") !== player) {
+            if (localStorage.getItem("playerName") === player) {
                 clearInterval(checkPlayer)
             }
             clearInterval(checkActiveGame)
@@ -403,10 +435,105 @@ function displaySpinTheBottleResult(challenge, name, gameId) {
         </div>
     `;
 
+    let isHost = window.localStorage.getItem("host");
+    let checkActiveGame;
+    if (!isHost) {
+        checkActiveGame = setInterval(async () => {
+            console.log("hej");
+            checkIfGameExist(gameId, checkActiveGame);
+
+            let requestDataForCheckingActiveGame = {
+                gameId: gameId,
+                action: "checkActiveGame",
+            }
+
+            let activeGame = await handleGameFetch(requestDataForCheckingActiveGame);
+
+            // If there is an active game return this information
+            if (activeGame) {
+                return "Active game";
+            } else {
+                console.log("No active game");
+
+                let infoBox = document.createElement("div");
+                infoBox.classList.add("infoBox");
+                infoBox.innerHTML = `
+                <div>
+                    <p>Your host ended this round</p>
+                    <p>You will be taken back to the waiting page</p>
+                </div>
+                `;
+
+                document.querySelector("main").appendChild(infoBox);
+                // Clear interval
+                clearInterval(checkActiveGame);
+
+                setTimeout(() => {
+                    renderWaitingForGame(gameId);
+                }, 5000);
+            }
+        }, 1000);
+    }
+
     let footer = document.querySelector("footer");
-    footer.innerHTML += `
-            <button class="nextButton">NEXT</button>
+    // Structure of footer
+    footer.innerHTML = `
+        <div class="buttonQuit">
+            <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
+            <p>QUIT</p>
+        </div>
+        <button class="nextButton">NEXT</button>
+    `;
+
+    // When clicking quit leave game
+    footer.querySelector(".buttonQuit").addEventListener("click", () => {
+
+        // If user is host - ask to play another game or keep playing
+        if (isHost) {
+            // Display pop up
+            let gameId = parseInt(localStorage.getItem("gameId"));
+
+            let popUp = document.createElement("div");
+            popUp.setAttribute("id", "leaveGamePopUp");
+
+            popUp.innerHTML = `
+        <div>
+            <p>Are you sure you want to end this round?</p>
+            <div>   
+                <button class="leaveGame">End Round</button>
+                <button class="closePopup">Keep Playing</button>
+            </div>
+        </div>
         `;
+
+            document.querySelector("main").appendChild(popUp);
+
+            // Close pop up and keep playing
+            popUp.querySelector(".closePopup").addEventListener("click", () => {
+                popUp.remove();
+            });
+
+            // End round and go back to category display
+            popUp.querySelector(".leaveGame").addEventListener("click", async () => {
+                let requestDataForEndingRound = {
+                    action: "endRound",
+                    gameId: gameId
+                }
+
+                await handleGameFetch(requestDataForEndingRound);
+
+                // Go back to game display
+                renderGameDisplay()
+            })
+        } else {
+            // If user is not host - ask to leave game or keep playing
+            clearInterval(checkActiveGame)
+            leaveGame();
+            setSTBPlayerIndex(getSTBPlayerIndex() + 1)
+            spinTheBottleHandle(gameId)
+        }
+    })
+
     // Render new round of Spin The Bottle
     document.querySelector(".nextButton").addEventListener("click", () => {
         setSTBPlayerIndex(getSTBPlayerIndex() + 1)

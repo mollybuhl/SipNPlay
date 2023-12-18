@@ -157,7 +157,7 @@ async function renderGameDisplay(currentGame = false) {
     });
 
     main.querySelector(".spinTheBottle").addEventListener("click", () => {
-        renderStartGame("Spin The Bottle", "No Category")
+        renderCategories("Spin The Bottle")
     });
 
     main.querySelector(".fillInTheBlank").addEventListener("click", () => {

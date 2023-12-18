@@ -49,6 +49,9 @@ body {
     /* background-color: var(--darkGrey); */
     background-image: url("../Media/BACKGROUND.png");
     background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
     color: var(--textColor);
     height: 100vh;
     margin: 0;
