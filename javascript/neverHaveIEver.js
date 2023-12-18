@@ -66,8 +66,93 @@ async function renderNeverHaveIEver(category, questionIndex = 0){
     })
     
     //Swipe for next question
-    //swipeNext();
-    document.querySelector(".swipeNextCard").addEventListener("click", renderNewCard);
+    swipeNext();
+    //document.querySelector(".swipeNextCard").addEventListener("click", renderNewCard);
+
+    // Function to swipe for next card
+    function swipeNext(){
+        let touchArea = document.querySelector(".swipeNextCard");
+
+        //Initial mouse X and Y positions are 0
+
+        let mouseX, initialX = 0;
+        let mouseY, initialY =0;
+        let isSwiped;
+
+        //Events for touch and mouse
+        let events = {
+            mouse: {
+                down: "mousedown",
+                move: "mousemove",
+                up: "mouseup"
+            },
+            touch:{
+                down: "touchstart",
+                move: "touchmove",
+                up: "touched"
+            }
+        };
+
+        let deviceType = "";
+
+        // Detect touch devive
+        const isTouchDevice = () => {
+            try{
+                // Try to create TouchEvent, will fail for desktop andd trow error
+                document.createEvent("TouchEvent");
+                deviceType = "touch";
+                return true;
+            }catch(error){
+                deviceType = "mouse";
+                return false;
+            }
+        }
+
+        // Get left and top of touchArea
+        let recLeft = touchArea.getBoundingClientRect().left;
+        let recTop = touchArea.getBoundingClientRect().top;
+
+
+        //Get Exact X and Y positions of mouse/touch
+        const getXY = (e) => {
+            mouseX = (!isTouchDevice() ? e.pageX : e.touches[0].pageX) - recLeft;
+            mouseY = (!isTouchDevice() ? e.pageY : e.touches[0].pageY) - recTop;
+
+        };
+
+        isTouchDevice();
+
+        //Start Swipe
+        touchArea.addEventListener(events[deviceType].down,
+            (event) => {
+                isSwiped = true;
+
+                //Get X and Y position
+                getXY(event);
+                initialX = mouseX;
+                initialY = mouseY;
+                console.log(mouseX, mouseY);
+        })
+
+        // Mousemove/touchmove
+        touchArea.addEventListener(events[deviceType].move,
+            (event) => {
+                if(!isTouchDevice()){
+                    event.preventDefault();
+                }
+                if(isSwiped){
+                    getXY(event);
+                    let diffx = mouseX - initialX;
+                    let diffY = mouseY - initialY;
+
+                    if(Math.abs(diffY) > Math.abs(diffx)){
+                        renderNewCard(category);
+                    }
+                }
+            }
+        )
+    }
+
 
     // Function to render a new question
     async function renderNewCard(){
@@ -113,86 +198,3 @@ async function fetchNeverHaveIEverQuestion(category){
    
 }
 
-// Function to swipe for next card
-function swipeNext(){
-    let touchArea = document.querySelector(".swipeNextCard");
-
-    //Initial mouse X and Y positions are 0
-
-    let mouseX, initialX = 0;
-    let mouseY, initialY =0;
-    let isSwiped;
-
-    //Events for touch and mouse
-    let events = {
-        mouse: {
-            down: "mousedown",
-            move: "mousemove",
-            up: "mouseup"
-        },
-        touch:{
-            down: "touchstart",
-            move: "touchmove",
-            up: "touched"
-        }
-    };
-
-    let deviceType = "";
-
-    // Detect touch devive
-    const isTouchDevice = () => {
-        try{
-            // Try to create TouchEvent, will fail for desktop andd trow error
-            document.createEvent("TouchEvent");
-            deviceType = "touch";
-            return true;
-        }catch(error){
-            deviceType = "mouse";
-            return false;
-        }
-    }
-
-    // Get left and top of touchArea
-    let recLeft = touchArea.getBoundingClientRect().left;
-    let recTop = touchArea.getBoundingClientRect().top;
-
-
-    //Get Exact X and Y positions of mouse/touch
-    const getXY = (e) => {
-        mouseX = (!isTouchDevice() ? e.pageX : e.touches[0].pageX) - recLeft;
-        mouseY = (!isTouchDevice() ? e.pageY : e.touches[0].pageY) - recTop;
-
-    };
-
-    isTouchDevice();
-
-    //Start Swipe
-    touchArea.addEventListener(events[deviceType].down,
-        (event) => {
-            isSwiped = true;
-
-            //Get X and Y position
-            getXY(event);
-            initialX = mouseX;
-            initialY = mouseY;
-            console.log(mouseX, mouseY);
-    })
-
-    // Mousemove/touchmove
-    touchArea.addEventListener(events[deviceType].move,
-        (event) => {
-            if(!isTouchDevice()){
-                event.preventDefault();
-            }
-            if(isSwiped){
-                getXY(event);
-                let diffx = mouseX - initialX;
-                let diffY = mouseY - initialY;
-
-                if(Math.abs(diffY) > Math.abs(diffx)){
-                    renderNewCard(category);
-                }
-            }
-        }
-    )
-}
