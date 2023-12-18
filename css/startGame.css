@@ -63,6 +63,7 @@ align-items: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 1vh;
 }
 
 .startGame > p{
@@ -114,16 +115,16 @@ align-items: center;
     cursor: pointer;
 }
 
-.startGame > button.clearDesign{
-    background-color: transparent;
-    border: 1px solid var(--buttonColor);
-    color: var(--textColor);
-}
-
 .startGame > button.longButton{
     width: 100%;
     margin-top: 2vh;
     color: var(--black);
+}
+
+.startGame > button.clearDesign{
+    background-color: transparent;
+    border: 1px solid var(--buttonColor);
+    color: var(--textColor);
 }
 
 

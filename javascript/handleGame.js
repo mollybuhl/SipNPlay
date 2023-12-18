@@ -282,6 +282,9 @@ async function startNewGame(game, category) {
     let startButton = document.getElementById("startGameButton")
     startButton.disabled = true;
 
+    // Get host name
+    let creatorName = window.localStorage.getItem("name");
+
     // Fetch current players every second
     let requestData = {
         action: "getPlayers",
@@ -497,7 +500,7 @@ function joinGame(playerName = null) {
 
 // Function to render page for waiting for game to start
 // This function will be called for players, not hosts, when no ongoing game is currently running
-function renderWaitingForGame(gameId) {
+async function renderWaitingForGame(gameId) {
     let main = document.querySelector("main");
     main.classList.add("startGame");
 
@@ -521,6 +524,15 @@ function renderWaitingForGame(gameId) {
     </div>
     `;
 
+      // Fetch the host
+      let requestDataToGetHost = {
+        action: "getHost",
+        gameId: gameId
+    }
+
+    let hostName = await handleGameFetch(requestDataToGetHost);
+
+
     // Fetch current players every second
     let requestData = {
         action: "getPlayers",
@@ -537,7 +549,7 @@ function renderWaitingForGame(gameId) {
             if (!displayedPlayers.includes(player)) {
                 let playerName = document.createElement("div");
                 playerName.classList.add(player);
-                if(player === creatorName){
+                if(player === hostName){
                     playerName.classList.add("host");
                     playerName.innerHTML = `
                     <p>${player}</p>
