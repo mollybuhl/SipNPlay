@@ -531,6 +531,7 @@ async function renderWaitingForGame(gameId) {
     }
 
     let hostName = await handleGameFetch(requestDataToGetHost);
+    console.log(hostName);
 
 
     // Fetch current players every second

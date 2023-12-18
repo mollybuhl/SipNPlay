@@ -45,7 +45,13 @@
 }
 
 .fillInTheBlank > .wrapper > .answers > div.selected{
-    border: 1px solid var(--green);;
+    border: 1px solid var(--green);
+}
+
+.fillInTheBlank > .wrapper > .answers > div.infoBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .fillInTheBlank > .wrapper > .answers > div.mostVoted{
