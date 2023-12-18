@@ -283,7 +283,7 @@ async function startNewGame(game, category) {
     startButton.disabled = true;
 
     // Get host name
-    let creatorName = window.localStorage.getItem("name");
+    let creatorName = window.localStorage.getItem("playerName");
 
     // Fetch current players every second
     let requestData = {
