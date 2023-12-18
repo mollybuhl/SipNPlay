@@ -1,0 +1,13 @@
+{
+    "name": "SipNPlay",
+    "short_name": "SipNPlay",
+    "start_url:": "http://www.maumt.se/wdu/ht22/students/designstudio/SipNPlay2/",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "Media/logo.png",
+            "sizes": "512x512",
+            "type": "imge/png"
+        }   
+    ]
+}

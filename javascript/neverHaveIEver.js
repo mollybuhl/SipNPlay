@@ -45,7 +45,7 @@ async function renderNeverHaveIEver(category, questionIndex = 0){
             </filter>
             </defs>
             </svg>
-            <p>Swipe up</p>
+            <p>Next Card</p>
         </div>
     </div>
     `;
@@ -66,8 +66,7 @@ async function renderNeverHaveIEver(category, questionIndex = 0){
     })
     
     //Swipe for next question
-    swipeNext();
-    //document.querySelector(".swipeNextCard").addEventListener("click", renderNewCard);
+    document.querySelector(".swipeNextCard").addEventListener("click", renderNewCard);
 
     // Function to swipe for next card
     function swipeNext(){

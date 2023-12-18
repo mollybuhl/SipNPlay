@@ -19,7 +19,7 @@
 }
 
 .cards > div{
-    background-color: var(--blackGrey);
+    background-color: var(--darkGrey);
     box-shadow: 0 -5px 5px 0px rgba(0, 0, 0, 0.2);
 
     font-family: outfit;
@@ -83,6 +83,7 @@
     display: flex;
     flex-direction: column;
     padding: 5vh;
+    cursor: pointer;
 }
 
 .swipeNextCard > div{

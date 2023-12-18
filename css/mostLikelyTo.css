@@ -62,7 +62,7 @@
 /*Question box*/
 .mostLikelyTo>.wrapper>.questionBox {
     height: 30%;
-    background-color: var(--blackGrey);
+    background-color: var(--darkGrey);
     border-radius: 5px;
     box-shadow: var(--boxShadow);
     padding: 2vh;
@@ -83,7 +83,7 @@
 }
 
 .mostLikelyTo>.wrapper>.options>div {
-    background-color: var(--blackGrey);
+    background-color: var(--darkGrey);
     border-radius: 5px;
     box-shadow: var(--boxShadow);
 
