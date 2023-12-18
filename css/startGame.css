@@ -238,8 +238,9 @@ footer #startGameButton:disabled{
     background-color: var(--darkGrey);
     display: flex;
     flex-direction: column;
+    font-family: outfit;
 
-    height: 20vh;
+    height: 15vh;
     width: 80%;
     border-radius: 5px;
     padding: 2vh;

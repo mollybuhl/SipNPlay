@@ -118,7 +118,8 @@
             "aColdPenguin",
             "mandapanda",
             "hetingGeting",
-            "drylle"
+            "drylle",
+            "momo"
         ],
         "activeGame": {
             "host": "hehe",
@@ -126,23 +127,6 @@
             "category": "The Basic Version",
             "questionIndex": 0,
             "playerInQuestion": "No player",
-            "timeLeft": 30,
-            "votes": []
-        }
-    },
-    {
-        "id": 4859,
-        "players": [
-            "looo",
-            "tanja",
-            "molly"
-        ],
-        "activeGame": {
-            "host": "looo",
-            "game": "No Active Game",
-            "category": "The Basic Version",
-            "questionIndex": 0,
-            "playerInQuestion": "molly",
             "timeLeft": 30,
             "votes": []
         }
