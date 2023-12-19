@@ -1,0 +1,86 @@
+#intro {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    background: linear-gradient(180deg, rgba(36, 36, 36, 1) 0%, rgba(8, 8, 8, 1) 100%);
+    height: 100%;
+    /* position: relative; */
+}
+
+#intro h1 {
+    font-family: museoModerno;
+    font-weight: var(--fontMedium);
+    font-size: 40px;
+    position: absolute;
+    left: -50vw;
+    top: 36vh;
+    animation: slideIn 1000ms 1000ms 1 both;
+    transform: translateX(68vw);
+    transition: transform 3500ms;
+}
+
+#intro svg {
+    position: absolute;
+    top: 41vh;
+    left: 40vw;
+    animation: zoom 1500ms 1000ms 1 both;
+}
+
+#intro .getStarted {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    bottom: -10vh;
+    left: 0;
+    right: 0;
+
+    animation: slideUp 1000ms 2500ms 1 forwards;
+    cursor: pointer;
+    font-family: outfit;
+}
+
+#intro .getStarted h3 {
+    font-weight: var(--fontRegular);
+}
+
+#intro .getStarted svg {
+    margin-top: -35vh;
+    margin-left: 6vw;
+}
+
+@keyframes zoom {
+
+    10%,
+    90% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(2.5);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-50vw);
+    }
+
+    to {
+        transform: translateX(68vw);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-18vh);
+    }
+}
