@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         getStarted.addEventListener("click", () => {
             introWrapper.style.opacity = "0";
             introWrapper.style.transition = "opacity 500ms";
+            introWrapper.remove();
         });
 
         // Set a flag in sessionStorage to indicate that the animation has been shown

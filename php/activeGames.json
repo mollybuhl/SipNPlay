@@ -149,21 +149,5 @@
                 "troll": "hejhej"
             }
         }
-    },
-    {
-        "id": 5956,
-        "players": [
-            "jhkjd",
-            "djksdk"
-        ],
-        "activeGame": {
-            "host": "jhkjd",
-            "game": "No Active Game",
-            "category": "No category",
-            "questionIndex": 0,
-            "playerInQuestion": "No player",
-            "timeLeft": 30,
-            "votes": []
-        }
     }
 ]
