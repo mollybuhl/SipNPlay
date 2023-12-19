@@ -5,7 +5,6 @@ TO DO:
     - Register more prompts
     - animate progresbar
     - display who is host
-    - Intro animation 
 
     Never Have I ever
     - Swipe for next card

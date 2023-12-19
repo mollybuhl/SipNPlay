@@ -9,6 +9,7 @@
     position: relative;
     width: 310px;
     height: 310px;
+    margin-top: 2vh;
     border-radius: 50%;
     background: var(--gradient);
 }
@@ -41,48 +42,22 @@
 #circle .challenge svg {
     position: absolute;
     top: 4vh;
-}
-
-#circle .challenge:first-of-type svg {
-    rotate: -35deg;
-}
-
-#circle .challenge:nth-of-type(2) svg {
-    rotate: -100deg;
-}
-
-#circle .challenge:nth-of-type(3) svg {
-    rotate: 215deg;
-}
-
-#circle .challenge:nth-of-type(4) svg {
-    rotate: 175deg;
-}
-
-#circle .challenge:nth-of-type(5) svg {
     rotate: -35deg;
 }
 
 #circle .challenge:nth-of-type(6) svg {
-    rotate: 35deg;
-    top: 2.5vh;
+    top: 4.3vh;
 }
 
 #pointerWrap {
     position: absolute;
     top: 19%;
     left: 34%;
+    cursor: pointer;
 }
 
 #bottlePointer {
     transition: transform 4000ms ease-in-out;
-}
-
-#spin {
-    margin-top: 7vh;
-    padding: 3vh;
-    background-color: var(--darkGrey);
-    cursor: pointer;
 }
 
 #spinTheBottleResult {
