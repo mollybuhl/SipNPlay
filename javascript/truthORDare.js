@@ -117,13 +117,8 @@ async function truthORDareHandle(category, gameId) {
             let playerInQuestion = await handleGameFetch(requestPlayerInQuestion);
             console.log(playerInQuestion);
             if (playerInQuestion === localStorage.getItem("playerName")) {
-                let requestUpdatePlayerInQuestion = {
-                    action: "getPlayerInQuestion",
-                    gameId: gameId
-                };
-
-                await handleGameFetch(requestUpdatePlayerInQuestion);
                 setPlayerIndex(getPlayerIndex() + 1)
+                clearInterval(checkPlayer)
                 truthORDareHandle(category, gameId)
             }
 
@@ -134,7 +129,7 @@ async function truthORDareHandle(category, gameId) {
     document.querySelectorAll("section>button").forEach(button => {
         button.addEventListener("click", (e) => {
             // e.target.attributes.id.value will be either truth or dare
-            renderTruthORDareQuestion(e.target.attributes.id.value, category, gameId, player)
+            renderTruthORDareQuestion(e.target.attributes.id.value, category, gameId)
         });
     });
 
@@ -213,7 +208,7 @@ async function truthORDareHandle(category, gameId) {
 }
 
 // Function fetches a random question from PHP depending on type and category
-async function renderTruthORDareQuestion(type, category, gameId, player) {
+async function renderTruthORDareQuestion(type, category, gameId) {
     let rqstData = {
         type: type,
         category: category,

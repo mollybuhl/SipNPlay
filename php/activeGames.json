@@ -149,5 +149,21 @@
                 "troll": "hejhej"
             }
         }
+    },
+    {
+        "id": 5173,
+        "players": [
+            "tranen",
+            "mollan"
+        ],
+        "activeGame": {
+            "host": "tranen",
+            "game": "No Active Game",
+            "category": "No category",
+            "questionIndex": 0,
+            "playerInQuestion": "No player",
+            "timeLeft": 30,
+            "votes": []
+        }
     }
 ]
