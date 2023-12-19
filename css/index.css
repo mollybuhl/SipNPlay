@@ -166,20 +166,28 @@ footer {
 .instructions {
     position: fixed;
     top: 20vh;
-    bottom: 20vh;
-    right: 5%;
-    left: 5%;
+    bottom: 25vh;
+    right: 7%;
+    left: 7%;
     z-index: 100;
 
     font-family: outfit;
     background-color: var(--darkGrey);
     box-shadow: var(--boxShadow);
     border-radius: 5px;
-    padding: 5vh 4vh;
+    padding: 4vh;
 
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+}
+
+.instructions .fa-xmark {
+    height: 40px;
+    width: 30px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }
 
 .instructions>.fa-xmark {
@@ -188,18 +196,19 @@ footer {
 }
 
 .instructions>.steps {
-    height: 45vh;
+    height: 50vh;
+    margin-top: -2vh;
 }
 
 .instructions>.steps>h3 {
-    font-size: var(--fontSizeTwo);
+    font-size: var(--fontSizeThree);
     font-weight: var(--fontBold);
     color: var(--orange);
     margin-bottom: -1vh;
 }
 
 .instructions>.steps>p {
-    font-size: var(--fontSizeThree);
+    font-size: var(--fontSizeFour);
 }
 
 .instructions>div {
