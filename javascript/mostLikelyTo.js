@@ -319,8 +319,8 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
         let checkActiveGame;
         if(!isHost){
             checkActiveGame = setInterval( async () => {
-                //checkIfGameExist(gameId, checkActiveGame);
-                //checkForActiveGame(gameId, answerTime, checkActiveGame);
+                checkIfGameExist(gameId, checkActiveGame);
+                checkForActiveGame(gameId, answerTime, checkActiveGame);
 
                 let requestDataForNextQuestion = {
                     action: "requestNextQuestion",
