@@ -108,24 +108,26 @@ function renderMenu() {
 
 function renderInstructions(steps) {
     let instructionsPopup = document.createElement("div");
-    instructionsPopup.classList.add("instructions");
+    instructionsPopup.classList.add("instructionsPopupBackg");
 
     let index = 0;
     displayInstructions(instructionsPopup, index)
 
     function displayInstructions(instructionsPopup, index) {
         instructionsPopup.innerHTML = `
-            <i class="fa-solid fa-xmark fa-lg exit" style="color: #747474;"></i>
+            <div class="instructions">
+                <div id="stepBack"></div>
+                <div id="stepForward"></div>
+                <i class="fa-solid fa-xmark fa-lg exit" style="color: #747474;"></i>
 
-            <section class="steps">
-                <h3>Step ${index + 1}</h3>
-                <p>${steps[index]}</p>
-            </section>
+                <section class="steps">
+                    <h3>Step ${index + 1}</h3>
+                    <p>${steps[index]}</p>
+                </section>
 
-            <div>
-                <i class="fa-solid fa-chevron-left" style="color: #747474;"></i>
-                <div class="stepsIndicator"></div>
-                <i class="fa-solid fa-chevron-right" style="color: #747474;"></i>
+                <div>
+                    <div class="stepsIndicator"></div>
+                </div>
             </div>
         `;
 
@@ -150,18 +152,18 @@ function renderInstructions(steps) {
         instructionsPopup.querySelector(".exit").addEventListener("click", closeInstructions);
 
         function closeInstructions(event) {
-            document.querySelector("body").removeChild(event.originalTarget.parentElement);
+            document.querySelector("body").removeChild(instructionsPopup);
         }
 
         if (index < steps.length - 1) {
-            document.querySelector(".instructions .fa-chevron-right").addEventListener("click", () => {
+            document.querySelector(".instructions #stepForward").addEventListener("click", () => {
                 index++;
                 displayInstructions(instructionsPopup, index)
             });
         }
 
         if (index > 0) {
-            document.querySelector(".instructions .fa-chevron-left").addEventListener("click", () => {
+            document.querySelector(".instructions #stepBack").addEventListener("click", () => {
                 index--;
                 displayInstructions(instructionsPopup, index)
             });
