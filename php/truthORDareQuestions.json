@@ -5,31 +5,145 @@
                 "When was the last time you cried?",
                 "When was the last time you lied?",
                 "What's your biggest fear?",
-                "Who was your first celebrity crush?"
+                "Who was your first celebrity crush?",
+                "If you could be invisible for a day, what would you do?",
+                "What’s the most embarrassing music you listen to?",
+                "Who is your secret crush?",
+                "What’s your biggest regret?",
+                "Do you have a hidden talent?",
+                "What's the most embarrassing thing you've ever done",
+                "What's your worst habit",
+                "What's the strangest dream you've had",
+                "What's your biggest pet peeve?",
+                "What five things would you bring to a deserted island?",
+                "What celebrity do you think you most look like?",
+                "How many selfies do you take a day?",
+                "What is one thing you would stand in line an hour for?",
+                "What's the longest time you've ever gone without showering?",
+                "If you could be a fictional character for a day, who would you choose?",
+                "What is the weirdest trend you've ever participated in?"
+
             ],
             "dare": [
                 "Show the most embarrassing photo on your phone",
-                "Eat a raw piece of garlic"
+                "Eat a raw piece of garlic",
+                "Show your hidden talent",
+                "Smell another player's armpit",
+                "Eat a bite of a banana peel",
+                "Do an impression of another player until someone can figure out who it is",
+                "Talk in a British accent until your next turn",
+                "Put on a blindfold and touch the other players' faces until you can figure out who's who",
+                "Bite into a raw onion without slicing it",
+                "Lick a bar of soap",
+                "Give a foot massage to the person on your right"
+            ]
+        },
+        "work":{
+            "truth":[
+                "What excuse have you used before to get out plans?",
+                "What unexpected part of the body do you find attractive?",
+                "What’s the most awkward thing you’ve ever been caught doing?",
+                "Where is the weirdest place you've ever gone to the bathroom?",
+                "Have you ever said “I love you” to someone and not meant it?",
+                "Have you ever broken the law?",
+                "Have you ever peed in the shower?",
+                "What's your biggest regret?",
+                "What's the most embarrassing thing you ever did on a date?",
+                "What is the boldest pickup line you've ever used?",
+                "If you could date a fictional character, who would it be?",
+                "Have you ever been fired from a job? If yes, tell the story.",
+                "What's the worst physical pain you've ever experienced?",
+                "Have you ever gone skinny dipping?",
+                "Name one thing you’d do if you knew there’d be zero consequences.",
+                "Do you pee in the shower?",
+                "When’s the last time you got caught in a lie?",
+                "What gross smell do you actually enjoy?",
+                "Who was the last person you said “I love you” to?",
+                "Who’s your celebrity “hall pass” if you were to meet that person while in a relationship?"
+            ],
+            "dare": [
+                "Let the other players go through your phone for one minute",
+                "Play the most embarrassing top-played song on your phone",
+                "Point to the player who smells the best",
+                "Let nanother player send a heart-eye emoji to someones Instagram story from your phone",
+                "Call a friend, pretend it's their birthday, and sing them Happy Birthday",
+                "Serenade the person to your right",
+                "Let the other players redo your hairstyle",
+                "Attempt the first TikTok dance on your FYP and post it",
+                "Find your very first crush on social and DM them",
+                "Tell the group two truths and a lie, and they have to guess which one the lie is"
+
             ]
         },
         "spicy": {
             "truth": [
                 "Do you have any fetishes?",
-                "Have you ever cheated on someone?"
+                "Have you ever cheated on someone?",
+                "What's the worst thing you've ever done?",
+                "Who would you like to kiss in this room?",
+                "What's the worst date you've been on?",
+                "Why did your last relationship break down?",
+                "What's the worst intimate experience you've ever had?",
+                "Do you still have feelings for any of your exes?",
+                "What’s the most embarrassing thing you’ve done to get a someones attention?",
+                "Have you ever flirted with a close friend’s sibling?",
+                "Tell us about you last one night stand",
+                "What’s the weirdest place you’ve hooked up with someone?",
+                "Have you ever slid into a celebrity’s DMs?",
+                "What are your thoughts on polyamory?",
+                "What's the best intimate experience you've ever had?",
+                "If you had to kiss someone in this room, who would it be",
+                "If you had to cut one friend out of your life, who would it be?",
+                "Have you ever had a threesome?",
+                "Do you own any sex toys?",
+                "Have you ever hooked up with a colleague?"
+
             ],
             "dare": [
-                "Give a foot massage to the person on your right"
+                "Read out your last five google searches",
+                "Show the last three people you DM'd on Instagram",
+                "Pick someone in this room and roast them for one minute",
+                "Let another player post an Instagram story from your account",
+                "Let another player send a text from your phone saying anything they want to anyone they want",
+                "Give a one-word roast to each other player",
+                "Comment a fire emoji on the first three pictures on your Instagram feed",
+                "Scroll through your phone book until someone says stop. You either have to call or delete that person",
+                "Update your relationship status to 'engaged' on Facebook",
+                "Post a random baby scan on Facebook"
             ]
         },
         "girls": {
             "truth": [
                 "What's the worst date you've been on?",
                 "Have you ever lied to get out of a bad date?",
-                "Why did your last relationship break down?"
+                "Why did your last relationship break down?",
+                "Which player would survive a zombie apocalypse?",
+                "What popular TV show or movie do you secretly hate?",
+                "What's a secret you've never told anyone",
+                "What's your biggest insecurity",
+                "What's the worst intimate experience you've ever had?",
+                "What's the worst thing anyone's ever done to you?",
+                "What's the worst thing you've ever said to anyone?",
+                "What's the biggest misconception about you?",
+                "Why did your last relationship break down?",
+                "If you could only listen to one song for the rest of your life, what would you choose?",
+                "Who do you text the most?",
+                "If you had to wear only flip-flops or heels for the next 10 years, which would you choose?",
+                "What’s an instant deal breaker in a potential love interest?",
+                "Which player knows you the best?",
+                "What's your favorite part of your body?",
+                "If you could only accomplish three things in life, what would they be?",
+                "Tell us about the biggest romantic fail you’ve ever experienced.",
+                "What are the top three things you look for in a love interest?"
             ],
             "dare": [
                 "Say two honest things about everyone in this room",
-                "Show the last five people you texted and what the messages said"
+                "Show the last five people you texted and what the messages said",
+                "Tell us which player you think is least likely to survive a zombie apocalypse",
+                "Reveal all the details of your first kiss",
+                "Describe the most attractive quality of every person in the room",
+                "Read the last text message you sent out loud",
+                "Show the weirdest item you have in your purse/pockets"
             ]
         }
     }
