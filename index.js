@@ -1,7 +1,7 @@
 "use strict";
 /*
 TO DO:
-    - Register more prompts (truth or dare, would you rather)
+    - Register more prompts (would you rather)
     - display who is host
    
     Spin the bottle
