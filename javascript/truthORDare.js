@@ -109,17 +109,22 @@ async function truthORDareHandle(category, gameId) {
 
         // Check if next question should be run
         checkPlayer = setInterval(async () => {
-            let requestPlayerInQuestion = {
-                action: "getPlayerInQuestion",
-                gameId: gameId
-            };
+            let gameId = localStorage.getItem("gameId");
+            if(gameId){
+                let requestPlayerInQuestion = {
+                    action: "getPlayerInQuestion",
+                    gameId: gameId
+                };
 
-            let playerInQuestion = await handleGameFetch(requestPlayerInQuestion);
-            console.log(playerInQuestion);
-            if (playerInQuestion === localStorage.getItem("playerName")) {
-                setPlayerIndex(getPlayerIndex() + 1)
-                clearInterval(checkPlayer)
-                truthORDareHandle(category, gameId)
+                let playerInQuestion = await handleGameFetch(requestPlayerInQuestion);
+                console.log(playerInQuestion);
+                if (playerInQuestion === localStorage.getItem("playerName")) {
+                    setPlayerIndex(getPlayerIndex() + 1)
+                    clearInterval(checkPlayer)
+                    truthORDareHandle(category, gameId)
+                }
+            }else{
+                clearInterval(checkPlayer);
             }
 
         }, 5000);
@@ -137,8 +142,13 @@ async function truthORDareHandle(category, gameId) {
     let checkActiveGame;
     if (!isHost) {
         checkActiveGame = setInterval(() => {
-            checkIfGameExist(gameId, checkActiveGame, checkPlayer);
-            checkForActiveGame(gameId, checkActiveGame, checkPlayer);
+            let gameId = localStorage.getItem("gameId");
+            if(gameId){
+                checkIfGameExist(gameId, checkActiveGame, checkPlayer);
+                checkForActiveGame(gameId, checkActiveGame, checkPlayer);
+            }else{
+                clearInterval(checkActiveGame);
+            }
         }, 1000);
     }
 
@@ -276,8 +286,13 @@ async function renderTruthORDareQuestion(type, category, gameId) {
     let checkActiveGame;
     if (!isHost) {
         checkActiveGame = setInterval(() => {
+            let gameId = localStorage.getItem("gameId");
+            if(gameId){
             checkIfGameExist(gameId, checkActiveGame);
             checkForActiveGame(gameId, checkActiveGame);
+            }else{
+                clearInterval(checkActiveGame);
+            }
         }, 1000);
     }
 

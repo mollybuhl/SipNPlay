@@ -427,26 +427,26 @@ async function renderWouldYouRather(category, gameId) {
         // Also check if next question should be run
         checkActiveGame = setInterval(async () => {
             let gameId = localStorage.getItem("gameId");
-                if(gameId){
-            checkIfGameExist(gameId, checkActiveGame);
-            checkForActiveGame(gameId, answerTime, checkActiveGame);
+            if(gameId){
+                checkIfGameExist(gameId, checkActiveGame);
+                checkForActiveGame(gameId, answerTime, checkActiveGame);
 
-            let requestDataForNextQuestion = {
-                action: "requestNextQuestion",
-                gameId: gameId,
-                currentQuestion: questionIndex
-            };
+                let requestDataForNextQuestion = {
+                    action: "requestNextQuestion",
+                    gameId: gameId,
+                    currentQuestion: questionIndex
+                };
 
-            let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
-           
-            if (activeQuestion != questionIndex) {
+                let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
+            
+                if (activeQuestion != questionIndex) {
+                    clearInterval(checkActiveGame);
+                    setWouldYRIndex(questionIndex + 1, gameId)
+                    renderWouldYouRather(category, gameId)
+                }
+            }else{
                 clearInterval(checkActiveGame);
-                setWouldYRIndex(questionIndex + 1, gameId)
-                renderWouldYouRather(category, gameId)
             }
-        }else{
-            clearInterval(checkActiveGame);
-        }
 
         }, 1000);
         intervalIds.push(checkActiveGame)
