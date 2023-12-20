@@ -4,6 +4,7 @@
 let wouldYRIIndex = 0;
 // let gameId;
 let questionsArray;
+let intervalIds = [];
 
 // // Setter and getter functions for would you rather question index and gameID
 async function setWouldYRIndex(index, gameId) {
@@ -32,6 +33,9 @@ function getQuestionsArray() {
 
 // Function fetches a random question from PHP depending on category
 async function renderWouldYouRather(category, gameId) {
+    //Clear all intervals before setting up new ones
+    intervalIds.forEach(clearInterval);
+    intervalIds = [];
 
     let main = document.querySelector("main");
     main.removeAttribute("class");
@@ -302,6 +306,7 @@ async function renderWouldYouRather(category, gameId) {
                 }
 
             }, 1000);
+            intervalIds.push(checkActiveGame)
         }
 
         if (isHost) {
@@ -432,6 +437,7 @@ async function renderWouldYouRather(category, gameId) {
             }
 
         }, 1000);
+        intervalIds.push(checkActiveGame)
     }
 }
 
