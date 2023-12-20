@@ -52,9 +52,7 @@
             "playerInQuestion": "No player",
             "timeLeft": 7,
             "votes": {
-                "this": [
-                    1
-                ],
+                "this": [],
                 "that": []
             }
         }

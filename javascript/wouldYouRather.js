@@ -161,7 +161,7 @@ async function renderWouldYouRather(category, gameId) {
 
             await fetchWouldYouRather(rqstOriginalVotesStructure);
             clearInterval(checkActiveGame);
-            leaveGame();
+            leaveGame(checkActiveGame);
         }
     })
 
@@ -288,22 +288,28 @@ async function renderWouldYouRather(category, gameId) {
             // If player is not host, check if game still exist and if there is an ongoing game
             // Also check if next question should be run
             checkActiveGame = setInterval(async () => {
-                checkIfGameExist(gameId, checkActiveGame);
-                checkForActiveGame(gameId, answerTime, checkActiveGame);
-
-                let requestDataForNextQuestion = {
-                    action: "requestNextQuestion",
-                    gameId: gameId,
-                    currentQuestion: questionIndex
-                };
-
-                let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
-                console.log(activeQuestion);
-                if (activeQuestion != questionIndex) {
+                let gameId = localStorage.getItem("gameId");
+                if(gameId){
+                    checkIfGameExist(gameId, checkActiveGame);
+                    checkForActiveGame(gameId, answerTime, checkActiveGame);
+    
+                    let requestDataForNextQuestion = {
+                        action: "requestNextQuestion",
+                        gameId: gameId,
+                        currentQuestion: questionIndex
+                    };
+    
+                    let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
+                    console.log(activeQuestion);
+                    if (activeQuestion != questionIndex) {
+                        clearInterval(checkActiveGame);
+                        setWouldYRIndex(questionIndex + 1, gameId)
+                        renderWouldYouRather(category, gameId)
+                    }
+                }else{
                     clearInterval(checkActiveGame);
-                    setWouldYRIndex(questionIndex + 1, gameId)
-                    renderWouldYouRather(category, gameId)
                 }
+                
 
             }, 1000);
             intervalIds.push(checkActiveGame)
@@ -376,7 +382,7 @@ async function renderWouldYouRather(category, gameId) {
                     await fetchWouldYouRather(rqstOriginalVotesStructure);
 
                     clearInterval(checkActiveGame);
-                    leaveGame();
+                    leaveGame(checkActiveGame);
                 }
             })
 
@@ -411,7 +417,8 @@ async function renderWouldYouRather(category, gameId) {
     // Set countdown timer for 15 seconds
     let progressbar = document.querySelector(".progressbar");
     let answerTime = await runTimer(15, progressbar, async function () {
-        readWouldYouRatherResults(data.questions)
+        clearInterval(checkActiveGame);
+        readWouldYouRatherResults(data.questions);
     });
 
     let checkActiveGame;
@@ -419,6 +426,8 @@ async function renderWouldYouRather(category, gameId) {
         // If player is not host, check if game still exist and if there is an ongoing game
         // Also check if next question should be run
         checkActiveGame = setInterval(async () => {
+            let gameId = localStorage.getItem("gameId");
+                if(gameId){
             checkIfGameExist(gameId, checkActiveGame);
             checkForActiveGame(gameId, answerTime, checkActiveGame);
 
@@ -429,12 +438,15 @@ async function renderWouldYouRather(category, gameId) {
             };
 
             let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
-            console.log(activeQuestion);
+           
             if (activeQuestion != questionIndex) {
                 clearInterval(checkActiveGame);
                 setWouldYRIndex(questionIndex + 1, gameId)
                 renderWouldYouRather(category, gameId)
             }
+        }else{
+            clearInterval(checkActiveGame);
+        }
 
         }, 1000);
         intervalIds.push(checkActiveGame)

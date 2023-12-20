@@ -712,7 +712,8 @@ function leaveGame(interval1 = false, interval2 = false, interval3 = false) {
 
         // If leaving/ending game was successfull, clear any running intervals
         if (leftTheGame) {
-
+            console.log(interval1);
+            console.log(interval2);
             if (interval1) {
                 clearInterval(interval1);
             }
