@@ -139,7 +139,8 @@
         }
 
         if($activeGame){
-            $games[$gameIndex]["activeGame"]["votes"]= [];
+            unset($games[$gameIndex]["activeGame"]["votes"]);
+            $games[$gameIndex]["activeGame"]["votes"] = [];
         }
 
         saveToFile("activeGames.json", $games);
