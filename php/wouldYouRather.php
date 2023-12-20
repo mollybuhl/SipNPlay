@@ -24,13 +24,16 @@
 
         switch($category) {
             case "The Basic Version":
-                $questionArray = $questions[0]["basic"];
+                $questionArray = $questions[0]["The Basic Version"];
                 break;
             case "Spicy Edition":
-                $questionArray = $questions[0]["spicy"];
+                $questionArray = $questions[0]["Spicy Edition"];
                 break;
             case "Girl Dinner":
-                $questionArray = $questions[0]["girls"];
+                $questionArray = $questions[0]["Girl Dinner"];
+                break;
+            case "Not Safe For Work":
+                $questionArray = $questions[0]["Not Safe For Work"];
                 break;
         }
 

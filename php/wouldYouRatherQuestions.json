@@ -1,30 +1,176 @@
 [
     {
-        "basic": [
+        "The Basic Version": [
             {
                 "this": "Have teeth for hair",
                 "that": "Have hair for teeth"
             },
             {
-                "this": "Have your name tattooed on your forehead",
-                "that": "Have no front teeth"
+                "this": "Get a paper cut every time you turn a page",
+                "that": "Bite your tongue every time you eat"
             },
             {
                 "this": "Live with a pink eye",
                 "that": "Live with bedbugs for the rest of your life"
+            },
+            {
+                "this": "Have the ability to go back in time",
+                "that": "See 10 minutes into the future"
+            },
+            {
+                "this": "Be able to speak any language",
+                "that": "Be able to communicate with animals"
+            },
+            {
+                "this": "Be in jail for five years",
+                "that": "Be in a coma for a decade"
+            },
+            {
+                "this": "Lose your sight",
+                "that": "Lose your memories"
+            },
+            {
+                "this": "Always be 10 minutes late",
+                "that": "Always be 30 minutes early"
+            },
+            {
+                "this": "Be 230cm tall",
+                "that": "Be 130cm short"
+            },
+            {
+                "this": "Hava a personal maid",
+                "that": "Have a personal chef"
+            },
+            {
+                "this": "Never be able to go out during the day",
+                "that": "Never go out at night"
+            },
+            {
+                "this": "Be the absolute best at something that no one takes seriously",
+                "that": "Be average at something well respected"
+            },
+            {
+                "this": "Be in a zombie apocalypse",
+                "that": "Be in a robot apocalypse"
+            },
+            {
+                "this": "Be alone all your life",
+                "that": "Surrounded by really annoying people"
+            },
+            {
+                "this": "Buy all used underwear",
+                "that": "Buy all used toothbrushes"
+            },
+            {
+                "this": "Have police hunting you down for a crime you didn't commit",
+                "that": "Have a serial killer actually hunting you"
+            },
+            {
+                "this": "Be able to take back anything you say",
+                "that": "Hear any conversation that is about you"
+            },
+            {
+                "this": "Have people spread a terrible lie about you",
+                "that": "Have people spread terrible but true tales about you"
+            },
+            {
+                "this": "Lose all of your friends but keep your BFF",
+                "that": "Lose your BFF but keep the rest of your friends"
+            },
+            {
+                "this": "Never be able to keep anyone else's secrets",
+                "that": "Have someone tell all of your secrets"
             }
         ],
-        "spicy": [
+        "Not Safe For Work": [
             {
-                "this": "Pee a ping-pong ball ",
-                "that": "Poop a bowling ball"
+                "this": "Work an overtime shift with your annoying boss",
+                "that": "Spend a full day with your mother-in-law"
             },
+            {
+                "this": "Send a dirty text to one of your family members",
+                "that": "Send a dirty text to your boss"
+            },
+            {
+                "this": "Wear the same socks for a month",
+                "that": "Wear the same underwear for a week"
+            },
+            {
+                "this": "Walk in on your parents",
+                "that": "Have them walk in on you"
+            },
+            {
+                "this": "Confess to cheating on your partner",
+                "that": "Catch your partner cheating on you"
+            },
+            {
+                "this": "Be caught having sex at work",
+                "that": "Be caught having sex bby your dad"
+            },
+            {
+                "this": "Get a text from a one-night stand that says “I'm pregnant”",
+                "that": "A text that says “I have an incurable STD”"
+            },
+            {
+                "this": "Have to pull out a big clump of long hairs that have gathered in your butt cheeks",
+                "that": "Pull out a long ingrown hair"
+            },
+            {
+                "this": "Lick food off of someone",
+                "that": "Have someone lick food off of you"
+            },
+            {
+                "this": "Have another 10 years with your partner",
+                "that": "A one night stand with your celebrity crush"
+            }
+        ],
+        "Spicy Edition": [
             {
                 "this": "Be caught cheating",
                 "that": "Catch someone cheating"
+            },
+            {
+                "this": "Walk in on your parents",
+                "that": "Have them walk in on you"
+            },
+            {
+                "this": "Go skinny dipping",
+                "that": "Try role-playing"
+            },
+            {
+                "this": "Make a sex tape",
+                "that": "Play strip poker with your fam"
+            },
+            {
+                "this": "Fall asleep during sex but wake up with an orgasm",
+                "that": "Be awake during sex but not get an orgasm"
+            },
+            {
+                "this": "Have sex in the ocean",
+                "that": "Have sex in a public bathroom"
+            },
+            {
+                "this": "Shave your partner's pubic hair",
+                "that": "Have your partner shave your pubic hair"
+            },
+            {
+                "this": "Have daddy as your safe word",
+                "that": "Have mommy as your safe word"
+            },
+            {
+                "this": "Only have very loud sex",
+                "that": "Only have totally silent sex"
+            },
+            {
+                "this": "Be the plus one in a couple's threesome",
+                "that": "Have a threesome with your significant other, and bring in a third"
+            },
+            {
+                "this": "Have sex while blindfolded",
+                "that": "Have sex while handcuffed"
             }
         ],
-        "girls": [
+        "Girl Dinner": [
             {
                 "this": "Wear the same bra for a month",
                 "that": "Wear the same panties for a week"
@@ -36,6 +182,70 @@
             {
                 "this": "Find the love of your life",
                 "that": "Find a million pounds"
+            },
+            {
+                "this": "Have another 10 years with your partner",
+                "that": "A one night stand with your celebrity crush"
+            },
+            {
+                "this": "Be underdressed",
+                "that": "Be overdressed to every event you go to"
+            },
+            {
+                "this": "Communicate only with emojis",
+                "that": "Never be able to text at all ever again"
+            },
+            {
+                "this": "Take amazing selfies but look terrible in all other photos",
+                "that": "Be photogenic everywhere BUT in your selfies"
+            },
+            {
+                "this": "Be gassy on a first date",
+                "that": "BBe gassy on your wedding night"
+            },
+            {
+                "this": "Have a third nipple",
+                "that": "Have an extra toe on each foot"
+            },
+            {
+                "this": "Walk in on your parents",
+                "that": "Have them walk in on you"
+            },
+            {
+                "this": "Have Angelina Jolie's lips",
+                "that": "Have Jennifer Aniston's hair"
+            },
+            {
+                "this": "Spend a day cleaning your worst enemy's house",
+                "that": "Have your crush spend the day cleaning your house"
+            },
+            {
+                "this": "Be beautiful and stupid",
+                "that": "Be unattractive but a genius"
+            },
+            {
+                "this": "Detect every lie you hear",
+                "that": "Get away with every lie you tell"
+            },
+            {
+                "this": "Have people know all the details of your finances",
+                "that": "All the details of your love life"
+            },
+            {
+                "this": "Get hit on by someone 20 years older than you",
+                "that": "By someone 20 years younger than you"
+            },
+            {
+                "this": "Be married to someone stunning who doesn't think you're attractive",
+                "that": "Be married to someone ugly who thinks you're gorgeous"
+            },
+            {
+                "this": "Never be able to keep anyone else's secrets",
+                "that": "Have someone tell all of your secrets"
+            },
+            {
+                "this": "Have to wear the same pad all day while on a heavy period",
+                "that": "Wear no pad/tampon on a light flow"
             }
         ]
     }

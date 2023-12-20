@@ -1,11 +1,11 @@
-.startGame{
-display: flex;
-flex-direction: column;
-align-items: center;
+.startGame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /*Game pin*/
-.startGame > div.gameId{
+.startGame>div.gameId {
     font-size: 35px;
     font-family: museoModerno;
     font-weight: var(--fontBold);
@@ -21,26 +21,26 @@ align-items: center;
 }
 
 /*Game pin text*/
-.startGame > h2{
+.startGame>h2 {
     font-size: var(--fontSizeTwo);
     margin-top: 5vh;
 }
 
 
-.startGame > h3{
+.startGame>h3 {
     font-family: outfit;
     font-size: var(--fontSizeTwo);
     font-weight: var(--fontMedium);
 }
 
 /*Participants text*/
-.startGame > h4{
+.startGame>h4 {
     font-family: outfit;
     font-size: var(--fontSizeFour);
     font-weight: var(--fontMedium);
 }
 
-.startGame > .participants{
+.startGame>.participants {
     width: 100%;
     display: grid;
     gap: 10px;
@@ -48,11 +48,9 @@ align-items: center;
     grid-auto-rows: 1fr;
 }
 
-.startGame > p{
+.startGame>p {}
 
-}
-
-.startGame > .participants > div{
+.startGame>.participants>div {
     border: 3px solid var(--mediumGrey);
     border-radius: 5px;
     font-family: outfit;
@@ -65,18 +63,18 @@ align-items: center;
     gap: 1vh;
 }
 
-.startGame > p{
+.startGame>p {
     font-family: outfit;
     font-size: var(--fontSizeFive);
     color: var(--textColor);
     text-align: center;
 }
 
-.waitingText{
+.waitingText {
     margin-top: 30vh;
 }
 
-.startGame > input{
+.startGame>input {
     width: 100%;
     height: 6vh;
     background-color: var(--black);
@@ -91,15 +89,15 @@ align-items: center;
     -moz-appearance: textfield;
 }
 
-.startGame > input.gameId{
+.startGame>input.gameId {
     font-size: var(--fontSizeFive);
 }
 
-.startGame > .participants{
+.startGame>.participants {
     text-align: center;
 }
 
-.startGame > button{
+.startGame>button {
     font-family: outfit;
     font-weight: var(--fontRegular);
     font-size: var(--fontSizeFive);
@@ -114,13 +112,13 @@ align-items: center;
     cursor: pointer;
 }
 
-.startGame > button.longButton{
+.startGame>button.longButton {
     width: 100%;
     margin-top: 2vh;
     color: var(--black);
 }
 
-.startGame > button.clearDesign{
+.startGame>button.clearDesign {
     background-color: transparent;
     border: 1px solid var(--buttonColor);
     color: var(--textColor);
@@ -143,30 +141,31 @@ footer #startGameButton {
     align-items: center;
 }
 
-footer #startGameButton:disabled{
+footer #startGameButton:disabled {
     background-color: var(--darkGrey);
     color: var(--mediumGrey);
     box-shadow: none;
 }
 
 /*Leave game popup*/
-#leaveGamePopUp{
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  background-color: #0E0E0EB5;
+#leaveGamePopUp {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #0E0E0EB5;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#leaveGamePopUp > div{
+#leaveGamePopUp>div {
     background-color: var(--darkGrey);
     display: flex;
     flex-direction: column;
+    z-index: 3;
 
     height: 20vh;
     width: 92%;
@@ -179,11 +178,11 @@ footer #startGameButton:disabled{
     text-align: center;
 }
 
-#leaveGamePopUp > div.oneButtonPopUp > div{
+#leaveGamePopUp>div.oneButtonPopUp>div {
     justify-content: center;
 }
 
-#leaveGamePopUp > div > div{
+#leaveGamePopUp>div>div {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -191,13 +190,13 @@ footer #startGameButton:disabled{
     gap: 10px;
 }
 
-#leaveGamePopUp > div > p{
+#leaveGamePopUp>div>p {
     margin: 0;
     padding-bottom: 10px;
     font-family: outfit;
 }
 
-#leaveGamePopUp > div > div > button{
+#leaveGamePopUp>div>div>button {
     font-family: outfit;
     font-weight: var(--fontRegular);
     font-size: var(--fontSizeFive);
@@ -215,26 +214,28 @@ footer #startGameButton:disabled{
     cursor: pointer;
 }
 
-#leaveGamePopUp > div > div > button.clearDesign{
+#leaveGamePopUp>div>div>button.clearDesign {
     background-color: transparent;
     border: 1px solid var(--buttonColor);
     color: var(--buttonColor);
 }
 
-.infoBox, .startGame > .infoBox{
+.infoBox,
+.startGame>.infoBox {
     position: absolute;
     height: 100%;
     width: 100%;
     top: 0;
     left: 0;
     background-color: #0E0E0EB5;
-  
+
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.infoBox > div, .startGame > .infoBox > div{
+.infoBox>div,
+.startGame>.infoBox>div {
     background-color: var(--darkGrey);
     display: flex;
     flex-direction: column;
@@ -250,7 +251,7 @@ footer #startGameButton:disabled{
     z-index: 4;
 }
 
-.startGame > .infoBox > div > button{
+.startGame>.infoBox>div>button {
     font-family: outfit;
     font-weight: var(--fontRegular);
     font-size: var(--fontSizeFive);

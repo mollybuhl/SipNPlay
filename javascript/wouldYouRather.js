@@ -1,6 +1,3 @@
-// TO-DO: 
-// - Fix quit button
-
 "use strict";
 
 // // Global variable to track index and gameId
@@ -105,8 +102,6 @@ async function renderWouldYouRather(category, gameId) {
         // If user is host - ask to play another game or keep playing
         if (isHost) {
 
-            clearInterval(answerTime);
-
             // Display pop up
             let gameId = parseInt(localStorage.getItem("gameId"));
 
@@ -139,6 +134,8 @@ async function renderWouldYouRather(category, gameId) {
 
                 await handleGameFetch(requestDataForEndingRound);
 
+                clearInterval(answerTime);
+
                 // Go back to category page
                 renderCategories("Would You Rather");
             })
@@ -161,14 +158,6 @@ async function renderWouldYouRather(category, gameId) {
     const questionIndex = getWouldYRIndex();
     console.log(questionIndex);
 
-    let rqstToSetnewIndex = {
-        action: "setQuestionIndex",
-        gameId: gameId,
-        index: questionIndex
-    };
-
-    await handleGameFetch(rqstToSetnewIndex);
-
     let rqstQuestion = {
         category: category,
         action: "fetchQuestion"
@@ -180,17 +169,17 @@ async function renderWouldYouRather(category, gameId) {
     const thisQuestion = document.getElementById("btnThis");
     const thatQuestion = document.getElementById("btnThat");
 
-    thisQuestion.querySelector("p").innerHTML = `${data.questions[getWouldYRIndex()].this}`;
-    thatQuestion.querySelector("p").innerHTML = `${data.questions[getWouldYRIndex()].that}`;
+    thisQuestion.querySelector("p").innerHTML = `${data.questions[questionIndex].this}`;
+    thatQuestion.querySelector("p").innerHTML = `${data.questions[questionIndex].that}`;
 
     document.querySelectorAll("section>button").forEach((button) => {
-        button.addEventListener("click", (e) => {
+        button.addEventListener("click", () => {
             let questionType = e.target.dataset["set"];
             console.log(e.target.dataset["set"]);
             console.log(e.target);
             e.target.classList.toggle("selected");
             updateSelectedQuestion(questionType, e.target)
-        })
+        });
     });
 
     async function updateSelectedQuestion(type, target) {
@@ -277,7 +266,6 @@ async function renderWouldYouRather(category, gameId) {
         }
 
         let isHost = window.localStorage.getItem("host");
-
         let checkActiveGame;
         if (!isHost) {
             // If player is not host, check if game still exist and if there is an ongoing game
@@ -296,7 +284,7 @@ async function renderWouldYouRather(category, gameId) {
                 console.log(activeQuestion);
                 if (activeQuestion != questionIndex) {
                     clearInterval(checkActiveGame);
-                    setWouldYRIndex(getWouldYRIndex() + 1, gameId)
+                    setWouldYRIndex(questionIndex + 1, gameId)
                     renderWouldYouRather(category, gameId)
                 }
 
@@ -323,14 +311,14 @@ async function renderWouldYouRather(category, gameId) {
                     popUp.setAttribute("id", "leaveGamePopUp");
 
                     popUp.innerHTML = `
-            <div>
-                <p>Are you sure you want to end this round?</p>
-                <div>   
-                    <button class="leaveGame">End Round</button>
-                    <button class="closePopup">Keep Playing</button>
-                </div>
-            </div>
-            `;
+                        <div>
+                            <p>Are you sure you want to end this round?</p>
+                            <div>   
+                                <button class="leaveGame">End Round</button>
+                                <button class="closePopup">Keep Playing</button>
+                            </div>
+                        </div>
+                    `;
 
                     document.querySelector("main").appendChild(popUp);
 
@@ -363,13 +351,12 @@ async function renderWouldYouRather(category, gameId) {
             // enableNextButtonWYR(category)
             document.querySelector(".nextButton").addEventListener("click", () => {
                 // Increment index to get new question or set index to 0 to restart
-                if (getWouldYRIndex() < questions.length - 1) {
-                    setWouldYRIndex(getWouldYRIndex() + 1, gameId)
+                if (questionIndex < questions.length - 1) {
+                    setWouldYRIndex(questionIndex + 1, gameId)
 
                 } else {
                     setWouldYRIndex(0, gameId)
                 }
-
                 renderWouldYouRather(category, gameId)
             });
         }
@@ -413,7 +400,7 @@ async function renderWouldYouRather(category, gameId) {
             console.log(activeQuestion);
             if (activeQuestion != questionIndex) {
                 clearInterval(checkActiveGame);
-                setWouldYRIndex(getWouldYRIndex() + 1, gameId)
+                setWouldYRIndex(questionIndex + 1, gameId)
                 renderWouldYouRather(category, gameId)
             }
 

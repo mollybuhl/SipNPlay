@@ -8,6 +8,9 @@ TO DO:
 
     Never Have I ever
     - Swipe for next card
+
+    Would You Rather
+    - fix multiple event listeners which adds votes
    
     Spin the bottle
     - End game, check for !isHost

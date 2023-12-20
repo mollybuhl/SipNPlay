@@ -1,6 +1,6 @@
 [
     {
-        "basic": {
+        "The Basic Version": {
             "truth": [
                 "When was the last time you cried?",
                 "When was the last time you lied?",
@@ -12,7 +12,7 @@
                 "Eat a raw piece of garlic"
             ]
         },
-        "spicy": {
+        "Spicy Edition": {
             "truth": [
                 "Do you have any fetishes?",
                 "Have you ever cheated on someone?"
@@ -21,7 +21,7 @@
                 "Give a foot massage to the person on your right"
             ]
         },
-        "girls": {
+        "Girl Dinner": {
             "truth": [
                 "What's the worst date you've been on?",
                 "Have you ever lied to get out of a bad date?",

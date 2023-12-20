@@ -25,25 +25,31 @@
         if($questionType == "truth") {
             switch($category) {
                 case "The Basic Version":
-                    $questionArray = $questions[0]["basic"]["truth"];
+                    $questionArray = $questions[0]["The Basic Version"]["truth"];
                     break;
                 case "Spicy Edition":
-                    $questionArray = $questions[0]["spicy"]["truth"];
+                    $questionArray = $questions[0]["Spicy Edition"]["truth"];
                     break;
                 case "Girl Dinner":
-                    $questionArray = $questions[0]["girls"]["truth"];
+                    $questionArray = $questions[0]["Girl Dinner"]["truth"];
+                    break;
+                case "Not Safe For Work":
+                    $questionArray = $questions[0]["Not Safe For Work"]["truth"];
                     break;
             }
         } else {
             switch($category) {
                 case "The Basic Version":
-                    $questionArray = $questions[0]["basic"]["dare"];
+                    $questionArray = $questions[0]["The Basic Version"]["dare"];
                     break;
                 case "Spicy Edition":
-                    $questionArray = $questions[0]["spicy"]["dare"];
+                    $questionArray = $questions[0]["Spicy Edition"]["dare"];
                     break;
                 case "Girl Dinner":
-                    $questionArray = $questions[0]["girls"]["dare"];
+                    $questionArray = $questions[0]["Girl Dinner"]["dare"];
+                    break;
+                case "Not Safe For Work":
+                    $questionArray = $questions[0]["Not Safe For Work"]["truth"];
                     break;
             }
         }

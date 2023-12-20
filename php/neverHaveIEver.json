@@ -306,108 +306,107 @@
                 "question": "been to an adult store"
             }
         ],
-        "Girl Dinner":
-        [
+        "Girl Dinner": [
             {
-            "id": 1,
-            "category": "Girl Dinner",
-            "question": "lied on a dating app"
+                "id": 1,
+                "category": "Girl Dinner",
+                "question": "lied on a dating app"
             },
             {
-            "id": 2,
-            "category": "Girl Dinner",
-            "question": "texted an ex out of nowhere"
+                "id": 2,
+                "category": "Girl Dinner",
+                "question": "texted an ex out of nowhere"
             },
             {
-            "id": 3,
-            "category": "Girl Dinner",
-            "question": "dumped someone over text"
+                "id": 3,
+                "category": "Girl Dinner",
+                "question": "dumped someone over text"
             },
             {
-            "id": 4,
-            "category": "Girl Dinner",
-            "question": "ghosted someone"
-            }  ,
+                "id": 4,
+                "category": "Girl Dinner",
+                "question": "ghosted someone"
+            },
             {
-            "id": 5,
-            "category": "Girl Dinner",
-            "question": "lied to someone in this room"
-            }  ,
+                "id": 5,
+                "category": "Girl Dinner",
+                "question": "lied to someone in this room"
+            },
             {
-            "id": 6,
-            "category": "Girl Dinner",
-            "question": "catfished someone"
-            }  ,
+                "id": 6,
+                "category": "Girl Dinner",
+                "question": "catfished someone"
+            },
             {
-            "id": 7,
-            "category": "Girl Dinner",
-            "question": "stalked an ex's new partner on social media"
-            }  ,
+                "id": 7,
+                "category": "Girl Dinner",
+                "question": "stalked an ex's new partner on social media"
+            },
             {
-            "id": 8,
-            "category": "Girl Dinner",
-            "question": "gone out with a friend's ex"
-            }  ,
+                "id": 8,
+                "category": "Girl Dinner",
+                "question": "gone out with a friend's ex"
+            },
             {
-            "id": 9,
-            "category": "Girl Dinner",
-            "question": "said 'I love you' when I didn't mean it"
-            }  ,
+                "id": 9,
+                "category": "Girl Dinner",
+                "question": "said 'I love you' when I didn't mean it"
+            },
             {
-            "id": 10,
-            "category": "Girl Dinner",
-            "question": "been sick on a friend"
-            }  ,
+                "id": 10,
+                "category": "Girl Dinner",
+                "question": "been sick on a friend"
+            },
             {
-            "id": 11,
-            "category": "Girl Dinner",
-            "question": "been cheated on"
-            }  ,
+                "id": 11,
+                "category": "Girl Dinner",
+                "question": "been cheated on"
+            },
             {
-            "id": 12,
-            "category": "Girl Dinner",
-            "question": "cheated on someone"
-            }  ,
+                "id": 12,
+                "category": "Girl Dinner",
+                "question": "cheated on someone"
+            },
             {
-            "id": 13,
-            "category": "Girl Dinner",
-            "question": "slid into someone's DMs"
-            }  ,
+                "id": 13,
+                "category": "Girl Dinner",
+                "question": "slid into someone's DMs"
+            },
             {
-            "id": 14,
-            "category": "Girl Dinner",
-            "question": "been in love"
-            }  ,
+                "id": 14,
+                "category": "Girl Dinner",
+                "question": "been in love"
+            },
             {
-            "id": 15,
-            "category": "Girl Dinner",
-            "question": "snooped through someone's phone"
-            }  ,
+                "id": 15,
+                "category": "Girl Dinner",
+                "question": "snooped through someone's phone"
+            },
             {
-            "id": 16,
-            "category": "Girl Dinner",
-            "question": "used a dating app"
-            }  ,
+                "id": 16,
+                "category": "Girl Dinner",
+                "question": "used a dating app"
+            },
             {
-            "id": 17,
-            "category": "Girl Dinner",
-            "question": "kissed more than one person in 24 hours"
-            }  ,
+                "id": 17,
+                "category": "Girl Dinner",
+                "question": "kissed more than one person in 24 hours"
+            },
             {
-            "id": 18,
-            "category": "Girl Dinner",
-            "question": "made out in a movie theater"
-            }  ,
+                "id": 18,
+                "category": "Girl Dinner",
+                "question": "made out in a movie theater"
+            },
             {
-            "id": 19,
-            "category": "Girl Dinner",
-            "question": "dated someone older than me"
-            }  ,
+                "id": 19,
+                "category": "Girl Dinner",
+                "question": "dated someone older than me"
+            },
             {
-            "id": 20,
-            "category": "Girl Dinner",
-            "question": "dated someone younger than me"
-            }    
-        ]  
+                "id": 20,
+                "category": "Girl Dinner",
+                "question": "dated someone younger than me"
+            }
+        ]
     }
 ]
