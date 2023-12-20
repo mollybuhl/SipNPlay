@@ -503,6 +503,8 @@ function joinGame(playerName = null) {
 // Function to render page for waiting for game to start
 // This function will be called for players, not hosts, when no ongoing game is currently running
 async function renderWaitingForGame(gameId) {
+    location.reload();
+    
     let main = document.querySelector("main");
     main.classList.add("startGame");
 

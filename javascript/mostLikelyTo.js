@@ -192,7 +192,7 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
         let requestDataForUpdateTimer = {
             gameId: gameId,
             action: "updateTime",
-            timeLeft: 30
+            timeLeft: 15
         }
     
         await handleGameFetch(requestDataForUpdateTimer);
@@ -200,7 +200,7 @@ async function renderMostLikelyTo(category, gameId, questionIndex = 0){
 
     // Get and display answering time
     let progressbar = document.querySelector(".progressbar");
-    let answerTime = await runTimer(30,progressbar,function(){
+    let answerTime = await runTimer(15,progressbar,function(){
         clearInterval(checkActiveGame);
         renderMostLikelyToResult(questionIndex);
     });
