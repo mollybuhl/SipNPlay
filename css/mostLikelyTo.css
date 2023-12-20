@@ -17,11 +17,12 @@
 /*Progressbar timer*/
 .timer {
     background-color: var(--white);
-    height: 2vh;
+    height: 1vh;
     width: 100%;
     border-radius: 5px;
 
     position: relative;
+    margin-top: 2vh;
 }
 
 .timer>.progressbar {
@@ -29,7 +30,7 @@
     position: absolute;
     top: 0;
 
-    height: 2vh;
+    height: 1vh;
     width: 100%;
     border-radius: 5px;
 
