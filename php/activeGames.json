@@ -151,19 +151,22 @@
         }
     },
     {
-        "id": 6838,
+        "id": 9899,
         "players": [
-            "hjedas",
-            "sagjasd"
+            "tranen",
+            "mollyyy"
         ],
         "activeGame": {
-            "host": "hjedas",
+            "host": "tranen",
             "game": "No Active Game",
             "category": "No category",
-            "questionIndex": 0,
+            "questionIndex": 2,
             "playerInQuestion": "No player",
-            "timeLeft": 30,
-            "votes": []
+            "timeLeft": -1,
+            "votes": {
+                "this": [],
+                "that": []
+            }
         }
     }
 ]

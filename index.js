@@ -3,9 +3,6 @@
 TO DO:
     Would You Rather
     - fix multiple event listeners which adds votes
-   
-    Spin the bottle
-    - End game, check for !isHost
 */
 createMenu();
 // Display Menu when clicking hamburger icon
