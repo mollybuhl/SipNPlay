@@ -83,32 +83,19 @@
         }
 
         if($activeGame){
-                // Add new vote
-                if(!$player == null) {
-                    if ($questionType == "this") {
-                        $games[$gameIndex]["activeGame"]["votes"]["this"][] = $player;
+             // Check if the player's vote already exists to prevent multiple votes
+            $existingVotes = $games[$gameIndex]["activeGame"]["votes"][$questionType];
+            if (!in_array($player, $existingVotes)) {
+                // Add a new vote
+                $games[$gameIndex]["activeGame"]["votes"][$questionType][] = $player;
 
-                        // Find the index of the lowercase player name in the lowercase array
-                        $votes = $games[$gameIndex]["activeGame"]["votes"]["that"];
-                        $indexToRemove = array_search($player, $votes);
-
-                        // Check if the value was found before attempting to remove
-                        if ($indexToRemove !== false) {
-                        // Remove the value at the found index
-                        array_splice($games[$gameIndex]["activeGame"]["votes"]["that"], $indexToRemove, 1);
-                        }
-                    } else {
-                        $games[$gameIndex]["activeGame"]["votes"]["that"][] = $player;
-
-                        $votes = $games[$gameIndex]["activeGame"]["votes"]["this"];
-                        $indexToRemove = array_search($player, $votes);
-
-                        if ($indexToRemove !== false) {
-                            array_splice($games[$gameIndex]["activeGame"]["votes"]["this"], $indexToRemove, 1);
-                        }
-                    }
+                // Remove the vote from the other option if it exists
+                $oppositeType = ($questionType == "this") ? "that" : "this";
+                $indexToRemove = array_search($player, $games[$gameIndex]["activeGame"]["votes"][$oppositeType]);
+                if ($indexToRemove !== false) {
+                    array_splice($games[$gameIndex]["activeGame"]["votes"][$oppositeType], $indexToRemove, 1);
                 }
-            
+            }
             saveToFile("activeGames.json", $games);
             sendJSON($games[$gameIndex]);
 

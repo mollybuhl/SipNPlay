@@ -1,8 +1,6 @@
 "use strict";
 /*
 TO DO:
-    Would You Rather
-    - fix multiple event listeners which adds votes
 */
 createMenu();
 // Display Menu when clicking hamburger icon
