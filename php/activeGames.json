@@ -132,22 +132,19 @@
         }
     },
     {
-        "id": 4236,
+        "id": 1521,
         "players": [
-            "troll",
-            "bill"
+            "lololol",
+            "momomo"
         ],
         "activeGame": {
-            "host": "troll",
+            "host": "lololol",
             "game": "No Active Game",
             "category": "No category",
             "questionIndex": 0,
             "playerInQuestion": "No player",
-            "timeLeft": 12,
-            "votes": [],
-            "answers": {
-                "troll": "hejhej"
-            }
+            "timeLeft": 30,
+            "votes": []
         }
     }
 ]
