@@ -33,7 +33,7 @@ if (localStorage.getItem("currentGame") === "true") {
 
 let instructionsArray = {
     "Main": ["Join an existing game with a game pin or create a new game by choosing the game you want to play first", "Share the game pin with a couple of friends (if you have any)", "Start the game, take a sip, relax and HAVE FUN!"],
-    "Never Have I Ever": ["Each card has a statement, if you have done it then you must take a sip of your drink", "Swipe up to get a new card"],
+    "Never Have I Ever": ["Each card has a statement, if you have done it then you must take a sip of your drink", "Click next to get a new card"],
     "Truth or Dare": ["Pick and choose truth and answer a question or dare if you are not a chicken nugget", "If you are boring and refuse to answer or do the dare, take a shot"],
     "Would You Rather": ["Pick and choose which of the two options you would rather do", "The players that voted for the alternative with the least votes has to take a sip of their drink"],
     "Spin The Bottle": ["Click on the bottle to spin", "Whatever it lands on, you have to do otherwise what's the point in playing?"],

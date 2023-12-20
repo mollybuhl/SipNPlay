@@ -106,7 +106,6 @@ function renderMenu() {
     }
 }
 
-// renderInstructions(array)
 function renderInstructions(steps) {
     let instructionsPopup = document.createElement("div");
     instructionsPopup.classList.add("instructions");

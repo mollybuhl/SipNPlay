@@ -295,8 +295,8 @@ async function spinTheBottleHandle(gameId) {
 
                 clearInterval(checkPlayer)
 
-                // Go back to category page
-                renderCategories("Spin The Bottle");
+                // Go back to game display
+                renderGameDisplay()
             })
 
 
