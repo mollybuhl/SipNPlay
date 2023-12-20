@@ -97,7 +97,7 @@ async function renderWouldYouRather(category, gameId) {
     `;
 
     // When clicking quit leave game
-    footer.querySelector(".buttonQuit").addEventListener("click", () => {
+    footer.querySelector(".buttonQuit").addEventListener("click", async () => {
         let isHost = window.localStorage.getItem("host");
         // If user is host - ask to play another game or keep playing
         if (isHost) {
@@ -150,6 +150,12 @@ async function renderWouldYouRather(category, gameId) {
 
         } else {
             // If user is not host - ask to leave game or keep playing
+            let rqstOriginalVotesStructure = {
+                gameId: gameId,
+                action: "originalVotesStructure"
+            };
+
+            await fetchWouldYouRather(rqstOriginalVotesStructure);
             clearInterval(checkActiveGame);
             leaveGame();
         }
@@ -304,7 +310,7 @@ async function renderWouldYouRather(category, gameId) {
                 `;
 
             // When clicking quit leave game
-            footer.querySelector(".buttonQuit").addEventListener("click", () => {
+            footer.querySelector(".buttonQuit").addEventListener("click", async () => {
                 let isHost = window.localStorage.getItem("host");
                 // If user is host - ask to play another game or keep playing
                 if (isHost) {
@@ -357,6 +363,13 @@ async function renderWouldYouRather(category, gameId) {
 
                 } else {
                     // If user is not host - ask to leave game or keep playing
+                    let rqstOriginalVotesStructure = {
+                        gameId: gameId,
+                        action: "originalVotesStructure"
+                    };
+
+                    await fetchWouldYouRather(rqstOriginalVotesStructure);
+
                     clearInterval(checkActiveGame);
                     leaveGame();
                 }
