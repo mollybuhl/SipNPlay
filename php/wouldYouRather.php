@@ -124,5 +124,24 @@
         }
         
         saveToFile("activeGames.json", $games);
+    } else if($action == "originalVotesStructure") {
+        $gameId = $requestData["gameId"];
+
+        // Find active game based on gameId from request
+        $activeGame = false;
+        $gameIndex;
+
+        foreach($games as $index => $game){
+            if($game["id"] == $gameId){
+                $activeGame = $game;
+                $gameIndex = $index;
+            }
+        }
+
+        if($activeGame){
+            $games[$gameIndex]["activeGame"]["votes"]= [];
+        }
+
+        saveToFile("activeGames.json", $games);
     }
 ?> 

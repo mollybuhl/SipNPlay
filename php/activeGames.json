@@ -149,27 +149,5 @@
                 "that": []
             }
         }
-    },
-    {
-        "id": 6591,
-        "players": [
-            "fsff",
-            "fgfdfd"
-        ],
-        "activeGame": {
-            "host": "fsff",
-            "game": "Would You Rather",
-            "category": "The Basic Version",
-            "questionIndex": 4,
-            "playerInQuestion": "No player",
-            "timeLeft": -1,
-            "votes": {
-                "this": [
-                    "fgfdfd",
-                    "fsff"
-                ],
-                "that": []
-            }
-        }
     }
 ]

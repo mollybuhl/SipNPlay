@@ -134,6 +134,13 @@ async function renderWouldYouRather(category, gameId) {
 
                 await handleGameFetch(requestDataForEndingRound);
 
+                let rqstOriginalVotesStructure = {
+                    gameId: gameId,
+                    action: "originalVotesStructure"
+                };
+
+                await fetchWouldYouRather(rqstOriginalVotesStructure);
+
                 clearInterval(answerTime);
 
                 // Go back to category page
@@ -335,6 +342,13 @@ async function renderWouldYouRather(category, gameId) {
                         }
 
                         await handleGameFetch(requestDataForEndingRound);
+
+                        let rqstOriginalVotesStructure = {
+                            gameId: gameId,
+                            action: "originalVotesStructure"
+                        };
+
+                        await fetchWouldYouRather(rqstOriginalVotesStructure);
 
                         // Go back to category page
                         renderCategories("Would You Rather");
