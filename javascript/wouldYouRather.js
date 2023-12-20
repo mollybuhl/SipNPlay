@@ -173,7 +173,7 @@ async function renderWouldYouRather(category, gameId) {
     thatQuestion.querySelector("p").innerHTML = `${data.questions[questionIndex].that}`;
 
     document.querySelectorAll("section>button").forEach((button) => {
-        button.addEventListener("click", () => {
+        button.addEventListener("click", (e) => {
             let questionType = e.target.dataset["set"];
             console.log(e.target.dataset["set"]);
             console.log(e.target);
