@@ -593,7 +593,6 @@ async function renderWaitingForGame(gameId) {
 
     let requestStart = setInterval(async () => {
         let requestToStartGame = await handleGameFetch(requestDataForStartingGame);
-        console.log(requestToStartGame);
 
         if (requestToStartGame) {
             // Stop fetching players

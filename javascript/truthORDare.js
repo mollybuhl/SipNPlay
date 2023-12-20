@@ -1,9 +1,11 @@
 "use strict";
 
+let intervalIds = [];
 // // Global variables to track index
 let truthIndex = 0;
 let dareIndex = 0;
 let playerIndex = 0;
+
 
 // Setter and getter function for truth index
 async function setTruthIndex(index, gameId) {
@@ -49,6 +51,10 @@ function getPlayerIndex() {
 
 // Function handles when the client chooses truth or dare
 async function truthORDareHandle(category, gameId) {
+    //Clear all intervals before setting up new ones
+    intervalIds.forEach(clearInterval);
+    intervalIds = [];
+
     // Fetch current players
     let requestData = {
         action: "getPlayers",
@@ -125,9 +131,11 @@ async function truthORDareHandle(category, gameId) {
                 }
             }else{
                 clearInterval(checkPlayer);
+                clearInterval(checkActiveGame);
             }
 
         }, 5000);
+        intervalIds.push(checkPlayer);
     }
 
     // Assigns an event listener to truth or dare buttons and calls renderTruthORDareQuestion function to generate a question
@@ -148,8 +156,10 @@ async function truthORDareHandle(category, gameId) {
                 checkForActiveGame(gameId, checkActiveGame, checkPlayer);
             }else{
                 clearInterval(checkActiveGame);
+                clearInterval(checkPlayer);
             }
         }, 1000);
+        intervalIds.push(checkActiveGame);
     }
 
     // Structure of footer
@@ -288,12 +298,14 @@ async function renderTruthORDareQuestion(type, category, gameId) {
         checkActiveGame = setInterval(() => {
             let gameId = localStorage.getItem("gameId");
             if(gameId){
-            checkIfGameExist(gameId, checkActiveGame);
-            checkForActiveGame(gameId, checkActiveGame);
+                checkIfGameExist(gameId, checkActiveGame);
+                checkForActiveGame(gameId, checkActiveGame);
             }else{
                 clearInterval(checkActiveGame);
+                clearInterval(checkPlayer);
             }
         }, 1000);
+        intervalIds.push(checkActiveGame);
     }
 
     let footer = document.querySelector("footer");
@@ -352,7 +364,7 @@ async function renderTruthORDareQuestion(type, category, gameId) {
             // If user is not host - ask to leave game or keep playing
             clearInterval(checkActiveGame)
             leaveGame();
-            renderNewQuestion()
+            //renderNewQuestion()
         }
     })
 

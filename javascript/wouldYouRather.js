@@ -4,7 +4,7 @@
 let wouldYRIIndex = 0;
 // let gameId;
 let questionsArray;
-let intervalIds = [];
+
 
 // // Setter and getter functions for would you rather question index and gameID
 async function setWouldYRIndex(index, gameId) {
@@ -312,7 +312,7 @@ async function renderWouldYouRather(category, gameId) {
                 
 
             }, 1000);
-            intervalIds.push(checkActiveGame)
+            intervalIds.push(checkActiveGame);
         }
 
         if (isHost) {
