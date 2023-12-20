@@ -3,8 +3,7 @@
         "id": 1822,
         "players": [
             "jiji",
-            "momom",
-            "tttt"
+            "momom"
         ],
         "activeGame": {
             "host": "jiji",
@@ -16,6 +15,25 @@
             "votes": [
                 " jiji"
             ]
+        }
+    },
+    {
+        "id": 4290,
+        "players": [
+            "gege",
+            "gui"
+        ],
+        "activeGame": {
+            "host": "gege",
+            "game": "No Active Game",
+            "category": "No category",
+            "questionIndex": 0,
+            "playerInQuestion": "No player",
+            "timeLeft": 11,
+            "votes": [],
+            "answers": {
+                "gege": "ffef"
+            }
         }
     }
 ]

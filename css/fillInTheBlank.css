@@ -34,6 +34,8 @@
 }
 
 .fillInTheBlank > .wrapper > .inputWrapper > textarea{
+    -webkit-appearance: none;
+    border-radius: 0;
     font-size: var(--fontSizeSix);
     width: 90%;
     height: 10vh;
