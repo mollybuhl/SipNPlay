@@ -143,6 +143,9 @@
             $games[$gameIndex]["activeGame"]["votes"] = [];
         }
 
+        error_log(json_encode($games[$gameIndex]["activeGame"]));
+
         saveToFile("activeGames.json", $games);
+        sendJSON($games[$gameIndex]["activeGame"]);
     }
 ?> 

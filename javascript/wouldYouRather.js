@@ -127,19 +127,19 @@ async function renderWouldYouRather(category, gameId) {
 
             // End round and go back to category display
             popUp.querySelector(".leaveGame").addEventListener("click", async () => {
-                let requestDataForEndingRound = {
-                    action: "endRound",
-                    gameId: gameId
-                }
-
-                await handleGameFetch(requestDataForEndingRound);
-
                 let rqstOriginalVotesStructure = {
                     gameId: gameId,
                     action: "originalVotesStructure"
                 };
 
                 await fetchWouldYouRather(rqstOriginalVotesStructure);
+
+                let requestDataForEndingRound = {
+                    action: "endRound",
+                    gameId: gameId
+                }
+
+                await handleGameFetch(requestDataForEndingRound);
 
                 clearInterval(answerTime);
 
@@ -342,19 +342,19 @@ async function renderWouldYouRather(category, gameId) {
 
                     // End round and go back to category display
                     popUp.querySelector(".leaveGame").addEventListener("click", async () => {
-                        let requestDataForEndingRound = {
-                            action: "endRound",
-                            gameId: gameId
-                        }
-
-                        await handleGameFetch(requestDataForEndingRound);
-
                         let rqstOriginalVotesStructure = {
                             gameId: gameId,
                             action: "originalVotesStructure"
                         };
 
                         await fetchWouldYouRather(rqstOriginalVotesStructure);
+
+                        let requestDataForEndingRound = {
+                            action: "endRound",
+                            gameId: gameId
+                        }
+
+                        await handleGameFetch(requestDataForEndingRound);
 
                         // Go back to category page
                         renderCategories("Would You Rather");
