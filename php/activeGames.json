@@ -143,8 +143,11 @@
             "category": "No category",
             "questionIndex": 0,
             "playerInQuestion": "No player",
-            "timeLeft": 30,
-            "votes": []
+            "timeLeft": -1,
+            "votes": {
+                "this": [],
+                "that": []
+            }
         }
     },
     {
