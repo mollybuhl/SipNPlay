@@ -1,13 +1,8 @@
 "use strict";
 /*
 TO DO:
-    - Overall CSS
-    - Register more prompts
-    - animate progresbar
+    - Register more prompts (truth or dare, would you rather)
     - display who is host
-
-    Never Have I ever
-    - Swipe for next card
    
     Spin the bottle
     - End game, check for !isHost

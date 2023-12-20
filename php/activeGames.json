@@ -139,11 +139,11 @@
         ],
         "activeGame": {
             "host": "lololol",
-            "game": "No Active Game",
-            "category": "No category",
+            "game": "Most Likely To",
+            "category": "Not Safe For Work",
             "questionIndex": 0,
             "playerInQuestion": "No player",
-            "timeLeft": 30,
+            "timeLeft": -1,
             "votes": []
         }
     }
