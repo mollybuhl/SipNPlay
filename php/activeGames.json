@@ -146,5 +146,21 @@
             "timeLeft": -1,
             "votes": []
         }
+    },
+    {
+        "id": 6838,
+        "players": [
+            "hjedas",
+            "sagjasd"
+        ],
+        "activeGame": {
+            "host": "hjedas",
+            "game": "No Active Game",
+            "category": "No category",
+            "questionIndex": 0,
+            "playerInQuestion": "No player",
+            "timeLeft": 30,
+            "votes": []
+        }
     }
 ]
