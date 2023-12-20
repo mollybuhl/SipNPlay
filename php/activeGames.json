@@ -126,43 +126,5 @@
             "timeLeft": 30,
             "votes": []
         }
-    },
-    {
-        "id": 9899,
-        "players": [
-            "tranen",
-            "mollyyy"
-        ],
-        "activeGame": {
-            "host": "tranen",
-            "game": "No Active Game",
-            "category": "No category",
-            "questionIndex": 2,
-            "playerInQuestion": "No player",
-            "timeLeft": -1,
-            "votes": {
-                "this": [],
-                "that": []
-            }
-        }
-    },
-    {
-        "id": 1772,
-        "players": [
-            "hahah",
-            "hahiii"
-        ],
-        "activeGame": {
-            "host": "hahah",
-            "game": "No Active Game",
-            "category": "No category",
-            "questionIndex": 1,
-            "playerInQuestion": "hahah",
-            "timeLeft": 30,
-            "votes": [
-                " hahiii",
-                " hahah"
-            ]
-        }
     }
 ]
