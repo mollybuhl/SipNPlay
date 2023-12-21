@@ -13,11 +13,12 @@ async function setTruthIndex(index, gameId) {
 
     let rqstToSetnewIndex = {
         action: "setQuestionIndex",
+        type: "truth",
         gameId: gameId,
         index: truthIndex
     };
 
-    await handleGameFetch(rqstToSetnewIndex);
+    await fetchTruthORDare(rqstToSetnewIndex);
 }
 
 function getTruthIndex() {
@@ -30,11 +31,12 @@ async function setDareIndex(index, gameId) {
 
     let rqstToSetnewIndex = {
         action: "setQuestionIndex",
+        type: "dare",
         gameId: gameId,
         index: dareIndex
     };
 
-    await handleGameFetch(rqstToSetnewIndex);
+    await fetchTruthORDare(rqstToSetnewIndex);
 }
 
 function getDareIndex() {
@@ -80,7 +82,7 @@ async function truthORDareHandle(category, gameId) {
         action: "updatePlayerInQuestion",
         gameId: gameId,
         player: player
-    }
+    };
 
     await handleGameFetch(updatePlayerData);
 
@@ -115,8 +117,7 @@ async function truthORDareHandle(category, gameId) {
 
         // Check if next question should be run
         checkPlayer = setInterval(async () => {
-            let gameId = localStorage.getItem("gameId");
-            if(gameId){
+            if (gameId) {
                 let requestPlayerInQuestion = {
                     action: "getPlayerInQuestion",
                     gameId: gameId
@@ -125,11 +126,47 @@ async function truthORDareHandle(category, gameId) {
                 let playerInQuestion = await handleGameFetch(requestPlayerInQuestion);
                 console.log(playerInQuestion);
                 if (playerInQuestion === localStorage.getItem("playerName")) {
+                    // Check question type
+                    let rqstToGetQuestionType = {
+                        gameId: gameId,
+                        action: "getQuestionType"
+                    };
+
+                    let questionType = await fetchTruthORDare(rqstToGetQuestionType);
+
+                    if (questionType === "truth") {
+                        // Check questionIndex
+                        let rqstToCheckCurrentIndex = {
+                            action: "getCurrentQuestionIndex",
+                            gameId: gameId,
+                            type: "truth"
+                        };
+
+                        let currentIndex = await fetchTruthORDare(rqstToCheckCurrentIndex);
+
+                        if (getTruthIndex() !== currentIndex) {
+                            setTruthIndex(currentIndex);
+                        }
+                    } else {
+                        // Check questionIndex
+                        let rqstToCheckCurrentIndex = {
+                            action: "getCurrentQuestionIndex",
+                            gameId: gameId,
+                            type: "dare"
+                        };
+
+                        let currentIndex = await fetchTruthORDare(rqstToCheckCurrentIndex);
+
+                        if (getDareIndex() !== currentIndex) {
+                            setDareIndex(currentIndex);
+                        }
+                    }
+
                     setPlayerIndex(getPlayerIndex() + 1)
                     clearInterval(checkPlayer)
                     truthORDareHandle(category, gameId)
                 }
-            }else{
+            } else {
                 clearInterval(checkPlayer);
                 clearInterval(checkActiveGame);
             }
@@ -151,10 +188,10 @@ async function truthORDareHandle(category, gameId) {
     if (!isHost) {
         checkActiveGame = setInterval(() => {
             let gameId = localStorage.getItem("gameId");
-            if(gameId){
+            if (gameId) {
                 checkIfGameExist(gameId, checkActiveGame, checkPlayer);
                 checkForActiveGame(gameId, checkActiveGame, checkPlayer);
-            }else{
+            } else {
                 clearInterval(checkActiveGame);
                 clearInterval(checkPlayer);
             }
@@ -262,14 +299,31 @@ async function renderTruthORDareQuestion(type, category, gameId) {
     let tIndex = getTruthIndex();
     let dIndex = getDareIndex();
 
+    let rqstToChangeQuestionType;
     // Display question based on index
     if (type === "truth") {
         displayTruthORDareQuestion(data, type, tIndex)
+
+        rqstToChangeQuestionType = {
+            gameId: gameId,
+            type: type,
+            action: "changeQuestionType"
+        };
+
+        await fetchTruthORDare(rqstToChangeQuestionType);
     } else {
         displayTruthORDareQuestion(data, type, dIndex)
+
+        rqstToChangeQuestionType = {
+            gameId: gameId,
+            type: type,
+            action: "changeQuestionType"
+        };
+
+        await fetchTruthORDare(rqstToChangeQuestionType);
     }
 
-    function renderNewQuestion() {
+    function renderNewQuestion(type) {
         if (type === "truth") {
             // Increment index to get new truth question or set index to 0 to restart
             if (tIndex < data.questions.length - 1) {
@@ -297,10 +351,10 @@ async function renderTruthORDareQuestion(type, category, gameId) {
     if (!isHost) {
         checkActiveGame = setInterval(() => {
             let gameId = localStorage.getItem("gameId");
-            if(gameId){
+            if (gameId) {
                 checkIfGameExist(gameId, checkActiveGame);
                 checkForActiveGame(gameId, checkActiveGame);
-            }else{
+            } else {
                 clearInterval(checkActiveGame);
                 clearInterval(checkPlayer);
             }
@@ -369,7 +423,7 @@ async function renderTruthORDareQuestion(type, category, gameId) {
     })
 
     document.querySelector(".nextButton").addEventListener("click", () => {
-        renderNewQuestion()
+        renderNewQuestion(type)
     });
 }
 

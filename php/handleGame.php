@@ -58,6 +58,11 @@
             "WYRvotes" => [
                 "this" => [],
                 "that" => []
+            ],
+            "truthORdare" => [
+                "type" => "none",
+                "truthIndex" => 0,
+                "dareIndex" => 0
             ]
         ]];
           

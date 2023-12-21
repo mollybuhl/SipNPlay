@@ -1,1 +1,27 @@
-[]
+[
+    {
+        "id": 6119,
+        "players": [
+            "tranen",
+            "bulna"
+        ],
+        "activeGame": {
+            "host": "tranen",
+            "game": "Truth or Dare",
+            "category": "The Basic Version",
+            "questionIndex": 0,
+            "playerInQuestion": "tranen",
+            "timeLeft": 30,
+            "votes": [],
+            "WYRvotes": {
+                "this": [],
+                "that": []
+            },
+            "truthORdare": {
+                "type": "dare",
+                "truthIndex": 5,
+                "dareIndex": 3
+            }
+        }
+    }
+]

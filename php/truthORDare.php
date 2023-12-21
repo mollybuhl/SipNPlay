@@ -8,6 +8,8 @@
     checkMethod($requestMethod, $allowed);
 
     $questions = getFileContents("truthORDareQuestions.json");
+    $games = getFileContents("activeGames.json");
+
 
     // Get data from the request body
     $requestData = getFileContents("php://input");
@@ -61,5 +63,105 @@
         ];
 
         sendJSON($response);
+    } else if($action === "changeQuestionType") {
+        // Get saved values from request body
+        $gameId = $requestData["gameId"];
+        $questionType = $requestData["type"];
+
+        // Find active game based on gameId from request
+        $activeGame = false;
+        $gameIndex;
+
+        foreach($games as $index => $game){
+            if($game["id"] == $gameId){
+                $activeGame = $game;
+                $gameIndex = $index;
+            }
+        }
+
+        if($activeGame){
+            $games[$gameIndex]["activeGame"]["truthORdare"]["type"] = $questionType;
+
+            saveToFile("activeGames.json", $games);
+            $message = ["Success"];
+            sendJSON($message);
+        } else{
+            $message = ["No game under that pin was found"];
+            sendJson($message, 404);
+        }
+        
+    } else if($action === "getQuestionType") {
+        // Get saved values from request body
+        $gameId = $requestData["gameId"];
+
+        // Find active game based on gameId from request
+        $activeGame = false;
+        $gameIndex;
+
+        foreach($games as $index => $game){
+            if($game["id"] == $gameId){
+                $activeGame = $game;
+                $gameIndex = $index;
+            }
+        }
+
+        if($activeGame){
+            sendJson($games[$gameIndex]["activeGame"]["truthORdare"]["type"]);
+        }else{
+            $message = ["No game under that pin was found"];
+            sendJson($message, 404);
+        }
+
+    } else if($action === "setQuestionIndex") {
+        // Get game by id
+        $gameId = $requestData["gameId"];
+        $index = $requestData["index"];
+        $questionType = $requestData["type"];
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId); 
+
+        // If active game found change game status, otherwise inform user
+        if($activeGame){
+
+            if($questionType === "truth") {
+                // Change truthIndex
+                $games[$gameIndex]["activeGame"]["truthORdare"]["truthIndex"] = $index;
+                $message = $games[$gameIndex]["activeGame"]["truthORdare"];
+            } else {
+                // Change dareIndex
+                $games[$gameIndex]["activeGame"]["truthORdare"]["dareIndex"] = $index;
+                $message = $games[$gameIndex]["activeGame"]["truthORdare"];
+            }
+    
+            // Update json file and inform user
+            saveToFile("activeGames.json", $games);
+            
+            sendJson($message);
+        }else{
+            $message = ["No game under that pin was found"];
+            sendJson($message, 404);
+        }    
+    } else if($action === "getCurrentQuestionIndex") {
+        // Get game by id
+        $gameId = $requestData["gameId"];
+        $questionType = $requestData["type"];
+        [$activeGame, $gameIndex] = checkForActiveGame($gameId);  
+        
+        // If active game found change game status, otherwise inform user
+        if($activeGame){
+
+            // Send back current question index for either truth or dare
+            $activeGameQuestion;
+            if($questionType === "truth") {
+                $activeGameQuestion = $games[$gameIndex]["activeGame"]["truthORdare"]["truthIndex"];
+            } else {
+                $activeGameQuestion = $games[$gameIndex]["activeGame"]["truthORdare"]["dareIndex"];
+            }
+        
+            $message = $activeGameQuestion;
+            sendJson($message);
+        }else{
+            $message = ["No game under that pin was found"];
+            sendJson($message, 404);
+        }
     }
 ?>
