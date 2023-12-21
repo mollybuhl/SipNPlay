@@ -596,12 +596,14 @@ async function renderWaitingForGame(gameId) {
         let requestToStartGame = await handleGameFetch(requestDataForStartingGame);
 
         if (requestToStartGame) {
+            clearIntervals();
+            /*
             // Stop fetching players
             clearInterval(updatePlayes);
             // Stop fetching request to start game
             clearInterval(requestStart);
             // Stop fetching check game status
-            clearInterval(gameExist);
+            clearInterval(gameExist);*/
 
             let game = requestToStartGame.game;
             let category = requestToStartGame.category;
