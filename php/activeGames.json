@@ -83,10 +83,10 @@
         ],
         "activeGame": {
             "host": "cray",
-            "game": "No Active Game",
-            "category": "No category",
+            "game": "Spin The Bottle",
+            "category": "No Category",
             "questionIndex": 0,
-            "playerInQuestion": "No player",
+            "playerInQuestion": "cray",
             "timeLeft": 10,
             "votes": []
         }
