@@ -78,6 +78,7 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0) {
     </div>
     `;
 
+    // Focus on input field fr phone
     document.querySelector(".inputWrapper > textArea").focus();
     document.querySelector(".inputWrapper > textArea").select();
 
@@ -109,7 +110,8 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0) {
         checkActiveGame = setInterval(() => {
             checkIfGameExist(gameId, checkActiveGame);
             checkForActiveGame(gameId, answerTime, checkActiveGame);
-        }, 1000);
+        }, 2000);
+        intervalIds.push(checkActiveGame);
     }
 
     // Structure of footer
@@ -517,6 +519,7 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
                 }
 
             }, 1000);
+            intervalIds.push(checkActiveGame);
         }
 
         // When clicking quit button ask user to confirm

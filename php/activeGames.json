@@ -83,10 +83,10 @@
         ],
         "activeGame": {
             "host": "molllll",
-            "game": "Fill In The Blank",
-            "category": "Not Safe For Work",
+            "game": "No Active Game",
+            "category": "No category",
             "questionIndex": 0,
-            "playerInQuestion": "rrrr",
+            "playerInQuestion": "No player",
             "timeLeft": -1,
             "votes": [],
             "answers": {

@@ -503,6 +503,7 @@ function joinGame(playerName = null) {
 // Function to render page for waiting for game to start
 // This function will be called for players, not hosts, when no ongoing game is currently running
 async function renderWaitingForGame(gameId) {
+    clearIntervals();
 
     let main = document.querySelector("main");
     main.classList.add("startGame");
@@ -711,6 +712,10 @@ function leaveGame(interval1 = false, interval2 = false, interval3 = false) {
 
         // If leaving/ending game was successfull, clear any running intervals
         if (leftTheGame) {
+        
+
+            clearIntervals();
+            /*
             console.log(interval1);
             console.log(interval2);
             if (interval1) {
@@ -721,7 +726,7 @@ function leaveGame(interval1 = false, interval2 = false, interval3 = false) {
             }
             if (interval3) {
                 clearInterval(interval3);
-            }
+            }*/
 
             // Clear local storage
             window.localStorage.setItem("currentGame", false);
@@ -734,6 +739,7 @@ function leaveGame(interval1 = false, interval2 = false, interval3 = false) {
         }
     })
 }
+
 
 // Function to check if game with provided gameId exist
 // Function will be called by players when activly in a game to make sure the game is still active
