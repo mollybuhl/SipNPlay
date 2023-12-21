@@ -74,6 +74,11 @@ footer {
     height: 10%;
 }
 
+button{
+    webkit-appearance: none;
+    color: var(--textColor);
+}
+
 /*SipNPlay header logo*/
 #headerLogo {
     font-family: museoModerno;

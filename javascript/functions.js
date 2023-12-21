@@ -221,4 +221,14 @@ async function runTimer(totalTime, progressbar, callback) {
     return countdownTimer; // Return the time ID
 }
 
+function clearIntervals(){
+    console.log("Clearing intervals");
+    console.log(intervalIds);
+    intervalIds.forEach(interval => {
+        if(interval){
+            clearInterval(interval)
+        }
+    })
+}
+
 

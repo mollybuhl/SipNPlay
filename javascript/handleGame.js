@@ -503,6 +503,7 @@ function joinGame(playerName = null) {
 // Function to render page for waiting for game to start
 // This function will be called for players, not hosts, when no ongoing game is currently running
 async function renderWaitingForGame(gameId) {
+    clearIntervals();
 
     let main = document.querySelector("main");
     main.classList.add("startGame");
@@ -579,11 +580,13 @@ async function renderWaitingForGame(gameId) {
             index++;
         });
     }, 1000);
+    intervalIds.push(updatePlayes);
 
     // send request to check game status
     let gameExist = setInterval(async () => {
         checkIfGameExist(gameId, gameExist, requestStart, updatePlayes);
     }, 1000);
+    intervalIds.push(gameExist);
 
     // Start game when host start game
     let requestDataForStartingGame = {
@@ -593,15 +596,16 @@ async function renderWaitingForGame(gameId) {
 
     let requestStart = setInterval(async () => {
         let requestToStartGame = await handleGameFetch(requestDataForStartingGame);
-        console.log(requestToStartGame);
 
         if (requestToStartGame) {
+            clearIntervals();
+            /*
             // Stop fetching players
             clearInterval(updatePlayes);
             // Stop fetching request to start game
             clearInterval(requestStart);
             // Stop fetching check game status
-            clearInterval(gameExist);
+            clearInterval(gameExist);*/
 
             let game = requestToStartGame.game;
             let category = requestToStartGame.category;
@@ -634,9 +638,11 @@ async function renderWaitingForGame(gameId) {
         }
 
     }, 1000);
+    intervalIds.push(requestStart);
 
     // Leave game when clicking on exit, send current intervals as paremeters to be stoped if leaving the game
     document.querySelector(".buttonQuit").addEventListener("click", () => {
+        clearIntervals();
         leaveGame(updatePlayes, requestStart, gameExist);
     });
 }
@@ -712,7 +718,12 @@ function leaveGame(interval1 = false, interval2 = false, interval3 = false) {
 
         // If leaving/ending game was successfull, clear any running intervals
         if (leftTheGame) {
+        
 
+            clearIntervals();
+            /*
+            console.log(interval1);
+            console.log(interval2);
             if (interval1) {
                 clearInterval(interval1);
             }
@@ -721,7 +732,7 @@ function leaveGame(interval1 = false, interval2 = false, interval3 = false) {
             }
             if (interval3) {
                 clearInterval(interval3);
-            }
+            }*/
 
             // Clear local storage
             window.localStorage.setItem("currentGame", false);
@@ -730,10 +741,11 @@ function leaveGame(interval1 = false, interval2 = false, interval3 = false) {
             window.localStorage.setItem("game", "main");
 
             // Render game display
-            renderGameDisplay();
+            location.reload();
         }
     })
 }
+
 
 // Function to check if game with provided gameId exist
 // Function will be called by players when activly in a game to make sure the game is still active

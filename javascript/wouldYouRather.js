@@ -5,6 +5,7 @@ let wouldYRIIndex = 0;
 // let gameId;
 let questionsArray;
 
+
 // // Setter and getter functions for would you rather question index and gameID
 async function setWouldYRIndex(index, gameId) {
     wouldYRIIndex = index;
@@ -32,6 +33,9 @@ function getQuestionsArray() {
 
 // Function fetches a random question from PHP depending on category
 async function renderWouldYouRather(category, gameId) {
+    //Clear all intervals before setting up new ones
+    intervalIds.forEach(clearInterval);
+    intervalIds = [];
 
     let main = document.querySelector("main");
     main.removeAttribute("class");
@@ -145,7 +149,7 @@ async function renderWouldYouRather(category, gameId) {
         } else {
             // If user is not host - ask to leave game or keep playing
             clearInterval(checkActiveGame);
-            leaveGame();
+            leaveGame(checkActiveGame);
         }
     })
 
@@ -272,24 +276,31 @@ async function renderWouldYouRather(category, gameId) {
             // If player is not host, check if game still exist and if there is an ongoing game
             // Also check if next question should be run
             checkActiveGame = setInterval(async () => {
-                checkIfGameExist(gameId, checkActiveGame);
-                checkForActiveGame(gameId, answerTime, checkActiveGame);
-
-                let requestDataForNextQuestion = {
-                    action: "requestNextQuestion",
-                    gameId: gameId,
-                    currentQuestion: questionIndex
-                };
-
-                let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
-                console.log(activeQuestion);
-                if (activeQuestion != questionIndex) {
+                let gameId = localStorage.getItem("gameId");
+                if(gameId){
+                    checkIfGameExist(gameId, checkActiveGame);
+                    checkForActiveGame(gameId, answerTime, checkActiveGame);
+    
+                    let requestDataForNextQuestion = {
+                        action: "requestNextQuestion",
+                        gameId: gameId,
+                        currentQuestion: questionIndex
+                    };
+    
+                    let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
+                    console.log(activeQuestion);
+                    if (activeQuestion != questionIndex) {
+                        clearInterval(checkActiveGame);
+                        setWouldYRIndex(questionIndex + 1, gameId)
+                        renderWouldYouRather(category, gameId)
+                    }
+                }else{
                     clearInterval(checkActiveGame);
-                    setWouldYRIndex(questionIndex + 1, gameId)
-                    renderWouldYouRather(category, gameId)
                 }
+                
 
             }, 1000);
+            intervalIds.push(checkActiveGame);
         }
 
         if (isHost) {
@@ -347,7 +358,7 @@ async function renderWouldYouRather(category, gameId) {
                     // If user is not host - ask to leave game or keep playing
 
                     clearInterval(checkActiveGame);
-                    leaveGame();
+                    leaveGame(checkActiveGame);
                 }
             })
 
@@ -382,7 +393,8 @@ async function renderWouldYouRather(category, gameId) {
     // Set countdown timer for 15 seconds
     let progressbar = document.querySelector(".progressbar");
     let answerTime = await runTimer(15, progressbar, async function () {
-        readWouldYouRatherResults(data.questions)
+        clearInterval(checkActiveGame);
+        readWouldYouRatherResults(data.questions);
     });
 
     let checkActiveGame;
@@ -390,24 +402,30 @@ async function renderWouldYouRather(category, gameId) {
         // If player is not host, check if game still exist and if there is an ongoing game
         // Also check if next question should be run
         checkActiveGame = setInterval(async () => {
-            checkIfGameExist(gameId, checkActiveGame);
-            checkForActiveGame(gameId, answerTime, checkActiveGame);
+            let gameId = localStorage.getItem("gameId");
+            if(gameId){
+                checkIfGameExist(gameId, checkActiveGame);
+                checkForActiveGame(gameId, answerTime, checkActiveGame);
 
-            let requestDataForNextQuestion = {
-                action: "requestNextQuestion",
-                gameId: gameId,
-                currentQuestion: questionIndex
-            };
+                let requestDataForNextQuestion = {
+                    action: "requestNextQuestion",
+                    gameId: gameId,
+                    currentQuestion: questionIndex
+                };
 
-            let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
-            console.log(activeQuestion);
-            if (activeQuestion != questionIndex) {
+                let activeQuestion = await handleGameFetch(requestDataForNextQuestion);
+            
+                if (activeQuestion != questionIndex) {
+                    clearInterval(checkActiveGame);
+                    setWouldYRIndex(questionIndex + 1, gameId)
+                    renderWouldYouRather(category, gameId)
+                }
+            }else{
                 clearInterval(checkActiveGame);
-                setWouldYRIndex(questionIndex + 1, gameId)
-                renderWouldYouRather(category, gameId)
             }
 
         }, 1000);
+        intervalIds.push(checkActiveGame)
     }
 }
 

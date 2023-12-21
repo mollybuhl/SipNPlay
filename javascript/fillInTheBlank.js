@@ -78,13 +78,40 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0) {
     </div>
     `;
 
+    // Focus on input field fr phone
+    document.querySelector(".inputWrapper > textArea").focus();
+    document.querySelector(".inputWrapper > textArea").select();
+
+    //Save answer when click send
+    document.querySelector(".inputWrapper > .sendIcon").addEventListener("click", async () =>{
+        
+        let playerAnswer = document.querySelector(".fillInTheBlankAnswer").value;
+        let playerName = window.localStorage.getItem("playerName");
+
+        // If player has given an answer save this in json file
+        if(playerAnswer.length > 0){
+            // Send request to save answer
+            let requestDataToSaveAnswer = {
+                gameId: gameId,
+                action: "saveAnswer",
+                playerName: playerName,
+                playerAnswer: playerAnswer
+            }
+
+            await fetchFillInTheBlank(requestDataToSaveAnswer);
+        }
+
+        document.querySelector(".inputWrapper > .sendIcon").classList.add("selected");
+    });
+
     // If player is not host, check if game still exist and if there is an ongoing game
     let checkActiveGame;
     if (!isHost) {
         checkActiveGame = setInterval(() => {
             checkIfGameExist(gameId, checkActiveGame);
             checkForActiveGame(gameId, answerTime, checkActiveGame);
-        }, 1000);
+        }, 2000);
+        intervalIds.push(checkActiveGame);
     }
 
     // Structure of footer
@@ -175,24 +202,7 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0) {
     // Set aswering timer for 15sec
     let progressbar = document.querySelector(".progressbar");
     let answerTime = await runTimer(15, progressbar, async function () {
-        // Save players answer
-        let playerAnswer = document.querySelector(".fillInTheBlankAnswer").value;
-        let playerName = window.localStorage.getItem("playerName");
-
-        // If player has given an answer save this in json file
-        if(playerAnswer.length > 0){
-            // Send request to save answer
-            let requestDataToSaveAnswer = {
-                gameId: gameId,
-                action: "saveAnswer",
-                playerName: playerName,
-                playerAnswer: playerAnswer
-            }
-
-            await fetchFillInTheBlank(requestDataToSaveAnswer);
-        }
         
-
         // Stop checking for active game
         clearInterval(checkActiveGame);
 
@@ -387,13 +397,15 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
 
         let votes = await fetchFillInTheBlank(requestDataToFetchVotes);
 
-        if(votes.length < 1){
+        if(allAnswers.length < 1){
             let infoBox = document.createElement("div");
             infoBox.classList.add("infoBox");
             infoBox.innerHTML = `
             <p>No answers was given</p>
             `;
             document.querySelector(".answers").appendChild(infoBox);
+        }else{
+            document.querySelector(".answers").innerHTML = ``;
         }
 
         // Initialize vote counter for all answers
@@ -507,6 +519,7 @@ async function renderFillInTheBlankVoting(modifiedQuestion, category, questionIn
                 }
 
             }, 1000);
+            intervalIds.push(checkActiveGame);
         }
 
         // When clicking quit button ask user to confirm
