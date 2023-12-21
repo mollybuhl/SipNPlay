@@ -735,7 +735,7 @@ function leaveGame(interval1 = false, interval2 = false, interval3 = false) {
             window.localStorage.setItem("game", "main");
 
             // Render game display
-            renderGameDisplay();
+            location.reload();
         }
     })
 }

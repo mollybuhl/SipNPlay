@@ -74,24 +74,5 @@
                 " pretty"
             ]
         }
-    },
-    {
-        "id": 2604,
-        "players": [
-            "molllll",
-            "rrrr"
-        ],
-        "activeGame": {
-            "host": "molllll",
-            "game": "No Active Game",
-            "category": "No category",
-            "questionIndex": 0,
-            "playerInQuestion": "No player",
-            "timeLeft": -1,
-            "votes": [],
-            "answers": {
-                "rrrr": "fefe"
-            }
-        }
     }
 ]
