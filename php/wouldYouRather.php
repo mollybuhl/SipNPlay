@@ -84,16 +84,16 @@
 
         if($activeGame){
              // Check if the player's vote already exists to prevent multiple votes
-            $existingVotes = $games[$gameIndex]["activeGame"]["votes"][$questionType];
+            $existingVotes = $games[$gameIndex]["activeGame"]["WYRvotes"][$questionType];
             if (!in_array($player, $existingVotes)) {
                 // Add a new vote
-                $games[$gameIndex]["activeGame"]["votes"][$questionType][] = $player;
+                $games[$gameIndex]["activeGame"]["WYRvotes"][$questionType][] = $player;
 
                 // Remove the vote from the other option if it exists
                 $oppositeType = ($questionType == "this") ? "that" : "this";
-                $indexToRemove = array_search($player, $games[$gameIndex]["activeGame"]["votes"][$oppositeType]);
+                $indexToRemove = array_search($player, $games[$gameIndex]["activeGame"]["WYRvotes"][$oppositeType]);
                 if ($indexToRemove !== false) {
-                    array_splice($games[$gameIndex]["activeGame"]["votes"][$oppositeType], $indexToRemove, 1);
+                    array_splice($games[$gameIndex]["activeGame"]["WYRvotes"][$oppositeType], $indexToRemove, 1);
                 }
             }
             saveToFile("activeGames.json", $games);
@@ -103,7 +103,7 @@
             $message = ["message" => "No active game was found"];
             sendJson($message, 404);
         }
-    } else if($action == "replaceVotesStructure") {
+    } else if($action == "resetWYRvotes") {
         $gameId = $requestData["gameId"];
 
         // Add keys this or that in votes key to store votes
@@ -119,33 +119,10 @@
         }
 
         if($activeGame){
-            $games[$gameIndex]["activeGame"]["votes"]["this"] = [];
-            $games[$gameIndex]["activeGame"]["votes"]["that"] = [];
+            $games[$gameIndex]["activeGame"]["WYRvotes"]["this"] = [];
+            $games[$gameIndex]["activeGame"]["WYRvotes"]["that"] = [];
         }
         
         saveToFile("activeGames.json", $games);
-    } else if($action == "originalVotesStructure") {
-        $gameId = $requestData["gameId"];
-
-        // Find active game based on gameId from request
-        $activeGame = false;
-        $gameIndex;
-
-        foreach($games as $index => $game){
-            if($game["id"] == $gameId){
-                $activeGame = $game;
-                $gameIndex = $index;
-            }
-        }
-
-        if($activeGame){
-            unset($games[$gameIndex]["activeGame"]["votes"]);
-            $games[$gameIndex]["activeGame"]["votes"] = [];
-        }
-
-        error_log(json_encode($games[$gameIndex]["activeGame"]));
-
-        saveToFile("activeGames.json", $games);
-        sendJSON($games[$gameIndex]["activeGame"]);
-    }
+    } 
 ?> 

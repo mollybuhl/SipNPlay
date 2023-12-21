@@ -54,7 +54,11 @@
             "questionIndex" => 0,
             "playerInQuestion" => "No player",
             "timeLeft" => 30,
-            "votes" => []
+            "votes" => [],
+            "WYRvotes" => [
+                "this" => [],
+                "that" => []
+            ]
         ]];
           
         $games[] = $gameData;
@@ -217,7 +221,9 @@
             // Update json file and inform user
             saveToFile("activeGames.json", $games);
 
-            $message = ["message" => "Round Ended"];
+            $message = ["message" => "Round Ended",
+                        "votes" => $games[$gameIndex]["activeGame"]["votes"]
+            ];
             sendJSON($message);
 
         }else{

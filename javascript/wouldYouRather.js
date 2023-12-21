@@ -127,13 +127,6 @@ async function renderWouldYouRather(category, gameId) {
 
             // End round and go back to category display
             popUp.querySelector(".leaveGame").addEventListener("click", async () => {
-                let rqstOriginalVotesStructure = {
-                    gameId: gameId,
-                    action: "originalVotesStructure"
-                };
-
-                await fetchWouldYouRather(rqstOriginalVotesStructure);
-
                 let requestDataForEndingRound = {
                     action: "endRound",
                     gameId: gameId
@@ -145,28 +138,23 @@ async function renderWouldYouRather(category, gameId) {
 
                 // Go back to category page
                 renderCategories("Would You Rather");
+
             })
 
 
         } else {
             // If user is not host - ask to leave game or keep playing
-            let rqstOriginalVotesStructure = {
-                gameId: gameId,
-                action: "originalVotesStructure"
-            };
-
-            await fetchWouldYouRather(rqstOriginalVotesStructure);
             clearInterval(checkActiveGame);
             leaveGame();
         }
     })
 
-    let rqstToChangeVotesStructure = {
+    let rqstToResetVotes = {
         gameId: gameId,
-        action: "replaceVotesStructure"
+        action: "resetWYRvotes"
     };
 
-    await fetchWouldYouRather(rqstToChangeVotesStructure);
+    await fetchWouldYouRather(rqstToResetVotes);
 
     const questionIndex = getWouldYRIndex();
     console.log(questionIndex);
@@ -243,14 +231,14 @@ async function renderWouldYouRather(category, gameId) {
         let thisPercent;
         let thatPercent;
 
-        if (!data.activeGame.votes.this.length == 0) {
-            thisPercent = (data.activeGame.votes.this.length / numOfPlayers) * 100;
+        if (!data.activeGame.WYRvotes.this.length == 0) {
+            thisPercent = (data.activeGame.WYRvotes.this.length / numOfPlayers) * 100;
         } else {
             thisPercent = 0;
         }
 
-        if (!data.activeGame.votes.that.length == 0) {
-            thatPercent = (data.activeGame.votes.that.length / numOfPlayers) * 100;
+        if (!data.activeGame.WYRvotes.that.length == 0) {
+            thatPercent = (data.activeGame.WYRvotes.that.length / numOfPlayers) * 100;
         } else {
             thatPercent = 0;
         }
@@ -342,13 +330,6 @@ async function renderWouldYouRather(category, gameId) {
 
                     // End round and go back to category display
                     popUp.querySelector(".leaveGame").addEventListener("click", async () => {
-                        let rqstOriginalVotesStructure = {
-                            gameId: gameId,
-                            action: "originalVotesStructure"
-                        };
-
-                        await fetchWouldYouRather(rqstOriginalVotesStructure);
-
                         let requestDataForEndingRound = {
                             action: "endRound",
                             gameId: gameId
@@ -358,17 +339,12 @@ async function renderWouldYouRather(category, gameId) {
 
                         // Go back to category page
                         renderCategories("Would You Rather");
+
                     })
 
 
                 } else {
                     // If user is not host - ask to leave game or keep playing
-                    let rqstOriginalVotesStructure = {
-                        gameId: gameId,
-                        action: "originalVotesStructure"
-                    };
-
-                    await fetchWouldYouRather(rqstOriginalVotesStructure);
 
                     clearInterval(checkActiveGame);
                     leaveGame();
