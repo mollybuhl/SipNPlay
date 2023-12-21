@@ -76,6 +76,7 @@ footer {
 
 button{
     webkit-appearance: none;
+    color: var(--textColor);
 }
 
 /*SipNPlay header logo*/
