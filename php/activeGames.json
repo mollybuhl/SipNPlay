@@ -74,5 +74,21 @@
                 " pretty"
             ]
         }
+    },
+    {
+        "id": 2145,
+        "players": [
+            "cray",
+            "may"
+        ],
+        "activeGame": {
+            "host": "cray",
+            "game": "No Active Game",
+            "category": "No category",
+            "questionIndex": 0,
+            "playerInQuestion": "No player",
+            "timeLeft": 10,
+            "votes": []
+        }
     }
 ]

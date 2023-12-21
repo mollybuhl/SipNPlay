@@ -139,7 +139,7 @@
         }
 
         if($activeGame){
-            unset($games[$gameIndex]["activeGame"]["votes"]);
+            //unset($games[$gameIndex]["activeGame"]["votes"]);
             $games[$gameIndex]["activeGame"]["votes"] = [];
         }
 

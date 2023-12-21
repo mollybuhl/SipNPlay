@@ -1,8 +1,5 @@
 "use strict";
-/*
-TO DO:
-   
-*/
+
 createMenu();
 // Display Menu when clicking hamburger icon
 document.querySelector(".menuIcon").addEventListener("click", renderMenu);
