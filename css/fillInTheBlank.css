@@ -53,6 +53,11 @@
     position: absolute;
     top: 25px;
     right: 40px;
+    cursor: pointer;
+}
+
+.fillInTheBlank > .wrapper > .inputWrapper > .sendIcon.selected{
+    filter: invert(9%) sepia(0%) saturate(0%) hue-rotate(272deg) brightness(101%) contrast(83%);
 }
 
 .fillInTheBlank > .wrapper > .answers{
@@ -79,6 +84,7 @@
 }
 
 .fillInTheBlank > .wrapper > .answers > div.infoBox{
+    position: inherit;
     display: flex;
     justify-content: center;
     align-items: center;
