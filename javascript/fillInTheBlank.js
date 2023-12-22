@@ -69,11 +69,12 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0) {
         <div class="timer">
             <div class="progressbar"></div>
         </div>
-        <textArea class="fillInTheBlankAnswer" placeholder="Type here..." name="fillInTheBlankAnswer" cols="40" rows="5"></textarea> 
-        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="48" viewBox="0 0 21 48" fill="none" class="sendIcon">
-        <path d="M1.43075 36.5033L5.66957 39.3169V44.0195C5.64377 44.8655 6.74058 45.3377 7.32122 44.7147L9.87613 42.1174L13.4504 44.4917C13.6117 44.5966 13.7924 44.6556 13.9795 44.6556C14.3795 44.6556 14.7537 44.3933 14.8892 44.0129L20.9473 27.3146C20.9925 27.1835 21.0119 27.0458 20.9925 26.9146C20.9667 26.2325 20.2248 25.8062 19.6183 26.0882L1.54688 34.7915C0.875911 35.0866 0.804948 36.1163 1.43075 36.5033ZM15.3988 30.2988L7.58576 38.2413L3.93404 35.8146L15.3988 30.2988Z" fill="#E9A072"/>
-        </svg>
-       
+        <div class="inputWrapper">
+            <textArea class="fillInTheBlankAnswer" placeholder="Type here..." name="fillInTheBlankAnswer" cols="40" rows="5"></textarea> 
+            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="48" viewBox="0 0 21 48" fill="none" class="sendIcon">
+            <path d="M1.43075 36.5033L5.66957 39.3169V44.0195C5.64377 44.8655 6.74058 45.3377 7.32122 44.7147L9.87613 42.1174L13.4504 44.4917C13.6117 44.5966 13.7924 44.6556 13.9795 44.6556C14.3795 44.6556 14.7537 44.3933 14.8892 44.0129L20.9473 27.3146C20.9925 27.1835 21.0119 27.0458 20.9925 26.9146C20.9667 26.2325 20.2248 25.8062 19.6183 26.0882L1.54688 34.7915C0.875911 35.0866 0.804948 36.1163 1.43075 36.5033ZM15.3988 30.2988L7.58576 38.2413L3.93404 35.8146L15.3988 30.2988Z" fill="#E9A072"/>
+            </svg>
+        </div>
     </div>
     `;
 
