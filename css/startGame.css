@@ -131,6 +131,7 @@ footer #startGameButton {
     font-size: var(--fontSizeFive);
 
     background-color: var(--white);
+    color: var(--darkGrey);
     height: 55%;
     width: auto;
     padding: 0 4vh;
@@ -202,6 +203,7 @@ footer #startGameButton:disabled {
     font-size: var(--fontSizeFive);
 
     background-color: var(--white);
+    color: var(--darkGrey);
     height: 55%;
     width: 50%;
     padding: 2vh;
@@ -240,6 +242,7 @@ footer #startGameButton:disabled {
     display: flex;
     flex-direction: column;
     font-family: outfit;
+    font-size: var(--fontSizeFour);
 
     height: 15vh;
     width: 80%;
@@ -249,6 +252,7 @@ footer #startGameButton:disabled {
     justify-content: center;
     align-items: center;
     z-index: 4;
+    text-align: center;
 }
 
 .startGame>.infoBox>div>button {
