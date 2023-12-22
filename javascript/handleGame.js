@@ -718,21 +718,8 @@ function leaveGame(interval1 = false, interval2 = false, interval3 = false) {
 
         // If leaving/ending game was successfull, clear any running intervals
         if (leftTheGame) {
-        
-
+            // Clear all intervalls
             clearIntervals();
-            /*
-            console.log(interval1);
-            console.log(interval2);
-            if (interval1) {
-                clearInterval(interval1);
-            }
-            if (interval2) {
-                clearInterval(interval2);
-            }
-            if (interval3) {
-                clearInterval(interval3);
-            }*/
 
             // Clear local storage
             window.localStorage.setItem("currentGame", false);
@@ -778,12 +765,11 @@ async function checkIfGameExist(gameId, interval1, interval2, interval3) {
         window.localStorage.removeItem("playerName");
         window.localStorage.setItem("game", "main");
 
-        // Infor user the game has ended
-
+        // Inform user the game has ended
         let infoBox = document.createElement("div");
         infoBox.classList.add("infoBox");
         infoBox.innerHTML = `
-        <div>
+        <div class=".infoBoxTall">
             <p>Looks like your host ended the game</p>
             <button>Back to homepage</button>
         </div>

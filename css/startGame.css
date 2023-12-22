@@ -255,6 +255,18 @@ footer #startGameButton:disabled {
     text-align: center;
 }
 
+.infoBox > .infoBoxTall{
+    height: 20vh;
+}
+
+.infoBox > .infoBoxTall > button{
+    height: 30%;
+    color: var(--darkGrey);
+}
+.infoBox > .infoBoxTall > p{
+    margin-top: 0;
+}
+
 .startGame>.infoBox>div>button {
     font-family: outfit;
     font-weight: var(--fontRegular);
