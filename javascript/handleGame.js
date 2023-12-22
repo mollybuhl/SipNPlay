@@ -769,7 +769,7 @@ async function checkIfGameExist(gameId, interval1, interval2, interval3) {
         let infoBox = document.createElement("div");
         infoBox.classList.add("infoBox");
         infoBox.innerHTML = `
-        <div class=".infoBoxTall">
+        <div class="infoBoxTall">
             <p>Looks like your host ended the game</p>
             <button>Back to homepage</button>
         </div>
