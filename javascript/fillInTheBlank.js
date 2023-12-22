@@ -78,9 +78,10 @@ async function renderFillInTheBlank(category, gameId, questionIndex = 0) {
     </div>
     `;
 
-    // Focus on input field fr phone
+    // Focus on input field for phone to automatically display keyboard
     document.querySelector(".inputWrapper > textArea").focus();
     document.querySelector(".inputWrapper > textArea").select();
+    prompt();
 
     //Save answer when click send
     document.querySelector(".inputWrapper > .sendIcon").addEventListener("click", async () =>{
