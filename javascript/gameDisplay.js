@@ -225,12 +225,13 @@ function renderCategories(game) {
 
     // Spicy edition
     main.querySelector(".spicyEdition").addEventListener("click", () => {
-        let category = "Spicy Edition";
+        //Locked for school hand in
+        /*let category = "Spicy Edition";
         if (currentGame) {
             startNewGame(game, category);
         } else {
             renderStartGame(game, category);
-        }
+        }*/
     });
 
     // Girl Dinner
